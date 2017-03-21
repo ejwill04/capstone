@@ -6,17 +6,6 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.set('port', process.env.PORT || 3000)
-// app.locals.title = 'BYOB'
-// app.locals.secrets = {
-//   wowowow: 'I am a banana'
-// }
-
-//get endpoints
-// app.get('/', (request, response) => {
-//   fs.readFile(`${__dirname}/index.html`, (err, file) => {
-//     response.send(file);
-//   });
-// });
 
 app.get('/api/v1/users', (request, response) => {
   database('users').select()
