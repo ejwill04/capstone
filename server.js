@@ -41,7 +41,7 @@ app.get('/api/v1/companies', (request, response) => {
   })
 })
 
-app.get('/api/users/:id', (request, response) => {
+app.get('/api/v1/users/:id', (request, response) => {
   const { id } = request.params
 
   database('users').where('id', id).select()
@@ -53,7 +53,7 @@ app.get('/api/users/:id', (request, response) => {
   })
 })
 
-app.get('/api/companies/:id', (request, response) => {
+app.get('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
 
   database('companies').where('id', id).select()
@@ -65,7 +65,7 @@ app.get('/api/companies/:id', (request, response) => {
   })
 })
 
-app.get('/api/comments/:id', (request, response) => {
+app.get('/api/v1/comments/:id', (request, response) => {
   const { id } = request.params
 
   database('comments').where('id', id).select()
@@ -78,5 +78,5 @@ app.get('/api/comments/:id', (request, response) => {
 })
 
 app.listen(app.get('port'), () => {
-  console.log(`${app.locals.title} is running on ${app.get('port')}.`)
+  console.log(`BYOB is running on ${app.get('port')}.`)
 })
