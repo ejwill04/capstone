@@ -108,20 +108,21 @@ app.post('/api/v1/companies', (request, response) => {
   })
 })
 
-// app.post('/api/v1/messages', (request, response) => {
-//   const { message } = request.body;
-//
-//   database('messages').insert({message})
-//   .then(() => {
-//     database('messages').select()
-//     .then(messages => {
-//       response.status(200).json(messages)
-//     })
-//     .catch(error => {
-//       console.error('error', error)
-//     })
-//   })
-// })
+app.post('/api/v1/messages', (request, response) => {
+  const { message, user_id, company_id } = request.body;
+  const comment = { message, user_id, company_id, created_at: new Date }
+
+  database('comments').insert(comment)
+  .then(() => {
+    database('comments').select()
+    .then(comments => {
+      response.status(200).json(comments)
+    })
+    .catch(error => {
+      console.error('error', error)
+    })
+  })
+})
 
 app.listen(app.get('port'), () => {
   console.log(`BYOB is running on ${app.get('port')}.`)
