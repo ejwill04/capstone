@@ -77,6 +77,52 @@ app.get('/api/v1/comments/:id', (request, response) => {
   })
 })
 
+app.post('/api/v1/users', (request, response) => {
+  const { name } = request.body;
+
+  database('users').insert({name})
+  .then(() => {
+    database('users').select()
+    .then(users => {
+      response.status(200).json(users)
+    })
+    .catch(error => {
+      console.error('error', error)
+    })
+  })
+})
+
+app.post('/api/v1/companies', (request, response) => {
+  const { name, city, state } = request.body
+  const company = { name, city, state }
+
+  database('companies').insert(company)
+  .then(() => {
+    database('companies').select()
+    .then(companies => {
+      response.status(200).json(companies)
+    })
+    .catch(error => {
+      console.error('error', error)
+    })
+  })
+})
+
+// app.post('/api/v1/messages', (request, response) => {
+//   const { message } = request.body;
+//
+//   database('messages').insert({message})
+//   .then(() => {
+//     database('messages').select()
+//     .then(messages => {
+//       response.status(200).json(messages)
+//     })
+//     .catch(error => {
+//       console.error('error', error)
+//     })
+//   })
+// })
+
 app.listen(app.get('port'), () => {
   console.log(`BYOB is running on ${app.get('port')}.`)
 })
