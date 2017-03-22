@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.set('port', process.env.PORT || 3000)
 
+// get all users
 app.get('/api/v1/users', (request, response) => {
   database('users').select()
   .then(users => {
@@ -21,6 +22,7 @@ app.get('/api/v1/users', (request, response) => {
   })
 })
 
+// get all comments
 app.get('/api/v1/comments', (request, response) => {
   database('comments').select()
   .then(comments => {
@@ -31,6 +33,7 @@ app.get('/api/v1/comments', (request, response) => {
   })
 })
 
+// get all companies
 app.get('/api/v1/companies', (request, response) => {
   database('companies').select()
   .then(companies => {
@@ -41,6 +44,7 @@ app.get('/api/v1/companies', (request, response) => {
   })
 })
 
+// get a user
 app.get('/api/v1/users/:id', (request, response) => {
   const { id } = request.params
 
@@ -53,6 +57,7 @@ app.get('/api/v1/users/:id', (request, response) => {
   })
 })
 
+// get a company
 app.get('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
 
@@ -65,6 +70,7 @@ app.get('/api/v1/companies/:id', (request, response) => {
   })
 })
 
+// get a comment
 app.get('/api/v1/comments/:id', (request, response) => {
   const { id } = request.params
 
@@ -77,6 +83,21 @@ app.get('/api/v1/comments/:id', (request, response) => {
   })
 })
 
+// get all comments associated with a company
+app.get('/api/v1/comments/:company_id', (request, response) => {
+  const { company_id } = request.params
+
+  database('comments').where('company_id', company_id).select()
+  .then(comments => {
+    response.status(200).json(comments)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
+})
+
+
+// add a user
 app.post('/api/v1/users', (request, response) => {
   const { name } = request.body;
 
@@ -92,6 +113,7 @@ app.post('/api/v1/users', (request, response) => {
   })
 })
 
+// add a company
 app.post('/api/v1/companies', (request, response) => {
   const { name, city, state } = request.body
   const company = { name, city, state }
@@ -108,6 +130,7 @@ app.post('/api/v1/companies', (request, response) => {
   })
 })
 
+// post a comment
 app.post('/api/v1/comments', (request, response) => {
   const { message, user_id, company_id } = request.body
   const comment = { message, user_id, company_id, created_at: new Date }
@@ -176,7 +199,6 @@ app.patch('/api/v1/comments/:id', (request, response) => {
     console.error('error', error)
   })
 })
-
 
 // app.delete('/api/v1/comments/:id', (request, response) => {
 //   const { id } = request.params
