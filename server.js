@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
-const environment = process.env.NODE_ENV || 'development'
+const environment = 'test'
 const configuration = require('./knexfile')[environment]
 const database = require('knex')(configuration)
 
@@ -50,10 +50,14 @@ app.get('/api/v1/users/:id', (request, response) => {
 
   database('users').where('id', id).select()
   .then(users => {
-    response.status(200).json(users)
+    if (users.length > 0) {
+      response.status(200).json(users)
+    } else {
+      response.status(404).send('User not found')
+    }
   })
   .catch(error => {
-    console.error('error', error)
+    response.status(404).send('DB Error')
   })
 })
 
@@ -63,10 +67,14 @@ app.get('/api/v1/companies/:id', (request, response) => {
 
   database('companies').where('id', id).select()
   .then(companies => {
-    response.status(200).json(companies)
+    if (companies.length > 0) {
+      response.status(200).json(companies)
+    } else {
+      response.status(404).send('Company not found')
+    }
   })
   .catch(error => {
-    console.error('error', error)
+    response.status(404, 'Company not found')
   })
 })
 
@@ -76,10 +84,14 @@ app.get('/api/v1/comments/:id', (request, response) => {
 
   database('comments').where('id', id).select()
   .then(comments => {
-    response.status(200).json(comments)
+    if (comments.length > 0) {
+      response.status(200).json(comments)
+    } else {
+      response.status(404).send('Comment not found')
+    }
   })
   .catch(error => {
-    console.error('error', error)
+    console.error(404, 'Comment not found')
   })
 })
 
