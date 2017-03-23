@@ -218,7 +218,11 @@ describe('POST /api/v1/comments', () => {
   beforeAndAfterEach()
 
   it('should post a new comment', (done) => {
-    let comment = { message: 'Just do it!', user_id: 1, company_id: 1 }
+    let comment = {
+      message: 'Just do it!',
+       user_id: 1,
+       company_id: 1
+     }
     chai.request(app)
     .post('/api/v1/comments')
     .send(comment)
@@ -228,6 +232,40 @@ describe('POST /api/v1/comments', () => {
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(31);
+      done();
+    })
+  })
+
+  beforeAndAfterEach()
+
+  it('should return an error if incorrect user_id', (done) => {
+    let comment = {
+      message: 'Just do it!',
+      user_id: 456768,
+      company_id: 1
+    }
+    chai.request(app)
+    .post('/api/v1/comments')
+    .send(comment)
+    .end((err, res) => {
+      expect(res).to.have.status(422);
+      done();
+    })
+  })
+
+  beforeAndAfterEach()
+
+  it('should return an error if incorrect company_id', (done) => {
+    let comment = {
+      message: 'Just do it!',
+      user_id: 1,
+      company_id: 123545464
+    }
+    chai.request(app)
+    .post('/api/v1/comments')
+    .send(comment)
+    .end((err, res) => {
+      expect(res).to.have.status(422);
       done();
     })
   })

@@ -153,9 +153,9 @@ app.post('/api/v1/comments', (request, response) => {
     .then(comments => {
       response.status(200).json(comments)
     })
-    .catch(error => {
-      console.error('error', error)
-    })
+  })
+  .catch(error => {
+    response.status(422).send('Could not post comment')
   })
 })
 
@@ -218,7 +218,7 @@ app.patch('/api/v1/comments/:id', (request, response) => {
 //   database('comments').where('id', id).del()
 //   .then(()=> response.status('the force is with you'))
 // })
-
+//
 // app.delete('/api/v1/users/:id', (request, response) => {
 //   const { id } = request.params
 //
