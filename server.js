@@ -119,9 +119,9 @@ app.post('/api/v1/users', (request, response) => {
     .then(users => {
       response.status(200).json(users)
     })
-    .catch(error => {
-      console.error('error', error)
-    })
+  })
+  .catch(error => {
+    response.status(422).send('Could not add user')
   })
 })
 
@@ -136,9 +136,9 @@ app.post('/api/v1/companies', (request, response) => {
     .then(companies => {
       response.status(200).json(companies)
     })
-    .catch(error => {
-      console.error('error', error)
-    })
+  })
+  .catch(error => {
+    response.status(422).send('Could not add company')
   })
 })
 
@@ -172,7 +172,7 @@ app.put('/api/v1/users/:id', (request, response) => {
       )
   })
   .catch(error => {
-    console.error('error', error)
+    response.status(422).send('Could not update user')
   })
 })
 
@@ -190,7 +190,7 @@ app.put('/api/v1/companies/:id', (request, response) => {
       )
   })
   .catch(error => {
-    console.error('error', error)
+    response.status(422).send('Could not update company')
   })
 })
 
@@ -208,7 +208,7 @@ app.patch('/api/v1/comments/:id', (request, response) => {
       )
   })
   .catch(error => {
-    console.error('error', error)
+    response.status(422).send('Could not update comment')
   })
 })
 

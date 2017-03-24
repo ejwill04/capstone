@@ -199,7 +199,11 @@ describe('POST /api/v1/companies', () => {
   beforeAndAfterEach()
 
   it('should post a new company', (done) => {
-    let company = { name: 'Glengarry Glen Ross', city: 'Nowhere', state: 'CO' }
+    let company = {
+      name: 'Glengarry Glen Ross',
+      city: 'Nowhere',
+      state: 'CO'
+    }
     chai.request(app)
     .post('/api/v1/companies')
     .send(company)
@@ -209,6 +213,23 @@ describe('POST /api/v1/companies', () => {
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(31);
+      done();
+    })
+  })
+
+  beforeAndAfterEach()
+
+  xit('should return an error if incorrect name', (done) => {
+    let company = {
+      thing: 123,
+      city: 'Nowhere',
+      state: 'CO'
+    }
+    chai.request(app)
+    .post('/api/v1/companies')
+    .send(company)
+    .end((err, res) => {
+      expect(res).to.have.status(422);
       done();
     })
   })
@@ -266,6 +287,146 @@ describe('POST /api/v1/comments', () => {
     .send(comment)
     .end((err, res) => {
       expect(res).to.have.status(422);
+      done();
+    })
+  })
+})
+
+describe('PUT /api/v1/users/:id', () => {
+  beforeAndAfterEach()
+
+  it('should update a user\'s name', (done) => {
+    let name = 'Eric Saylor'
+    chai.request(app)
+    .put('/api/v1/users/1')
+    .send({ name })
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      expect(res.body[0].name).to.be.equal(name);
+      done();
+    })
+  })
+})
+
+describe('PUT /api/v1/companies/:id', () => {
+  beforeAndAfterEach()
+
+  it('should update a company', (done) => {
+    let company = {
+      name: 'Glengarry Glen Ross',
+      city: 'Nowhere',
+      state: 'CO',
+    }
+    chai.request(app)
+    .put('/api/v1/companies/5')
+    .send(company)
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      expect(res.body[0].name).to.be.equal(company.name);
+      expect(res.body[0].city).to.be.equal(company.city);
+      expect(res.body[0].state).to.be.equal(company.state);
+      done();
+    })
+  })
+
+  it('it should only update what is passed in the body', (done) => {
+    let originalName;
+    let originalCity;
+    let originalState;
+
+    chai.request(app)
+    .get('/api/v1/companies/5')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      originalName = res.body[0].name;
+      originalCity = res.body[0].city;
+      originalState = res.body[0].state;
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+    })
+
+    let updateCompany = {
+      name: 'Glengarry Glen Ross',
+    }
+
+    chai.request(app)
+    .put('/api/v1/companies/5')
+    .send(updateCompany)
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      expect(res.body[0].name).to.be.equal(updateCompany.name);
+      expect(res.body[0].city).to.be.equal(originalCity);
+      expect(res.body[0].state).to.be.equal(originalState);
+      done();
+    })
+  })
+
+  it('it should not update anything if no body', (done) => {
+    let originalName;
+    let originalCity;
+    let originalState;
+
+    chai.request(app)
+    .get('/api/v1/companies/5')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      originalName = res.body[0].name;
+      originalCity = res.body[0].city;
+      originalState = res.body[0].state;
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+    })
+
+    chai.request(app)
+    .put('/api/v1/companies/5')
+    .send()
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      expect(res.body[0].name).to.be.equal(originalName);
+      expect(res.body[0].city).to.be.equal(originalCity);
+      expect(res.body[0].state).to.be.equal(originalState);
+      done();
+    })
+  })
+})
+
+describe('PATCH /api/v1/comment/:id', () => {
+  beforeAndAfterEach()
+
+  it('should update a comment', (done) => {
+    let comment = {
+      message: 'What is the meaning of life?'
+    }
+    chai.request(app)
+    .patch('/api/v1/comments/1')
+    .send(comment)
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      expect(res.body[0].message).to.be.equal(comment.message);
       done();
     })
   })
