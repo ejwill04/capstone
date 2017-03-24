@@ -461,3 +461,108 @@ describe('GET /api/v1/comments/company/:company_id', () => {
     })
   })
 })
+
+describe('GET /api/v1/comments/company/:company_id', () => {
+  beforeAndAfterEach()
+
+  it('should respond with total number of comments for a given company', (done) => {
+    chai.request(app)
+    .get('/api/v1/comments/total/1')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('number');
+      expect(res.body).to.equal(2);
+      done()
+    })
+  })
+
+  beforeAndAfterEach()
+
+  it('should respond back with a 404 when company not found', (done) => {
+    chai.request(app)
+    .get('/api/v1/comments/total/2349')
+    .end((err, res) => {
+      if(err) {
+        expect(err).to.have.status(404);
+        done()
+      }
+    })
+  })
+})
+
+describe('DELETE /api/v1/users/:id', () => {
+  beforeAndAfterEach()
+
+  it('should DELETE a user', (done) => {
+    chai.request(app)
+    .delete('/api/v1/users/2')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(200)
+      expect(res.body).to.have.length(29)
+      done()
+    })
+  })
+
+  xit('should respond with an error if that user does not exist', (done) => {
+    chai.request(app)
+    .delete('/api/v1/users/548552')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(422)
+      done()
+    })
+  })
+})
+
+describe('DELETE /api/v1/companies/:id', () => {
+  beforeAndAfterEach()
+
+  it('should DELETE a company', (done) => {
+    chai.request(app)
+    .delete('/api/v1/companies/4')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(200)
+      expect(res.body).to.have.length(29)
+      done()
+    })
+  })
+
+  xit('should respond with an error if that company does not exist', (done) => {
+    chai.request(app)
+    .delete('/api/v1/companies/548552')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(422)
+      done()
+    })
+  })
+})
+
+describe('DELETE /api/v1/comments/:id', () => {
+  beforeAndAfterEach()
+
+  it('should DELETE a comment', (done) => {
+    chai.request(app)
+    .delete('/api/v1/comments/1')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(200)
+      expect(res.body).to.have.length(29)
+      done()
+    })
+  })
+
+  xit('should respond with an error if that comment does not exist', (done) => {
+    chai.request(app)
+    .delete('/api/v1/comments/548552')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(422)
+      done()
+    })
+  })
+})

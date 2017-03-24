@@ -111,6 +111,22 @@ app.get('/api/v1/comments/company/:company_id', (request, response) => {
   })
 })
 
+// get total number of comments associated with a company
+app.get('/api/v1/comments/total/:company_id', (request, response) => {
+  const { company_id } = request.params
+  database('comments').where('company_id', company_id).select()
+  .then(comments => {
+    if (comments.length > 0) {
+      response.status(200).json(comments.length)
+    } else {
+      response.status(404).send('Company not found')
+    }
+  })
+  .catch(error => {
+    console.error(404, 'Company not found')
+  })
+})
+
 
 // add a user
 app.post('/api/v1/users', (request, response) => {
@@ -215,20 +231,58 @@ app.patch('/api/v1/comments/:id', (request, response) => {
   })
 })
 
-// app.delete('/api/v1/comments/:id', (request, response) => {
-//   const { id } = request.params
-//
-//   database('comments').where('id', id).del()
-//   .then(()=> response.status('the force is with you'))
-// })
-//
-// app.delete('/api/v1/users/:id', (request, response) => {
-//   const { id } = request.params
-//
-//   database('comments').where('user_id', id).del()
-//   .then(() => database('users').where('id', id).del())
-//   .then(() => response.status('the force removed it'))
-// })
+app.delete('/api/v1/users/:id', (request, response) => {
+  const { id } = request.params
+
+  database('comments').where('user_id', id).delete()
+  .then(() => database('users').where('id', id).delete())
+  .then((deleted) => {
+    if (deleted > 0) {
+      database('users').select()
+      .then(users => response.status(200).json(users))
+    } else {
+      response.status(422)
+    }
+  })
+  .catch((error) => {
+    console.error('error: ', error)
+  });
+})
+
+app.delete('/api/v1/companies/:id', (request, response) => {
+  const { id } = request.params
+
+  database('comments').where('company_id', id).delete()
+  .then(() => database('companies').where('id', id).delete())
+  .then((deleted) => {
+    if (deleted > 0) {
+      database('companies').select()
+      .then(companies => response.status(200).json(companies))
+    } else {
+      response.status(422)
+    }
+  })
+  .catch((error) => {
+    console.error('error: ', error)
+  });
+})
+
+app.delete('/api/v1/comments/:id', (request, response) => {
+  const { id } = request.params
+
+  database('comments').where('id', id).delete()
+  .then((deleted) => {
+    if (deleted > 0) {
+      database('comments').select()
+      .then(comments => response.status(200).json(comments))
+    } else {
+      response.status(422)
+    }
+  })
+  .catch((error) => {
+    console.error('error: ', error)
+  });
+})
 
 app.listen(app.get('port'), () => {
   console.log(`BYOB is running on ${app.get('port')}.`)
