@@ -180,7 +180,7 @@ exports.seed = function(knex, Promise) {
         "message": "amet eleifend pede libero quis orci",
         "user_id": 30,
         created_at: new Date,
-        "company_id": 30
+        "company_id": 1
       })
     ]);
   });

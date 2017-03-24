@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
-const environment = 'test'
+const environment = process.env.NODE_ENV || 'test'
 const configuration = require('./knexfile')[environment]
 const database = require('knex')(configuration)
 
@@ -96,15 +96,18 @@ app.get('/api/v1/comments/:id', (request, response) => {
 })
 
 // get all comments associated with a company
-app.get('/api/v1/comments/:company_id', (request, response) => {
+app.get('/api/v1/comments/company/:company_id', (request, response) => {
   const { company_id } = request.params
-
   database('comments').where('company_id', company_id).select()
   .then(comments => {
-    response.status(200).json(comments)
+    if (comments.length > 0) {
+      response.status(200).json(comments)
+    } else {
+      response.status(404).send('Company not found')
+    }
   })
   .catch(error => {
-    console.error('error', error)
+    console.error(404, 'Company not found')
   })
 })
 

@@ -126,7 +126,7 @@ exports.seed = function(knex, Promise) {
         "message": "nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede posuere nonummy integer non velit",
         "user_id": 21,
         created_at: new Date,
-        "company_id": 21
+        "company_id": 1
       }),
       knex('comments').insert({
         "message": "a feugiat et eros vestibulum ac est lacinia nisi venenatis tristique fusce congue diam id ornare imperdiet sapien urna pretium nisl",
