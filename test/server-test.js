@@ -431,3 +431,26 @@ describe('PATCH /api/v1/comment/:id', () => {
     })
   })
 })
+
+describe('GET /api/v1/comments/:company_id', () => {
+  beforeAndAfterEach()
+
+  it('should respond with all comments for a given company', (done) => {
+    let comment = {
+      message:'this is the second message',
+      company_id:1,
+      user_id:1
+    }
+
+    chai.request(app)
+    .get('/api/v1/comments/1')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      done()
+    })
+  })
+})
