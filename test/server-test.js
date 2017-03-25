@@ -215,6 +215,20 @@ describe('POST /api/v1/users', () => {
       done();
     })
   })
+
+  beforeAndAfterEach()
+
+  it('should return an error if missing param', (done) => {
+    let user = { thing: '123' }
+    chai.request(app)
+    .post('/api/v1/users')
+    .send(user)
+    .end((err, res) => {
+      expect(res).to.have.status(422);
+      expect(res.text).to.equal('Did not receive correct body params');
+      done();
+    })
+  })
 })
 
 describe('POST /api/v1/companies', () => {
@@ -241,9 +255,9 @@ describe('POST /api/v1/companies', () => {
 
   beforeAndAfterEach()
 
-  xit('should return an error if incorrect name', (done) => {
+  it('should return an error if missing body param', (done) => {
     let company = {
-      thing: 123,
+      thing: '123',
       city: 'Nowhere',
       state: 'CO'
     }
@@ -252,6 +266,7 @@ describe('POST /api/v1/companies', () => {
     .send(company)
     .end((err, res) => {
       expect(res).to.have.status(422);
+      expect(res.text).to.equal('Did not receive correct body params');
       done();
     })
   })
@@ -329,6 +344,59 @@ describe('PUT /api/v1/users/:id', () => {
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(1);
       expect(res.body[0].name).to.be.equal(name);
+      done();
+    })
+  })
+
+  it('it should only update what is passed in the body', (done) => {
+    let originalName;
+
+    chai.request(app)
+    .get('/api/v1/users/5')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      originalName = res.body[0].name;
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+    })
+
+    let updateUser = {
+      name: 'Kendrick Lamar',
+    }
+
+    chai.request(app)
+    .put('/api/v1/companies/5')
+    .send(updateUser)
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      expect(res.body[0].name).to.be.equal(updateUser.name);
+      done();
+    })
+  })
+
+  it('it should return error if no body', (done) => {
+    chai.request(app)
+    .get('/api/v1/users/3')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+    })
+
+    chai.request(app)
+    .put('/api/v1/users/5')
+    .send()
+    .end((err, res) => {
+      expect(res).to.have.status(422);
+      expect(res.text).to.be.equal('Could not update user');
       done();
     })
   })
@@ -528,12 +596,12 @@ describe('DELETE /api/v1/users/:id', () => {
     })
   })
 
-  xit('should respond with an error if that user does not exist', (done) => {
+  it('should respond with an error if that user does not exist', (done) => {
     chai.request(app)
     .delete('/api/v1/users/548552')
     .end((err, res) => {
-      if(err){ return done(err) }
-      expect(res).to.have.status(422)
+      expect(err).to.have.status(404)
+      expect(err.response.error.text).to.be.equal('Could not find that user')
       done()
     })
   })
@@ -553,12 +621,12 @@ describe('DELETE /api/v1/companies/:id', () => {
     })
   })
 
-  xit('should respond with an error if that company does not exist', (done) => {
+  it('should respond with an error if that company does not exist', (done) => {
     chai.request(app)
     .delete('/api/v1/companies/548552')
     .end((err, res) => {
-      if(err){ return done(err) }
-      expect(res).to.have.status(422)
+      expect(err).to.have.status(404)
+      expect(err.response.error.text).to.be.equal('Could not find that company')
       done()
     })
   })
@@ -578,12 +646,12 @@ describe('DELETE /api/v1/comments/:id', () => {
     })
   })
 
-  xit('should respond with an error if that comment does not exist', (done) => {
+  it('should respond with an error if that comment does not exist', (done) => {
     chai.request(app)
     .delete('/api/v1/comments/548552')
     .end((err, res) => {
-      if(err){ return done(err) }
-      expect(res).to.have.status(422)
+      expect(err).to.have.status(404)
+      expect(err.response.error.text).to.be.equal('Could not find that comment')
       done()
     })
   })

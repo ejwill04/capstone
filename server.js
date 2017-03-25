@@ -39,11 +39,9 @@ app.get('/api/v1/companies', (request, response) => {
     let state = request.query.state
     database('companies').where('state', state).select()
     .then(companies => {
-      console.log(companies.length)
       if (companies.length > 0) {
         response.status(200).json(companies)
       } else {
-        console.log('where area you')
         response.status(404).json('State not found')
       }
     })
@@ -146,16 +144,20 @@ app.get('/api/v1/comments/total/:company_id', (request, response) => {
 app.post('/api/v1/users', (request, response) => {
   const { name } = request.body;
 
-  database('users').insert({name})
-  .then(() => {
-    database('users').select()
-    .then(users => {
-      response.status(200).json(users)
+  if (!name) {
+    response.status(422).send('Did not receive correct body params')
+  } else {
+    database('users').insert({name})
+    .then(() => {
+      database('users').select()
+      .then(users => {
+        response.status(200).json(users)
+      })
     })
-  })
-  .catch(error => {
-    response.status(422).send('Could not add user')
-  })
+    .catch(error => {
+      response.status(422).send('Could not add user')
+    })
+  }
 })
 
 // add a company
@@ -163,16 +165,20 @@ app.post('/api/v1/companies', (request, response) => {
   const { name, city, state } = request.body
   const company = { name, city, state }
 
-  database('companies').insert(company)
-  .then(() => {
-    database('companies').select()
-    .then(companies => {
-      response.status(200).json(companies)
+  if (!name || !city || !state) {
+    response.status(422).send('Did not receive correct body params')
+  } else {
+    database('companies').insert(company)
+    .then(() => {
+      database('companies').select()
+      .then(companies => {
+        response.status(200).json(companies)
+      })
     })
-  })
-  .catch(error => {
-    response.status(422).send('Could not add company')
-  })
+    .catch(error => {
+      response.status(422).send('Could not add company')
+    })
+  }
 })
 
 // post a comment
@@ -197,16 +203,20 @@ app.put('/api/v1/users/:id', (request, response) => {
   const { id } = request.params
   const { name } = request.body
 
-  database('users').where('id', id).update({ name })
-  .then(() => {
-    database('users').where('id',id).select()
+  if (!name) {
+    response.status(422).send('Could not update user')
+  } else {
+    database('users').where('id', id).update({ name })
+    .then(() => {
+      database('users').where('id', id).select()
       .then(updatedUser =>
         response.status(200).json(updatedUser)
       )
-  })
-  .catch(error => {
-    response.status(422).send('Could not update user')
-  })
+    })
+    .catch(error => {
+      response.status(422).send('Could not update user')
+    })
+  }
 })
 
 // update company name
@@ -248,54 +258,63 @@ app.patch('/api/v1/comments/:id', (request, response) => {
 app.delete('/api/v1/users/:id', (request, response) => {
   const { id } = request.params
 
-  database('comments').where('user_id', id).delete()
-  .then(() => database('users').where('id', id).delete())
-  .then((deleted) => {
-    if (deleted > 0) {
-      database('users').select()
-      .then(users => response.status(200).json(users))
+  database('users').where('id', id).select()
+  .then((user) => {
+    if (user.length === 0) {
+      response.status(404).send('Could not find that user')
     } else {
-      response.status(422)
+      database('comments').where('user_id', id).delete()
+      .then(() => database('users').where('id', id).delete())
+      .then(() => {
+          database('users').select()
+          .then(users => response.status(200).json(users))
+      })
+      .catch((error) => {
+        console.error('error: ', error)
+      });
     }
   })
-  .catch((error) => {
-    console.error('error: ', error)
-  });
 })
 
 app.delete('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
 
-  database('comments').where('company_id', id).delete()
-  .then(() => database('companies').where('id', id).delete())
-  .then((deleted) => {
-    if (deleted > 0) {
-      database('companies').select()
-      .then(companies => response.status(200).json(companies))
+  database('companies').where('id', id).select()
+  .then((company) => {
+    if (company.length === 0) {
+      response.status(404).send('Could not find that company')
     } else {
-      response.status(422)
+      database('comments').where('company_id', id).delete()
+      .then(() => database('companies').where('id', id).delete())
+      .then(() => {
+          database('companies').select()
+          .then(companies => response.status(200).json(companies))
+      })
+      .catch((error) => {
+        console.error('error: ', error)
+      });
     }
   })
-  .catch((error) => {
-    console.error('error: ', error)
-  });
 })
 
 app.delete('/api/v1/comments/:id', (request, response) => {
   const { id } = request.params
 
-  database('comments').where('id', id).delete()
-  .then((deleted) => {
-    if (deleted > 0) {
-      database('comments').select()
-      .then(comments => response.status(200).json(comments))
+  database('comments').where('id', id).select()
+  .then((comment) => {
+    if (comment.length === 0) {
+      response.status(404).send('Could not find that comment')
     } else {
-      response.status(422)
+      database('comments').where('id', id).delete()
+      .then(() => {
+        database('comments').select()
+        .then(comments => response.status(200).json(comments))
+      })
+      .catch((error) => {
+        console.error('error: ', error)
+      });
     }
   })
-  .catch((error) => {
-    console.error('error: ', error)
-  });
 })
 
 app.listen(app.get('port'), () => {
