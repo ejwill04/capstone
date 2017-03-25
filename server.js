@@ -35,13 +35,27 @@ app.get('/api/v1/comments', (request, response) => {
 
 // get all companies
 app.get('/api/v1/companies', (request, response) => {
-  database('companies').select()
-  .then(companies => {
-    response.status(200).json(companies)
-  })
-  .catch(error => {
-    console.error('error', error)
-  })
+  if (request.query.state) {
+    let state = request.query.state
+    database('companies').where('state', state).select()
+    .then(companies => {
+      console.log(companies.length)
+      if (companies.length > 0) {
+        response.status(200).json(companies)
+      } else {
+        console.log('where area you')
+        response.status(404).json('State not found')
+      }
+    })
+  } else {
+    database('companies').select()
+    .then(companies => {
+      response.status(200).json(companies)
+    })
+    .catch(error => {
+      console.error('error', error)
+    })
+  }
 })
 
 // get a user

@@ -67,6 +67,28 @@ describe('GET /api/v1/companies', () => {
       done()
     })
   })
+
+  it('should query companies', (done) => {
+    chai.request(app)
+    .get('/api/v1/companies?state=KY')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      done()
+    })
+  })
+
+  it('should return nothing when query doesnt match', (done) => {
+    chai.request(app)
+    .get('/api/v1/companies?state=ABC')
+    .end((err, res) => {
+      expect(res).to.have.status(404);
+      done()
+    })
+  })
 })
 
 describe('GET /api/v1/comments', () => {
