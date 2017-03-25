@@ -1,142 +1,91 @@
 # BYOB API
 
-BYOB API provides programmatic access to BYOB functionality and content.
-Version 1 of the API is limited to the essentials of the website's functionality: viewing feature streams, photo information and comments, as well as user profiles.
-
-The API is [REST API](http://en.wikipedia.org/wiki/Representational_State_Transfer "RESTful")
-Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
-
-You can try our API in [console](http://bitly.com/api500px) ([http://bitly.com/api500px](http://bitly.com/api500px))
-
-See [status.500px.com](http://status.500px.com) for API status updates, outages, and scheduled maintenance.
-
-***
-
-## Checklist
-* [Try the API console](http://bitly.com/api500px)
-* [See if the concepts used by the API are familiar to you][]
-* Familiarize yourself with API functionality
-* Read the 500px [API Terms of Use][]
-* [Register your application][] and get OAuth consumer key and secret
-* Hack away
-
-***
-
-## Basics
-
-- **[Formats and Terms](https://github.com/500px/api-documentation/blob/master/basics/formats_and_terms.md)**
-- **[API Terms of Use](https://github.com/500px/api-documentation/blob/master/basics/terms_of_use.md)**
-
-## Examples
-
-- **[JavaScript](http://500px.github.com/500px-js-sdk)**
-- **[iOS](https://github.com/500px/api-documentation/blob/master/examples/iOS/API%20Tutorials.md)**
-- **[Ruby](https://github.com/500px/api-documentation/blob/master/examples/Ruby/)**
-- **[PHP](https://github.com/500px/api-documentation/blob/master/examples/PHP/PHP.md)**
-
-## Changes
-
-* 2014-03-27 Deprecated photo object's image_url key.
-
-## SDK
-
-- **[JavaScript](https://github.com/500px/500px-js-sdk)**
-- **[Android](https://github.com/500px/500px-android-sdk)**
-- **[iOS](https://github.com/500px/500px-iOS-api)**
+## Overview
+BYOB is a template for setting up a database and API endpoints using Node, Express, Knex, and PostgreSQL.  The template uses three related tables - Users, Companies, and Comments.  The general link is that a User can submit a Comment about any given Company.  The endpoints attempt to be RESTful.  
 
 ## Endpoints
+ [heroku](https://build-your-own-backend.herokuapp.com/)
+*****
+### Users
 
-#### Photo Resources
+<code>GET</code>/api/v1/users
 
-- **[<code>GET</code> photos](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos.md)**
-- **[<code>GET</code> photos/search](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos_search.md)**
-- **[<code>GET</code> photos/:id](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos_id.md)**
-- **[<code>GET</code> photos/:id/comments](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos_id_comments.md)**
-- **[<code>GET</code> photos/:id/votes](https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos_id_votes.md)**
-- **[<code>PUT</code> photos/:id](https://github.com/500px/api-documentation/blob/master/endpoints/photo/PUT_photos_id.md)**
-- **[<code>POST</code> photos](https://github.com/500px/api-documentation/blob/master/endpoints/photo/POST_photos.md)**
-- **[<code>POST</code> photos/upload](https://github.com/500px/api-documentation/blob/master/endpoints/photo/POST_photos_upload.md)**
-- **[<code>POST</code> photos/:id/vote](https://github.com/500px/api-documentation/blob/master/endpoints/photo/POST_photos_id_vote.md)**
-- **[<code>DELETE</code> photos/:id/vote](https://github.com/500px/api-documentation/blob/master/endpoints/photo/DELETE_photos_id_vote.md)**
-- **[<code>POST</code> photos/:id/tags](https://github.com/500px/api-documentation/blob/master/endpoints/photo/POST_photos_id_tags.md)**
-- **[<code>POST</code> photos/:id/comments](https://github.com/500px/api-documentation/blob/master/endpoints/photo/POST_photos_id_comments.md)**
-- **[<code>POST</code> photos/:id/report](https://github.com/500px/api-documentation/blob/master/endpoints/photo/POST_photos_id_report.md)**
-- **[<code>DELETE</code> photos/:id](https://github.com/500px/api-documentation/blob/master/endpoints/photo/DELETE_photos_id.md)**
-- **[<code>DELETE</code> photos/:id/tags](https://github.com/500px/api-documentation/blob/master/endpoints/photo/DELETE_photos_id_tags.md)**
+* returns a JSON array of all users
 
-#### Upload Method
+<code>POST</code>/api/v1/users
 
-- **[<code>POST</codE> upload](https://github.com/500px/api-documentation/blob/master/endpoints/upload/POST_upload.md)**
+* send user <code>name</code> to add to database.  Will respond with all users.
 
-#### User Resources
+### Users/:id
 
-- **[<code>GET</code> users](https://github.com/500px/api-documentation/blob/master/endpoints/user/GET_users.md)**
-- **[<code>GET</code> users/show](https://github.com/500px/api-documentation/blob/master/endpoints/user/GET_users_show.md)**
-- **[<code>GET</code> users/:id/friends](https://github.com/500px/api-documentation/blob/master/endpoints/user/GET_users_id_friends.md)**
-- **[<code>GET</code> users/:id/followers](https://github.com/500px/api-documentation/blob/master/endpoints/user/GET_users_id_followers.md)**
-- **[<code>GET</code> users/search](https://github.com/500px/api-documentation/blob/master/endpoints/user/GET_users_search.md)**
-- **[<code>POST</code> users/:id/friends](https://github.com/500px/api-documentation/blob/master/endpoints/user/POST_users_id_friends.md)**
-- **[<code>DELETE</code> users/:id/friends](https://github.com/500px/api-documentation/blob/master/endpoints/user/DELETE_users_id_friends.md)**
+<code>GET</code>/api/v1/users/:id
 
-#### Gallery Resources
+* return a JSON array of a single user
 
-- **[<code>GET</code> users/:user_id/galleries](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/GET_galleries.md)**
-- **[<code>GET</code> users/:user_id/galleries/:id](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/GET_galleries_id.md)**
-- **[<code>GET</code> users/:user_id/galleries/:id/items](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/GET_galleries_id_items.md)**
-- **[<code>GET</code> users/:user_id/galleries/:id/share_url](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/GET_galleries_id.md)**
-- **[<code>PUT</code> users/:user_id/galleries/:id](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/PUT_galleries_id.md)**
-- **[<code>PUT</code> users/:user_id/galleries/:id/items](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/PUT_galleries_id_items.md)**
-- **[<code>PUT</code> users/:user_id/galleries/reposition](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/PUT_galleries_reposition.md)**
-- **[<code>POST</code> users/:user_id/galleries](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/POST_galleries.md)**
-- **[<code>DELETE</code> users/:user_id/galleries/:id](https://github.com/500px/api-documentation/blob/master/endpoints/galleries/DELETE_galleries_id.md)**
+<code>PUT</code>/api/v1/users/:id
 
-#### Collections/Sets Resources
+* Send an updated user name and return JSON array for single user
 
-- **DEPRECATED**.  Please use [Gallery Resources](#gallery-resources) instead
+<code>DELETE</code>/api/v1/users/:id
 
-#### Comment Resources
+* Deletes sent user ID and returns JSON array of all remaining users
 
-- **[<code>POST</code> comments/:id/comments](https://github.com/500px/api-documentation/blob/master/endpoints/comments/POST_comments_id_comments.md)**
+***
 
-## Directory API
+### Companies
 
-You can also programmatically access the [500px Directory](https://500px.com/directory). The Directory allows you to contact photographers and search for photographers by speciality, availability, service rates, language, camera, and other information. To gain access to the Directory API please contact sales@500px.com.
+<code>GET</code>/api/v1/companies
 
-## Authentication
+* returns a JSON array of all companies
 
-- **[<code>POST</code> oauth/request_token](https://github.com/500px/api-documentation/blob/master/authentication/POST_oauth_requesttoken.md)**
-- **[<code>POST</code> oauth/authorize](https://github.com/500px/api-documentation/blob/master/authentication/POST_oauth_authorize.md)**
-- **[<code>POST</code> oauth/access_token](https://github.com/500px/api-documentation/blob/master/authentication/POST_oauth_accesstoken.md)**
-- **[Upload key](https://github.com/500px/api-documentation/blob/master/authentication/upload_key.md)**
+<code>POST</code>/api/v1/companies
 
+* send company <code>name</code> to add to database.  Will respond with all companies.
 
-## FAQ
-### What do I need to know before I start using the API?
-Got rust on your skills? No worries. Here are the docs you might need to get started:
+### Companies/:id
 
-- HTTPS protocol
-- [REST software pattern][]
-- Authentication with [OAuth][] (or the official [Beginner’s Guide][])
-- Data serialization with [JSON][] (or see a [quick tutorial][])
+<code>GET</code>/api/v1/companies/:id
 
-### How do I connect to the 500px.com API?
-The API is only available to authenticated clients. Clients should authenticate users using [OAuth][]. Once authenticated, you need to request a resource from one of the endpoints using HTTPS. Generally, reading any data is done through a request with GET method. If you want our server to create, update or delete a given resource, POST or PUT methods are required.
+* return a JSON array of a single company
 
-### What return formats do you support?
-500px API currently returns data in [JSON](http://json.org/ "JSON") format.
+<code>PUT</code>/api/v1/companies/:id
 
-### What kind of authentication is required?
-Applications must identify themselves to access any resource.
-If your application only needs read-only access and does not authenticate the user, **consumer_key** containing a valid Consumer Key parameter should be specified in the query string. Otherwise, [OAuth](https://github.com/500px/api-documentation/tree/master/authentication) or upload key authentication takes care of identifying the application as well as the user accessing the API.
+* Send an updated company name and return JSON array for single user
 
-### Is there a request rate limit?
-There is a rate limit of 1,000,000 API requests per month per account. We will contact you and if required disable your application if we find that your application is exceeding this limit or interfering with our system's stability.This revised rate limit will come into effect May 1, 2014.
+<code>DELETE</code>/api/v1/companies/:id
 
-[REST software pattern]: http://en.wikipedia.org/wiki/Representational_State_Transfer
-[OAuth]: http://oauth.net/core/1.0a/
-[Beginner’s Guide]: http://hueniverse.com/oauth/
-[JSON]: http://json.org
-[quick tutorial]: http://www.webmonkey.com/2010/02/get_started_with_json/
-[Register your application]: http://500px.com/settings/applications
-[API Terms of Use]: https://github.com/500px/api-documentation/blob/master/basics/terms_of_use.md
-[See if the concepts used by the API are familiar to you]: https://github.com/500px/api-documentation#what-do-i-need-to-know-before-i-start-using-the-api
+* Deletes sent user ID and returns JSON array of all remaining companies
+
+***
+
+### Comments
+
+<code>GET</code>/api/v1/comments
+
+* returns a JSON array of all comments
+
+<code>POST</code>/api/v1/comments
+
+* send comment <code>name</code> to add to database.  Will respond with all comments.
+
+### Comments/:id
+
+<code>GET</code>/api/v1/comments/:id
+
+* return a JSON array of a single comment
+
+<code>PUT</code>/api/v1/comments/:id
+
+* Send an updated comment name and return JSON array for single user
+
+<code>DELETE</code>/api/v1/comments/:id
+
+* Deletes sent user ID and returns JSON array of all remaining comments
+
+***
+
+## Testing, Testing, 1, 2, Test, 1, 2, Test
+
+![passing-tests-screenshot](http://i.imgur.com/c7lZroW.png)
+
+*cannot confirm or deny
