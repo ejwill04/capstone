@@ -243,18 +243,27 @@ app.patch('/api/v1/comments/:id', (request, response) => {
   const { message } = request.body
   const updated_at = new Date
 
-  database('comments').where('id', id).update({ message, updated_at })
-  .then(() => {
-    database('comments').where('id', id).select()
-      .then(updatedComment =>
-        response.status(200).json(updatedComment)
-      )
-  })
-  .catch(error => {
-    response.status(422).send('Could not update comment')
-  })
+  if (!message) {
+    response.status(422).send('Please send a message')
+  } else {
+    database('comments').where('id', id).update({ message, updated_at })
+    .then((update) => {
+      if (update === 0) {
+        response.status(404).send('Could not find comment')
+      } else {
+        database('comments').where('id', id).select()
+        .then(updatedComment =>
+          response.status(200).json(updatedComment)
+        )
+        .catch(error => {
+          response.status(422).send('Could not update comment')
+        })
+      }
+    })
+  }
 })
 
+// delete user
 app.delete('/api/v1/users/:id', (request, response) => {
   const { id } = request.params
 
@@ -276,6 +285,7 @@ app.delete('/api/v1/users/:id', (request, response) => {
   })
 })
 
+// delete company
 app.delete('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
 
@@ -297,6 +307,7 @@ app.delete('/api/v1/companies/:id', (request, response) => {
   })
 })
 
+// delete comment
 app.delete('/api/v1/comments/:id', (request, response) => {
   const { id } = request.params
 

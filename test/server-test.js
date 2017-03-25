@@ -520,6 +520,32 @@ describe('PATCH /api/v1/comment/:id', () => {
       done();
     })
   })
+
+  it('should return 404 if comment does not exist', (done) => {
+    let comment = {
+      message: 'What is the meaning of life?'
+    }
+    chai.request(app)
+    .patch('/api/v1/comments/14545')
+    .send(comment)
+    .end((err, res) => {
+      expect(res).to.have.status(404);
+      expect(res.text).to.be.equal('Could not find comment');
+      done();
+    })
+  })
+
+  it('should return 422 if no message send in body', (done) => {
+
+    chai.request(app)
+    .patch('/api/v1/comments/14545')
+    .send()
+    .end((err, res) => {
+      expect(res).to.have.status(422);
+      expect(res.text).to.be.equal('Please send a message');
+      done();
+    })
+  })
 })
 
 describe('GET /api/v1/comments/company/:company_id', () => {
