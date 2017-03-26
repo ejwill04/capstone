@@ -6,6 +6,7 @@ BYOB is a template for setting up a database and API endpoints using Node, Expre
 ## Endpoints
  [heroku](https://build-your-own-backend.herokuapp.com/)
 *****
+
 ### Users
 
 <code>GET</code>/api/v1/users
@@ -37,6 +38,8 @@ BYOB is a template for setting up a database and API endpoints using Node, Expre
 <code>GET</code>/api/v1/companies
 
 * returns a JSON array of all companies
+
+* send query of state and receive only companies located in given state (ex. '/api/v1/companies?state=KY')
 
 <code>POST</code>/api/v1/companies
 
@@ -74,7 +77,7 @@ BYOB is a template for setting up a database and API endpoints using Node, Expre
 
 * return a JSON array of a single comment
 
-<code>PUT</code>/api/v1/comments/:id
+<code>PATCH</code>/api/v1/comments/:id
 
 * Send an updated comment name and return JSON array for single user
 
@@ -82,10 +85,16 @@ BYOB is a template for setting up a database and API endpoints using Node, Expre
 
 * Deletes sent user ID and returns JSON array of all remaining comments
 
+<code>GET</code>/api/v1/comments/total/:company_id
+
+* Send a company ID and receive total number of associated comments
+
+<code>GET</code>/api/v1/comments/company/:company_id
+
+* Send a company ID and receive all associated comments
+
 ***
 
 ## Testing, Testing, 1, 2, Test, 1, 2, Test
 
 ![passing-tests-screenshot](http://i.imgur.com/c7lZroW.png)
-
-*cannot confirm or deny
