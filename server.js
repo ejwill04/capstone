@@ -91,7 +91,7 @@ app.get('/api/v1/companies/:id', (request, response) => {
 })
 
 // get a comment
-app.get('/api/v1/comments/:id', (request, response) => {
+app.get('/api/v1/interview_questions/:id', (request, response) => {
   const { id } = request.params
 
   database('comments').where('id', id).select()
@@ -107,13 +107,13 @@ app.get('/api/v1/comments/:id', (request, response) => {
   })
 })
 
-// get all comments associated with a company
-app.get('/api/v1/comments/company/:company_id', (request, response) => {
+// get all interview questions associated with a company
+app.get('/api/v1/interview_questions/company/:company_id', (request, response) => {
   const { company_id } = request.params
-  database('comments').where('company_id', company_id).select()
-  .then(comments => {
-    if (comments.length > 0) {
-      response.status(200).json(comments)
+  database('interview_questions').where('company_id', company_id).select()
+  .then(interview_questions => {
+    if (interview_questions.length > 0) {
+      response.status(200).json(interview_questions)
     } else {
       response.status(404).send('Company not found')
     }
@@ -123,13 +123,13 @@ app.get('/api/v1/comments/company/:company_id', (request, response) => {
   })
 })
 
-// get total number of comments associated with a company
-app.get('/api/v1/comments/total/:company_id', (request, response) => {
+// get all reviews associated with a company
+app.get('/api/v1/reviews/company/:company_id', (request, response) => {
   const { company_id } = request.params
-  database('comments').where('company_id', company_id).select()
-  .then(comments => {
-    if (comments.length > 0) {
-      response.status(200).json(comments.length)
+  database('reviews').where('company_id', company_id).select()
+  .then(reviews => {
+    if (reviews.length > 0) {
+      response.status(200).json(reviews)
     } else {
       response.status(404).send('Company not found')
     }
@@ -139,10 +139,26 @@ app.get('/api/v1/comments/total/:company_id', (request, response) => {
   })
 })
 
+// get all salaries associated with a company
+app.get('/api/v1/salaries/company/:company_id', (request, response) => {
+  const { company_id } = request.params
+  database('salaries').where('company_id', company_id).select()
+  .then(salaries => {
+    if (salaries.length > 0) {
+      response.status(200).json(salaries)
+    } else {
+      response.status(404).send('Company not found')
+    }
+  })
+  .catch(error => {
+    console.error(404, 'Company not found')
+  })
+})
 
 // add a user
+// what information do we need to know about a user if any?
 app.post('/api/v1/users', (request, response) => {
-  const { name } = request.body;
+  const { name, github, cohort, slack, companies, remote } = request.body;
 
   if (!name) {
     response.status(422).send('Did not receive correct body params')
@@ -162,18 +178,15 @@ app.post('/api/v1/users', (request, response) => {
 
 // add a company
 app.post('/api/v1/companies', (request, response) => {
-  const { name, city, state } = request.body
-  const company = { name, city, state }
+  const { user_id, name, industry, num_of_emp, tech_stack, remote_ok } = request.body
+  const company = { user_id, name, industry, num_of_emp, tech_stack, remote_ok }
 
-  if (!name || !city || !state) {
+  if (!user_id && !name) {
     response.status(422).send('Did not receive correct body params')
   } else {
     database('companies').insert(company)
     .then(() => {
-      database('companies').select()
-      .then(companies => {
-        response.status(200).json(companies)
-      })
+      response.status(200).json('company received')
     })
     .catch(error => {
       response.status(422).send('Could not add company')
@@ -181,16 +194,16 @@ app.post('/api/v1/companies', (request, response) => {
   }
 })
 
-// post a comment
-app.post('/api/v1/comments', (request, response) => {
+// post an interview_questions
+app.post('/api/v1/interview_questions', (request, response) => {
   const { message, user_id, company_id } = request.body
-  const comment = { message, user_id, company_id, created_at: new Date }
+  const interview_question = { message, user_id, company_id, created_at: new Date }
 
-  database('comments').insert(comment)
+  database('interview_question').insert(interview_question)
   .then(() => {
-    database('comments').select()
-    .then(comments => {
-      response.status(200).json(comments)
+    database('interview_question').select()
+    .then(interview_question => {
+      response.status(200).json(interview_questions)
     })
   })
   .catch(error => {
@@ -198,34 +211,48 @@ app.post('/api/v1/comments', (request, response) => {
   })
 })
 
-// update user name
-app.put('/api/v1/users/:id', (request, response) => {
-  const { id } = request.params
-  const { name } = request.body
+// post an reviews
+app.post('/api/v1/reviews', (request, response) => {
+  const { message, user_id, company_id } = request.body
+  const review = { message, user_id, company_id, created_at: new Date }
 
-  if (!name) {
-    response.status(422).send('Could not update user')
-  } else {
-    database('users').where('id', id).update({ name })
-    .then(() => {
-      database('users').where('id', id).select()
-      .then(updatedUser =>
-        response.status(200).json(updatedUser)
-      )
+  database('review').insert(review)
+  .then(() => {
+    database('review').select()
+    .then(review => {
+      response.status(200).json(reviews)
     })
-    .catch(error => {
-      response.status(422).send('Could not update user')
+  })
+  .catch(error => {
+    response.status(422).send('Could not post comment')
+  })
+})
+
+// post an salary
+app.post('/api/v1/salaries', (request, response) => {
+  const { message, user_id, company_id } = request.body
+  const salary = { message, user_id, company_id, created_at: new Date }
+
+  database('salary').insert(salary)
+  .then(() => {
+    database('salary').select()
+    .then(salary => {
+      response.status(200).json(salaries)
     })
-  }
+  })
+  .catch(error => {
+    response.status(422).send('Could not post comment')
+  })
 })
 
 // update company name
 app.put('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
-  const { name, city, state } = request.body
+  const { name, industry, num_of_emp, tech_stack } = request.body
+  const company = { name, industry, num_of_emp, tech_stack }
   const updated_at = new Date
 
-  database('companies').where('id', id).update({ name, city, state, updated_at })
+  database('companies').where('id', id).update(company)
   .then(() => {
     database('companies').where('id', id).select()
       .then(updatedCompany =>
@@ -234,54 +261,6 @@ app.put('/api/v1/companies/:id', (request, response) => {
   })
   .catch(error => {
     response.status(422).send('Could not update company')
-  })
-})
-
-// update message
-app.patch('/api/v1/comments/:id', (request, response) => {
-  const { id } = request.params
-  const { message } = request.body
-  const updated_at = new Date
-
-  if (!message) {
-    response.status(422).send('Please send a message')
-  } else {
-    database('comments').where('id', id).update({ message, updated_at })
-    .then((update) => {
-      if (update === 0) {
-        response.status(404).send('Could not find comment')
-      } else {
-        database('comments').where('id', id).select()
-        .then(updatedComment =>
-          response.status(200).json(updatedComment)
-        )
-        .catch(error => {
-          response.status(422).send('Could not update comment')
-        })
-      }
-    })
-  }
-})
-
-// delete user
-app.delete('/api/v1/users/:id', (request, response) => {
-  const { id } = request.params
-
-  database('users').where('id', id).select()
-  .then((user) => {
-    if (user.length === 0) {
-      response.status(404).send('Could not find that user')
-    } else {
-      database('comments').where('user_id', id).delete()
-      .then(() => database('users').where('id', id).delete())
-      .then(() => {
-          database('users').select()
-          .then(users => response.status(200).json(users))
-      })
-      .catch((error) => {
-        console.error('error: ', error)
-      });
-    }
   })
 })
 
@@ -307,19 +286,61 @@ app.delete('/api/v1/companies/:id', (request, response) => {
   })
 })
 
-// delete comment
-app.delete('/api/v1/comments/:id', (request, response) => {
+// delete interview_question
+app.delete('/api/v1/interview_questions/:id', (request, response) => {
   const { id } = request.params
 
-  database('comments').where('id', id).select()
-  .then((comment) => {
-    if (comment.length === 0) {
-      response.status(404).send('Could not find that comment')
+  database('interview_questions').where('id', id).select()
+  .then((interview_question) => {
+    if (interview_question.length === 0) {
+      response.status(404).send('Could not find that interview_question')
     } else {
-      database('comments').where('id', id).delete()
+      database('interview_questions').where('id', id).delete()
       .then(() => {
-        database('comments').select()
-        .then(comments => response.status(200).json(comments))
+        database('interview_questions').select()
+        .then(interview_questions => response.status(200).json(interview_questions))
+      })
+      .catch((error) => {
+        console.error('error: ', error)
+      });
+    }
+  })
+})
+
+// delete reviews
+app.delete('/api/v1/reviews/:id', (request, response) => {
+  const { id } = request.params
+
+  database('reviews').where('id', id).select()
+  .then((reviews) => {
+    if (reviews.length === 0) {
+      response.status(404).send('Could not find that reviews')
+    } else {
+      database('reviews').where('id', id).delete()
+      .then(() => {
+        database('reviews').select()
+        .then(reviewss => response.status(200).json(reviews))
+      })
+      .catch((error) => {
+        console.error('error: ', error)
+      });
+    }
+  })
+})
+
+// delete salaries
+app.delete('/api/v1/salaries/:id', (request, response) => {
+  const { id } = request.params
+
+  database('salaries').where('id', id).select()
+  .then((salaries) => {
+    if (salaries.length === 0) {
+      response.status(404).send('Could not find that salaries')
+    } else {
+      database('salaries').where('id', id).delete()
+      .then(() => {
+        database('salaries').select()
+        .then(salaries => response.status(200).json(salaries))
       })
       .catch((error) => {
         console.error('error: ', error)

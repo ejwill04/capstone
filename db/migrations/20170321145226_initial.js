@@ -3,6 +3,12 @@ exports.up = function(knex, Promise) {
         knex.schema.createTable('users', function(table) {
             table.increments('id').primary();
             table.string('name');
+            table.string('github');
+            table.string('cohort');
+            table.string('slack');
+            table.string('companies');
+            // companies will be an array of company_id with the first item representing the most recent company
+            table.boolean('remote');
 
             table.timestamps();
         }),
@@ -10,15 +16,55 @@ exports.up = function(knex, Promise) {
         knex.schema.createTable('companies', function(table){
             table.increments('id').primary();
             table.string('name');
-            table.string('city');
-            table.string('state');
+            table.string('industry');
+            table.integer('num_of_emp');
+            table.string('tech_stack');
+            // tech_stack will be an array of technologies
+            table.boolean('remote_ok');
+            table.timestamps();
+        }),
+
+        knex.schema.createTable('locations', function(table){
+          table.increments('id').primary();
+          table.string('city');
+          table.string('state');
+          table.string('country');
+          table.boolean('remote');
+          table.integer('company_id')
+               .references('id')
+               .inTable('companies');
+        }),
+
+        knex.schema.createTable('interview_questions', function(table){
+            table.increments('id').primary();
+            table.string('message');
+            table.integer('user_id')
+                 .references('id')
+                 .inTable('users');
+            table.integer('company_id')
+                 .references('id')
+                 .inTable('companies');
 
             table.timestamps();
         }),
 
-        knex.schema.createTable('comments', function(table){
+        knex.schema.createTable('reviews', function(table){
             table.increments('id').primary();
             table.string('message');
+            table.integer('user_id')
+                 .references('id')
+                 .inTable('users');
+            table.integer('company_id')
+                 .references('id')
+                 .inTable('companies');
+
+            table.timestamps();
+        }),
+
+        knex.schema.createTable('salaries', function(table){
+            table.increments('id').primary();
+            table.integer('amount');
+            table.string('emp_position');
             table.integer('user_id')
                  .references('id')
                  .inTable('users');
@@ -33,8 +79,11 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
     return Promise.all([
-      knex.schema.dropTable('comments'),
+      knex.schema.dropTable('salaries'),
+      knex.schema.dropTable('reviews'),
+      knex.schema.dropTable('interview_questions'),
+      knex.schema.dropTable('locations'),
       knex.schema.dropTable('companies'),
-        knex.schema.dropTable('users')
+      knex.schema.dropTable('users')
     ])
 };
