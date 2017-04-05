@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 
-const environment = process.env.NODE_ENV || 'test'
+const environment = process.env.NODE_ENV || 'development'
 const configuration = require('./knexfile')[environment]
 const database = require('knex')(configuration)
 
@@ -22,11 +22,33 @@ app.get('/api/v1/users', (request, response) => {
   })
 })
 
-// get all comments
-app.get('/api/v1/comments', (request, response) => {
-  database('comments').select()
-  .then(comments => {
-    response.status(200).json(comments)
+// get all interview_questions
+app.get('/api/v1/interview_questions', (request, response) => {
+  database('interview_questions').select()
+  .then(interview_questions => {
+    response.status(200).json(interview_questions)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
+})
+
+// get all salaries
+app.get('/api/v1/salaries', (request, response) => {
+  database('salaries').select()
+  .then(salaries => {
+    response.status(200).json(salaries)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
+})
+
+// get all reviews
+app.get('/api/v1/reviews', (request, response) => {
+  database('reviews').select()
+  .then(reviews => {
+    response.status(200).json(reviews)
   })
   .catch(error => {
     console.error('error', error)
@@ -90,20 +112,54 @@ app.get('/api/v1/companies/:id', (request, response) => {
   })
 })
 
-// get a comment
+// get an interview_questions
 app.get('/api/v1/interview_questions/:id', (request, response) => {
   const { id } = request.params
 
-  database('comments').where('id', id).select()
-  .then(comments => {
-    if (comments.length > 0) {
-      response.status(200).json(comments)
+  database('interview_questions').where('id', id).select()
+  .then(interview_questions => {
+    if (interview_questions.length > 0) {
+      response.status(200).json(interview_questions)
     } else {
-      response.status(404).send('Comment not found')
+      response.status(404).send('interview question not found')
     }
   })
   .catch(error => {
-    console.error(404, 'Comment not found')
+    console.error(404, 'interview question not found')
+  })
+})
+
+// get a salary
+app.get('/api/v1/salaries/:id', (request, response) => {
+  const { id } = request.params
+
+  database('salaries').where('id', id).select()
+  .then(salaries => {
+    if (salaries.length > 0) {
+      response.status(200).json(salaries)
+    } else {
+      response.status(404).send('salary not found')
+    }
+  })
+  .catch(error => {
+    console.error(404, 'salary not found')
+  })
+})
+
+// get a review
+app.get('/api/v1/review/:id', (request, response) => {
+  const { id } = request.params
+
+  database('review').where('id', id).select()
+  .then(review => {
+    if (review.length > 0) {
+      response.status(200).json(review)
+    } else {
+      response.status(404).send('review not found')
+    }
+  })
+  .catch(error => {
+    console.error(404, 'review not found')
   })
 })
 
