@@ -1,3 +1,5 @@
+process.env.NODE_ENV = 'test'
+
 const chai = require('chai')
 const expect = chai.expect
 const app = require('../server.js')
@@ -46,7 +48,7 @@ describe('GET /api/v1/users', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(30);
+      expect(res.body).to.have.length(3);
       done()
     })
   })
@@ -63,46 +65,58 @@ describe('GET /api/v1/companies', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(30);
-      done()
-    })
-  })
-
-  it('should query companies', (done) => {
-    chai.request(app)
-    .get('/api/v1/companies?state=KY')
-    .end((err, res) => {
-      if(err) { return done(err) }
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(1);
-      done()
-    })
-  })
-
-  it('should return nothing when query doesnt match', (done) => {
-    chai.request(app)
-    .get('/api/v1/companies?state=ABC')
-    .end((err, res) => {
-      expect(res).to.have.status(404);
+      expect(res.body).to.have.length(3);
       done()
     })
   })
 })
 
-describe('GET /api/v1/comments', () => {
+describe('GET /api/v1/interview_questions', () => {
   beforeAndAfterEach()
 
-  it('should respond back with all comments', (done) => {
+  it('should respond back with all interview_questions', (done) => {
     chai.request(app)
-    .get('/api/v1/comments')
+    .get('/api/v1/interview_questions')
     .end((err, res) => {
       if(err) { return done(err) }
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(30);
+      expect(res.body).to.have.length(3);
+      done()
+    })
+  })
+})
+
+describe('GET /api/v1/salaries', () => {
+  beforeAndAfterEach()
+
+  it('should respond back with all salaries', (done) => {
+    chai.request(app)
+    .get('/api/v1/salaries')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(3);
+      done()
+    })
+  })
+})
+
+describe('GET /api/v1/reviews', () => {
+  beforeAndAfterEach()
+
+  it('should respond back with all reviews', (done) => {
+    chai.request(app)
+    .get('/api/v1/reviews')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(3);
       done()
     })
   })
@@ -168,12 +182,12 @@ describe('GET /api/v1/companies/:id', () => {
   })
 })
 
-describe('GET /api/v1/comments/:id', () => {
+describe('GET /api/v1/interview_questions/:id', () => {
   beforeAndAfterEach()
 
-  it('should respond back with a particular comment', (done) => {
+  it('should respond back with a particular interview question', (done) => {
     chai.request(app)
-    .get('/api/v1/comments/1')
+    .get('/api/v1/interview_questions/1')
     .end((err, res) => {
       if(err) { return done(err) }
       expect(res).to.have.status(200);
@@ -186,9 +200,69 @@ describe('GET /api/v1/comments/:id', () => {
 
   beforeAndAfterEach()
 
-  it('should respond back with a 404 when comment not found', (done) => {
+  it('should respond back with a 404 when interview question not found', (done) => {
     chai.request(app)
-    .get('/api/v1/comments/199')
+    .get('/api/v1/interview_questions/199')
+    .end((err, res) => {
+      if(err) {
+        expect(err).to.have.status(404);
+        done()
+     }
+    })
+  })
+})
+
+describe('GET /api/v1/reviews/:id', () => {
+  beforeAndAfterEach()
+
+  it('should respond back with a particular review', (done) => {
+    chai.request(app)
+    .get('/api/v1/reviews/1')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      done()
+    })
+  })
+
+  beforeAndAfterEach()
+
+  it('should respond back with a 404 when review not found', (done) => {
+    chai.request(app)
+    .get('/api/v1/reviews/199')
+    .end((err, res) => {
+      if(err) {
+        expect(err).to.have.status(404);
+        done()
+     }
+    })
+  })
+})
+
+describe('GET /api/v1/salaries/:id', () => {
+  beforeAndAfterEach()
+
+  it('should respond back with a particular salary', (done) => {
+    chai.request(app)
+    .get('/api/v1/salaries/1')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
+      done()
+    })
+  })
+
+  beforeAndAfterEach()
+
+  it('should respond back with a 404 when salary not found', (done) => {
+    chai.request(app)
+    .get('/api/v1/salaries/199')
     .end((err, res) => {
       if(err) {
         expect(err).to.have.status(404);
@@ -211,7 +285,7 @@ describe('POST /api/v1/users', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(31);
+      expect(res.body).to.have.length(4);
       done();
     })
   })
@@ -237,8 +311,10 @@ describe('POST /api/v1/companies', () => {
   it('should post a new company', (done) => {
     let company = {
       name: 'Glengarry Glen Ross',
-      city: 'Nowhere',
-      state: 'CO'
+      industry: 'Nowhere',
+      num_of_emp: 2,
+      tech_stack: '[JavaScript, Ruby]',
+      remote_ok: true
     }
     chai.request(app)
     .post('/api/v1/companies')
@@ -247,8 +323,8 @@ describe('POST /api/v1/companies', () => {
       if(err) { return done(err) }
       expect(res).to.have.status(200);
       expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(31);
+      expect(res.body).to.be.a('string');
+      expect(res.body).to.equal('company received');
       done();
     })
   })
@@ -257,9 +333,7 @@ describe('POST /api/v1/companies', () => {
 
   it('should return an error if missing body param', (done) => {
     let company = {
-      thing: '123',
-      city: 'Nowhere',
-      state: 'CO'
+      user_id: 1,
     }
     chai.request(app)
     .post('/api/v1/companies')
@@ -272,24 +346,24 @@ describe('POST /api/v1/companies', () => {
   })
 })
 
-describe('POST /api/v1/comments', () => {
+describe('POST /api/v1/interview_questions', () => {
   beforeAndAfterEach()
 
-  it('should post a new comment', (done) => {
-    let comment = {
+  it('should post a new interview question', (done) => {
+    let interview_questions = {
       message: 'Just do it!',
-       user_id: 1,
-       company_id: 1
+      user_id: 1,
+      company_id: 1
      }
     chai.request(app)
-    .post('/api/v1/comments')
-    .send(comment)
+    .post('/api/v1/interview_questions')
+    .send(interview_questions)
     .end((err, res) => {
       if(err) { return done(err) }
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(31);
+      expect(res.body).to.have.length(4);
       done();
     })
   })
@@ -297,14 +371,14 @@ describe('POST /api/v1/comments', () => {
   beforeAndAfterEach()
 
   it('should return an error if incorrect user_id', (done) => {
-    let comment = {
+    let interview_questions = {
       message: 'Just do it!',
       user_id: 456768,
       company_id: 1
     }
     chai.request(app)
-    .post('/api/v1/comments')
-    .send(comment)
+    .post('/api/v1/interview_questions')
+    .send(interview_questions)
     .end((err, res) => {
       expect(res).to.have.status(422);
       done();
@@ -314,89 +388,16 @@ describe('POST /api/v1/comments', () => {
   beforeAndAfterEach()
 
   it('should return an error if incorrect company_id', (done) => {
-    let comment = {
+    let interview_questions = {
       message: 'Just do it!',
       user_id: 1,
       company_id: 123545464
     }
     chai.request(app)
-    .post('/api/v1/comments')
-    .send(comment)
+    .post('/api/v1/interview_questions')
+    .send(interview_questions)
     .end((err, res) => {
       expect(res).to.have.status(422);
-      done();
-    })
-  })
-})
-
-describe('PUT /api/v1/users/:id', () => {
-  beforeAndAfterEach()
-
-  it('should update a user\'s name', (done) => {
-    let name = 'Eric Saylor'
-    chai.request(app)
-    .put('/api/v1/users/1')
-    .send({ name })
-    .end((err, res) => {
-      if(err) { return done(err) }
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(1);
-      expect(res.body[0].name).to.be.equal(name);
-      done();
-    })
-  })
-
-  it('it should only update what is passed in the body', (done) => {
-    let originalName;
-
-    chai.request(app)
-    .get('/api/v1/users/5')
-    .end((err, res) => {
-      if(err) { return done(err) }
-      originalName = res.body[0].name;
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(1);
-    })
-
-    let updateUser = {
-      name: 'Kendrick Lamar',
-    }
-
-    chai.request(app)
-    .put('/api/v1/companies/5')
-    .send(updateUser)
-    .end((err, res) => {
-      if(err) { return done(err) }
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(1);
-      expect(res.body[0].name).to.be.equal(updateUser.name);
-      done();
-    })
-  })
-
-  it('it should return error if no body', (done) => {
-    chai.request(app)
-    .get('/api/v1/users/3')
-    .end((err, res) => {
-      if(err) { return done(err) }
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(1);
-    })
-
-    chai.request(app)
-    .put('/api/v1/users/5')
-    .send()
-    .end((err, res) => {
-      expect(res).to.have.status(422);
-      expect(res.text).to.be.equal('Could not update user');
       done();
     })
   })
@@ -408,37 +409,41 @@ describe('PUT /api/v1/companies/:id', () => {
   it('should update a company', (done) => {
     let company = {
       name: 'Glengarry Glen Ross',
-      city: 'Nowhere',
-      state: 'CO',
+      industry: 'Nowhere',
+      num_of_emp: 5,
+      tech_stack: '[do shit]'
     }
     chai.request(app)
-    .put('/api/v1/companies/5')
+    .put('/api/v1/companies/1')
     .send(company)
     .end((err, res) => {
       if(err) { return done(err) }
-      expect(res).to.have.status(200);
       expect(res).to.be.json;
+      expect(res).to.have.status(200);
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(1);
       expect(res.body[0].name).to.be.equal(company.name);
-      expect(res.body[0].city).to.be.equal(company.city);
-      expect(res.body[0].state).to.be.equal(company.state);
+      expect(res.body[0].industry).to.be.equal(company.industry);
+      expect(res.body[0].num_of_emp).to.be.equal(company.num_of_emp);
+      expect(res.body[0].tech_stack).to.be.equal(company.tech_stack);
       done();
     })
   })
 
   it('it should only update what is passed in the body', (done) => {
     let originalName;
-    let originalCity;
-    let originalState;
+    let originalIndustry;
+    let originalNum_of_emp;
+    let originalTech_stack;
 
     chai.request(app)
-    .get('/api/v1/companies/5')
+    .get('/api/v1/companies/1')
     .end((err, res) => {
       if(err) { return done(err) }
       originalName = res.body[0].name;
-      originalCity = res.body[0].city;
-      originalState = res.body[0].state;
+      originalIndustry = res.body[0].industry;
+      originalNum_of_emp = res.body[0].num_of_emp;
+      originalTech_stack = res.body[0].tech_stack;
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
@@ -450,7 +455,7 @@ describe('PUT /api/v1/companies/:id', () => {
     }
 
     chai.request(app)
-    .put('/api/v1/companies/5')
+    .put('/api/v1/companies/1')
     .send(updateCompany)
     .end((err, res) => {
       if(err) { return done(err) }
@@ -459,24 +464,27 @@ describe('PUT /api/v1/companies/:id', () => {
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(1);
       expect(res.body[0].name).to.be.equal(updateCompany.name);
-      expect(res.body[0].city).to.be.equal(originalCity);
-      expect(res.body[0].state).to.be.equal(originalState);
+      expect(res.body[0].industry).to.be.equal(originalIndustry);
+      expect(res.body[0].num_of_emp).to.be.equal(originalNum_of_emp);
+      expect(res.body[0].tech_stack).to.be.equal(originalTech_stack);
       done();
     })
   })
 
-  it('it should not update anything if no body', (done) => {
+  xit('it should not update anything if no body', (done) => {
     let originalName;
-    let originalCity;
-    let originalState;
+    let originalIndustry;
+    let originalNum_of_emp;
+    let originalTech_stack;
 
     chai.request(app)
-    .get('/api/v1/companies/5')
+    .get('/api/v1/companies/1')
     .end((err, res) => {
       if(err) { return done(err) }
       originalName = res.body[0].name;
-      originalCity = res.body[0].city;
-      originalState = res.body[0].state;
+      originalIndustry = res.body[0].industry;
+      originalNum_of_emp = res.body[0].num_of_emp;
+      originalTech_stack = res.body[0].tech_stack;
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
@@ -484,7 +492,7 @@ describe('PUT /api/v1/companies/:id', () => {
     })
 
     chai.request(app)
-    .put('/api/v1/companies/5')
+    .put('/api/v1/companies/1')
     .send()
     .end((err, res) => {
       if(err) { return done(err) }
@@ -493,73 +501,26 @@ describe('PUT /api/v1/companies/:id', () => {
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(1);
       expect(res.body[0].name).to.be.equal(originalName);
-      expect(res.body[0].city).to.be.equal(originalCity);
-      expect(res.body[0].state).to.be.equal(originalState);
+      expect(res.body[0].num_of_emp).to.be.equal(originalNum_of_emp);
+      expect(res.body[0].industry).to.be.equal(originalIndustry);
+      expect(res.body[0].tech_stack).to.be.equal(originalTech_stack);
       done();
     })
   })
 })
 
-describe('PATCH /api/v1/comment/:id', () => {
+describe('GET /api/v1/interview_questions/company/:company_id', () => {
   beforeAndAfterEach()
 
-  it('should update a comment', (done) => {
-    let comment = {
-      message: 'What is the meaning of life?'
-    }
+  it('should respond with all interview_questions for a given company', (done) => {
     chai.request(app)
-    .patch('/api/v1/comments/1')
-    .send(comment)
+    .get('/api/v1/interview_questions/company/1')
     .end((err, res) => {
       if(err) { return done(err) }
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(1);
-      expect(res.body[0].message).to.be.equal(comment.message);
-      done();
-    })
-  })
-
-  it('should return 404 if comment does not exist', (done) => {
-    let comment = {
-      message: 'What is the meaning of life?'
-    }
-    chai.request(app)
-    .patch('/api/v1/comments/14545')
-    .send(comment)
-    .end((err, res) => {
-      expect(res).to.have.status(404);
-      expect(res.text).to.be.equal('Could not find comment');
-      done();
-    })
-  })
-
-  it('should return 422 if no message send in body', (done) => {
-
-    chai.request(app)
-    .patch('/api/v1/comments/14545')
-    .send()
-    .end((err, res) => {
-      expect(res).to.have.status(422);
-      expect(res.text).to.be.equal('Please send a message');
-      done();
-    })
-  })
-})
-
-describe('GET /api/v1/comments/company/:company_id', () => {
-  beforeAndAfterEach()
-
-  it('should respond with all comments for a given company', (done) => {
-    chai.request(app)
-    .get('/api/v1/comments/company/1')
-    .end((err, res) => {
-      if(err) { return done(err) }
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(2);
       done()
     })
   })
@@ -568,7 +529,7 @@ describe('GET /api/v1/comments/company/:company_id', () => {
 
   it('should respond back with a 404 when company not found', (done) => {
     chai.request(app)
-    .get('/api/v1/comments/company/2349')
+    .get('/api/v1/interview_questions/company/2349')
     .end((err, res) => {
       if(err) {
         expect(err).to.have.status(404);
@@ -578,18 +539,18 @@ describe('GET /api/v1/comments/company/:company_id', () => {
   })
 })
 
-describe('GET /api/v1/comments/company/:company_id', () => {
+describe('GET /api/v1/salaries/company/:company_id', () => {
   beforeAndAfterEach()
 
-  it('should respond with total number of comments for a given company', (done) => {
+  it('should respond with all salaries for a given company', (done) => {
     chai.request(app)
-    .get('/api/v1/comments/total/1')
+    .get('/api/v1/salaries/company/1')
     .end((err, res) => {
       if(err) { return done(err) }
       expect(res).to.have.status(200);
       expect(res).to.be.json;
-      expect(res.body).to.be.a('number');
-      expect(res.body).to.equal(2);
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
       done()
     })
   })
@@ -598,37 +559,42 @@ describe('GET /api/v1/comments/company/:company_id', () => {
 
   it('should respond back with a 404 when company not found', (done) => {
     chai.request(app)
-    .get('/api/v1/comments/total/2349')
+    .get('/api/v1/salaries/company/2349')
     .end((err, res) => {
       if(err) {
         expect(err).to.have.status(404);
         done()
-      }
+     }
     })
   })
 })
 
-describe('DELETE /api/v1/users/:id', () => {
+describe('GET /api/v1/reviews/company/:company_id', () => {
   beforeAndAfterEach()
 
-  it('should DELETE a user', (done) => {
+  it('should respond with all reviews for a given company', (done) => {
     chai.request(app)
-    .delete('/api/v1/users/2')
+    .get('/api/v1/reviews/company/1')
     .end((err, res) => {
-      if(err){ return done(err) }
-      expect(res).to.have.status(200)
-      expect(res.body).to.have.length(29)
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(1);
       done()
     })
   })
 
-  it('should respond with an error if that user does not exist', (done) => {
+  beforeAndAfterEach()
+
+  it('should respond back with a 404 when company not found', (done) => {
     chai.request(app)
-    .delete('/api/v1/users/548552')
+    .get('/api/v1/reviews/company/2349')
     .end((err, res) => {
-      expect(err).to.have.status(404)
-      expect(err.response.error.text).to.be.equal('Could not find that user')
-      done()
+      if(err) {
+        expect(err).to.have.status(404);
+        done()
+     }
     })
   })
 })
@@ -636,13 +602,13 @@ describe('DELETE /api/v1/users/:id', () => {
 describe('DELETE /api/v1/companies/:id', () => {
   beforeAndAfterEach()
 
-  it('should DELETE a company', (done) => {
+  xit('should DELETE a company', (done) => {
     chai.request(app)
-    .delete('/api/v1/companies/4')
+    .delete('/api/v1/companies/1')
     .end((err, res) => {
       if(err){ return done(err) }
       expect(res).to.have.status(200)
-      expect(res.body).to.have.length(29)
+      expect(res.body).to.have.length(2)
       done()
     })
   })
@@ -658,26 +624,76 @@ describe('DELETE /api/v1/companies/:id', () => {
   })
 })
 
-describe('DELETE /api/v1/comments/:id', () => {
+describe('DELETE /api/v1/interview_questions/:id', () => {
   beforeAndAfterEach()
 
-  it('should DELETE a comment', (done) => {
+  it('should DELETE an interview question', (done) => {
     chai.request(app)
-    .delete('/api/v1/comments/1')
+    .delete('/api/v1/interview_questions/1')
     .end((err, res) => {
       if(err){ return done(err) }
       expect(res).to.have.status(200)
-      expect(res.body).to.have.length(29)
+      expect(res.body).to.have.length(2)
       done()
     })
   })
 
-  it('should respond with an error if that comment does not exist', (done) => {
+  it('should respond with an error if that interview question does not exist', (done) => {
     chai.request(app)
-    .delete('/api/v1/comments/548552')
+    .delete('/api/v1/interview_questions/548552')
     .end((err, res) => {
       expect(err).to.have.status(404)
-      expect(err.response.error.text).to.be.equal('Could not find that comment')
+      expect(err.response.error.text).to.be.equal('Could not find that interview question')
+      done()
+    })
+  })
+})
+
+describe('DELETE /api/v1/salaries/:id', () => {
+  beforeAndAfterEach()
+
+  it('should DELETE a salary', (done) => {
+    chai.request(app)
+    .delete('/api/v1/salaries/1')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(200)
+      expect(res.body).to.have.length(2)
+      done()
+    })
+  })
+
+  it('should respond with an error if that salary does not exist', (done) => {
+    chai.request(app)
+    .delete('/api/v1/salaries/548552')
+    .end((err, res) => {
+      expect(err).to.have.status(404)
+      expect(err.response.error.text).to.be.equal('Could not find that salary')
+      done()
+    })
+  })
+})
+
+describe('DELETE /api/v1/reviews/:id', () => {
+  beforeAndAfterEach()
+
+  it('should DELETE a review', (done) => {
+    chai.request(app)
+    .delete('/api/v1/reviews/1')
+    .end((err, res) => {
+      if(err){ return done(err) }
+      expect(res).to.have.status(200)
+      expect(res.body).to.have.length(2)
+      done()
+    })
+  })
+
+  it('should respond with an error if that review does not exist', (done) => {
+    chai.request(app)
+    .delete('/api/v1/reviews/548552')
+    .end((err, res) => {
+      expect(err).to.have.status(404)
+      expect(err.response.error.text).to.be.equal('Could not find that review')
       done()
     })
   })

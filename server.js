@@ -57,25 +57,13 @@ app.get('/api/v1/reviews', (request, response) => {
 
 // get all companies
 app.get('/api/v1/companies', (request, response) => {
-  if (request.query.state) {
-    let state = request.query.state
-    database('companies').where('state', state).select()
-    .then(companies => {
-      if (companies.length > 0) {
-        response.status(200).json(companies)
-      } else {
-        response.status(404).json('State not found')
-      }
-    })
-  } else {
-    database('companies').select()
-    .then(companies => {
-      response.status(200).json(companies)
-    })
-    .catch(error => {
-      console.error('error', error)
-    })
-  }
+  database('companies').select()
+  .then(companies => {
+    response.status(200).json(companies)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
 })
 
 // get a user
@@ -102,6 +90,7 @@ app.get('/api/v1/companies/:id', (request, response) => {
   database('companies').where('id', id).select()
   .then(companies => {
     if (companies.length > 0) {
+      console.log('hit me babe...........')
       response.status(200).json(companies)
     } else {
       response.status(404).send('Company not found')
@@ -147,10 +136,10 @@ app.get('/api/v1/salaries/:id', (request, response) => {
 })
 
 // get a review
-app.get('/api/v1/review/:id', (request, response) => {
+app.get('/api/v1/reviews/:id', (request, response) => {
   const { id } = request.params
 
-  database('review').where('id', id).select()
+  database('reviews').where('id', id).select()
   .then(review => {
     if (review.length > 0) {
       response.status(200).json(review)
@@ -234,10 +223,10 @@ app.post('/api/v1/users', (request, response) => {
 
 // add a company
 app.post('/api/v1/companies', (request, response) => {
-  const { user_id, name, industry, num_of_emp, tech_stack, remote_ok } = request.body
-  const company = { user_id, name, industry, num_of_emp, tech_stack, remote_ok }
+  const { name, industry, num_of_emp, tech_stack, remote_ok } = request.body
+  const company = { name, industry, num_of_emp, tech_stack, remote_ok }
 
-  if (!user_id && !name) {
+  if (!name) {
     response.status(422).send('Did not receive correct body params')
   } else {
     database('companies').insert(company)
@@ -255,15 +244,15 @@ app.post('/api/v1/interview_questions', (request, response) => {
   const { message, user_id, company_id } = request.body
   const interview_question = { message, user_id, company_id, created_at: new Date }
 
-  database('interview_question').insert(interview_question)
+  database('interview_questions').insert(interview_question)
   .then(() => {
-    database('interview_question').select()
+    database('interview_questions').select()
     .then(interview_question => {
-      response.status(200).json(interview_questions)
+      response.status(200).json(interview_question)
     })
   })
   .catch(error => {
-    response.status(422).send('Could not post comment')
+    response.status(422).send('Could not post the interview question')
   })
 })
 
@@ -280,7 +269,7 @@ app.post('/api/v1/reviews', (request, response) => {
     })
   })
   .catch(error => {
-    response.status(422).send('Could not post comment')
+    response.status(422).send('Could not post the review')
   })
 })
 
@@ -297,7 +286,7 @@ app.post('/api/v1/salaries', (request, response) => {
     })
   })
   .catch(error => {
-    response.status(422).send('Could not post comment')
+    response.status(422).send('Could not post the salary')
   })
 })
 
@@ -329,7 +318,10 @@ app.delete('/api/v1/companies/:id', (request, response) => {
     if (company.length === 0) {
       response.status(404).send('Could not find that company')
     } else {
-      database('comments').where('company_id', id).delete()
+      database('locations').where('company_id', id).delete()
+      database('interview_questions').where('company_id', id).delete()
+      database('reviews').where('company_id', id).delete()
+      database('salaries').where('company_id', id).delete()
       .then(() => database('companies').where('id', id).delete())
       .then(() => {
           database('companies').select()
@@ -349,7 +341,7 @@ app.delete('/api/v1/interview_questions/:id', (request, response) => {
   database('interview_questions').where('id', id).select()
   .then((interview_question) => {
     if (interview_question.length === 0) {
-      response.status(404).send('Could not find that interview_question')
+      response.status(404).send('Could not find that interview question')
     } else {
       database('interview_questions').where('id', id).delete()
       .then(() => {
@@ -370,12 +362,12 @@ app.delete('/api/v1/reviews/:id', (request, response) => {
   database('reviews').where('id', id).select()
   .then((reviews) => {
     if (reviews.length === 0) {
-      response.status(404).send('Could not find that reviews')
+      response.status(404).send('Could not find that review')
     } else {
       database('reviews').where('id', id).delete()
       .then(() => {
         database('reviews').select()
-        .then(reviewss => response.status(200).json(reviews))
+        .then(reviews => response.status(200).json(reviews))
       })
       .catch((error) => {
         console.error('error: ', error)
@@ -391,7 +383,7 @@ app.delete('/api/v1/salaries/:id', (request, response) => {
   database('salaries').where('id', id).select()
   .then((salaries) => {
     if (salaries.length === 0) {
-      response.status(404).send('Could not find that salaries')
+      response.status(404).send('Could not find that salary')
     } else {
       database('salaries').where('id', id).delete()
       .then(() => {
