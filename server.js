@@ -90,7 +90,6 @@ app.get('/api/v1/companies/:id', (request, response) => {
   database('companies').where('id', id).select()
   .then(companies => {
     if (companies.length > 0) {
-      console.log('hit me babe...........')
       response.status(200).json(companies)
     } else {
       response.status(404).send('Company not found')

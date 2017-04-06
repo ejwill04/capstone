@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     client: 'pg',
-    connection:'postgres://localhost/byob_database',
+    connection:'postgres://localhost/capstone_database',
     migrations: {
       directory: './db/migrations'
     },
@@ -13,7 +13,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection:'postgres://localhost/byob_database_test',
+    connection:'postgres://localhost/capstone_database_test',
     migrations: {
       directory: './db/migrations'
     },
