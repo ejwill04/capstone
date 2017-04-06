@@ -1,4 +1,4 @@
-# BYOB API
+# Neumann API
 
 ## Overview
 BYOB is a template for setting up a database and API endpoints using Node, Express, Knex, and PostgreSQL.  The template uses three related tables - Users, Companies, and Comments.  The general link is that a User can submit a Comment about any given Company.  The endpoints attempt to be RESTful.  
