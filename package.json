@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --inline --content-base --history-api-fallback",
     "test": "node_modules/.bin/mocha ./test/**.js || true"
   },
   "keywords": [],
