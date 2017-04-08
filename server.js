@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const fs = require('fs')
 
 const environment = process.env.NODE_ENV || 'development'
 const configuration = require('./knexfile')[environment]
@@ -8,11 +9,19 @@ const database = require('knex')(configuration)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static('build'))
 
 app.set('port', process.env.PORT || 3000)
 
+app.get('/', (request, response) => {
+  fs.readFile(`${__dirname}/index.html`, (err, file) => {
+    response.send(file)
+  })
+})
+
 // get all users
 app.get('/api/v1/users', (request, response) => {
+  console.log('eheh hereh')
   database('users').select()
   .then(users => {
     response.status(200).json(users)
