@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import '../styles.scss'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
 
@@ -25,10 +26,12 @@ export default class App extends Component {
 
   render() {
     return (
-      <div id="app">
+      <MuiThemeProvider>
+        <div>
         <HeroVideo />
         <Footer />
-      </div>
+        </div>
+      </MuiThemeProvider>
     )
   }
 }
