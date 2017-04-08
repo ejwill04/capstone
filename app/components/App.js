@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import '../styles.scss'
+import HeroVideo from './HeroVideo'
+import Footer from './Footer'
 
 export default class App extends Component {
   constructor() {
@@ -23,8 +25,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        It works!
+      <div id="app">
+        <HeroVideo />
+        <Footer />
       </div>
     )
   }
