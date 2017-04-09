@@ -8,6 +8,6 @@ import ResultsPage from './components/ResultsPage'
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App} />
-    <Route path="companies" component={ResultsPage} />
+    <Route path=":state" component={ResultsPage} />
   </Router>
   , document.getElementById('application'))

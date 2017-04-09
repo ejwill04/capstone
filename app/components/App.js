@@ -100,7 +100,7 @@ export default class App extends Component {
           >
           {this.menuItems(menuStates)}
         </SelectField>
-        <Link to="/companies"><Button className="go-btn" title="Go" handleClick={()=> this.fetchJobsByState(this.state.value)} /></Link>
+        <Link to={`/${this.state.value}`}><Button className="go-btn" title="Go" handleClick={()=> this.fetchJobsByState(this.state.value)} /></Link>
         <Footer />
         </div>
       </section>
