@@ -6,7 +6,7 @@ const style = {
 }
 
 const Button = (props) => (
-  <RaisedButton label={props.title} primary={true} style={style} onClick={props.handleClick} />
+  <RaisedButton className={props.className} label={props.title} backgroundColor='#00C2D2' style={style} onClick={props.handleClick} />
 )
 
 module.exports = Button

@@ -10,9 +10,9 @@ import SelectField from 'material-ui/SelectField'
 const injectTapEventPlugin = require("react-tap-event-plugin")
 
 
-const styles = {
+const dropDownStyles = {
   customWidth: {
-    width: 150,
+    width: 450,
   },
 }
 
@@ -78,11 +78,11 @@ menuItems(states){
           floatingLabelText="State"
           value={this.state.value}
           onChange={ this.handleChange.bind(this) }
-          style={styles.customWidth}
+          style={dropDownStyles.customWidth}
+          labelStyle={{fontSize: '30px'}}
+          menuItemStyle={{fontSize: '24px'}}
           floatingLabelFixed={true}
           floatingLabelStyle={{color: 'magenta'}}
-          style={{color: "magenta"}}
-          iconStyle={{color: "magenta"}}
           >
           {this.menuItems(menuStates)}
         </SelectField>
