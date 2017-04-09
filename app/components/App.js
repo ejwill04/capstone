@@ -11,7 +11,7 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log('called did mount')
-    fetch(`http://localhost:3000/api/v1/users`, {
+    fetch(`/api/v1/users`, {
       method: 'GET',
     })
     .then(response => response.json())

@@ -13,6 +13,12 @@ app.use(express.static('build'))
 
 app.set('port', process.env.PORT || 3000)
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
+
 app.get('/', (request, response) => {
   fs.readFile(`${__dirname}/index.html`, (err, file) => {
     response.send(file)
@@ -405,8 +411,10 @@ app.delete('/api/v1/salaries/:id', (request, response) => {
   })
 })
 
-app.listen(app.get('port'), () => {
-  console.log(`BYOB is running on ${app.get('port')}.`)
-})
+if (!module.parent) {
+  app.listen(app.get('port'), () => {
+    console.log(`BYOB is running on ${app.get('port')}.`)
+  })
+}
 
 module.exports = app;
