@@ -19,6 +19,18 @@ exports.seed = function(knex, Promise) {
         user_id: 3,
         created_at: new Date,
         company_id: 3
+      }),
+      knex('reviews').insert({
+        message: "vivamus porta volutpat erat quisque erat eros viverra eget congue eget semper rutrum nulla nunc",
+        user_id: 4,
+        created_at: new Date,
+        company_id: 3
+      }),
+      knex('reviews').insert({
+        message: "vivamus vel nulla eget eros erat eros viverra eget congue eget semper rutrum nulla nunc",
+        user_id: 5,
+        created_at: new Date,
+        company_id: 3
       })
     ]);
   });
