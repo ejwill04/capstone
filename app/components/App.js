@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
 import '../styles.scss'
+import { Link } from 'react-router'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
@@ -20,7 +21,8 @@ const menuStates = [
   {value: "AL", name: 'Alabama'},
   {value: "AK", name: 'Alaska'},
   {value: "AZ", name: 'Arizona'},
-  {value: "AR", name: 'Arkansas'}
+  {value: "AR", name: 'Arkansas'},
+  {value: "CO", name: 'Colorado'}
 ]
 
 export default class App extends Component {
@@ -51,23 +53,31 @@ export default class App extends Component {
   }
 
 
-//onNewRequest={this.handleChange}
+  menuItems(states){
+    return menuStates.map((states) => (
+      <MenuItem
+        key={states.value}
+        insetChildren={true}
+        checked={this.state.value.includes(states.value)}
+        value={states.value}
+        primaryText={states.name}
+      />
+    )
+    )
+  }
 
-menuItems(states){
-  return menuStates.map((states) => (
-    <MenuItem
-      key={states.value}
-      insetChildren={true}
-      checked={this.state.value.includes(states.value)}
-      value={states.value}
-      primaryText={states.name}
-    />
-  )
-)
-}
+  fetchJobsByState(state){
+    fetch(`http://localhost:3000/api/v1/locations/${state}`, {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('State data: ', data)
+    })
+    .catch(err => err)
+  }
 
   render() {
-    // make API call to table, find the jobs in that state
     return (
       <MuiThemeProvider>
         <section>
@@ -89,7 +99,7 @@ menuItems(states){
           >
           {this.menuItems(menuStates)}
         </SelectField>
-        <Button className="go-btn" title="Go" handleClick={()=> console.log('button')} />
+        <Link to="/companies"><Button className="go-btn" title="Go" handleClick={()=> this.fetchJobsByState(this.state.value)} /></Link>
         <Footer />
         </div>
       </section>
