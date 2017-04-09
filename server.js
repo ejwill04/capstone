@@ -27,10 +27,33 @@ app.get('/', (request, response) => {
 
 // get all users
 app.get('/api/v1/users', (request, response) => {
-  console.log('eheh hereh')
   database('users').select()
   .then(users => {
     response.status(200).json(users)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
+})
+
+// get all locations
+app.get('/api/v1/locations', (request, response) => {
+  database('locations').select()
+  .then(locations => {
+    response.status(200).json(locations)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
+})
+
+// get all locations for a given state
+app.get('/api/v1/locations/:state', (request, response) => {
+let { state } = request.params
+
+  database('locations').where('state', state).select()
+  .then(locations => {
+    response.status(200).json(locations)
   })
   .catch(error => {
     console.error('error', error)

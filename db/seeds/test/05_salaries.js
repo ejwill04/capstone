@@ -22,6 +22,20 @@ exports.seed = function(knex, Promise) {
         created_at: new Date,
         company_id: 3,
         emp_position: "back-end engineer"
+      }),
+      knex('salaries').insert({
+        amount: 200000,
+        user_id: 4,
+        created_at: new Date,
+        company_id: 4,
+        emp_position: "back-end engineer"
+      }),
+      knex('salaries').insert({
+        amount: 60000,
+        user_id: 5,
+        created_at: new Date,
+        company_id: 3,
+        emp_position: "awesome engineer"
       })
     ]);
   });

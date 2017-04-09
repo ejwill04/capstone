@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
         github: "username: ejwill04 password: password",
         cohort: "1610",
         slack: "ejwill04",
-        companies: "[Facebook, Google, SpaceX]",
+        companies: "[Sports Authority, Google, SpaceX]",
         remote: true
       }),
       knex('users').insert({
@@ -15,7 +15,7 @@ exports.seed = function(knex, Promise) {
         github: "username: blundy password: password",
         cohort: "1610",
         slack: "blunduy",
-        companies: "[Facebook, Google, SpaceX]",
+        companies: "[Sphero, Google, SpaceX]",
         remote: false
       }),
       knex('users').insert({
@@ -25,6 +25,22 @@ exports.seed = function(knex, Promise) {
         slack: "dbeliveau",
         companies: "[Apple, NASA, Wall Street]",
         remote: true
+      }),
+      knex('users').insert({
+        name: "Anna Psitos",
+        github: "username: apsitos password: password",
+        cohort: "1610",
+        slack: "apsitos",
+        companies: "[Sphero, NASA, Wall Street]",
+        remote: false
+      }),
+      knex('users').insert({
+        name: "Gabi Procell",
+        github: "username: gprocell password: password",
+        cohort: "1610",
+        slack: "gprocell",
+        companies: "[Sphero, NASA, Wall Street]",
+        remote: false
       })
     ]);
   });
