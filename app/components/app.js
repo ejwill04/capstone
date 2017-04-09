@@ -4,14 +4,15 @@ import '../styles.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
+import Button from './Button'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 const injectTapEventPlugin = require("react-tap-event-plugin")
 
 
-const styles = {
+const dropDownStyles = {
   customWidth: {
-    width: 150,
+    width: 400,
   },
 }
 
@@ -34,7 +35,7 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log('called did mount')
-    fetch(`/api/v1/users`, {
+    fetch(`http://localhost:3000/api/v1/users`, {
       method: 'GET',
     })
     .then(response => response.json())
@@ -69,23 +70,29 @@ menuItems(states){
     // make API call to table, find the jobs in that state
     return (
       <MuiThemeProvider>
-        <div>
+        <section>
         <HeroVideo />
+        <div className="dropdown-menu-container">
         <SelectField
           className="dropdown"
           floatingLabelText="State"
           value={this.state.value}
           onChange={ this.handleChange.bind(this) }
-          style={styles.customWidth}
+          style={dropDownStyles.customWidth}
+          labelStyle={{fontSize: '30px'}}
+          menuItemStyle={{fontSize: '24px', lineHeight: '35px'}}
           floatingLabelFixed={true}
-          floatingLabelStyle={{color: 'magenta'}}
-          style={{color: "magenta"}}
-          iconStyle={{color: "magenta"}}        
+          floatingLabelStyle={{color: '#ff4b8d', marginTop: '-25px', fontSize: '24px'}}
+          underlineStyle={{display: 'none'}}
+          iconStyle={{fill: '#2E3131'}}
+
           >
           {this.menuItems(menuStates)}
         </SelectField>
+        <Button className="go-btn" title="Go" handleClick={()=> console.log('button')} />
         <Footer />
         </div>
+      </section>
       </MuiThemeProvider>
     )
   }
