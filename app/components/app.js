@@ -12,7 +12,7 @@ const injectTapEventPlugin = require("react-tap-event-plugin")
 
 const dropDownStyles = {
   customWidth: {
-    width: 450,
+    width: 400,
   },
 }
 
@@ -80,9 +80,12 @@ menuItems(states){
           onChange={ this.handleChange.bind(this) }
           style={dropDownStyles.customWidth}
           labelStyle={{fontSize: '30px'}}
-          menuItemStyle={{fontSize: '24px'}}
+          menuItemStyle={{fontSize: '24px', lineHeight: '35px'}}
           floatingLabelFixed={true}
-          floatingLabelStyle={{color: 'magenta'}}
+          floatingLabelStyle={{color: '#ff4b8d', marginTop: '-25px', fontSize: '24px'}}
+          underlineStyle={{display: 'none'}}
+          iconStyle={{fill: '#2E3131'}}
+
           >
           {this.menuItems(menuStates)}
         </SelectField>
