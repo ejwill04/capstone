@@ -4,6 +4,7 @@ import '../styles.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
+import Button from './Button'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 const injectTapEventPlugin = require("react-tap-event-plugin")
@@ -69,8 +70,9 @@ menuItems(states){
     // make API call to table, find the jobs in that state
     return (
       <MuiThemeProvider>
-        <div>
+        <section>
         <HeroVideo />
+        <div className="dropdown-menu-container">
         <SelectField
           className="dropdown"
           floatingLabelText="State"
@@ -80,12 +82,14 @@ menuItems(states){
           floatingLabelFixed={true}
           floatingLabelStyle={{color: 'magenta'}}
           style={{color: "magenta"}}
-          iconStyle={{color: "magenta"}}        
+          iconStyle={{color: "magenta"}}
           >
           {this.menuItems(menuStates)}
         </SelectField>
+        <Button className="go-btn" title="Go" handleClick={()=> console.log('button')} />
         <Footer />
         </div>
+      </section>
       </MuiThemeProvider>
     )
   }

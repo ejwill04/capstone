@@ -3,9 +3,12 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.dropdown {
-  margin:auto
+.dropdown-menu-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15%;
 }
+
 
 #footer {
   width: 100vw;
@@ -19,7 +22,8 @@ body {
 
 .video {
   position: fixed;
-  top:60%; left: 50%;
+  top: 400px;
+  left: 50%;
   z-index: -100;
   transform: translate(-50%, -50%);
 }
