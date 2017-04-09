@@ -48,7 +48,43 @@ describe('GET /api/v1/users', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(3);
+      expect(res.body).to.have.length(5);
+      done()
+    })
+  })
+})
+
+describe('GET /api/v1/locations', () => {
+  beforeAndAfterEach()
+
+  it('should respond back with all locations', (done) => {
+    chai.request(app)
+    .get('/api/v1/locations')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('array');
+      expect(res.body).to.have.length(6);
+      done()
+    })
+  })
+})
+
+describe('GET /api/v1/locations/:state', () => {
+  beforeAndAfterEach()
+
+  it('should respond back with locations, companies, and users', (done) => {
+    chai.request(app)
+    .get('/api/v1/locations/CO')
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('object');
+      expect(res.body.companies).to.have.length(6);
+      expect(res.body.locations).to.have.length(6);
+      expect(res.body.users).to.have.length(5);
       done()
     })
   })
@@ -65,7 +101,7 @@ describe('GET /api/v1/companies', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(3);
+      expect(res.body).to.have.length(6);
       done()
     })
   })
@@ -82,7 +118,7 @@ describe('GET /api/v1/interview_questions', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(3);
+      expect(res.body).to.have.length(6);
       done()
     })
   })
@@ -99,7 +135,7 @@ describe('GET /api/v1/salaries', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(3);
+      expect(res.body).to.have.length(5);
       done()
     })
   })
@@ -116,7 +152,7 @@ describe('GET /api/v1/reviews', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(3);
+      expect(res.body).to.have.length(5);
       done()
     })
   })
@@ -285,7 +321,7 @@ describe('POST /api/v1/users', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(4);
+      expect(res.body).to.have.length(6);
       done();
     })
   })
@@ -363,7 +399,7 @@ describe('POST /api/v1/interview_questions', () => {
       expect(res).to.have.status(200);
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(4);
+      expect(res.body).to.have.length(7);
       done();
     })
   })
@@ -633,7 +669,7 @@ describe('DELETE /api/v1/interview_questions/:id', () => {
     .end((err, res) => {
       if(err){ return done(err) }
       expect(res).to.have.status(200)
-      expect(res.body).to.have.length(2)
+      expect(res.body).to.have.length(5)
       done()
     })
   })
@@ -658,7 +694,7 @@ describe('DELETE /api/v1/salaries/:id', () => {
     .end((err, res) => {
       if(err){ return done(err) }
       expect(res).to.have.status(200)
-      expect(res.body).to.have.length(2)
+      expect(res.body).to.have.length(4)
       done()
     })
   })
@@ -683,7 +719,7 @@ describe('DELETE /api/v1/reviews/:id', () => {
     .end((err, res) => {
       if(err){ return done(err) }
       expect(res).to.have.status(200)
-      expect(res.body).to.have.length(2)
+      expect(res.body).to.have.length(4)
       done()
     })
   })

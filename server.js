@@ -11,6 +11,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('build'))
 
+app.use(function(req, res, next) {
+ res.header("Access-Control-Allow-Origin", "*")
+ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ next()
+})
+
 app.set('port', process.env.PORT || 3000)
 
 app.use(function(req, res, next) {
@@ -64,7 +70,6 @@ let responseObj = { locations: '', companies: '', users: '' }
       responseObj.companies = companies
       database('users').whereIn('company_id', company_ids).select()
       .then(users => {
-        console.log('responseObj', responseObj)
         responseObj.users = users
         response.status(200).json(responseObj)
       })
