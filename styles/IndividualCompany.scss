@@ -1,0 +1,28 @@
+.individualcompany-container {
+  width: 90%;
+  background-color: white;
+  border-bottom: 1px solid #d8d8d8;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.company-name {
+  padding-bottom: 10px;
+  padding-top: 5px;
+  font-size: 20px;
+  display: inline-block;
+}
+.company-alums {
+  display: inline;
+  float: right;
+}
+
+.company-size {
+  float: right;
+}
+
+.company-size, .company-industry {
+  display: inline;
+  font-size: 14px;
+  color: #7E8787;
+}

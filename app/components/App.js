@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import '../styles.scss'
+import '../../styles/index.scss'
+import ResultsPage from './ResultsPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
@@ -91,6 +92,9 @@ menuItems(states){
         </SelectField>
         <Button className="go-btn" title="Go" handleClick={()=> console.log('button')} />
         <Footer />
+        </div>
+        <div>
+          <ResultsPage />
         </div>
       </section>
       </MuiThemeProvider>
