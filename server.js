@@ -64,7 +64,6 @@ let responseObj = { locations: '', companies: '', users: '' }
       responseObj.companies = companies
       database('users').whereIn('company_id', company_ids).select()
       .then(users => {
-        console.log('responseObj', responseObj)
         responseObj.users = users
         response.status(200).json(responseObj)
       })
