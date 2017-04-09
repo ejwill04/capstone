@@ -6,10 +6,15 @@ import HeroVideo from './HeroVideo'
 import Footer from './Footer'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+import SelectField from 'material-ui/SelectField'
 const injectTapEventPlugin = require("react-tap-event-plugin")
 
 
-
+const styles = {
+  customWidth: {
+    width: 150,
+  },
+}
 
 export default class App extends Component {
   constructor() {
@@ -50,7 +55,13 @@ export default class App extends Component {
       <MuiThemeProvider>
         <div>
         <HeroVideo />
-        <DropDownMenu value={this.state.value} onChange={ this.handleChange } >
+        <SelectField
+          floatingLabelText="State"
+          value={this.state.value}
+          onChange={ this.handleChange.bind(this) }
+          style={styles.customWidth}
+          floatingLabelFixed={true}
+        >
           <MenuItem value={1} label="Alabama" primaryText="AL" />
           <MenuItem value={2} label="Alaska" primaryText="AK"  />
           <MenuItem value={3} label="Arizona" primaryText="AZ" />
@@ -101,7 +112,7 @@ export default class App extends Component {
           <MenuItem value={48} label="West Virginia" primaryText="WV" />
           <MenuItem value={49} label="Wisconsin" primaryText="WI" />
           <MenuItem value={50} label="Wyoming" primaryText="WY" />
-        </DropDownMenu>
+        </SelectField>
         <Footer />
         </div>
       </MuiThemeProvider>
