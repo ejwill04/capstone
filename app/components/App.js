@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import '../styles.scss'
+import '../../styles/index.scss'
+import ResultsPage from './ResultsPage'
 
 export default class App extends Component {
   constructor() {
@@ -24,7 +25,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        It works!
+        <ResultsPage />
       </div>
     )
   }
