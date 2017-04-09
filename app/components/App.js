@@ -72,12 +72,16 @@ menuItems(states){
         <div>
         <HeroVideo />
         <SelectField
+          className="dropdown"
           floatingLabelText="State"
           value={this.state.value}
           onChange={ this.handleChange.bind(this) }
           style={styles.customWidth}
           floatingLabelFixed={true}
-        >
+          floatingLabelStyle={{color: 'magenta'}}
+          style={{color: "magenta"}}
+          iconStyle={{color: "magenta"}}        
+          >
           {this.menuItems(menuStates)}
         </SelectField>
         <Footer />
