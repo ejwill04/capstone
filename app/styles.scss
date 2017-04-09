@@ -1,0 +1,36 @@
+body {
+  background-color: #2E3131;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dropdown-menu-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 15%;
+}
+
+.state-tag {
+  margin-top: 40px;
+}
+
+.go-btn {
+  width: 150px;
+}
+
+#footer {
+  width: 100vw;
+  height: 30vh;
+  background-color: #2E3131;
+  z-index:2;
+  position: absolute;
+  top: 70%;
+  left: 0%;
+}
+
+.video {
+  position: fixed;
+  top: 400px;
+  left: 50%;
+  z-index: -100;
+  transform: translate(-50%, -50%);
+}

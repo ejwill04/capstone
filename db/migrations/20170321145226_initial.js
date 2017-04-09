@@ -1,18 +1,5 @@
 exports.up = function(knex, Promise) {
     return Promise.all([
-        knex.schema.createTable('users', function(table) {
-            table.increments('id').primary();
-            table.string('name');
-            table.string('github');
-            table.string('cohort');
-            table.string('slack');
-            table.string('companies');
-            // companies will be an array of company_id with the first item representing the most recent company
-            table.boolean('remote');
-
-            table.timestamps();
-        }),
-
         knex.schema.createTable('companies', function(table){
             table.increments('id').primary();
             table.string('name');
@@ -21,6 +8,19 @@ exports.up = function(knex, Promise) {
             table.string('tech_stack');
             // tech_stack will be an array of technologies
             table.boolean('remote_ok');
+            table.timestamps();
+        }),
+
+        knex.schema.createTable('users', function(table) {
+            table.increments('id').primary();
+            table.string('name');
+            table.string('github');
+            table.string('cohort');
+            table.string('slack');
+            table.integer('company_id')
+                 .references('id')
+                 .inTable('companies');
+            table.boolean('remote');
             table.timestamps();
         }),
 
@@ -83,7 +83,7 @@ exports.down = function(knex, Promise) {
       knex.schema.dropTable('reviews'),
       knex.schema.dropTable('interview_questions'),
       knex.schema.dropTable('locations'),
-      knex.schema.dropTable('companies'),
-      knex.schema.dropTable('users')
+      knex.schema.dropTable('users'),
+      knex.schema.dropTable('companies')
     ])
 };

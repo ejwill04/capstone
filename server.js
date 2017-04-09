@@ -19,6 +19,12 @@ app.use(function(req, res, next) {
 
 app.set('port', process.env.PORT || 3000)
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*")
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+  next()
+})
+
 app.get('/', (request, response) => {
   fs.readFile(`${__dirname}/index.html`, (err, file) => {
     response.send(file)
@@ -27,10 +33,48 @@ app.get('/', (request, response) => {
 
 // get all users
 app.get('/api/v1/users', (request, response) => {
-  console.log('eheh hereh')
   database('users').select()
   .then(users => {
     response.status(200).json(users)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
+})
+
+// get all locations
+app.get('/api/v1/locations', (request, response) => {
+  database('locations').select()
+  .then(locations => {
+    response.status(200).json(locations)
+  })
+  .catch(error => {
+    console.error('error', error)
+  })
+})
+
+// get all locations, companies and related users for a given state
+app.get('/api/v1/locations/:state', (request, response) => {
+let { state } = request.params
+let company_ids
+let responseObj = { locations: '', companies: '', users: '' }
+
+  database('locations').where('state', state).select()
+  .then(locations => {
+    responseObj.locations = locations
+    company_ids = locations.map(obj => obj.company_id)
+  })
+  .then(() => {
+    database('companies').whereIn('id', company_ids).select()
+    .then(companies => {
+      responseObj.companies = companies
+      database('users').whereIn('company_id', company_ids).select()
+      .then(users => {
+        console.log('responseObj', responseObj)
+        responseObj.users = users
+        response.status(200).json(responseObj)
+      })
+    })
   })
   .catch(error => {
     console.error('error', error)
@@ -411,8 +455,10 @@ app.delete('/api/v1/salaries/:id', (request, response) => {
   })
 })
 
-app.listen(app.get('port'), () => {
-  console.log(`BYOB is running on ${app.get('port')}.`)
-})
+if (!module.parent) {
+  app.listen(app.get('port'), () => {
+    console.log(`BYOB is running on ${app.get('port')}.`)
+  })
+}
 
 module.exports = app;

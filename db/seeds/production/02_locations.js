@@ -3,22 +3,40 @@ exports.seed = function(knex, Promise) {
   .then(() => {
     return Promise.all([
       knex('locations').insert({
-        city: "Houston",
-        state: "TX",
+        city: "Greely",
+        state: "CO",
         country: "US",
         company_id: 1
       }),
       knex('locations').insert({
-        city: "York",
-        state: "PA",
+        city: "Denver",
+        state: "CO",
         country: "US",
         company_id: 2
       }),
       knex('locations').insert({
-        city: "Arlington",
-        state: "VA",
+        city: "Fort Collins",
+        state: "CO",
         country: "US",
         company_id: 3
+      }),
+      knex('locations').insert({
+        city: "Boulder",
+        state: "CO",
+        country: "US",
+        company_id: 4
+      }),
+      knex('locations').insert({
+        city: "Denver",
+        state: "CO",
+        country: "US",
+        company_id: 5
+      }),
+      knex('locations').insert({
+        city: "Denver",
+        state: "CO",
+        country: "US",
+        company_id: 6
       })
     ]);
   });
