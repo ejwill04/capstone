@@ -56,7 +56,7 @@ export default class App extends Component {
 
   componentDidMount() {
     console.log('called did mount')
-    fetch(`http://localhost:3000/api/v1/users`, {
+    fetch(`/api/v1/users`, {
       method: 'GET',
     })
     .then(response => response.json())
@@ -85,7 +85,7 @@ export default class App extends Component {
   }
 
   fetchJobsByState(state){
-    fetch(`http://localhost:3000/api/v1/locations/${state}`, {
+    fetch(`/api/v1/locations/${state}`, {
       method: 'GET',
     })
     .then(response => response.json())
