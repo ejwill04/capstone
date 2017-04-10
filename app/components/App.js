@@ -48,7 +48,7 @@ export default class App extends Component {
     .catch(err => err)
   }
 
-  handleChange(e,i,value){
+  handleStateChange(e,i,value){
     this.setState({ value })
     console.log(value)
   }
@@ -82,13 +82,15 @@ export default class App extends Component {
     return (
       <MuiThemeProvider>
         <section>
+        <Button className='github-btn' title='GitHub' handleClick={()=> console.log('github login')}/>
+        <h1 className='neumann-title'>Neumann</h1>
         <HeroVideo />
         <div className="dropdown-menu-container">
         <SelectField
           className="dropdown"
           floatingLabelText="State"
           value={this.state.value}
-          onChange={ this.handleChange.bind(this) }
+          onChange={ this.handleStateChange.bind(this) }
           style={dropDownStyles.customWidth}
           labelStyle={{fontSize: '30px'}}
           menuItemStyle={{fontSize: '24px', lineHeight: '35px'}}
@@ -96,7 +98,6 @@ export default class App extends Component {
           floatingLabelStyle={{color: '#ff4b8d', marginTop: '-25px', fontSize: '24px'}}
           underlineStyle={{display: 'none'}}
           iconStyle={{fill: '#2E3131'}}
-
           >
           {this.menuItems(menuStates)}
         </SelectField>
