@@ -10,6 +10,11 @@ import Button from './Button'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 const injectTapEventPlugin = require("react-tap-event-plugin")
+import RaisedButton from 'material-ui/RaisedButton';
+
+const style = {
+  margin: 18,
+}
 
 
 const dropDownStyles = {
@@ -95,8 +100,12 @@ export default class App extends Component {
       <MuiThemeProvider>
         <section>
         <div className='login-container'>
-          <h3 className='log-in'>Log in</h3>
-          <Button className='github-btn' title={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>} handleClick={()=> console.log('github login')} />
+          <RaisedButton className='github-btn'
+            backgroundColor='#00C2D2'
+            label='Log in with'
+            labelPosition='before'
+            icon={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>}
+            handleClick={()=> console.log('github login')} />
         </div>
         <h1 className='neumann-title'>Neumann</h1>
         <HeroVideo />
