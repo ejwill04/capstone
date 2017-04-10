@@ -12,7 +12,7 @@ export default class ResultsPage extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     let state = this.props.params.state
     fetch(`http://localhost:3000/api/v1/locations/${state}`, {
       method: 'GET',
@@ -20,18 +20,17 @@ export default class ResultsPage extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({stateData: data})
-      console.log('State data: ', data)
     })
     .catch(err => err)
   }
 
   render() {
-    let { stateData } = this.state.stateData
+    let { stateData } = this.state
     return (
       <div>
         <Header />
         <div className='resultspage-container'>
-          <ResultsList companyDetail={stateData}/>
+          <ResultsList stateData={stateData}/>
           <CompanyProfile />
         </div>
       </div>
