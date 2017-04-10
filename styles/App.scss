@@ -58,21 +58,16 @@ body {
 }
 
 .video {
-  position: fixed;
-  top: 400px;
+  position: absolute;
   left: 50%;
   z-index: -100;
   transform: translate(-50%, -50%);
 }
 
-@media screen and (max-width: 1400px) {
-  .video {
-    top: 200px;
-  }
-
+@media screen and (max-width: 900px) {
+  
   #footer {
-    margin-top: -19%;
-    height: 50%;
+    margin-top: -25%;
   }
 
 }
