@@ -2,15 +2,16 @@ import React from 'react'
 import CityList from './CityList'
 
 
-export default class ResultsList extends React.Component {
+const ResultsList = (props) => {
+  console.log(props);
 
-render() {
   return(
     <div className='results-container'>
-      <CityList companyDetail={this.props.companyDetail}/>
+      <CityList companyDetail={props.stateData}/>
       <CityList />
       <CityList />
     </div>
   )
 }
-}
+
+export default ResultsList
