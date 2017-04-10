@@ -1,30 +1,38 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { render } from 'react-dom'
 import Header from './Header'
 import ResultsList from './ResultsList'
 import CompanyProfile from './CompanyProfile'
 
-const ResultsPage = () => {
+export default class ResultsPage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
 
-  const companyDetail = () => {
-    fetch(`http://localhost:3000/api/v1/companies`,
-    {
-      method: 'GET'
-    })
-    .then(response =>  response.json())
-    .then(data => {
-      console.log(data);
-    })
+    }
   }
 
-  return(
-    <div>
-      <Header />
-      <div className='resultspage-container'>
-        <ResultsList companyDetail={() => {this.companyDetail.bind(this)}}/>
-        <CompanyProfile />
-      </div>
-    </div>
-  )
-}
+  componentWillMount() {
+    let state = this.props.params.state
+    fetch(`http://localhost:3000/api/v1/locations/${state}`, {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('State data: ', data)
+    })
+    .catch(err => err)
+  }
 
-export default ResultsPage
+  render() {
+    return (
+      <div>
+        <Header />
+        <div className='resultspage-container'>
+          <ResultsList />
+          <CompanyProfile />
+        </div>
+      </div>
+    )
+  }
+}
