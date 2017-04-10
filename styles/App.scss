@@ -64,3 +64,15 @@ body {
   z-index: -100;
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 1400px) {
+  .video {
+    top: 200px;
+  }
+
+  #footer {
+    margin-top: -19%;
+    height: 50%;
+  }
+
+}
