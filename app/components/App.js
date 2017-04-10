@@ -10,12 +10,14 @@ import Button from './Button'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 const injectTapEventPlugin = require("react-tap-event-plugin")
-import RaisedButton from 'material-ui/RaisedButton';
+import RaisedButton from 'material-ui/RaisedButton'
+const clientId = "385d87a144f6bdb6c58a"
+const domain = "http://localhost:8080"
+const lock = new Auth0Lock(clientId, domain)
 
 const style = {
   margin: 18,
 }
-
 
 const dropDownStyles = {
   customWidth: {
@@ -44,6 +46,19 @@ const menuStates = [
   {value: "LA", name: 'Louisiana'},
 ]
 
+lock.on("authenticated", (authResult) => {
+  lock.getUserInfo(authResult.accessToken, (error, profile) => {
+    if (error) {
+      console.log(error)
+      return
+    }
+
+    localStorage.setItem("accessToken", authResult.accessToken)
+    localStorage.setItem("profile", JSON.stringify(profile))
+    console.log(profile);
+  })
+})
+
 export default class App extends Component {
   constructor() {
     super()
@@ -52,7 +67,6 @@ export default class App extends Component {
     }
     injectTapEventPlugin()
   }
-
 
   componentDidMount() {
     console.log('called did mount')
@@ -95,6 +109,10 @@ export default class App extends Component {
     .catch(err => err)
   }
 
+  githubLogin(){
+    lock.show()
+  }
+
   render() {
     return (
       <MuiThemeProvider>
@@ -105,7 +123,7 @@ export default class App extends Component {
             label='Log in with'
             labelPosition='before'
             icon={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>}
-            handleClick={()=> console.log('github login')} />
+            onClick={ () => this.githubLogin() } />
         </div>
         <h1 className='neumann-title'>Neumann</h1>
         <HeroVideo />
