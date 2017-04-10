@@ -1,3 +1,4 @@
+@import 'reset.css';
 @import 'Header';
 @import 'ResultsList';
 @import 'CityList';
@@ -5,8 +6,3 @@
 @import 'ResultsPage';
 @import 'CompanyProfile';
 @import 'App';
-@import 'reset.css';
-
-body {
-  background-color: slategray;
-}
