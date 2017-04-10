@@ -1,4 +1,8 @@
-import React, { Component } from 'react'
+import React, { PropTypes as T } from 'react'
+import { Button } from 'react-bootstrap'
+import AuthService from '../helpers/AuthService'
+import ProfileDetails from './ProfileDetails'
+import styles from './styles.module.css'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
 import '../../styles/index.scss'
@@ -6,11 +10,12 @@ import '../../styles/index.scss'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
-import Button from './Button'
+import GithubButton from './Button'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 const injectTapEventPlugin = require("react-tap-event-plugin")
 import RaisedButton from 'material-ui/RaisedButton'
+const Auth0Lock = require('auth0-lock')
 const clientId = "385d87a144f6bdb6c58a"
 const domain = "http://localhost:8080"
 const lock = new Auth0Lock(clientId, domain)
@@ -22,7 +27,7 @@ const style = {
 const dropDownStyles = {
   customWidth: {
     width: 400,
-  },
+  }
 }
 
 const menuStates = [
@@ -60,13 +65,18 @@ lock.on("authenticated", (authResult) => {
 })
 
 export default class App extends Component {
-  constructor() {
-    super()
+
+  constructor(props, context) {
+    super(props, context)
     this.state = {
-      value: "CO"
+      value: "CO",
+      profile: props.auth.getProfile()
     }
     injectTapEventPlugin()
-  }
+    props.auth.on('profile_updated', (newProfile) => {
+      this.setState({profile: newProfile})
+  })
+}
 
   componentDidMount() {
     console.log('called did mount')
@@ -114,10 +124,12 @@ export default class App extends Component {
   }
 
   render() {
+    const { profile } = this.state
     return (
       <MuiThemeProvider>
         <section>
         <div className='login-container'>
+          <ProfileDetails profile={profile}></ProfileDetails>
           <RaisedButton className='github-btn'
             backgroundColor='#00C2D2'
             label='Log in with'
@@ -144,7 +156,7 @@ export default class App extends Component {
           >
           {this.menuItems(menuStates)}
         </SelectField>
-        <Link to={`/${this.state.value}`}><Button className="go-btn" title="go" handleClick={()=> this.fetchJobsByState(this.state.value)} /></Link>
+        <Link to={`/${this.state.value}`}><GithubButton className="go-btn" title="go" handleClick={()=> this.fetchJobsByState(this.state.value)} /></Link>
         <Footer />
         </div>
       </section>

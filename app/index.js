@@ -4,7 +4,6 @@ import { Router, Route, Link, IndexRoute, hashHistory, browserHistory, IndexRedi
 import App from './components/App'
 import ResultsPage from './components/ResultsPage'
 
-
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={App} />
