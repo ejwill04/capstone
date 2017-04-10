@@ -6,46 +6,34 @@ export default class ResultsList extends Component {
   constructor() {
     super()
     this.state = {
-      companyData: []
     }
   }
   render() {
-    console.log(this.props.data.companies)
-    // this.setState({ companyData: this.props.data.compan})
-      let list = this.props.data.locations ? this.props.data.locations.map((el) => {
-        return <CityList key={el.id} city={el.city} company_id={el.company_id} />
-      }) : null
+    console.log('list of companies', this.props.data.companies)
+    let citiesArray = this.props.data.locations ? this.props.data.locations.map((el) => {return el.city}) : null
 
-      return(
-        <div className='results-container'>
-        <div>{list}</div>
-      </div>
-      )
+    let uniqueCitiesArray = [...new Set(citiesArray)]
 
+    let list = this.props.data.locations ?
+    uniqueCitiesArray.map((cityName) => {
+      return <CityList city={cityName}
+                       locationData={this.props.data.locations.filter((obj) => {
+                        return obj.city === cityName})}
+                        companyData={this.props.data.companies.filter((obj) => {
+                         return this.props.data.locations.filter((obj) => {
+                          if(obj.id === cityName) {
+                            return obj.company_id
+                          }}).includes(obj.id)
+                       })} />
+    }) : null
+
+  
+
+
+    return(
+      <div className='results-container'>
+      <div>{list}</div>
+    </div>
+    )
   }
 }
-
-
-
-
-// const ResultsList = ({ data }) => {
-//
-// const list = (data) => {
-//   if (data.locations) {
-//       data.locations.map((el) => {
-//         console.log('el.city?,...........', el.city)
-//          return (
-//              <p>{el.city}</p>
-//          )
-//        })
-//     }
-//   }
-//
-//   return (
-//     <div className='results-container'>
-//       <p>{list(data)}</p>
-//     </div>
-//   )
-// }
-//
-// export default ResultsList
