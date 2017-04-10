@@ -3,7 +3,12 @@ import React from 'react'
 const Footer = () => {
   return (
     <div id="footer">
-      I didn't know our county was bi. Good for us. I'll wave at you every day. Not if you're a fish. Hi boys. I'm Tina. C'mon Dad, just let me bite down on the bean. My boob? I want a dry erase board so I can write down all my private thoughts and then erase them immediately. This is such a snore-gasm. 
+      <p className='footer-text'>
+        Dear Diary: Tonight I'm sneaking off to the abandoned taffy factory to look for treasure. Also, if boys had uteruses,
+        they'd be called duderuses. Your ass is grass and I'm gonna mow it. Here's a bunch of numbers. They may look random but
+        they're my phone number. Dad, you're the best pimp a girl could ever have. Brr, it sure is cold in here. I wish some
+        strong, chivalrous man would lend me his jacket, or his pants.
+      </p>
     </div>
   )
 }
