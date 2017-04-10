@@ -15,27 +15,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 import RaisedButton from 'material-ui/RaisedButton'
-const injectTapEventPlugin = require("react-tap-event-plugin")
+const injectTapEventPlugin = require('react-tap-event-plugin')
 
-// import AuthService from '../helpers/AuthService'
-import Auth0Lock from 'auth0-lock'
-const clientId = "385d87a144f6bdb6c58a"
-const lock = new Auth0Lock("z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd", 'gabitron.auth0.com')
+import AuthService from '../helpers/AuthService'
+const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
 
 injectTapEventPlugin()
-
-lock.on("authenticated", (authResult) => {
-  lock.getUserInfo(authResult.accessToken, (error, profile) => {
-    if (error) {
-      console.log(error)
-      return
-    }
-
-    localStorage.setItem("accessToken", authResult.accessToken)
-    localStorage.setItem("profile", JSON.stringify(profile))
-    console.log(profile);
-  })
-})
 
 export default class App extends Component {
 
@@ -90,7 +75,7 @@ export default class App extends Component {
                           label='Log in with'
                           labelPosition='before'
                           icon={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>}
-                          onClick={()=> lock.show({ callbackURL: 'http://localhost:8080' })} />
+                          onClick={auth.login.bind(this)} />
           </div>
           <h1 className='neumann-title'>Neumann</h1>
           <HeroVideo />
