@@ -21,13 +21,23 @@ body {
 }
 
 .go-btn {
-  width: 150px;
+  width: 125px;
 }
 
-.github-btn {
+.login-container {
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.log-in {
+  display: inline-block;
+}
+
+.github-img {
+  margin-top: 3px;
+  height: 30px;
+  width: 30px;
 }
 
 #footer {
@@ -43,8 +53,9 @@ body {
 .footer-text {
   text-align: center;
   margin: 45px;
-  color: #B3B7B7;
+  line-height: 130%;
   font-size: 24px;
+  color: #B3B7B7;
 }
 
 .video {

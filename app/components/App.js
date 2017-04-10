@@ -23,14 +23,27 @@ const menuStates = [
   {value: "AK", name: 'Alaska'},
   {value: "AZ", name: 'Arizona'},
   {value: "AR", name: 'Arkansas'},
-  {value: "CO", name: 'Colorado'}
+  {value: "CA", name: 'California'},
+  {value: "CO", name: 'Colorado'},
+  {value: "CT", name: 'Connecticut'},
+  {value: "DE", name: 'Deleware'},
+  {value: "FL", name: 'Florida'},
+  {value: "GA", name: 'Georgia'},
+  {value: "HI", name: 'Hawaii'},
+  {value: "ID", name: 'Idaho'},
+  {value: "IL", name: 'Illinois'},
+  {value: "IN", name: 'Indiana'},
+  {value: "IA", name: 'Iowa'},
+  {value: "KA", name: 'Kansas'},
+  {value: "KY", name: 'Kentucky'},
+  {value: "LA", name: 'Louisiana'},
 ]
 
 export default class App extends Component {
   constructor() {
     super()
     this.state = {
-      value: "AL"
+      value: "CO"
     }
     injectTapEventPlugin()
   }
@@ -52,7 +65,6 @@ export default class App extends Component {
     this.setState({ value })
     console.log(value)
   }
-
 
   menuItems(states){
     return menuStates.map((states) => (
@@ -82,7 +94,10 @@ export default class App extends Component {
     return (
       <MuiThemeProvider>
         <section>
-        <Button className='github-btn' title='GitHub' handleClick={()=> console.log('github login')}/>
+        <div className='login-container'>
+          <h3 className='log-in'>Log in</h3>
+          <Button className='github-btn' title={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>} handleClick={()=> console.log('github login')} />
+        </div>
         <h1 className='neumann-title'>Neumann</h1>
         <HeroVideo />
         <div className="dropdown-menu-container">
@@ -98,10 +113,11 @@ export default class App extends Component {
           floatingLabelStyle={{color: '#ff4b8d', marginTop: '-25px', fontSize: '24px'}}
           underlineStyle={{display: 'none'}}
           iconStyle={{fill: '#2E3131'}}
+          maxHeight={220}
           >
           {this.menuItems(menuStates)}
         </SelectField>
-        <Link to={`/${this.state.value}`}><Button className="go-btn" title="Go" handleClick={()=> this.fetchJobsByState(this.state.value)} /></Link>
+        <Link to={`/${this.state.value}`}><Button className="go-btn" title="go" handleClick={()=> this.fetchJobsByState(this.state.value)} /></Link>
         <Footer />
         </div>
       </section>
