@@ -55,7 +55,6 @@ export default class Header extends Component {
             onRequestClose={this.handleClose}
             autoScrollBodyContent={true}
           >
-            <div>
             <TextField
               floatingLabelText="Company Name"
               hintText="Ex:ABC Co."></TextField>
@@ -77,7 +76,6 @@ export default class Header extends Component {
             <TextField
               floatingLabelText="Email Address"
               hintText="macDaddy@daddymac.com"></TextField>
-            </div>
           </Dialog>
         </div>
       )
