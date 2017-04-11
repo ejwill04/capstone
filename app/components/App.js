@@ -65,12 +65,6 @@ export default class App extends Component {
     ))
   }
 
-  // showUsername() {
-  //   let user = JSON.parse(localStorage.profile)
-  //   this.setState({ user_profile: user })
-  //   console.log(user.name);
-  // }
-
   logoutBtn() {
     return (
       <div>

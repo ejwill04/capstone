@@ -1,4 +1,6 @@
 import Auth0Lock from 'auth0-lock'
+import { Link } from 'react-router'
+
 export default class AuthService {
   constructor(clientId, domain) {
     this.lock = new Auth0Lock(clientId, domain, {})
@@ -39,6 +41,6 @@ export default class AuthService {
 
   logout() {
     localStorage.removeItem('id_token')
-    location.reload()
+    document.location.href='/'
   }
 }
