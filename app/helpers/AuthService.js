@@ -13,7 +13,6 @@ export default class AuthService {
       if (error) {
         console.log('Error loading the profile', error);
       } else {
-        debugger
         this.setProfile(profile)
       }
     })
