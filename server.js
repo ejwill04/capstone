@@ -209,6 +209,22 @@ app.get('/api/v1/reviews/:id', (request, response) => {
   })
 })
 
+// get all users associated with a company
+app.get('/api/v1/users/company/:company_id', (request, response) => {
+  const { company_id } = request.params
+  database('users').where('company_id', company_id).select()
+  .then(users => {
+    if (users.length > 0) {
+      response.status(200).json(users)
+    } else {
+      response.status(404).send('Company not found')
+    }
+  })
+  .catch(error => {
+    console.error(404, 'Company not found')
+  })
+})
+
 // get all interview questions associated with a company
 app.get('/api/v1/interview_questions/company/:company_id', (request, response) => {
   const { company_id } = request.params

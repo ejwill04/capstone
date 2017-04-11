@@ -3,8 +3,8 @@ import CityList from './CityList'
 
 
 export default class ResultsList extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
     }
   }
@@ -25,8 +25,8 @@ export default class ResultsList extends Component {
 
     return(
       <div className='results-container'>
-      <div>{list}</div>
-    </div>
+        <div>{list}</div>
+      </div>
     )
   }
 }
