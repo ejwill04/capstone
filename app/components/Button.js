@@ -5,7 +5,7 @@ const style = {
   margin: 18,
 }
 
-const Button = (props) => (
+const GithubButton = (props) => (
   <RaisedButton
     className={props.className}
     label={props.title}
@@ -15,4 +15,4 @@ const Button = (props) => (
     icon={props.icon} />
 )
 
-module.exports = Button
+module.exports = GithubButton

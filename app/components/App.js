@@ -1,26 +1,34 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes as T } from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
 import '../../styles/index.scss'
-// import ResultsPage from './ResultsPage'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
+import ProfileDetails from './ProfileDetails'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
-import Button from './Button'
+import GithubButton from './Button'
+import statesReference from './statesReference'
+
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
-const injectTapEventPlugin = require("react-tap-event-plugin")
 import RaisedButton from 'material-ui/RaisedButton'
-import statesReference from './statesReference'
+const injectTapEventPlugin = require('react-tap-event-plugin')
+
+import AuthService from '../helpers/AuthService'
+const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
+
 injectTapEventPlugin()
 
 export default class App extends Component {
-  constructor() {
-    super()
+
+  constructor(props, context) {
+    super(props, context)
     this.state = {
       availableStates: [],
       selectedState: 'CO'
     }
+
     this.handleStateChange = this.handleStateChange.bind(this)
     this.menuItems = this.menuItems.bind(this)
   }
@@ -56,6 +64,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { profile } = this.state
     return (
       <MuiThemeProvider>
         <section>
@@ -65,7 +74,7 @@ export default class App extends Component {
                           label='Log in with'
                           labelPosition='before'
                           icon={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>}
-                          handleClick={()=> console.log('github login')} />
+                          onClick={auth.login.bind(this)} />
           </div>
           <h1 className='neumann-title'>Neumann</h1>
           <HeroVideo />
@@ -85,7 +94,7 @@ export default class App extends Component {
               {this.menuItems()}
             </SelectField>
             <Link to={`/${this.state.selectedState}`}>
-              <Button className="go-btn"
+              <GithubButton className="go-btn"
                       title="go" />
             </Link>
             <Footer />

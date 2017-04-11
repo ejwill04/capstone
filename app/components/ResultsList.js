@@ -1,23 +1,39 @@
-import React from 'react'
+import React, { Component } from 'react'
 import CityList from './CityList'
 
 
-const ResultsList = (props) => {
-  console.log(props.stateData);
-  const locations = props.stateData.locations
-  if (locations) {
-    locations.map((city) => {
-      console.log(city.city)
-    })
+export default class ResultsList extends Component {
+  constructor() {
+    super()
+    this.state = {
+    }
   }
+  render() {
+    let citiesArray = this.props.data.locations ? this.props.data.locations.map(el => {return el.city}) : null
 
-  return(
-    <div className='results-container'>
-      <CityList companyDetail={props.stateData}/>
-      <CityList />
-      <CityList />
-    </div>
-  )
+    let uniqueCitiesArray = [...new Set(citiesArray)]
+
+    let list = this.props.data.locations ?
+    uniqueCitiesArray.map((cityName) => {
+      return <CityList city={cityName}
+                       locationData={this.props.data.locations.filter(obj => {
+                        return obj.city === cityName})}
+                       usersData={this.props.data.users}
+                       companyData={this.props.data.companies}
+                       key={cityName} />
+    }) : null
+
+    return(
+      <div className='results-container'>
+        <div>{list}</div>
+      </div>
+    )
+  }
 }
 
-export default ResultsList
+
+// companyData={this.props.data.companies.filter((obj) => {
+//  return this.props.data.locations.filter((obj) => {
+//   if(obj.id === cityName) {
+//     return obj.company_id
+//   }}).includes(obj.id)
