@@ -2,15 +2,13 @@ import React, { Component } from 'react'
 import IndividualCompany from './IndividualCompany'
 
 export default class CityList extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
     }
   }
 
   render() {
-
-
     let company_ids = this.props.locationData.map((obj) => {
       return obj.company_id
     })
@@ -21,7 +19,9 @@ export default class CityList extends Component {
 
     let mappedCompanies = selectedCompanies.map(company => {
       return <IndividualCompany key={company.id}
+                                company_id={company.id}
                                 city={this.props.city}
+                                state={this.props.locationData[0].state}
                                 name={company.name}
                                 users={this.props.usersData.filter(obj => { return obj.company_id === company.id })}
                                 industry={company.industry}
