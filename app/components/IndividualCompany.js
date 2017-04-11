@@ -15,7 +15,7 @@ export default class IndividualCompany extends Component {
     return (
       <Link to={`/${name}`}>
         <div className='individualcompany-container'>
-            <h2 className='company-name'>{name}</h2><p className='company-alums'>{users.length}</p>
+            <h2 className='company-name' >{name}</h2><p className='company-alums'>{users.length}</p>
             <div>
               <p className='company-size'>{size}</p>
               <p className='company-industry'>{industry}</p>

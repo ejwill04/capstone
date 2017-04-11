@@ -29,7 +29,6 @@ export default class ResultsPage extends Component {
   }
 
   render() {
-    let { stateData } = this.state
     return (
       <div>
         <Header />

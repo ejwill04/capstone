@@ -26,7 +26,8 @@ export default class App extends Component {
     super(props, context)
     this.state = {
       availableStates: [],
-      selectedState: 'CO'
+      selectedState: 'CO',
+      id_token: localStorage.id_token
     }
 
     this.handleStateChange = this.handleStateChange.bind(this)
@@ -63,18 +64,36 @@ export default class App extends Component {
     ))
   }
 
+  logoutBtn() {
+    return (
+      <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
+    )
+  }
+
+  loginBtn() {
+    return (
+      <RaisedButton className='github-btn'
+        backgroundColor='#00C2D2'
+        label='Log in with'
+        labelPosition='before'
+        icon={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>}
+        onClick={auth.login.bind(this)} />
+      )
+  }
+
+  // loginLogout() {
+  //   if (this.state.id_token) {
+  //   )} else {
+  //   }
+  // }
+
   render() {
     const { profile } = this.state
     return (
       <MuiThemeProvider>
         <section>
           <div className='login-container'>
-            <RaisedButton className='github-btn'
-                          backgroundColor='#00C2D2'
-                          label='Log in with'
-                          labelPosition='before'
-                          icon={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>}
-                          onClick={auth.login.bind(this)} />
+            { localStorage.id_token ? this.logoutBtn() : this.loginBtn() }
           </div>
           <h1 className='neumann-title'>Neumann</h1>
           <HeroVideo />
