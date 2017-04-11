@@ -1,4 +1,6 @@
 import Auth0Lock from 'auth0-lock'
+import { Link } from 'react-router'
+
 export default class AuthService {
   constructor(clientId, domain) {
     this.lock = new Auth0Lock(clientId, domain, {})
@@ -11,7 +13,6 @@ export default class AuthService {
       if (error) {
         console.log('Error loading the profile', error);
       } else {
-        debugger
         this.setProfile(profile)
       }
     })
@@ -33,12 +34,12 @@ export default class AuthService {
     // this.emit('profile_updated', profile)
   }
   getProfile() {
-    const profile = localStorage.getITem('profile')
+    const profile = localStorage.getItem('profile')
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 
   logout() {
     localStorage.removeItem('id_token')
-    location.reload()
+    document.location.href='/'
   }
 }
