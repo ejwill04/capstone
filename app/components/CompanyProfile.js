@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-
 export default class CompanyProfile extends Component {
   constructor() {
     super()

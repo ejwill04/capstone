@@ -25,8 +25,8 @@ export default class ResultsList extends Component {
 
     return(
       <div className='results-container'>
-      <div>{list}</div>
-    </div>
+        <div>{list}</div>
+      </div>
     )
   }
 }
