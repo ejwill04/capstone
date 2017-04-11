@@ -1,6 +1,6 @@
-import React from 'react'
 import AddCompanyForm from './AddCompanyForm'
 
+import React from 'react'
 
 const CompanyProfile = () => {
   return(
