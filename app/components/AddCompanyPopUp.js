@@ -28,6 +28,10 @@ export default class AddCompanyPopUp extends Component {
     this.setState({ open: false });
   };
 
+  handleSubmit() {
+    console.log('form submit')
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -41,7 +45,7 @@ export default class AddCompanyPopUp extends Component {
         keyboardFocused={true}
         onTouchTap={(e) => {
           this.handleClose()
-          console.log('submit', e)}}
+          console.log('submit button was clicked', e)}}
       />,
     ];
 
@@ -55,7 +59,7 @@ export default class AddCompanyPopUp extends Component {
                 open={this.state.open}
                 onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
-          <div>
+          <form onSubmit={() => this.handleSubmit()}>
             <TextField floatingLabelText="Company Name"
                        hintText="Ex:ABC Co."></TextField>
             <TextField floatingLabelText="Industry"
@@ -73,7 +77,7 @@ export default class AddCompanyPopUp extends Component {
                        hintText="@macDaddy"></TextField>
             <TextField floatingLabelText="Email Address"
                        hintText="macDaddy@daddymac.com"></TextField>
-          </div>
+          </form>
         </Dialog>
       </div>
     );
