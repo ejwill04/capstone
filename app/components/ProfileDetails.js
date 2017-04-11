@@ -24,4 +24,4 @@ export class ProfileDetails extends React.Component {
   }
 }
 
-export default ProfileDetails;
+// export default ProfileDetails;

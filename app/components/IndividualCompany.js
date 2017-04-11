@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { Link } from 'react-router'
 
 export default class IndividualCompany extends Component {
   constructor() {
@@ -10,15 +11,17 @@ export default class IndividualCompany extends Component {
 
   render() {
     let { name, industry, size, users } = this.props
-    console.log(users)
+    console.log('props yo',this.props.city)
     return (
-      <div className='individualcompany-container'>
-          <h2 className='company-name'>{name}</h2><p className='company-alums'>{users.length}</p>
-          <div>
-            <p className='company-size'>{size}</p>
-            <p className='company-industry'>{industry}</p>
-          </div>
-      </div>
+      <Link to={`/${name}`}>
+        <div className='individualcompany-container'>
+            <h2 className='company-name'>{name}</h2><p className='company-alums'>{users.length}</p>
+            <div>
+              <p className='company-size'>{size}</p>
+              <p className='company-industry'>{industry}</p>
+            </div>
+        </div>
+      </Link>
     )
   }
 }
