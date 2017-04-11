@@ -16,6 +16,14 @@ export default class AddCompanyPopUp extends Component {
     super()
     this.state = {
       open: false,
+      companyName: '',
+      industry: '',
+      techStack: '',
+      review: '',
+      worksThereNow: false,
+      interviewQuestion: '',
+      slackHandle: '',
+      emailAddress: '',
     }
   }
 
@@ -30,6 +38,12 @@ export default class AddCompanyPopUp extends Component {
 
   handleSubmit() {
     console.log('form submit')
+
+  }
+
+  handleFind(e) {
+    console.log('find fidn fdin', e.target.value)
+    alert('fjdsklfjdklsfjdlsk')
   }
 
   render() {
@@ -44,9 +58,8 @@ export default class AddCompanyPopUp extends Component {
         primary={true}
         keyboardFocused={true}
         onTouchTap={(e) => {
-          this.handleClose()
-
-          console.log('submit button was clicked', e)}}
+          this.handleSubmit()
+          this.handleClose()}}
       />,
     ];
 
@@ -60,25 +73,31 @@ export default class AddCompanyPopUp extends Component {
                 open={this.state.open}
                 onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
-          <form onSubmit={() => this.handleSubmit()}>
             <TextField floatingLabelText="Company Name"
-                       hintText="Ex:ABC Co."></TextField>
+                       hintText="Ex:ABC Co."
+                       onChange={(e) => this.setState({companyName: e.target.value})}></TextField>
             <TextField floatingLabelText="Industry"
-                       hintText="Roofing"></TextField>
+                       hintText="Roofing"
+                       onChange={(e) => this.setState({industry: e.target.value})}></TextField>
             <TextField floatingLabelText="Tech Stack"
-                       hintText="Java, React"></TextField>
+                       hintText="Java, React"
+                       onChange={(e) => this.setState({techStack: e.target.value})}></TextField>
             <TextField floatingLabelText="Review"
-                       hintText="We have TONS of fun."></TextField>
+                       hintText="We have TONS of fun."
+                       onChange={(e) => this.setState({review: e.target.value})}></TextField>
             <TextField floatingLabelText="Interview Questions"
-                       hintText="What is your greatest weakness?"></TextField>
+                       hintText="What is your greatest weakness?"
+                       onChange={(e) => this.setState({interviewQuestion: e.target.value})}></TextField>
             <Toggle    label="I currently work here"
                        labelPosition="right"
-                       style={styles.toggle} />
+                       style={styles.toggle}
+                       onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow})}/>
             <TextField floatingLabelText="Slack handle"
-                       hintText="@macDaddy"></TextField>
+                       hintText="@macDaddy"
+                       onChange={(e) => this.setState({slackHandle: e.target.value})}></TextField>
             <TextField floatingLabelText="Email Address"
-                       hintText="macDaddy@daddymac.com"></TextField>
-          </form>
+                       hintText="macDaddy@daddymac.com"
+                       onChange={(e) => this.setState({emailAddress: e.target.value})}></TextField>
         </Dialog>
       </div>
     );
