@@ -9,12 +9,9 @@ const Header = () => {
   return (
     <MuiThemeProvider>
       <div className='header-container'>
-        <input className='header-input'
-          placeholder='filter search' />
-          <GithubButton className="go-btn" title="Filter" />
-          <GithubButton className="go-btn" title="Add a Company" />
-          <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
-        </div>
+        <GithubButton className="go-btn" title="Add a Company" />
+        <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
+      </div>
     </MuiThemeProvider>
   )
 }

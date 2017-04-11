@@ -38,16 +38,30 @@ export default class CompanyProfile extends Component {
       })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        // this.setState({ alums: data })
+        this.setState({ alums: data })
       })
-      .catch(err => err)
+      .catch(()=> this.setState({ alums: {} }))
+    }
+  }
+
+  showUsers() {
+    debugger
+    let alumArray = []
+    if(this.state.alums.length > 0) {
+      for(let i = 0; i < this.state.alums.length; i ++) {
+        alumArray.push(this.state.alums[i].name)
+      }
+      return alumArray.map((alum)=> {
+        return <p key={alum}>{alum}</p>
+      })
+    } else {
+      console.log(this.state.alums)
+      return <p>No alumni here</p>
     }
   }
 
   render() {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
-    console.log(company)
     return (
       <div className="companyprofile-container">
         <div className="information-container">
@@ -56,6 +70,7 @@ export default class CompanyProfile extends Component {
           <h2 className="profile-num_of_emp">{company.num_of_emp}</h2>
           <h2 className="profile-techstack">{company.tech_stack}</h2>
           <h2 className="profile-alumni">Alumni</h2>
+          <div>{this.showUsers()}</div>
         </div>
         <button>Add Yourself</button>
       </div>
