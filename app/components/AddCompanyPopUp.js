@@ -18,6 +18,7 @@ export default class AddCompanyPopUp extends Component {
       open: false,
       name: '',
       industry: '',
+      remote_ok: false,
       tech_stack: '',
       review: '',
       worksThereNow: false,
@@ -28,12 +29,12 @@ export default class AddCompanyPopUp extends Component {
   }
 
   postACompany() {
-    let {name, industry, tech_stack} = this.state
-
+    let {name, industry, tech_stack, remote_ok} = this.state
     let company = {
       name,
       industry,
-      tech_stack
+      tech_stack,
+      remote_ok
     }
 console.log('company', company);
     fetch('http://localhost:3000/api/v1/companies',
@@ -63,11 +64,6 @@ console.log('company', company);
   handleSubmit() {
     console.log('form submit')
     this.postACompany()
-  }
-
-  handleFind(e) {
-    console.log('find fidn fdin', e.target.value)
-    alert('fjdsklfjdklsfjdlsk')
   }
 
   render() {
@@ -103,6 +99,10 @@ console.log('company', company);
             <TextField floatingLabelText="Industry"
                        hintText="Roofing"
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
+            <Toggle    label="I work remotely"
+                       labelPosition="right"
+                       style={styles.toggle}
+                       onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok})}/>
             <TextField floatingLabelText="Tech Stack"
                        hintText="Java, React"
                        onChange={(e) => this.setState({tech_stack: e.target.value})}></TextField>
