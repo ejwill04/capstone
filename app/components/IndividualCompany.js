@@ -10,18 +10,19 @@ export default class IndividualCompany extends Component {
   }
 
   render() {
-    let { name, industry, size, users } = this.props
-    console.log('props yo',this.props.city)
+    let { name, industry, size, users, state, company_id } = this.props
     return (
-      <Link to={`/${name}`}>
-        <div className='individualcompany-container'>
-            <h2 className='company-name' >{name}</h2><p className='company-alums'>{users.length}</p>
-            <div>
-              <p className='company-size'>{size}</p>
-              <p className='company-industry'>{industry}</p>
-            </div>
-        </div>
-      </Link>
+      <div>
+        <Link to={`/${state}/${company_id}`} >
+          <div className='individualcompany-container'>
+              <h2 className='company-name'>{name}</h2><p className='company-alums'>{users.length}</p>
+              <div>
+                <p className='company-size'>{size}</p>
+                <p className='company-industry'>{industry}</p>
+              </div>
+          </div>
+        </Link>
+      </div>
     )
   }
 }

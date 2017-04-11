@@ -8,7 +8,8 @@ export default class ResultsPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: {}
+      data: {},
+      selectedCompany: ''
     }
   }
 
@@ -34,7 +35,7 @@ export default class ResultsPage extends Component {
         <Header />
         <div className='resultspage-container'>
           <ResultsList data={this.state.data} />
-          <CompanyProfile />
+          <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} />
         </div>
       </div>
     )
