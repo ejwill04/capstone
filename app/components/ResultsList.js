@@ -9,18 +9,18 @@ export default class ResultsList extends Component {
     }
   }
   render() {
-    let citiesArray = this.props.data.locations ? this.props.data.locations.map((el) => {return el.city}) : null
+    let citiesArray = this.props.data.locations ? this.props.data.locations.map(el => {return el.city}) : null
 
     let uniqueCitiesArray = [...new Set(citiesArray)]
 
     let list = this.props.data.locations ?
     uniqueCitiesArray.map((cityName) => {
       return <CityList city={cityName}
-                       locationData={this.props.data.locations.filter((obj) => {
+                       locationData={this.props.data.locations.filter(obj => {
                         return obj.city === cityName})}
+                       usersData={this.props.data.users}
                        companyData={this.props.data.companies}
-                       key={cityName}
-                        />
+                       key={cityName} />
     }) : null
 
     return(
