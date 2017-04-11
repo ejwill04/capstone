@@ -45,6 +45,7 @@ export default class AddCompanyPopUp extends Component {
         keyboardFocused={true}
         onTouchTap={(e) => {
           this.handleClose()
+
           console.log('submit button was clicked', e)}}
       />,
     ];
@@ -70,9 +71,9 @@ export default class AddCompanyPopUp extends Component {
                        hintText="We have TONS of fun."></TextField>
             <TextField floatingLabelText="Interview Questions"
                        hintText="What is your greatest weakness?"></TextField>
-            <Toggle label="I currently work here"
-                    labelPosition="right"
-                    style={styles.toggle} />
+            <Toggle    label="I currently work here"
+                       labelPosition="right"
+                       style={styles.toggle} />
             <TextField floatingLabelText="Slack handle"
                        hintText="@macDaddy"></TextField>
             <TextField floatingLabelText="Email Address"
