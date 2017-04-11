@@ -16,15 +16,39 @@ export default class AddCompanyPopUp extends Component {
     super()
     this.state = {
       open: false,
-      companyName: '',
+      name: '',
       industry: '',
-      techStack: '',
+      tech_stack: '',
       review: '',
       worksThereNow: false,
       interviewQuestion: '',
       slackHandle: '',
       emailAddress: '',
     }
+  }
+
+  postACompany() {
+    let {name, industry, tech_stack} = this.state
+
+    let company = {
+      name,
+      industry,
+      tech_stack
+    }
+console.log('company', company);
+    fetch('http://localhost:3000/api/v1/companies',
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(
+        company
+      ),
+    })
+      .then((response) => response.json())
+      .then((payload) => console.log(payload))
   }
 
   handleOpen() {
@@ -38,7 +62,7 @@ export default class AddCompanyPopUp extends Component {
 
   handleSubmit() {
     console.log('form submit')
-
+    this.postACompany()
   }
 
   handleFind(e) {
@@ -75,13 +99,13 @@ export default class AddCompanyPopUp extends Component {
                 autoScrollBodyContent={true}>
             <TextField floatingLabelText="Company Name"
                        hintText="Ex:ABC Co."
-                       onChange={(e) => this.setState({companyName: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({name: e.target.value})}></TextField>
             <TextField floatingLabelText="Industry"
                        hintText="Roofing"
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
             <TextField floatingLabelText="Tech Stack"
                        hintText="Java, React"
-                       onChange={(e) => this.setState({techStack: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({tech_stack: e.target.value})}></TextField>
             <TextField floatingLabelText="Review"
                        hintText="We have TONS of fun."
                        onChange={(e) => this.setState({review: e.target.value})}></TextField>
