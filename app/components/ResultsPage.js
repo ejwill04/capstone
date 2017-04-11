@@ -13,7 +13,6 @@ export default class ResultsPage extends Component {
   }
 
   componentWillMount() {
-    console.log('mounted');
     let state = this.props.params.state
     fetch(`http://localhost:3000/api/v1/locations/${state}`, {
       method: 'GET',

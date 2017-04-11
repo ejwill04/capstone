@@ -9,7 +9,6 @@ export default class ResultsList extends Component {
     }
   }
   render() {
-    console.log('list of companies', this.props.data.companies)
     let citiesArray = this.props.data.locations ? this.props.data.locations.map((el) => {return el.city}) : null
 
     let uniqueCitiesArray = [...new Set(citiesArray)]
@@ -19,16 +18,10 @@ export default class ResultsList extends Component {
       return <CityList city={cityName}
                        locationData={this.props.data.locations.filter((obj) => {
                         return obj.city === cityName})}
-                        companyData={this.props.data.companies.filter((obj) => {
-                         return this.props.data.locations.filter((obj) => {
-                          if(obj.id === cityName) {
-                            return obj.company_id
-                          }}).includes(obj.id)
-                       })} />
+                       companyData={this.props.data.companies}
+                       key={cityName}
+                        />
     }) : null
-
-  
-
 
     return(
       <div className='results-container'>
@@ -37,3 +30,10 @@ export default class ResultsList extends Component {
     )
   }
 }
+
+
+// companyData={this.props.data.companies.filter((obj) => {
+//  return this.props.data.locations.filter((obj) => {
+//   if(obj.id === cityName) {
+//     return obj.company_id
+//   }}).includes(obj.id)
