@@ -30,7 +30,6 @@ export default class App extends Component {
       id_token: localStorage.id_token,
       user_profile: auth.getProfile()
     }
-
     this.handleStateChange = this.handleStateChange.bind(this)
     this.menuItems = this.menuItems.bind(this)
   }

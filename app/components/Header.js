@@ -9,10 +9,10 @@ const Header = () => {
   return (
     <MuiThemeProvider>
       <div className='header-container'>
-          <GithubButton className="go-btn" title="Add a Company" />
-          <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
-           <AddCompanyPopUp />
-        </div>
+        <GithubButton className="go-btn" title="Add a Company" />
+        <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
+        <AddCompanyPopUp />
+       </div>
     </MuiThemeProvider>
   )
 }
