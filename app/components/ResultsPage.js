@@ -8,7 +8,7 @@ export default class ResultsPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      data: {}
     }
   }
 
@@ -19,9 +19,15 @@ export default class ResultsPage extends Component {
     })
     .then(response => response.json())
     .then(data => {
-      console.log('State data: ', data)
+      this.getData(data)
     })
     .catch(err => err)
+  }
+
+  getData(data) {
+    // console.log('all data', data)
+    this.setState({ data: data })
+    // debugger
   }
 
   render() {
@@ -29,7 +35,7 @@ export default class ResultsPage extends Component {
       <div>
         <Header />
         <div className='resultspage-container'>
-          <ResultsList />
+          <ResultsList data={this.state.data} />
           <CompanyProfile />
         </div>
       </div>
