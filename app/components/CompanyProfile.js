@@ -1,5 +1,4 @@
 import React from 'react'
-import AddCompanyForm from './AddCompanyForm'
 
 
 const CompanyProfile = () => {
@@ -12,7 +11,6 @@ const CompanyProfile = () => {
         <h2 className="profile-alumni">Alumni</h2>
       </div>
       <button>Add Yourself</button>
-      <AddCompanyForm />
     </div>
   )
 }
