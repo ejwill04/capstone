@@ -59,16 +59,16 @@ let { state } = request.params
 let company_ids
 let responseObj = { locations: '', companies: '', users: '' }
 
-  database('locations').where('state', state).select()
+  database('locations').where('state', state).select().orderBy('city', 'asc')
   .then(locations => {
     responseObj.locations = locations
     company_ids = locations.map(obj => obj.company_id)
   })
   .then(() => {
-    database('companies').whereIn('id', company_ids).select()
+    database('companies').whereIn('id', company_ids).select().orderBy('name', 'asc')
     .then(companies => {
       responseObj.companies = companies
-      database('users').whereIn('company_id', company_ids).select()
+      database('users').whereIn('company_id', company_ids).select().orderBy('name', 'asc')
       .then(users => {
         responseObj.users = users
         response.status(200).json(responseObj)

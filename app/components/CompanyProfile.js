@@ -45,7 +45,6 @@ export default class CompanyProfile extends Component {
   }
 
   showUsers() {
-    debugger
     let alumArray = []
     if(this.state.alums.length > 0) {
       for(let i = 0; i < this.state.alums.length; i ++) {
@@ -55,7 +54,6 @@ export default class CompanyProfile extends Component {
         return <p key={alum}>{alum}</p>
       })
     } else {
-      console.log(this.state.alums)
       return <p>No alumni here</p>
     }
   }
