@@ -1,16 +1,65 @@
-import React from 'react'
+import React, { Component } from 'react';
+import {Tabs, Tab} from 'material-ui/Tabs';
 
-const Footer = () => {
-  return (
+const styles = {
+  headline: {
+    color: '#B3B7B7',
+    fontSize: 24,
+    paddingTop: 16,
+    marginBottom: 12,
+    fontWeight: 400,
+  },
+};
+
+export default class Footer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'a'
+    };
+  }
+
+  handleChange(value){
+    this.setState({
+      value: value
+    });
+    console.log('Value: ',this.state.value);
+  };
+
+  render() {
+    return (
     <div id="footer">
-      <p className='footer-text'>
-        Dear Diary: Tonight I'm sneaking off to the abandoned taffy factory to look for treasure. Also, if boys had uteruses,
-        they'd be called duderuses. Your ass is grass and I'm gonna mow it. Here's a bunch of numbers. They may look random but
-        they're my phone number. Dad, you're the best pimp a girl could ever have. Brr, it sure is cold in here. I wish some
-        strong, chivalrous man would lend me his jacket, or his pants.
-      </p>
+      <Tabs
+        value={this.state.value}
+        onChange={() => this.handleChange()}
+      >
+        <Tab label="Search" value="search">
+          <div className="tab">
+            <h2 style={styles.headline}>Search for Companies</h2>
+            <p className="tab-text">
+              Search for companies that have hired Turing grads.
+            </p>
+          </div>
+        </Tab>
+        <Tab label="Review" value="review">
+          <div className="tab">
+            <h2 style={styles.headline}>Company Reviews</h2>
+            <p className="tab-text">
+              Find company reviews from employees.
+            </p>
+          </div>
+        </Tab>
+        <Tab label="Interview" value="interview">
+          <div className="tab">
+            <h2 style={styles.headline}>Hiring Process Info</h2>
+            <p className="tab-text">
+              Get information on the hiring process.
+            </p>
+          </div>
+        </Tab>
+      </Tabs>
     </div>
-  )
+    );
+  }
 }
-
-module.exports = Footer
