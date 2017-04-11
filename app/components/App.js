@@ -2,10 +2,8 @@ import React, { Component, PropTypes as T } from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
 import '../../styles/index.scss'
-import { Button } from 'react-bootstrap'
 
 import ProfileDetails from './ProfileDetails'
-// import ResultsPage from './ResultsPage'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
 import GithubButton from './Button'
@@ -30,6 +28,7 @@ export default class App extends Component {
       availableStates: [],
       selectedState: 'CO'
     }
+
     this.handleStateChange = this.handleStateChange.bind(this)
     this.menuItems = this.menuItems.bind(this)
   }

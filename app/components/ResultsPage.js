@@ -25,9 +25,7 @@ export default class ResultsPage extends Component {
   }
 
   getData(data) {
-    // console.log('all data', data)
     this.setState({ data: data })
-    // debugger
   }
 
   render() {
