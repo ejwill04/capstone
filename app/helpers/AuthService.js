@@ -33,7 +33,7 @@ export default class AuthService {
     // this.emit('profile_updated', profile)
   }
   getProfile() {
-    const profile = localStorage.getITem('profile')
+    const profile = localStorage.getItem('profile')
     return profile ? JSON.parse(localStorage.profile) : {}
   }
 

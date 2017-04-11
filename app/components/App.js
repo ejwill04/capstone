@@ -27,7 +27,8 @@ export default class App extends Component {
     this.state = {
       availableStates: [],
       selectedState: 'CO',
-      id_token: localStorage.id_token
+      id_token: localStorage.id_token,
+      user_profile: auth.getProfile()
     }
 
     this.handleStateChange = this.handleStateChange.bind(this)
@@ -64,9 +65,18 @@ export default class App extends Component {
     ))
   }
 
+  // showUsername() {
+  //   let user = JSON.parse(localStorage.profile)
+  //   this.setState({ user_profile: user })
+  //   console.log(user.name);
+  // }
+
   logoutBtn() {
     return (
-      <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
+      <div>
+        <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
+        <p>{this.state.user_profile.name}</p>
+      </div>
     )
   }
 
@@ -80,12 +90,6 @@ export default class App extends Component {
         onClick={auth.login.bind(this)} />
       )
   }
-
-  // loginLogout() {
-  //   if (this.state.id_token) {
-  //   )} else {
-  //   }
-  // }
 
   render() {
     const { profile } = this.state
