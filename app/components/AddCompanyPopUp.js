@@ -4,6 +4,8 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
   radioButton: {
@@ -18,6 +20,8 @@ export default class AddCompanyPopUp extends Component {
       open: false,
       name: '',
       industry: '',
+      value: 1,
+      num_of_emp: 10,
       remote_ok: false,
       tech_stack: '',
       review: '',
@@ -29,12 +33,13 @@ export default class AddCompanyPopUp extends Component {
   }
 
   postACompany() {
-    let {name, industry, tech_stack, remote_ok} = this.state
+    let {name, industry, tech_stack, remote_ok, num_of_emp} = this.state
     let company = {
       name,
       industry,
       tech_stack,
-      remote_ok
+      remote_ok,
+      num_of_emp
     }
 console.log('company', company);
     fetch('http://localhost:3000/api/v1/companies',
@@ -99,6 +104,20 @@ console.log('company', company);
             <TextField floatingLabelText="Industry"
                        hintText="Roofing"
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
+            <DropDownMenu value={this.state.value}
+                          onChange={this.handleChange}>
+                       <MenuItem value={1}
+                                 primaryText="10"
+                                 onClick={(e) => this.setState({num_of_emp: 10, value: 1})}/>
+                       <MenuItem value={2}
+                                 primaryText="40"
+                                 onClick={(e) => this.setState({num_of_emp: 40, value: 2})}/>
+                       <MenuItem value={3}
+                                 primaryText="100"
+                                 onClick={(e) => this.setState({num_of_emp: 100, value: 3})}/>
+                       <MenuItem value={4}
+                                 primaryText="200"
+                                 onClick={(e) => this.setState({num_of_emp: 200, value: 4})}/></DropDownMenu>
             <Toggle    label="I work remotely"
                        labelPosition="right"
                        style={styles.toggle}
