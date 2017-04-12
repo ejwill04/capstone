@@ -91,6 +91,8 @@ console.log('company', company);
     return (
       <div>
         <RaisedButton label="Add A Company"
+                      className='add-company-btn'
+                      backgroundColor='#00C2D2'
                       onTouchTap={() => this.handleOpen()} />
         <Dialog title="Add A Company"
                 actions={actions}
