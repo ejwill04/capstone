@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { Tabs, Tab } from 'material-ui/Tabs';
 
 const styles = {
   headline: {
@@ -11,30 +11,11 @@ const styles = {
   },
 };
 
-export default class Footer extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: 'a'
-    };
-  }
-
-  handleChange(value){
-    this.setState({
-      value: value
-    });
-    console.log('Value: ',this.state.value);
-  };
-
-  render() {
+const Footer = () => {
     return (
     <div id="footer">
-      <Tabs
-        value={this.state.value}
-        onChange={() => this.handleChange()}
-      >
-        <Tab label="Search" value="search">
+      <Tabs>
+        <Tab label="Search">
           <div className="tab">
             <h2 style={styles.headline}>Search for Companies</h2>
             <p className="tab-text">
@@ -42,7 +23,7 @@ export default class Footer extends Component {
             </p>
           </div>
         </Tab>
-        <Tab label="Review" value="review">
+        <Tab label="Review">
           <div className="tab">
             <h2 style={styles.headline}>Company Reviews</h2>
             <p className="tab-text">
@@ -50,7 +31,7 @@ export default class Footer extends Component {
             </p>
           </div>
         </Tab>
-        <Tab label="Interview" value="interview">
+        <Tab label="Interview" >
           <div className="tab">
             <h2 style={styles.headline}>Hiring Process Info</h2>
             <p className="tab-text">
@@ -62,4 +43,5 @@ export default class Footer extends Component {
     </div>
     );
   }
-}
+
+  export default Footer
