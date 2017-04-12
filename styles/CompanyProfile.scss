@@ -1,14 +1,33 @@
 .companyprofile-container {
+  margin-left: 100px;
   width: 66%;
-  background-color: aliceblue;
-  // padding: 20px;
+  height: 70%;
+}
+
+.profile-techstack {
+  margin-bottom: 20px;
+}
+
+.profile-alumni {
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
 .information-container {
+  height: 30vh;
   margin: 20px;
-
 }
 
 .profile-name {
+  margin-top: 50px;
+  margin-bottom: 20px;
   font-size: 48px;
+}
+
+.alumni-name {
+  margin-bottom: 20px;
+}
+
+.company-list-style {
+  text-decoration: none;
 }

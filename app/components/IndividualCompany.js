@@ -13,12 +13,13 @@ export default class IndividualCompany extends Component {
     let { name, industry, size, users, state, company_id } = this.props
     return (
       <div>
-        <Link to={`/${state}/${company_id}`} >
+        <Link className='company-list-style' to={`/${state}/${company_id}`} >
           <div className='individualcompany-container'>
-              <h2 className='company-name'>{name}</h2><p className='company-alums'>{users.length}</p>
+              <h2 className='company-name'>{name}</h2>
+              <p className='company-alums'>Alumni: {users.length}</p>
               <div>
-                <p className='company-size'>{size}</p>
-                <p className='company-industry'>{industry}</p>
+                <p className='company-size'>Number of Employees: {size}</p>
+                <p className='company-industry'>Industry: {industry}</p>
               </div>
           </div>
         </Link>

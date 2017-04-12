@@ -30,10 +30,3 @@ export default class ResultsList extends Component {
     )
   }
 }
-
-
-// companyData={this.props.data.companies.filter((obj) => {
-//  return this.props.data.locations.filter((obj) => {
-//   if(obj.id === cityName) {
-//     return obj.company_id
-//   }}).includes(obj.id)
