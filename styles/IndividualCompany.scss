@@ -1,7 +1,5 @@
 .individualcompany-container {
   width: 90%;
-  background-color: white;
-  border-bottom: 1px solid #d8d8d8;
   padding: 10px;
   margin: 0 auto;
 }
@@ -17,12 +15,12 @@
   float: right;
 }
 
-.company-size {
-  float: right;
-}
-
 .company-size, .company-industry {
-  display: inline;
+  margin: 10px;
   font-size: 14px;
   color: #7E8787;
+}
+
+.left-company {
+  border-right: 1px solid black;
 }

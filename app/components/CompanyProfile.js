@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import GithubButton from './Button'
+import CompanyFooter from './CompanyFooter'
 
 export default class CompanyProfile extends Component {
   constructor() {
@@ -51,7 +54,7 @@ export default class CompanyProfile extends Component {
         alumArray.push(this.state.alums[i].name)
       }
       return alumArray.map((alum)=> {
-        return <p key={alum}>{alum}</p>
+        return <p key={alum} className='alumni-name'>{alum}</p>
       })
     } else {
       return <p>No alumni here</p>
@@ -61,17 +64,18 @@ export default class CompanyProfile extends Component {
   render() {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
     return (
-      <div className="companyprofile-container">
-        <div className="information-container">
-          <h1 className="profile-name">{company.name}</h1>
-          <h2 className="profile-industry">{company.industry}</h2>
-          <h2 className="profile-num_of_emp">{company.num_of_emp}</h2>
-          <h2 className="profile-techstack">{company.tech_stack}</h2>
-          <h2 className="profile-alumni">Alumni</h2>
-          <div>{this.showUsers()}</div>
+        <MuiThemeProvider>
+        <div className="companyprofile-container">
+          <CompanyFooter />
+          <div className="information-container">
+            <h1 className="profile-name">{company.name}</h1>
+            <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
+            <h2 className="profile-alumni">Alumni</h2>
+            <div>{this.showUsers()}</div>
+          </div>
+          <GithubButton title='Add Yourself' />
         </div>
-        <button>Add Yourself</button>
-      </div>
+      </MuiThemeProvider>
     )
   }
 }
