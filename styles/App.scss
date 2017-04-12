@@ -3,6 +3,17 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.user-login-container {
+  float: right;
+}
+
+.user-name {
+  margin-top: 8px;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .dropdown-menu-container {
   display: flex;
   justify-content: center;

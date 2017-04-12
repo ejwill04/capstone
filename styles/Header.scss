@@ -1,7 +1,12 @@
 .header-container {
-  height: 100px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.header-input {
-  margin: 30px;
+.log-out-btn {
+  width: 125px;
+}
+
+.add-company-btn {
+  margin: 20px;
 }

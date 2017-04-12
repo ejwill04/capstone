@@ -68,7 +68,7 @@ let responseObj = { locations: '', companies: '', users: '' }
     database('companies').whereIn('id', company_ids).select().orderBy('name', 'asc')
     .then(companies => {
       responseObj.companies = companies
-      database('users').whereIn('company_id', company_ids).select().orderBy('name', 'asc')
+      database('users').whereIn('company_id', company_ids).select()
       .then(users => {
         responseObj.users = users
         response.status(200).json(responseObj)

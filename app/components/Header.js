@@ -5,13 +5,17 @@ import GithubButton from './Button'
 import AuthService from '../helpers/AuthService'
 const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
 
+let userName = auth.getProfile()
+
 const Header = () => {
   return (
     <MuiThemeProvider>
       <div className='header-container'>
-        <GithubButton className="go-btn" title="Add a Company" />
-        <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
         <AddCompanyPopUp />
+        <aside>
+          <p className='user-name'>{userName.name}</p>
+          <GithubButton className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
+        </aside>
        </div>
     </MuiThemeProvider>
   )
