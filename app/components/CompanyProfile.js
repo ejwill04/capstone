@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import GithubButton from './Button'
 import CompanyFooter from './CompanyFooter'
+import AddEmployeePopup from './AddEmployeePopup'
 
 export default class CompanyProfile extends Component {
   constructor() {
@@ -22,7 +23,7 @@ export default class CompanyProfile extends Component {
   getCompany(newProps) {
     let company_id = newProps.company_id
     if (Number(company_id)) {
-      fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
+      fetch(`/api/v1/companies/${company_id}`, {
         method: 'GET',
       })
       .then(response => response.json())
@@ -61,10 +62,6 @@ export default class CompanyProfile extends Component {
     }
   }
 
-  clickEvent(e) {
-    console.log(e)
-  }
-
   render() {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
     return (
@@ -75,7 +72,7 @@ export default class CompanyProfile extends Component {
             <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
             <h2 className="profile-alumni">Alumni</h2>
             <div>{this.showUsers()}</div>
-            <GithubButton title='Add Yourself' />
+            <AddEmployeePopup />
           </div>
           <CompanyFooter data={company} />
         </div>
