@@ -42,7 +42,7 @@ export default class AddCompanyPopUp extends Component {
       num_of_emp
     }
 console.log('company', company);
-    fetch('http://localhost:3000/api/v1/companies',
+    fetch('/api/v1/companies',
     {
       headers: {
         'Accept': 'application/json',

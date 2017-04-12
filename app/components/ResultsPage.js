@@ -15,7 +15,7 @@ export default class ResultsPage extends Component {
 
   componentDidMount() {
     let state = this.props.params.state
-    fetch(`http://localhost:3000/api/v1/locations/${state}`, {
+    fetch(`/api/v1/locations/${state}`, {
       method: 'GET',
     })
     .then(response => response.json())
