@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import GithubButton from './Button'
 
 export default class CompanyFooter extends Component {
   constructor(props) {
@@ -37,9 +38,11 @@ export default class CompanyFooter extends Component {
       <div id="company-footer">
         <Tabs>
           <Tab id='reviews-tab' label="Reviews" value="Reviews" onClick={()=> this.getReviews(this.props)}>
+            <GithubButton title='Add Review' />
             <div>{this.state.companyReviews}</div>
           </Tab>
           <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> this.getHiring(this.props)}>
+            <GithubButton title='Add Interview Question' />
             <div>{this.state.companyInterviews}</div>
           </Tab>
         </Tabs>
