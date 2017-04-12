@@ -61,19 +61,23 @@ export default class CompanyProfile extends Component {
     }
   }
 
+  clickEvent(e) {
+    console.log(e)
+  }
+
   render() {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
     return (
         <MuiThemeProvider>
         <div className="companyprofile-container">
-          <CompanyFooter />
           <div className="information-container">
             <h1 className="profile-name">{company.name}</h1>
             <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
             <h2 className="profile-alumni">Alumni</h2>
             <div>{this.showUsers()}</div>
+            <GithubButton title='Add Yourself' />
           </div>
-          <GithubButton title='Add Yourself' />
+          <CompanyFooter data={company} />
         </div>
       </MuiThemeProvider>
     )
