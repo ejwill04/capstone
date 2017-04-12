@@ -104,7 +104,8 @@ console.log('company', company);
             <TextField floatingLabelText="Industry"
                        hintText="Roofing"
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
-            <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+            <DropDownMenu value={this.state.value}
+                          onChange={this.handleChange}>
                        <MenuItem value={1}
                                  primaryText="10"
                                  onClick={(e) => this.setState({num_of_emp: 10, value: 1})}/>
@@ -116,8 +117,7 @@ console.log('company', company);
                                  onClick={(e) => this.setState({num_of_emp: 100, value: 3})}/>
                        <MenuItem value={4}
                                  primaryText="200"
-                                 onClick={(e) => this.setState({num_of_emp: 200, value: 4})}/>
-            </DropDownMenu>
+                                 onClick={(e) => this.setState({num_of_emp: 200, value: 4})}/></DropDownMenu>
             <Toggle    label="I work remotely"
                        labelPosition="right"
                        style={styles.toggle}
