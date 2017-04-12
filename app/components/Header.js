@@ -12,7 +12,7 @@ const Header = () => {
     <MuiThemeProvider>
       <div className='header-container'>
         <AddCompanyPopUp />
-        <aside>
+        <aside className='company-user-login'>
           <p className='user-name'>{userName.name}</p>
           <GithubButton className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
         </aside>

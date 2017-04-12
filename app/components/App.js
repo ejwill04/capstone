@@ -68,7 +68,7 @@ export default class App extends Component {
     return (
       <div className='user-login-container'>
         <p className='user-name'>{this.state.user_profile.name}</p>
-        <GithubButton className="go-btn" title="Logout" handleClick={() => auth.logout()}/>
+        <GithubButton className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
       </div>
     )
   }

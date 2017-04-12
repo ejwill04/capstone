@@ -1,9 +1,16 @@
 .header-container {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
 }
 
+.company-user-login {
+  margin-right: 20px;
+}
+
 .log-out-btn {
+  margin: 20px;
+
   width: 125px;
 }
 
