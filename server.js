@@ -31,10 +31,6 @@ app.get('/', (request, response) => {
   })
 })
 
-app.get('*', (request, response) => {
-    response.sendFile(path.resolve(__dirname, 'index.html'))
-})
-
 // get all users
 app.get('/api/v1/users', (request, response) => {
   database('users').select()
