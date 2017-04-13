@@ -2,19 +2,26 @@ import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import GithubButton from './Button'
 import AddCompanyInfoPopUp from './AddCompanyInfoPopUp'
+import RenderCompanyComment from './RenderCompanyComment'
 
 export default class CompanyFooter extends Component {
   constructor(props) {
     super(props)
     this.state  = {
-      companyReviews: [],
-      companyInterviews: []
+      companyReviews: '',
+      companyInterviews: ''
     }
+    this.getReviews = this.getReviews.bind(this)
+    this.getHiring = this.getHiring.bind(this)
   }
 
-  // componentWillReceiveProps(newProps) {
-  //   return this.props === newProps
-  // }
+  componentWillReceiveProps(newProps) {
+    if (this.props !== newProps) {
+      this.setState({ companyReviews: '', companyInterviews: '' })
+      this.getHiring(newProps)
+      this.getReviews(newProps)
+    }
+  }
 
   getReviews(company) {
     this.state.companyReviews = []
@@ -23,10 +30,7 @@ export default class CompanyFooter extends Component {
     })
     .then(response => response.json())
     .then(response => {
-      response.map((review)=> {
-        this.state.companyReviews.push(review.message)
-        console.log('review.....', this.state.companyReviews)
-      })
+      this.setState({ companyReviews: response })
     })
     .catch(err => err)
   }
@@ -38,10 +42,7 @@ export default class CompanyFooter extends Component {
     })
     .then(response => response.json())
     .then(response => {
-      response.map((interview)=> {
-        this.state.companyInterviews.push(interview.message)
-        console.log('interview.....', this.state.companyInterviews)
-      })
+      this.setState({ companyInterviews: response })
     })
     .catch(err => err)
   }
@@ -54,11 +55,13 @@ export default class CompanyFooter extends Component {
             <AddCompanyInfoPopUp company_id={this.props.data.id}
                                  text='a Review'
                                  param_name='reviews' />
+            <RenderCompanyComment data={this.state.companyReviews} company_id={this.props.data.id} />
           </Tab>
           <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> this.getHiring(this.props)}>
             <AddCompanyInfoPopUp company_id={this.props.data.id}
                                  text='an Interview Question'
                                  param_name='interview_questions' />
+            <RenderCompanyComment data={this.state.companyInterviews} company_id={this.props.data.id} />
           </Tab>
         </Tabs>
       </div>

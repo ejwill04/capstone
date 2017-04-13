@@ -11,6 +11,8 @@ export default class CompanyProfile extends Component {
       companyData: {},
       alums: {}
     }
+    this.getCompany = this.getCompany.bind(this)
+    this.getUsers = this.getUsers.bind(this)
   }
 
   // componentWillMount() {
