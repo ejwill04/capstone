@@ -14,6 +14,7 @@ module.exports = {
       { test: /\.css$/, loader: 'style!css' },
       { test: /\.scss$/, loader: 'style!css!sass' },
       { test: /\.mp4$/, loader: 'url' },
+      { test: /\.svg$/, loader: 'url' },
     ]
   },
   devServer: {
