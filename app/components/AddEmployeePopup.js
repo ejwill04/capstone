@@ -27,6 +27,7 @@ export default class AddEmployeePopup extends Component {
       cohort: '',
       github_url: '',
       github_avatar: '',
+      company_id: ''
     }
   }
 
@@ -40,7 +41,8 @@ export default class AddEmployeePopup extends Component {
       company_id,
       cohort,
       github_url,
-      github_avatar
+      github_avatar,
+      company_id
     }
 console.log('user', user);
     fetch('http://localhost:3000/api/v1/users',
@@ -66,7 +68,7 @@ console.log('user', user);
   getLocalStorageData() {
     let userProfile = auth.getProfile()
     let { email, name, picture, url } = userProfile
-    this.setState({ email, name, github_url: url, github_avatar: picture })
+    this.setState({ email, name, github_url: url, github_avatar: picture, company_id: this.props.companyId })
   }
 
   handleClose() {

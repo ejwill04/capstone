@@ -72,7 +72,6 @@ export default class CompanyProfile extends Component {
 
   render() {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
-    console.log(this.state.company_id);
     return (
         <MuiThemeProvider>
         <div className="companyprofile-container">
