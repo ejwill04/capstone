@@ -52,7 +52,6 @@ export default class CompanyFooter extends Component {
             <GithubButton title='Add Interview Question' />
           </Tab>
         </Tabs>
-        {this.showReviews()}
       </div>
     )
   }
