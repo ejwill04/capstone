@@ -86,7 +86,6 @@ export default class AddCompanyPopUp extends Component {
   }
 
   handleOpen() {
-    console.log('open')
     this.setState({ open: true });
   };
 
@@ -94,8 +93,7 @@ export default class AddCompanyPopUp extends Component {
     this.setState({ open: false });
   };
 
-  handleSubmit() {
-    console.log('form submit')
+  handleSubmit()
     this.postACompany()
   }
 

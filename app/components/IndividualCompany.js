@@ -5,7 +5,6 @@ export default class IndividualCompany extends Component {
   constructor() {
     super()
     this.state = {
-
     }
   }
 

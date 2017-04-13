@@ -6,13 +6,10 @@ export default class ResultsList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // stateAdded: ''
     }
   }
 
   componentWillReceiveProps(newProps) {
-    console.log('new props', newProps)
-    console.log('this.props', this.props)
     return newProps === this.props
   }
 
