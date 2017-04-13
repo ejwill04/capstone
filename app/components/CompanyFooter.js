@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import GithubButton from './Button'
+import AddCompanyInfoPopUp from './AddCompanyInfoPopUp'
 
 export default class CompanyFooter extends Component {
   constructor(props) {
@@ -10,6 +11,10 @@ export default class CompanyFooter extends Component {
       companyInterviews: []
     }
   }
+
+  // componentWillReceiveProps(newProps) {
+  //   return this.props === newProps
+  // }
 
   getReviews(company) {
     this.state.companyReviews = []
@@ -46,10 +51,14 @@ export default class CompanyFooter extends Component {
       <div id="company-footer">
         <Tabs>
           <Tab id='reviews-tab' label="Reviews" value="Reviews" onClick={()=> this.getReviews(this.props)}>
-            <GithubButton title='Add Review' />
+            <AddCompanyInfoPopUp company_id={this.props.data.id}
+                                 text='a Review'
+                                 param_name='reviews' />
           </Tab>
           <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> this.getHiring(this.props)}>
-            <GithubButton title='Add Interview Question' />
+            <AddCompanyInfoPopUp company_id={this.props.data.id}
+                                 text='an Interview Question'
+                                 param_name='interview_questions' />
           </Tab>
         </Tabs>
       </div>
