@@ -8,11 +8,12 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?/,
-        loader: 'babel-loader',
+        loader: 'babel',
         exclude: /node_modules/,
       },
       { test: /\.css$/, loader: 'style!css' },
       { test: /\.scss$/, loader: 'style!css!sass' },
+      { test: /\.mp4$/, loader: 'url' },
     ]
   },
   devServer: {
