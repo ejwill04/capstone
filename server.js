@@ -290,7 +290,8 @@ app.post('/api/v1/users', (request, response) => {
       })
     })
     .catch(error => {
-      console.log('Could not add user', error);
+      console.log('Could not add user', error)
+      response.status(422).send('Could not add user')
     })
   }
 })
