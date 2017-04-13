@@ -11,10 +11,11 @@ export default class ResultsPage extends Component {
       data: {},
       selectedCompany: ''
     }
+    this.newCompanyAdded = this.newCompanyAdded.bind(this)
+    this.fetchRequest = this.fetchRequest.bind(this)
   }
 
-  componentDidMount() {
-    let state = this.props.params.state
+  fetchRequest(state) {
     fetch(`http://localhost:3000/api/v1/locations/${state}`, {
       method: 'GET',
     })
@@ -25,6 +26,15 @@ export default class ResultsPage extends Component {
     .catch(err => err)
   }
 
+  componentDidMount() {
+    let state = this.props.params.state
+    this.fetchRequest(state)
+  }
+
+  newCompanyAdded(state) {
+    this.fetchRequest(state)
+  }
+
   getData(data) {
     this.setState({ data: data })
   }
@@ -32,7 +42,7 @@ export default class ResultsPage extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header newCompanyAdded={this.newCompanyAdded}/>
         <div className='resultspage-container'>
           <ResultsList data={this.state.data} />
           <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} />

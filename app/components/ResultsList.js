@@ -8,6 +8,11 @@ export default class ResultsList extends Component {
     this.state = {
     }
   }
+
+  componentWillReceiveProps(newProps) {
+    return newProps === this.props
+  }
+
   render() {
     let citiesArray = this.props.data.locations ? this.props.data.locations.map(el => {return el.city}) : null
 

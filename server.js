@@ -303,11 +303,31 @@ app.post('/api/v1/companies', (request, response) => {
     response.status(422).send('Did not receive correct body params')
   } else {
     database('companies').insert(company)
-    .then(() => {
-      response.status(200).json('company received')
+    .then((company) => {
+      database('companies').where('name', name).select()
+      .then(company => {
+        response.status(200).json(company[0].id)
+      })
     })
     .catch(error => {
       response.status(422).send('Could not add company')
+    })
+  }
+})
+// add a location
+app.post('/api/v1/locations', (request, response) => {
+  const { city, state, country, company_id } = request.body
+  const location = { city, state, country, company_id }
+
+  if (!city ) {
+    response.status(422).send('Did not receive correct body params')
+  } else {
+    database('locations').insert(location)
+    .then(() => {
+      response.status(200).json('location received')
+    })
+    .catch(error => {
+      response.status(422).send('Could not add location')
     })
   }
 })
