@@ -93,7 +93,7 @@ export default class AddCompanyPopUp extends Component {
     this.setState({ open: false });
   };
 
-  handleSubmit()
+  handleSubmit() {
     this.postACompany()
   }
 
