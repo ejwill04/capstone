@@ -31,6 +31,12 @@ export default class AddEmployeePopup extends Component {
     }
   }
 
+  componentWillReceiveProps(newProps){
+    if(this.state.company_id !== newProps) {
+      this.setState({ company_id: newProps.companyId })
+    }
+  }
+
   postAUser() {
     let {name, slack, email, company_id, remote, cohort, github_url, github_avatar} = this.state
     let user = {
@@ -42,7 +48,6 @@ export default class AddEmployeePopup extends Component {
       cohort,
       github_url,
       github_avatar,
-      company_id
     }
 console.log('user', user);
     fetch('http://localhost:3000/api/v1/users',
@@ -61,14 +66,13 @@ console.log('user', user);
   }
 
   handleOpen() {
-    this.getLocalStorageData()
     this.setState({ open: true })
   }
 
   getLocalStorageData() {
     let userProfile = auth.getProfile()
     let { email, name, picture, url } = userProfile
-    this.setState({ email, name, github_url: url, github_avatar: picture, company_id: this.props.companyId })
+    this.setState({ email, name, github_url: url, github_avatar: picture })
   }
 
   handleClose() {
@@ -76,7 +80,7 @@ console.log('user', user);
   }
 
   handleSubmit() {
-    console.log('form submit')
+    this.getLocalStorageData()
     this.postAUser()
   }
 
