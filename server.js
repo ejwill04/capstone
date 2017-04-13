@@ -124,7 +124,7 @@ app.get('/api/v1/companies', (request, response) => {
   })
 })
 
-// get a user
+// get a single user
 app.get('/api/v1/users/:id', (request, response) => {
   const { id } = request.params
 
@@ -141,7 +141,7 @@ app.get('/api/v1/users/:id', (request, response) => {
   })
 })
 
-// get a company
+// get a single company
 app.get('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
 
@@ -158,7 +158,7 @@ app.get('/api/v1/companies/:id', (request, response) => {
   })
 })
 
-// get an interview_questions
+// get a single interview_questions
 app.get('/api/v1/interview_questions/:id', (request, response) => {
   const { id } = request.params
 
@@ -175,7 +175,7 @@ app.get('/api/v1/interview_questions/:id', (request, response) => {
   })
 })
 
-// get a salary
+// get a single salary
 app.get('/api/v1/salaries/:id', (request, response) => {
   const { id } = request.params
 
@@ -192,7 +192,7 @@ app.get('/api/v1/salaries/:id', (request, response) => {
   })
 })
 
-// get a review
+// get a single review
 app.get('/api/v1/reviews/:id', (request, response) => {
   const { id } = request.params
 
@@ -276,7 +276,7 @@ app.get('/api/v1/salaries/company/:company_id', (request, response) => {
 // add a user
 // what information do we need to know about a user if any?
 app.post('/api/v1/users', (request, response) => {
-  const { name, github, cohort, slack, companies, remote } = request.body;
+  const { name, github_url, github_avatar, email, cohort, slack, company_id, remote } = request.body;
 
   if (!name) {
     response.status(422).send('Did not receive correct body params')

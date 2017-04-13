@@ -21,21 +21,24 @@ export default class AddEmployeePopup extends Component {
     this.state = {
       open: false,
       name: '',
-      remote_ok: false,
+      remote: false,
       slack: '',
       email: '',
+      cohort: '',
       github_url: '',
       github_avatar: '',
     }
   }
 
   postAUser() {
-    let {name, slack, email, remote_ok, github_url, github_avatar} = this.state
+    let {name, slack, email, company_id, remote, cohort, github_url, github_avatar} = this.state
     let user = {
       name,
-      remote_ok,
+      remote,
       slack,
       email,
+      company_id,
+      cohort,
       github_url,
       github_avatar
     }
@@ -116,10 +119,14 @@ console.log('user', user);
                        hintText="quacking@gquack.com"
                        defaultValue={this.state.email}
                        onChange={(e) => this.setState({email: e.target.value})}></TextField>
+            <TextField floatingLabelText="Cohort Number"
+                       hintText="1610"
+                       defaultValue={this.state.cohort}
+                       onChange={(e) => this.setState({email: e.target.value})}></TextField>
             <Toggle    label="I work remotely"
                        labelPosition="right"
                        style={styles.toggle}
-                       onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok})}/>
+                       onToggle={(e) => this.setState({ remote: !this.state.remote})}/>
         </Dialog>
       </div>
     );
