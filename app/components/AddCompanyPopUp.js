@@ -14,8 +14,8 @@ const styles = {
 };
 
 export default class AddCompanyPopUp extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       open: false,
       name: '',
@@ -43,7 +43,7 @@ export default class AddCompanyPopUp extends Component {
       remote_ok,
       num_of_emp
     }
-    console.log('company', company);
+    // console.log('company', company);
     fetch('http://localhost:3000/api/v1/companies',
     {
       headers: {
@@ -56,15 +56,17 @@ export default class AddCompanyPopUp extends Component {
       ),
     })
       .then((response) => response.json())
-      .then((payload) => console.log(payload))
+      .then((payload) => this.postALocation(payload))
   }
-  postALocation() {
+
+  postALocation(company_id) {
     let { city, state } = this.state
     let location = {
       city,
-      state
+      state,
+      company_id
     }
-    console.log('location', location);
+    // console.log('location', location);
     fetch('http://localhost:3000/api/v1/locations',
     {
       headers: {
@@ -77,7 +79,10 @@ export default class AddCompanyPopUp extends Component {
       ),
     })
       .then((response) => response.json())
-      .then((payload) => console.log(payload))
+      .then((payload) => {
+        this.props.newCompanyAdded(this.state.state)
+        console.log(payload)
+      })
   }
 
   handleOpen() {
@@ -92,7 +97,6 @@ export default class AddCompanyPopUp extends Component {
   handleSubmit() {
     console.log('form submit')
     this.postACompany()
-    this.postALocation()
   }
 
   render() {

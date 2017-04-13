@@ -303,8 +303,11 @@ app.post('/api/v1/companies', (request, response) => {
     response.status(422).send('Did not receive correct body params')
   } else {
     database('companies').insert(company)
-    .then(() => {
-      response.status(200).json('company received')
+    .then((company) => {
+      database('companies').where('name', name).select()
+      .then(company => {
+        response.status(200).json(company[0].id)
+      })
     })
     .catch(error => {
       response.status(422).send('Could not add company')
