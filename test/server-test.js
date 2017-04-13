@@ -381,6 +381,46 @@ describe('POST /api/v1/companies', () => {
     })
   })
 })
+describe('POST /api/v1/locations', () => {
+  beforeAndAfterEach()
+
+  it('should post a new location', (done) => {
+    let location = {
+      id: 1,
+      city: "Greely",
+      state: "CO",
+      country: "US",
+      company_id: 1
+    }
+    chai.request(app)
+    .post('/api/v1/locations')
+    .send(location)
+    .end((err, res) => {
+      if(err) { return done(err) }
+      expect(res).to.have.status(200);
+      expect(res).to.be.json;
+      expect(res.body).to.be.a('string');
+      expect(res.body).to.equal('location received');
+      done();
+    })
+  })
+
+  beforeAndAfterEach()
+
+  it('should return an error if missing body param', (done) => {
+    let location = {
+      user_id: 1,
+    }
+    chai.request(app)
+    .post('/api/v1/locations')
+    .send(location)
+    .end((err, res) => {
+      expect(res).to.have.status(422);
+      expect(res.text).to.equal('Did not receive correct body params');
+      done();
+    })
+  })
+})
 
 describe('POST /api/v1/interview_questions', () => {
   beforeAndAfterEach()

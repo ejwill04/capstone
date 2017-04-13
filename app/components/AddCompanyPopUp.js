@@ -20,6 +20,8 @@ export default class AddCompanyPopUp extends Component {
       open: false,
       name: '',
       industry: '',
+      city: '',
+      state: '',
       value: 1,
       num_of_emp: 10,
       remote_ok: false,
@@ -41,7 +43,7 @@ export default class AddCompanyPopUp extends Component {
       remote_ok,
       num_of_emp
     }
-console.log('company', company);
+    console.log('company', company);
     fetch('http://localhost:3000/api/v1/companies',
     {
       headers: {
@@ -51,6 +53,27 @@ console.log('company', company);
       method: 'POST',
       body: JSON.stringify(
         company
+      ),
+    })
+      .then((response) => response.json())
+      .then((payload) => console.log(payload))
+  }
+  postALocation() {
+    let { city, state } = this.state
+    let location = {
+      city,
+      state
+    }
+    console.log('location', location);
+    fetch('http://localhost:3000/api/v1/locations',
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(
+        location
       ),
     })
       .then((response) => response.json())
@@ -69,6 +92,7 @@ console.log('company', company);
   handleSubmit() {
     console.log('form submit')
     this.postACompany()
+    this.postALocation()
   }
 
   render() {
@@ -103,6 +127,12 @@ console.log('company', company);
             <TextField floatingLabelText="Company Name"
                        hintText="Ex:ABC Co."
                        onChange={(e) => this.setState({name: e.target.value})}></TextField>
+            <TextField floatingLabelText="City"
+                       hintText="Denver"
+                       onChange={(e) => this.setState({city: e.target.value})}></TextField>
+            <TextField floatingLabelText="State"
+                       hintText="Colorado"
+                       onChange={(e) => this.setState({state: e.target.value})}></TextField>
             <TextField floatingLabelText="Industry"
                        hintText="Roofing"
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
