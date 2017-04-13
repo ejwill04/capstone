@@ -13,6 +13,12 @@ export default class CompanyProfile extends Component {
     }
   }
 
+  componentWillMount() {
+    if(!localStorage.profile) {
+      console.log('no');
+    }
+  }
+
   componentWillReceiveProps(newProps) {
     if (this.state.company_id !== newProps) {
       this.getCompany(newProps)
