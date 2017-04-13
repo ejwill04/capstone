@@ -6,29 +6,37 @@ export default class CompanyFooter extends Component {
   constructor(props) {
     super(props)
     this.state  = {
-      companyReviews: '',
-      companyInterviews: ''
+      companyReviews: [],
+      companyInterviews: []
     }
   }
 
   getReviews(company) {
+    this.state.companyReviews = []
     fetch(`http://localhost:3000/api/v1/reviews/company/${company.data.id}`, {
       method: 'GET',
     })
     .then(response => response.json())
     .then(response => {
-      this.setState({ companyReviews: response[0].message })
+      response.map((review)=> {
+        this.state.companyReviews.push(review.message)
+        console.log('review.....', this.state.companyReviews)
+      })
     })
     .catch(err => err)
   }
 
   getHiring(company) {
+    this.state.companyInterviews = []
     fetch(`http://localhost:3000/api/v1/interview_questions/company/${company.data.id}`, {
       method: 'GET',
     })
     .then(response => response.json())
     .then(response => {
-      this.setState({ companyInterviews: response[0].message })
+      response.map((interview)=> {
+        this.state.companyInterviews.push(interview.message)
+        console.log('interview.....', this.state.companyInterviews)
+      })
     })
     .catch(err => err)
   }
@@ -39,13 +47,12 @@ export default class CompanyFooter extends Component {
         <Tabs>
           <Tab id='reviews-tab' label="Reviews" value="Reviews" onClick={()=> this.getReviews(this.props)}>
             <GithubButton title='Add Review' />
-            <div>{this.state.companyReviews}</div>
           </Tab>
           <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> this.getHiring(this.props)}>
             <GithubButton title='Add Interview Question' />
-            <div>{this.state.companyInterviews}</div>
           </Tab>
         </Tabs>
+        {this.showReviews()}
       </div>
     )
   }
