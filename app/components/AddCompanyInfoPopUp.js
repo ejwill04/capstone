@@ -33,7 +33,6 @@ export default class AddCompanyInfoPopUp extends Component {
       user_id,
       company_id
     }
-    console.log(comment, param_name)
 
     fetch(`http://localhost:3000/api/v1/${param_name}`,
     {
