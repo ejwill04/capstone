@@ -16,47 +16,40 @@ export default class CompanyProfile extends Component {
     this.getUsers = this.getUsers.bind(this)
   }
 
-  // componentWillMount() {
-  //   if(!localStorage.profile) {
-  //     console.log('no');
-  //   }
-  // }
-
   componentWillReceiveProps(newProps) {
     if (this.state.company_id !== newProps) {
       this.setState({ company_id: newProps.company_id })
-      this.getCompany()
-      this.getUsers()
+      this.getCompany(newProps)
+      this.getUsers(newProps)
     }
   }
 
-  getCompany() {
-    let company_id = this.state.company_id
-    if (Number(company_id)) {
-      fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
-        method: 'GET',
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ companyData: data })
-      })
-      .catch(err => err)
+  getCompany(newProps) {
+      let company_id = newProps.company_id
+      if (Number(company_id)) {
+        fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.setState({ companyData: data })
+        })
+        .catch(err => err)
+      }
     }
-  }
-
-  getUsers() {
-    let company_id = this.state.company_id
-    if (Number(company_id)) {
-      fetch(`http://localhost:3000/api/v1/users/company/${company_id}`, {
-        method: 'GET',
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ alums: data })
-      })
-      .catch(()=> this.setState({ alums: {} }))
+    getUsers(newProps) {
+      let company_id = newProps.company_id
+      if (Number(company_id)) {
+        fetch(`http://localhost:3000/api/v1/users/company/${company_id}`, {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.setState({ alums: data })
+        })
+        .catch(()=> this.setState({ alums: {} }))
+      }
     }
-  }
 
   showUsers() {
     let alumArray = []
