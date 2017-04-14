@@ -66,6 +66,7 @@ console.log('user', user);
   }
 
   handleOpen() {
+    this.getLocalStorageData()
     this.setState({ open: true })
   }
 
@@ -80,7 +81,6 @@ console.log('user', user);
   }
 
   handleSubmit() {
-    this.getLocalStorageData()
     this.postAUser()
   }
 
