@@ -356,11 +356,11 @@ app.post('/api/v1/reviews', (request, response) => {
   const { message, user_id, company_id } = request.body
   const review = { message, user_id, company_id, created_at: new Date }
 
-  database('review').insert(review)
+  database('reviews').insert(review)
   .then(() => {
-    database('review').select()
+    database('reviews').select()
     .then(review => {
-      response.status(200).json(reviews)
+      response.status(200).json(review)
     })
   })
   .catch(error => {
