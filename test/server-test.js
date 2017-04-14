@@ -312,7 +312,13 @@ describe('POST /api/v1/users', () => {
   beforeAndAfterEach()
 
   it('should post a new user', (done) => {
-    let user = { name: 'Testing Name' }
+    let user = {
+      name: 'Testing Name',
+      cohort: '1610',
+      slack: '@bugs',
+      company_id: 1,
+      email: 'bugs@gmail.com'
+    }
     chai.request(app)
     .post('/api/v1/users')
     .send(user)

@@ -276,7 +276,7 @@ app.get('/api/v1/salaries/company/:company_id', (request, response) => {
 // add a user
 // what information do we need to know about a user if any?
 app.post('/api/v1/users', (request, response) => {
-  const { name, github, cohort, slack, companies, remote } = request.body;
+  const { name, github, cohort, slack, companies, remote, company_id, email } = request.body;
 
   if (!name) {
     response.status(422).send('Did not receive correct body params')
