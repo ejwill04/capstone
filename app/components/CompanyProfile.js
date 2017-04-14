@@ -9,7 +9,8 @@ export default class CompanyProfile extends Component {
     super()
     this.state = {
       companyData: {},
-      alums: {}
+      alums: {},
+      company_id: ''
     }
   }
 
@@ -21,13 +22,14 @@ export default class CompanyProfile extends Component {
 
   componentWillReceiveProps(newProps) {
     if (this.state.company_id !== newProps) {
-      this.getCompany(newProps)
-      this.getUsers(newProps)
+      this.setState({ company_id: newProps.company_id })
+      this.getCompany()
+      this.getUsers()
     }
   }
 
-  getCompany(newProps) {
-    let company_id = newProps.company_id
+  getCompany() {
+    let company_id = this.state.company_id
     if (Number(company_id)) {
       fetch(`/api/v1/companies/${company_id}`, {
         method: 'GET',
@@ -40,8 +42,8 @@ export default class CompanyProfile extends Component {
     }
   }
 
-  getUsers(newProps) {
-    let company_id = newProps.company_id
+  getUsers() {
+    let company_id = this.state.company_id
     if (Number(company_id)) {
       fetch(`http://localhost:3000/api/v1/users/company/${company_id}`, {
         method: 'GET',
@@ -78,7 +80,7 @@ export default class CompanyProfile extends Component {
             <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
             <h2 className="profile-alumni">Alumni</h2>
             <div>{this.showUsers()}</div>
-            <AddEmployeePopup />
+            <AddEmployeePopup companyId={this.state.company_id}/>
           </div>
           <CompanyFooter data={company} />
         </div>
