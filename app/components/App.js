@@ -2,6 +2,7 @@ import React, { Component, PropTypes as T } from 'react'
 import { render } from 'react-dom'
 import { Link } from 'react-router'
 import '../../styles/index.scss'
+const githubIcon = require('../photos/github.svg')
 
 import ProfileDetails from './ProfileDetails'
 import HeroVideo from './HeroVideo'
@@ -72,14 +73,14 @@ export default class App extends Component {
       </div>
     )
   }
-
+  
   loginBtn() {
     return (
       <RaisedButton className='github-btn'
         backgroundColor='#00C2D2'
         label='Log in with'
         labelPosition='before'
-        icon={<img className='github-img' src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/2000px-Octicons-mark-github.svg.png'/>}
+        icon={<img className='github-img' src={ githubIcon }/>}
         onClick={auth.login.bind(this)} />
       )
   }
