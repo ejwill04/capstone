@@ -119,6 +119,7 @@ export default class AddCompanyPopUp extends Component {
 
   postAUser(company_id) {
     let {userName, github_url, github_avatar, cohort, slack, remote_ok } = this.state
+    
     let user = {
       name: userName,
       github_url,
