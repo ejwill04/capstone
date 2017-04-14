@@ -7,11 +7,11 @@ const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0
 
 let userName = auth.getProfile()
 
-const Header = () => {
+const Header = (props) => {
   return (
     <MuiThemeProvider>
       <div className='header-container'>
-        <AddCompanyPopUp />
+        <AddCompanyPopUp newCompanyAdded={props.newCompanyAdded}/>
         <aside className='company-user-login'>
           <p className='user-name'>{userName.name}</p>
           <GithubButton className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>

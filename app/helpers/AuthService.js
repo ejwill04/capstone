@@ -39,6 +39,7 @@ export default class AuthService {
   }
 
   logout() {
+    localStorage.removeItem('profile')
     localStorage.removeItem('id_token')
     document.location.href='/'
   }

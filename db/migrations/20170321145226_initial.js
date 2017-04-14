@@ -14,7 +14,9 @@ exports.up = function(knex, Promise) {
         knex.schema.createTable('users', function(table) {
             table.increments('id').primary();
             table.string('name');
-            table.string('github');
+            table.string('github_url');
+            table.string('github_avatar');
+            table.string('email')
             table.string('cohort');
             table.string('slack');
             table.integer('company_id')

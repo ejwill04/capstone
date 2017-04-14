@@ -1,45 +1,58 @@
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import GithubButton from './Button'
 
-const CompanyFooter = (props) => {
+export default class CompanyFooter extends Component {
+  constructor(props) {
+    super(props)
+    this.state  = {
+      companyReviews: [],
+      companyInterviews: []
+    }
+  }
 
-  const getReviews = ()=> {
-    fetch(`http://localhost:3000/api/v1/reviews/company/${props.data.id}`, {
+  getReviews(company) {
+    this.state.companyReviews = []
+    fetch(`http://localhost:3000/api/v1/reviews/company/${company.data.id}`, {
       method: 'GET',
     })
     .then(response => response.json())
     .then(response => {
-      console.log(response[0].message)
+      response.map((review)=> {
+        this.state.companyReviews.push(review.message)
+        console.log('review.....', this.state.companyReviews)
+      })
     })
     .catch(err => err)
   }
 
-  const getHiring = ()=> {
-    fetch(`http://localhost:3000/api/v1/interview_questions/company/${props.data.id}`, {
+  getHiring(company) {
+    this.state.companyInterviews = []
+    fetch(`http://localhost:3000/api/v1/interview_questions/company/${company.data.id}`, {
       method: 'GET',
     })
     .then(response => response.json())
     .then(response => {
-      console.log(response[0].message)
+      response.map((interview)=> {
+        this.state.companyInterviews.push(interview.message)
+        console.log('interview.....', this.state.companyInterviews)
+      })
     })
     .catch(err => err)
   }
 
-  return (
-    <div id="company-footer">
-      <Tabs>
-        <Tab id='reviews-tab' label="Reviews" value="Reviews" onClick={()=> getReviews()}>
-          {/* <div>{props.company}</div> */}
-        </Tab>
-        <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> getHiring()}>
-          {/* <div>{props.company}</div> */}
-        </Tab>
-      </Tabs>
-    </div>
-  )
+  render() {
+    return (
+      <div id="company-footer">
+        <Tabs>
+          <Tab id='reviews-tab' label="Reviews" value="Reviews" onClick={()=> this.getReviews(this.props)}>
+            <GithubButton title='Add Review' />
+          </Tab>
+          <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> this.getHiring(this.props)}>
+            <GithubButton title='Add Interview Question' />
+          </Tab>
+        </Tabs>
+      </div>
+    )
+  }
 }
-
-module.exports = CompanyFooter;
-
-
-// /api/v1/reviews/company/:company_id
