@@ -12,13 +12,15 @@ export default class CompanyProfile extends Component {
       alums: {},
       company_id: ''
     }
+    this.getCompany = this.getCompany.bind(this)
+    this.getUsers = this.getUsers.bind(this)
   }
 
-  componentWillMount() {
-    if(!localStorage.profile) {
-      console.log('no');
-    }
-  }
+  // componentWillMount() {
+  //   if(!localStorage.profile) {
+  //     console.log('no');
+  //   }
+  // }
 
   componentWillReceiveProps(newProps) {
     if (this.state.company_id !== newProps) {
@@ -31,7 +33,7 @@ export default class CompanyProfile extends Component {
   getCompany() {
     let company_id = this.state.company_id
     if (Number(company_id)) {
-      fetch(`/api/v1/companies/${company_id}`, {
+      fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
         method: 'GET',
       })
       .then(response => response.json())
