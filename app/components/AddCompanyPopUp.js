@@ -11,7 +11,7 @@ const styles = {
   radioButton: {
     marginTop: 16,
   },
-};
+}
 
 export default class AddCompanyPopUp extends Component {
   constructor(props) {
@@ -178,11 +178,11 @@ export default class AddCompanyPopUp extends Component {
 
   handleOpen() {
     this.setState({ open: true });
-  };
+  }
 
   handleClose() {
     this.setState({ open: false });
-  };
+  }
 
   handleSubmit() {
     this.postACompany()
@@ -203,7 +203,7 @@ export default class AddCompanyPopUp extends Component {
           this.handleSubmit()
           this.handleClose()}}
       />,
-    ];
+    ]
 
     return (
       <div>
@@ -271,6 +271,6 @@ export default class AddCompanyPopUp extends Component {
                        onChange={(e) => this.setState({email: e.target.value})}></TextField>
         </Dialog>
       </div>
-    );
+    )
   }
 }

@@ -21,23 +21,33 @@ export default class AddEmployeePopup extends Component {
     this.state = {
       open: false,
       name: '',
-      remote_ok: false,
+      remote: false,
       slack: '',
       email: '',
+      cohort: '',
       github_url: '',
       github_avatar: '',
+      company_id: ''
+    }
+  }
+
+  componentWillReceiveProps(newProps){
+    if(this.state.company_id !== newProps) {
+      this.setState({ company_id: newProps.companyId })
     }
   }
 
   postAUser() {
-    let {name, slack, email, remote_ok, github_url, github_avatar} = this.state
+    let {name, slack, email, company_id, remote, cohort, github_url, github_avatar} = this.state
     let user = {
       name,
-      remote_ok,
+      remote,
       slack,
       email,
+      company_id,
+      cohort,
       github_url,
-      github_avatar
+      github_avatar,
     }
 console.log('user', user);
     fetch('http://localhost:3000/api/v1/users',
@@ -71,8 +81,47 @@ console.log('user', user);
   }
 
   handleSubmit() {
-    console.log('form submit')
     this.postAUser()
+  }
+
+  checkForUser(actions) {
+    if(localStorage.id_token) {
+      return (
+        <div>
+          <RaisedButton label="Add Yourself"
+                        className='add-user-btn'
+                        backgroundColor='#00C2D2'
+                        labelColor="#FFF"
+                        onTouchTap={() => this.handleOpen()} />
+          <Dialog title="Add Yourself to this Company"
+                  actions={actions}
+                  modal={false}
+                  open={this.state.open}
+                  onRequestClose={() => this.handleClose()}
+                  autoScrollBodyContent={true}>
+              <TextField floatingLabelText="Your Name"
+                         hintText="Donald Duck"
+                         defaultValue={this.state.name}
+                         onChange={(e) => this.setState({name: e.target.value})}></TextField>
+              <TextField floatingLabelText="Slack Handle"
+                         hintText="@quackquack"
+                         onChange={(e) => this.setState({slack: e.target.value})}></TextField>
+              <TextField floatingLabelText="Email Address"
+                         hintText="quacking@gquack.com"
+                         defaultValue={this.state.email}
+                         onChange={(e) => this.setState({email: e.target.value})}></TextField>
+              <TextField floatingLabelText="Cohort Number"
+                         hintText="1610"
+                         defaultValue={this.state.cohort}
+                         onChange={(e) => this.setState({email: e.target.value})}></TextField>
+              <Toggle    label="I work remotely"
+                         labelPosition="right"
+                         style={styles.toggle}
+                         onToggle={(e) => this.setState({ remote: !this.state.remote})}/>
+          </Dialog>
+        </div>
+        )
+    }
   }
 
   render() {
@@ -94,34 +143,41 @@ console.log('user', user);
 
     return (
       <div>
-        <RaisedButton label="Add Yourself"
-                      className='add-user-btn'
-                      backgroundColor='#00C2D2'
-                      labelColor="#FFF"
-                      onTouchTap={() => this.handleOpen()} />
-        <Dialog title="Add Yourself to this Company"
-                actions={actions}
-                modal={false}
-                open={this.state.open}
-                onRequestClose={() => this.handleClose()}
-                autoScrollBodyContent={true}>
-            <TextField floatingLabelText="Your Name"
-                       hintText="Donald Duck"
-                       defaultValue={this.state.name}
-                       onChange={(e) => this.setState({name: e.target.value})}></TextField>
-            <TextField floatingLabelText="Slack Handle"
-                       hintText="@quackquack"
-                       onChange={(e) => this.setState({slack: e.target.value})}></TextField>
-            <TextField floatingLabelText="Email Address"
-                       hintText="quacking@gquack.com"
-                       defaultValue={this.state.email}
-                       onChange={(e) => this.setState({email: e.target.value})}></TextField>
-            <Toggle    label="I work remotely"
-                       labelPosition="right"
-                       style={styles.toggle}
-                       onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok})}/>
-        </Dialog>
+        {this.checkForUser(actions)}
       </div>
+      // <div>
+      //   <RaisedButton label="Add Yourself"
+      //                 className='add-user-btn'
+      //                 backgroundColor='#00C2D2'
+      //                 labelColor="#FFF"
+      //                 onTouchTap={() => this.handleOpen()} />
+      //   <Dialog title="Add Yourself to this Company"
+      //           actions={actions}
+      //           modal={false}
+      //           open={this.state.open}
+      //           onRequestClose={() => this.handleClose()}
+      //           autoScrollBodyContent={true}>
+      //       <TextField floatingLabelText="Your Name"
+      //                  hintText="Donald Duck"
+      //                  defaultValue={this.state.name}
+      //                  onChange={(e) => this.setState({name: e.target.value})}></TextField>
+      //       <TextField floatingLabelText="Slack Handle"
+      //                  hintText="@quackquack"
+      //                  onChange={(e) => this.setState({slack: e.target.value})}></TextField>
+      //       <TextField floatingLabelText="Email Address"
+      //                  hintText="quacking@gquack.com"
+      //                  defaultValue={this.state.email}
+      //                  onChange={(e) => this.setState({email: e.target.value})}></TextField>
+      //       <TextField floatingLabelText="Cohort Number"
+      //                  hintText="1610"
+      //                  defaultValue={this.state.cohort}
+      //                  onChange={(e) => this.setState({email: e.target.value})}></TextField>
+      //       <Toggle    label="I work remotely"
+      //                  labelPosition="right"
+      //                  style={styles.toggle}
+      //                  onToggle={(e) => this.setState({ remote: !this.state.remote})}/>
+      //   </Dialog>
+      // </div>
     );
   }
 }
