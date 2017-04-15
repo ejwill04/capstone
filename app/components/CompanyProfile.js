@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import GithubButton from './Button'
 import CompanyFooter from './CompanyFooter'
 import AddEmployeePopup from './AddEmployeePopup'
 
+// we want to render the alumn with their name, avatar, and github icon
 export default class CompanyProfile extends Component {
   constructor() {
     super()
     this.state = {
       companyData: {},
       alums: [],
-      company_id: ''
+      company_id: '',
     }
     this.getCompany = this.getCompany.bind(this)
     this.getUsers = this.getUsers.bind(this)
@@ -69,21 +71,6 @@ export default class CompanyProfile extends Component {
       .then((payload) => this.setState({ alums: payload}))
   }
 
-  // showUsers() {
-  //   console.log(this.state.alums)
-  //   let alumArray = []
-  //   if(this.state.alums.length > 0) {
-  //     for(let i = 0; i < this.state.alums.length; i ++) {
-  //       alumArray.push(this.state.alums[i].name)
-  //     }
-  //     return alumArray.map((alum)=> {
-  //       return <p key={alum} className='alumni-name'>{alum}</p>
-  //     })
-  //   } else {
-  //     return <p>No alumni here</p>
-  //   }
-  // }
-
   render() {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
 
@@ -91,9 +78,14 @@ export default class CompanyProfile extends Component {
      this.state.alums.map((alum, i) => {
       console.log(alum)
       return (
-        <p key={i} className='alumni-name'>
-          {alum.name}
-        </p>
+        <Card expanded={false} key={i}>
+          <CardHeader
+            title={alum.name}
+            avatar="{alum.github_avatar}"
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+        </Card>
       )
     })
     return (
