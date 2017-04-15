@@ -12,7 +12,7 @@ let userName = auth.getProfile()
 const checkForUser = (props)=> {
   if(localStorage.length === 0) {
     return (
-      <RaisedButton className='github-btn'
+      <RaisedButton className='github-btn-statepage'
         backgroundColor='#00C2D2'
         label='Log in with'
         labelPosition='before'
