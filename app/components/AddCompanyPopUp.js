@@ -206,7 +206,7 @@ export default class AddCompanyPopUp extends Component {
     ]
 
     return (
-      <div>
+      <div className='company-btn-container'>
         <RaisedButton label="Add A Company"
                       className='add-company-btn'
                       backgroundColor='#00C2D2'
