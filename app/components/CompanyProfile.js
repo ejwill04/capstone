@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import GithubButton from './Button'
+import Button from './Button'
 import CompanyFooter from './CompanyFooter'
 import AddEmployeePopup from './AddEmployeePopup'
 

@@ -7,7 +7,7 @@ const githubIcon = require('../photos/github.svg')
 import ProfileDetails from './ProfileDetails'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
-import GithubButton from './Button'
+import Button from './Button'
 import statesReference from './statesReference'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -69,7 +69,7 @@ export default class App extends Component {
     return (
       <div className='user-login-container'>
         <p className='user-name'>{this.state.user_profile.name}</p>
-        <GithubButton className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
+        <Button className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
       </div>
     )
   }
@@ -93,7 +93,9 @@ export default class App extends Component {
           <div className='login-container'>
             { localStorage.id_token ? this.logoutBtn() : this.loginBtn() }
           </div>
-          <h1 className='neumann-title'>Neumann</h1>
+          <aside className='title-container'>
+            <h1 className='neumann-title'>Neumann</h1>
+          </aside>
           <HeroVideo />
           <div className='dropdown-menu-container'>
             <SelectField className='dropdown'
@@ -111,8 +113,8 @@ export default class App extends Component {
               {this.menuItems()}
             </SelectField>
             <Link to={`/${this.state.selectedState}`}>
-              <GithubButton className='go-btn'
-                      title='go' />
+              <Button className="go-btn"
+                      title="go" />
             </Link>
             <Footer />
           </div>
