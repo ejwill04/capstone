@@ -74,8 +74,8 @@ export default class CompanyProfile extends Component {
             <h1 className="profile-name">{company.name}</h1>
             <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
             <h2 className="profile-alumni">Alumni</h2>
-            <div>{this.showUsers()}</div>
-            <AddEmployeePopup companyId={this.state.company_id}/>
+            <div className="current-alumni">{this.showUsers()}</div>
+            <AddEmployeePopup companyId={this.state.company_id} />
           </div>
           <CompanyFooter data={company} />
         </div>

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { showUsers } from './CompanyProfile'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -63,7 +64,17 @@ console.log('user', user);
       ),
     })
       .then((response) => response.json())
-      .then((payload) => console.log(payload))
+      .then((payload) => this.parseUsers(payload))
+  }
+
+  parseUsers(payload){
+    let users = []
+    for(let i = 0; i < payload.length; i ++) {
+      users.push(payload[i].name)
+    }
+    return users.map((alum)=> {
+      return <p key={alum} className='alumni-name'>{alum}</p>
+    })
   }
 
   handleOpen() {
@@ -77,7 +88,7 @@ console.log('user', user);
     this.setState({ email, name, github_url: url, github_avatar: picture })
   }
 
-  handleClose() {
+  handleClose(props) {
     this.setState({ open: false })
   }
 
