@@ -17,22 +17,32 @@ export default class AddCompanyPopUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
-      name: '',
-      industry: '',
       city: '',
-      state: '',
-      value: 1,
+      cohort: '',
+      company_id: '',
+      email: '',
+      github_avatar: '',
+      github_url: '',
+      industry: '',
+      interviewQuestion: '',
+      message: '',
+      name: '',
       num_of_emp: 10,
+      open: false,
       remote_ok: false,
       tech_stack: '',
-      review: '',
+      slack: '',
+      state: '',
+      userName: '',
+      value: 1,
       worksThereNow: false,
-      interviewQuestion: '',
-      slackHandle: '',
-      emailAddress: '',
     }
   }
+
+  getName() {
+    this.setState({ userName: JSON.parse(localStorage.profile).name , github_url: JSON.parse(localStorage.profile).html_url, github_avatar: JSON.parse(localStorage.profile).picture } )
+  }
+
 
   postACompany() {
     let {name, industry, tech_stack, remote_ok, num_of_emp} = this.state
@@ -43,7 +53,6 @@ export default class AddCompanyPopUp extends Component {
       remote_ok,
       num_of_emp
     }
-    // console.log('company', company);
     fetch('http://localhost:3000/api/v1/companies',
     {
       headers: {
@@ -56,17 +65,22 @@ export default class AddCompanyPopUp extends Component {
       ),
     })
       .then((response) => response.json())
-      .then((payload) => this.postALocation(payload))
+      .then((company_id) => {
+        this.postALocation(company_id)
+        this.getName()
+        this.postAUser(company_id)
+      })
   }
 
   postALocation(company_id) {
+    console.log('psot locations', company_id)
+    this.setState({ company_id: company_id})
     let { city, state } = this.state
     let location = {
       city,
       state,
       company_id
     }
-    // console.log('location', location);
     fetch('http://localhost:3000/api/v1/locations',
     {
       headers: {
@@ -81,8 +95,85 @@ export default class AddCompanyPopUp extends Component {
       .then((response) => response.json())
       .then((payload) => {
         this.props.newCompanyAdded(this.state.state)
-        console.log(payload)
       })
+  }
+
+
+  postAUser(company_id) {
+    let {userName, github_url, github_avatar, cohort, slack, email, remote_ok } = this.state
+
+    let user = {
+      name: userName,
+      github_url,
+      cohort,
+      slack,
+      email,
+      company_id,
+      github_avatar,
+      remote: remote_ok
+    }
+    fetch('http://localhost:3000/api/v1/users',
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(
+        user
+      ),
+    })
+      .then((response) => response.json())
+      .then((user_id) => {
+        this.postAReview(user_id)
+        this.postAnInterviewQuestion(user_id)
+      })
+  }
+
+  postAReview(user_id) {
+    let { company_id, message } = this.state
+    let review = {
+      message,
+      user_id,
+      company_id
+    }
+    console.log('review', review)
+    fetch('http://localhost:3000/api/v1/reviews',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(
+          review
+        ),
+      })
+      .then((response) => response.json())
+      .then((payload) => console.log('post a review', payload))
+  }
+
+  postAnInterviewQuestion (user_id) {
+    let { company_id, interviewQuestion } = this.state
+    let interview_question = {
+      message: interviewQuestion,
+      user_id,
+      company_id
+    }
+    console.log('interview_question', interview_question)
+    fetch('http://localhost:3000/api/v1/interview_questions',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(
+          interview_question
+        ),
+      })
+      .then((response) => response.json())
+      .then((payload) => console.log('post a interview_question', payload))
   }
 
   handleOpen() {
@@ -161,7 +252,7 @@ export default class AddCompanyPopUp extends Component {
                        onChange={(e) => this.setState({tech_stack: e.target.value})}></TextField>
             <TextField floatingLabelText="Review"
                        hintText="We have TONS of fun."
-                       onChange={(e) => this.setState({review: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({message: e.target.value})}></TextField>
             <TextField floatingLabelText="Interview Questions"
                        hintText="What is your greatest weakness?"
                        onChange={(e) => this.setState({interviewQuestion: e.target.value})}></TextField>
@@ -171,10 +262,13 @@ export default class AddCompanyPopUp extends Component {
                        onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow})}/>
             <TextField floatingLabelText="Slack handle"
                        hintText="@macDaddy"
-                       onChange={(e) => this.setState({slackHandle: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({slack: e.target.value})}></TextField>
+            <TextField floatingLabelText="cohort"
+                       hintText="1610"
+                       onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
             <TextField floatingLabelText="Email Address"
                        hintText="macDaddy@daddymac.com"
-                       onChange={(e) => this.setState({emailAddress: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({email: e.target.value})}></TextField>
         </Dialog>
       </div>
     )

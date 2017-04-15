@@ -276,17 +276,18 @@ app.get('/api/v1/salaries/company/:company_id', (request, response) => {
 // add a user
 // what information do we need to know about a user if any?
 app.post('/api/v1/users', (request, response) => {
-  const { name, github_url, github_avatar, email, cohort, slack, company_id, remote } = request.body;
-  const user = { name, github_url, github_avatar, email, cohort, slack, company_id, remote }
+
+  const { name, github_url, cohort, slack, email, remote, company_id, github_avatar } = request.body;
+  const user = { name, github_url, cohort, slack, email, remote, company_id, github_avatar }
 
   if (!name) {
     response.status(422).send('Did not receive correct body params')
   } else {
     database('users').insert(user)
     .then(() => {
-      database('users').where('company_id', company_id).select()
-      .then(users => {
-        response.status(200).json(users)
+      database('users').where('name', name).select()
+      .then((user) => {
+        response.status(200).json(user[user.length-1].id)
       })
     })
     .catch(error => {
@@ -354,7 +355,7 @@ app.post('/api/v1/interview_questions', (request, response) => {
 // post an reviews
 app.post('/api/v1/reviews', (request, response) => {
   const { message, user_id, company_id } = request.body
-  const review = { message, user_id, company_id, created_at: new Date }
+  const review = { message, user_id, company_id }
 
   database('reviews').insert(review)
   .then(() => {
