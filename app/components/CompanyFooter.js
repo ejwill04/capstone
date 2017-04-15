@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import GithubButton from './Button'
+import Button from './Button'
 import AddCompanyInfoPopUp from './AddCompanyInfoPopUp'
 import RenderCompanyComment from './RenderCompanyComment'
 
