@@ -34,7 +34,7 @@ export default class AddCompanyPopUp extends Component {
       github_avatar: '',
       slack: '',
       cohort: '',
-      emailAddress: '',
+      email: '',
     }
   }
 
@@ -118,13 +118,14 @@ export default class AddCompanyPopUp extends Component {
   // }
 
   postAUser(company_id) {
-    let {userName, github_url, github_avatar, cohort, slack, remote_ok } = this.state
-    
+    let {userName, github_url, github_avatar, cohort, slack, email, remote_ok } = this.state
+
     let user = {
       name: userName,
       github_url,
       cohort,
       slack,
+      email,
       company_id,
       github_avatar,
       remote: remote_ok
@@ -238,7 +239,7 @@ export default class AddCompanyPopUp extends Component {
                        onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
             <TextField floatingLabelText="Email Address"
                        hintText="macDaddy@daddymac.com"
-                       onChange={(e) => this.setState({emailAddress: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({email: e.target.value})}></TextField>
         </Dialog>
       </div>
     );

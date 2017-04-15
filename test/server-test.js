@@ -314,10 +314,12 @@ describe('POST /api/v1/users', () => {
   it('should post a new user', (done) => {
     let user = {
       name: 'Testing Name',
+      github_url: 'bugs',
       cohort: '1610',
       slack: '@bugs',
       company_id: 1,
-      email: 'bugs@gmail.com'
+      github_avatar: 'bugs@bugs',
+      remote: true
     }
     chai.request(app)
     .post('/api/v1/users')
@@ -326,7 +328,8 @@ describe('POST /api/v1/users', () => {
       if(err) { return done(err) }
       expect(res).to.have.status(200);
       expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
+      expect(res.body).to.be.a('object');
+      expect(res.body).to.equal('user received');
       expect(res.body).to.have.length(6);
       done();
     })
