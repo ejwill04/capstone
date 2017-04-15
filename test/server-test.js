@@ -396,9 +396,9 @@ describe('POST /api/v1/locations', () => {
   it('should post a new location', (done) => {
     let location = {
       id: 1,
-      city: "Greely",
-      state: "CO",
-      country: "US",
+      city: 'Greely',
+      state: 'CO',
+      country: 'US',
       company_id: 1
     }
     chai.request(app)

@@ -25,7 +25,7 @@ const checkForUser = (props)=> {
         <AddCompanyPopUp newCompanyAdded={props.newCompanyAdded}/>
         <aside className='company-user-login'>
           <p className='user-name'>{userName.name}</p>
-          <GithubButton className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
+          <GithubButton className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
         </aside>
       </section>
     )

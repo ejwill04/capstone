@@ -69,11 +69,11 @@ export default class App extends Component {
     return (
       <div className='user-login-container'>
         <p className='user-name'>{this.state.user_profile.name}</p>
-        <GithubButton className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
+        <GithubButton className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
       </div>
     )
   }
-  
+
   loginBtn() {
     return (
       <RaisedButton className='github-btn'
@@ -95,9 +95,9 @@ export default class App extends Component {
           </div>
           <h1 className='neumann-title'>Neumann</h1>
           <HeroVideo />
-          <div className="dropdown-menu-container">
-            <SelectField className="dropdown"
-                         floatingLabelText="State"
+          <div className='dropdown-menu-container'>
+            <SelectField className='dropdown'
+                         floatingLabelText='State'
                          value={this.state.selectedState}
                          onChange={ this.handleStateChange }
                          style={dropDownStyles.customWidth}
@@ -111,8 +111,8 @@ export default class App extends Component {
               {this.menuItems()}
             </SelectField>
             <Link to={`/${this.state.selectedState}`}>
-              <GithubButton className="go-btn"
-                      title="go" />
+              <GithubButton className='go-btn'
+                      title='go' />
             </Link>
             <Footer />
           </div>
