@@ -67,7 +67,17 @@ export default class CompanyProfile extends Component {
 
   hideButtons(company) {
     if(window.location.pathname === '/CO') {
-      return <img className='turing-logo' src='http://media4.cdn.builtincolorado.com/sites/www.builtincolorado.com/files/company_logos/turing-logo-black.png'></img>
+      return (
+        <section className='instructions-container'>
+          <img className='turing-logo' src='http://media4.cdn.builtincolorado.com/sites/www.builtincolorado.com/files/company_logos/turing-logo-black.png'></img>
+          <p className='instructions'>
+            Click on a city to see what companies Turing alumni are affiliated with. Companies will have reviews and hiring process information.
+            <br></br>
+            If you are logged in, you can add a new company, add yourself to an existing company or add a review or interview question.
+          </p>
+        </section>
+      )
+
     } else {
       return (
         <section>
