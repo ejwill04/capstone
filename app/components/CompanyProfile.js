@@ -65,11 +65,12 @@ export default class CompanyProfile extends Component {
     }
   }
 
-  render() {
-    let company = this.state.companyData[0] ? this.state.companyData[0] : {}
-    return (
-        <MuiThemeProvider>
-        <div className="companyprofile-container">
+  hideButtons(company) {
+    if(window.location.pathname === '/CO') {
+      return <img className='turing-logo' src='http://media4.cdn.builtincolorado.com/sites/www.builtincolorado.com/files/company_logos/turing-logo-black.png'></img>
+    } else {
+      return (
+        <section>
           <div className="information-container">
             <h1 className="profile-name">{company.name}</h1>
             <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
@@ -78,6 +79,17 @@ export default class CompanyProfile extends Component {
             <AddEmployeePopup companyId={this.state.company_id}/>
           </div>
           <CompanyFooter data={company} />
+        </section>
+      )
+    }
+  }
+
+  render() {
+    let company = this.state.companyData[0] ? this.state.companyData[0] : {}
+    return (
+        <MuiThemeProvider>
+        <div className="companyprofile-container">
+          {this.hideButtons(company)}
         </div>
       </MuiThemeProvider>
     )
