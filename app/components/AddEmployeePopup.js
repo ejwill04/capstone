@@ -39,44 +39,6 @@ export default class AddEmployeePopup extends Component {
     }
   }
 
-  postAUser() {
-    let {name, slack, email, company_id, remote, cohort, github_url, github_avatar} = this.state
-    let user = {
-      name,
-      remote,
-      slack,
-      email,
-      company_id,
-      cohort,
-      github_url,
-      github_avatar,
-    }
-console.log('user', user);
-    fetch('http://localhost:3000/api/v1/users',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(
-        user
-      ),
-    })
-      .then((response) => response.json())
-      .then((payload) => this.parseUsers(payload))
-  }
-
-  parseUsers(payload){
-    let users = []
-    for(let i = 0; i < payload.length; i ++) {
-      users.push(payload[i].name)
-    }
-    return users.map((alum)=> {
-      return <p key={alum} className='alumni-name'>{alum}</p>
-    })
-  }
-
   handleOpen() {
     this.getLocalStorageData()
     this.setState({ open: true })
@@ -92,8 +54,8 @@ console.log('user', user);
     this.setState({ open: false })
   }
 
-  handleSubmit() {
-    this.postAUser()
+  handleSubmit(user) {
+    this.props.postAUser(user)
   }
 
   render() {
@@ -108,7 +70,7 @@ console.log('user', user);
         primary={true}
         keyboardFocused={true}
         onTouchTap={(e) => {
-          this.handleSubmit()
+          this.handleSubmit(this.state)
           this.handleClose()}}
       />,
     ];
