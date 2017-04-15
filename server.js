@@ -230,14 +230,10 @@ app.get('/api/v1/interview_questions/company/:company_id', (request, response) =
   const { company_id } = request.params
   database('interview_questions').where('company_id', company_id).select()
   .then(interview_questions => {
-    if (interview_questions.length > 0) {
-      response.status(200).json(interview_questions)
-    } else {
-      response.status(404).send('Company not found')
-    }
+    response.status(200).json(interview_questions)
   })
   .catch(error => {
-    console.error(404, 'Company not found')
+    console.error('Company not found')
   })
 })
 
@@ -246,14 +242,10 @@ app.get('/api/v1/reviews/company/:company_id', (request, response) => {
   const { company_id } = request.params
   database('reviews').where('company_id', company_id).select()
   .then(reviews => {
-    if (reviews.length > 0) {
-      response.status(200).json(reviews)
-    } else {
-      response.status(404).send('Company not found')
-    }
+    response.status(200).json(reviews)
   })
   .catch(error => {
-    console.error(404, 'Company not found')
+    console.error('Company not found')
   })
 })
 
