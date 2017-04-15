@@ -353,13 +353,14 @@ app.post('/api/v1/interview_questions', (request, response) => {
 // post an reviews
 app.post('/api/v1/reviews', (request, response) => {
   const { message, user_id, company_id } = request.body
-  const review = { message, user_id, company_id, created_at: new Date }
+  const review = { message, user_id, company_id }
 
-  database('review').insert(review)
+  database('reviews').insert(review)
   .then(() => {
-    database('review').select()
+    database('reviews').select()
+    console.log(review)
     .then(review => {
-      response.status(200).json(reviews)
+      response.status(200).json(review)
     })
   })
   .catch(error => {

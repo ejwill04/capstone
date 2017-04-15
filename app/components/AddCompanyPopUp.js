@@ -17,24 +17,25 @@ export default class AddCompanyPopUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      open: false,
-      name: '',
-      industry: '',
       city: '',
-      state: '',
-      value: 1,
+      cohort: '',
+      company_id: '',
+      email: '',
+      github_avatar: '',
+      github_url: '',
+      industry: '',
+      interviewQuestion: '',
+      message: '',
+      name: '',
       num_of_emp: 10,
+      open: false,
       remote_ok: false,
       tech_stack: '',
-      message: '',
-      worksThereNow: false,
-      interviewQuestion: '',
-      userName: '',
-      github_url: '',
-      github_avatar: '',
       slack: '',
-      cohort: '',
-      email: '',
+      state: '',
+      userName: '',
+      value: 1,
+      worksThereNow: false,
     }
   }
 
@@ -72,6 +73,8 @@ export default class AddCompanyPopUp extends Component {
   }
 
   postALocation(company_id) {
+    console.log('psot locations', company_id)
+    this.setState({ company_id: company_id})
     let { city, state } = this.state
     let location = {
       city,
@@ -95,27 +98,6 @@ export default class AddCompanyPopUp extends Component {
       })
   }
 
-  // postAReview(company_id) {
-  //   console.log('company_id', company_id)
-  //   let { message } = this.state
-  //   let review = {
-  //     message,
-  //     company_id
-  //   }
-  //   fetch('http://localhost:3000/api/v1/reviews',
-  //   {
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     method: 'POST',
-  //     body: JSON.stringify(
-  //       review
-  //     ),
-  //   })
-  //   .then((response) => response.json())
-  //   .then((payload) => console.log('post a review', payload))
-  // }
 
   postAUser(company_id) {
     let {userName, github_url, github_avatar, cohort, slack, email, remote_ok } = this.state
@@ -142,11 +124,56 @@ export default class AddCompanyPopUp extends Component {
       ),
     })
       .then((response) => response.json())
-      .then((user_id) => this.postAInterviewQuestion(user_id))
+      .then((user_id) => {
+        this.postAReview(user_id)
+        this.postAnInterviewQuestion(user_id)
+      })
   }
 
-  postAInterviewQuestion(user_id) {
-    console.log('user id', user_id)
+  postAReview(user_id) {
+    let { company_id, message } = this.state
+    let review = {
+      message,
+      user_id,
+      company_id
+    }
+    console.log('review', review)
+    fetch('http://localhost:3000/api/v1/reviews',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(
+          review
+        ),
+      })
+      .then((response) => response.json())
+      .then((payload) => console.log('post a review', payload))
+  }
+
+  postAnInterviewQuestion (user_id) {
+    let { company_id, interviewQuestion } = this.state
+    let interview_question = {
+      message: interviewQuestion,
+      user_id,
+      company_id
+    }
+    console.log('interview_question', interview_question)
+    fetch('http://localhost:3000/api/v1/interview_questions',
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(
+          interview_question
+        ),
+      })
+      .then((response) => response.json())
+      .then((payload) => console.log('post a interview_question', payload))
   }
 
   handleOpen() {
