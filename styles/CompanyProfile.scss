@@ -31,3 +31,24 @@
 .company-list-style {
   text-decoration: none;
 }
+
+.instructions-container {
+  text-align: center;
+
+  position: relative;
+}
+
+.turing-logo {
+  width: 800px;
+  opacity: 0.1;
+}
+
+.instructions {
+  position: absolute;
+  line-height: 200%;
+  font-size: 30px;
+  color:#2E3131;
+  width: 90%;
+  top: 35%;
+  left: 6%;
+}

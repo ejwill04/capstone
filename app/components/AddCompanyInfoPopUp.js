@@ -68,6 +68,32 @@ export default class AddCompanyInfoPopUp extends Component {
     this.postAComment()
   }
 
+  checkForUser(actions) {
+    if(localStorage.id_token) {
+      return (
+        <div>
+          <RaisedButton label={`Add ${this.props.text}`}
+                        className='add-comment-btn'
+                        backgroundColor='#00C2D2'
+                        labelColor="#FFF"
+                        onTouchTap={() => this.handleOpen()} />
+          <Dialog title={`Add ${this.props.text} to this Company`}
+                  actions={actions}
+                  modal={false}
+                  open={this.state.open}
+                  onRequestClose={() => this.handleClose()}
+                  autoScrollBodyContent={true}>
+              <TextField floatingLabelText={`Your ${this.props.text}`}
+                         hintText="Say something"
+                         onChange={(e) => this.setState({ message: e.target.value })}>
+              </TextField>
+
+          </Dialog>
+        </div>
+        )
+    }
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -87,23 +113,7 @@ export default class AddCompanyInfoPopUp extends Component {
 
     return (
       <div>
-        <RaisedButton label={`Add ${this.props.text}`}
-                      className='add-comment-btn'
-                      backgroundColor='#00C2D2'
-                      labelColor="#FFF"
-                      onTouchTap={() => this.handleOpen()} />
-        <Dialog title={`Add ${this.props.text} to this Company`}
-                actions={actions}
-                modal={false}
-                open={this.state.open}
-                onRequestClose={() => this.handleClose()}
-                autoScrollBodyContent={true}>
-            <TextField floatingLabelText={`Your ${this.props.text}`}
-                       hintText="Say something"
-                       onChange={(e) => this.setState({ message: e.target.value })}>
-            </TextField>
-
-        </Dialog>
+        {this.checkForUser(actions)}
       </div>
     );
   }
