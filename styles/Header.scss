@@ -1,8 +1,15 @@
 .header-container {
-  margin-top: 20px;
   margin-bottom: 100px;
   display: flex;
   justify-content: space-between;
+  height: 13vh;
+  background-color: #2e3131;
+}
+
+.home-btn-container {
+  margin-bottom: 100px;
+  height: 13vh;
+  background-color: #2e3131;
 }
 
 .company-user-login {
