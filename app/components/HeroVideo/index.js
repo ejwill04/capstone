@@ -7,7 +7,7 @@ const HeroVideo = () => {
     <div>
       <video id="turing-video" loop autoPlay width="100%" >
         <source src={ video } type="video/mp4" />
-        {/* Your browser does not support HTML5 video. Here's a <a href="https://www.turing.io/sites/default/files/videos/turing-loop-video.mp4">link</a> to the video. */}
+        Your browser does not support HTML5 video. Here's a <a href="https://www.turing.io/sites/default/files/videos/turing-loop-video.mp4">link</a> to the video.
       </video>
     </div>
   )
