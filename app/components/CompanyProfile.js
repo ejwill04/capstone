@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import Avatar from 'material-ui/Avatar'
 import GithubButton from './Button'
 import CompanyFooter from './CompanyFooter'
 import AddEmployeePopup from './AddEmployeePopup'
@@ -78,12 +79,15 @@ export default class CompanyProfile extends Component {
      this.state.alums.map((alum, i) => {
       console.log(alum)
       return (
-        <Card expanded={false} key={i}>
+        <Card
+          expanded={false}
+          key={i}
+          className="alumn-card"
+        >
           <CardHeader
+            className="alumn-card-name"
             title={alum.name}
-            avatar="{alum.github_avatar}"
-            actAsExpander={true}
-            showExpandableButton={true}
+            avatar={alum.github_avatar}
           />
         </Card>
       )
