@@ -8,18 +8,19 @@ export default class CompanyFooter extends Component {
   constructor(props) {
     super(props)
     this.state  = {
-      companyReviews: '',
-      companyInterviews: ''
+      renderedSection: 'Reviews',
+      companyReviews: [],
+      companyInterviews: []
     }
     this.getReviews = this.getReviews.bind(this)
     this.getHiring = this.getHiring.bind(this)
+    this.dataSelector = this.dataSelector.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
     if (this.props !== newProps) {
-      this.setState({ companyReviews: '', companyInterviews: '' })
-      this.getHiring(newProps)
       this.getReviews(newProps)
+      this.getHiring(newProps)
     }
   }
 
@@ -32,7 +33,9 @@ export default class CompanyFooter extends Component {
     .then(response => {
       this.setState({ companyReviews: response })
     })
-    .catch(err => err)
+    .catch(err => {
+      this.setState({ companyReviews: [] })
+    })
   }
 
   getHiring(company) {
@@ -44,26 +47,31 @@ export default class CompanyFooter extends Component {
     .then(response => {
       this.setState({ companyInterviews: response })
     })
-    .catch(err => err)
+    .catch(err => {
+      this.setState({ companyInterviews: [] })
+    })
+  }
+
+  dataSelector() {
+    return this.state.renderedSection === 'Reviews' ? this.state.companyReviews : this.state.companyInterviews
   }
 
   render() {
     return (
       <div id="company-footer">
         <Tabs>
-          <Tab id='reviews-tab' label="Reviews" value="Reviews" onClick={()=> this.getReviews(this.props)}>
+          <Tab id='reviews-tab' label="Reviews" value="Reviews" onClick={()=> this.setState({ renderedSection: 'Reviews' })}>
             <AddCompanyInfoPopUp company_id={this.props.data.id}
                                  text='a Review'
                                  param_name='reviews' />
-            <RenderCompanyComment data={this.state.companyReviews} company_id={this.props.data.id} />
           </Tab>
-          <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> this.getHiring(this.props)}>
+          <Tab id='hiring-tab' label="Hiring Process" value="Hiring Process" onClick={()=> this.setState({ renderedSection: 'Interviews' })}>
             <AddCompanyInfoPopUp company_id={this.props.data.id}
                                  text='an Interview Question'
                                  param_name='interview_questions' />
-            <RenderCompanyComment data={this.state.companyInterviews} company_id={this.props.data.id} />
           </Tab>
         </Tabs>
+        <RenderCompanyComment data={this.dataSelector()} company_id={this.props.data.id} />
       </div>
     )
   }

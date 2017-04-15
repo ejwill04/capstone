@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import moment from 'moment'
 
 export default class RenderCompanyComment extends Component {
   constructor(props) {
@@ -9,15 +10,18 @@ export default class RenderCompanyComment extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps !== this.props) {
-      this.setState({ company_id: newProps })
-    }
+    return newProps !== this.props
   }
 
   render() {
     let messages = this.props.data.length > 0 ?
      this.props.data.map((obj, i) => {
-      return <div key={i}>{obj.message}</div>
+       return (
+         <div key={i} className='company-comment-wrapper'>
+           <div className='company-comment-created_at'>{moment(obj.created_at).format('MMMM Do, YYYY')}</div>
+           <div className='company-comment-message'>{obj.message}</div>
+         </div>
+       )
     }) : null
 
     return (
