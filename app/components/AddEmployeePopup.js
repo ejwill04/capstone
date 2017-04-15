@@ -14,7 +14,8 @@ const styles = {
     marginTop: 16,
   },
 };
-
+//Can take in employee info and set it to state, but we are only logging it at this time.
+//We want the name to render next to the alumni currently in the company
 export default class AddEmployeePopup extends Component {
   constructor() {
     super()
@@ -128,7 +129,7 @@ console.log('user', user);
             <TextField floatingLabelText="Cohort Number"
                        hintText="1610"
                        defaultValue={this.state.cohort}
-                       onChange={(e) => this.setState({email: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
             <Toggle    label="I work remotely"
                        labelPosition="right"
                        style={styles.toggle}
