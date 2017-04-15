@@ -130,8 +130,6 @@ export default class AddCompanyPopUp extends Component {
       github_avatar,
       remote: remote_ok
     }
-
-    console.log('user', user);
     fetch('http://localhost:3000/api/v1/users',
     {
       headers: {
@@ -144,7 +142,11 @@ export default class AddCompanyPopUp extends Component {
       ),
     })
       .then((response) => response.json())
-      .then((payload) => console.log(payload))
+      .then((user_id) => this.postAInterviewQuestion(user_id))
+  }
+
+  postAInterviewQuestion(user_id) {
+    console.log('user id', user_id)
   }
 
   handleOpen() {

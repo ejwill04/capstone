@@ -284,7 +284,10 @@ app.post('/api/v1/users', (request, response) => {
   } else {
     database('users').insert(user)
     .then(() => {
-      response.status(200).json(user)
+      database('users').where('name', name).select()
+      .then((user) => {
+        response.status(200).json(user[user.length-1].id)
+      })
     })
     .catch(error => {
       response.status(422).send('Could not add user')
