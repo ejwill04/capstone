@@ -16,14 +16,20 @@ body {
 .dropdown-menu-container {
   display: flex;
   justify-content: center;
-  margin-top: 8%;
+  margin-top: 15%;
+}
+
+.title-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .neumann-title {
-  display: flex;
-  justify-content: center;
-  margin-top: 8%;
+  position: absolute;
+  z-index: 3;
   font-size: 48px;
+  top: 100px;
 }
 
 .state-tag {
