@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import CityList from './CityList'
+import statesReference from './statesReference'
+
 
 
 export default class ResultsList extends Component {
@@ -15,7 +17,6 @@ export default class ResultsList extends Component {
 
   render() {
     let citiesArray = this.props.data.locations ? this.props.data.locations.map(el => {return el.city}) : null
-
     let uniqueCitiesArray = [...new Set(citiesArray)]
 
     let list = this.props.data.locations ?
@@ -30,7 +31,7 @@ export default class ResultsList extends Component {
 
     return(
       <div className='results-container'>
-        <h1 className='state-selected'>{this.props.stateSelected}</h1>
+        <h1 className='state-selected'>{statesReference[this.props.stateSelected]}</h1>
         <div>{list}</div>
       </div>
     )
