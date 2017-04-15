@@ -30,6 +30,7 @@ export default class ResultsList extends Component {
 
     return(
       <div className='results-container'>
+        <h1 className='state-selected'>{this.props.stateSelected}</h1>
         <div>{list}</div>
       </div>
     )
