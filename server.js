@@ -269,24 +269,26 @@ app.get('/api/v1/salaries/company/:company_id', (request, response) => {
 // what information do we need to know about a user if any?
 app.post('/api/v1/users', (request, response) => {
 
-  const { name, github_url, cohort, slack, email, remote, company_id, github_avatar } = request.body;
-  const user = { name, github_url, cohort, slack, email, remote, company_id, github_avatar }
+  const { id, name, github_url, github_avatar } = request.body;
+  const user = { id, name, github_url, github_avatar }
 
-  if (!name) {
-    response.status(422).send('Did not receive correct body params')
-  } else {
-    database('users').insert(user)
-    .then(() => {
-      database('users').where('name', name).select()
-      .then((user) => {
-        response.status(200).json(user[user.length-1].id)
-      })
+    database('users').where('id', id).select()
+    .then(res => {
+      if(res.length === 0) {
+        database('users').insert(user)
+        .then(res => {
+          response.status(200).send('user created')
+        })
+        .catch(error => {
+          response.status(422).send('could not add user')
+        })
+      } else {
+        response.status(200).send('user already exists')
+      }
     })
     .catch(error => {
-      console.log('Could not add user', error)
-      response.status(422).send('Could not add user')
+      response.status(422).send('Could not find user')
     })
-  }
 })
 
 // add a company
@@ -394,6 +396,25 @@ app.put('/api/v1/companies/:id', (request, response) => {
   })
   .catch(error => {
     response.status(422).send('Could not update company')
+  })
+})
+
+// update user
+app.put('/api/v1/users/:id', (request, response) => {
+  const { id } = request.params
+  const { cohort, slack, email, company_id, remote } = request.body
+  const user = { cohort, slack, email, remote }
+  const updated_at = new Date
+
+  database('users').where('id', id).update(user)
+  .then(() => {
+    database('users').where('id', id).select()
+      .then(updatedUser =>
+        response.status(200).json(updatedUser)
+      )
+  })
+  .catch(error => {
+    response.status(422).send('Could not update user')
   })
 })
 

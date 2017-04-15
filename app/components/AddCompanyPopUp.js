@@ -21,8 +21,9 @@ export default class AddCompanyPopUp extends Component {
       cohort: '',
       company_id: '',
       email: '',
-      github_avatar: '',
-      github_url: '',
+      // github_avatar: '',
+      // github_url: '',
+      // id: '',
       industry: '',
       interviewQuestion: '',
       message: '',
@@ -33,15 +34,20 @@ export default class AddCompanyPopUp extends Component {
       tech_stack: '',
       slack: '',
       state: '',
-      userName: '',
+      // userName: '',
       value: 1,
       worksThereNow: false,
     }
   }
 
-  getName() {
-    this.setState({ userName: JSON.parse(localStorage.profile).name , github_url: JSON.parse(localStorage.profile).html_url, github_avatar: JSON.parse(localStorage.profile).picture } )
-  }
+  // getName() {
+  //   this.setState({
+  //     userName: JSON.parse(localStorage.profile).name ,
+  //     github_url: JSON.parse(localStorage.profile).html_url,
+  //     github_avatar: JSON.parse(localStorage.profile).picture,
+  //     id: JSON.parse(localStorage.profile).identities[0].user_id
+  //    } )
+  // }
 
 
   postACompany() {
@@ -67,8 +73,8 @@ export default class AddCompanyPopUp extends Component {
       .then((response) => response.json())
       .then((company_id) => {
         this.postALocation(company_id)
-        this.getName()
-        this.postAUser(company_id)
+        // this.getName()
+        this.updateUser(company_id)
       })
   }
 
@@ -99,26 +105,24 @@ export default class AddCompanyPopUp extends Component {
   }
 
 
-  postAUser(company_id) {
-    let {userName, github_url, github_avatar, cohort, slack, email, remote_ok } = this.state
+  updateUser(company_id) {
+    let { cohort, slack, email, remote_ok } = this.state
+    let id = JSON.parse(localStorage.profile).identities[0].user_id
 
     let user = {
-      name: userName,
-      github_url,
       cohort,
       slack,
       email,
       company_id,
-      github_avatar,
       remote: remote_ok
     }
-    fetch('http://localhost:3000/api/v1/users',
+    fetch(`http://localhost:3000/api/v1/users/${id}`,
     {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      method: 'POST',
+      method: 'PUT',
       body: JSON.stringify(
         user
       ),
