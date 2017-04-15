@@ -12,7 +12,7 @@ let userName = auth.getProfile()
 const checkForUser = (props)=> {
   if(localStorage.length === 0) {
     return (
-      <section>
+      <section className='home-btn-container'>
         <RaisedButton className='home-btn'
           backgroundColor='#00C2D2'
           label='Go Home to Login'
