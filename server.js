@@ -358,7 +358,6 @@ app.post('/api/v1/reviews', (request, response) => {
   database('reviews').insert(review)
   .then(() => {
     database('reviews').select()
-    console.log(review)
     .then(review => {
       response.status(200).json(review)
     })
