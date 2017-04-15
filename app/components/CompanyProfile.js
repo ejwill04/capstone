@@ -65,11 +65,22 @@ export default class CompanyProfile extends Component {
     }
   }
 
-  render() {
-    let company = this.state.companyData[0] ? this.state.companyData[0] : {}
-    return (
-        <MuiThemeProvider>
-        <div className="companyprofile-container">
+  hideButtons(company) {
+    if(window.location.pathname === '/CO') {
+      return (
+        <section className='instructions-container'>
+          <img className='turing-logo' src='http://media4.cdn.builtincolorado.com/sites/www.builtincolorado.com/files/company_logos/turing-logo-black.png'></img>
+          <p className='instructions'>
+            Click on a city to see what companies Turing alumni are affiliated with. Companies will have reviews and hiring process information.
+            <br></br>
+            If you are logged in, you can add a new company, add yourself to an existing company or add a review or interview question.
+          </p>
+        </section>
+      )
+
+    } else {
+      return (
+        <section>
           <div className="information-container">
             <h1 className="profile-name">{company.name}</h1>
             <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
@@ -78,6 +89,17 @@ export default class CompanyProfile extends Component {
             <AddEmployeePopup companyId={this.state.company_id}/>
           </div>
           <CompanyFooter data={company} />
+        </section>
+      )
+    }
+  }
+
+  render() {
+    let company = this.state.companyData[0] ? this.state.companyData[0] : {}
+    return (
+        <MuiThemeProvider>
+        <div className="companyprofile-container">
+          {this.hideButtons(company)}
         </div>
       </MuiThemeProvider>
     )
