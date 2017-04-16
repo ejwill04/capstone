@@ -21,9 +21,6 @@ export default class AddCompanyPopUp extends Component {
       cohort: '',
       company_id: '',
       email: '',
-      // github_avatar: '',
-      // github_url: '',
-      // id: '',
       industry: '',
       interviewQuestion: '',
       message: '',
@@ -34,21 +31,10 @@ export default class AddCompanyPopUp extends Component {
       tech_stack: '',
       slack: '',
       state: '',
-      // userName: '',
       value: 1,
       worksThereNow: false,
     }
   }
-
-  // getName() {
-  //   this.setState({
-  //     userName: JSON.parse(localStorage.profile).name ,
-  //     github_url: JSON.parse(localStorage.profile).html_url,
-  //     github_avatar: JSON.parse(localStorage.profile).picture,
-  //     id: JSON.parse(localStorage.profile).identities[0].user_id
-  //    } )
-  // }
-
 
   postACompany() {
     let {name, industry, tech_stack, remote_ok, num_of_emp} = this.state
