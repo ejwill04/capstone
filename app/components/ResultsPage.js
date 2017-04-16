@@ -47,7 +47,7 @@ export default class ResultsPage extends Component {
         <Header newCompanyAdded={this.newCompanyAdded} />
         <div className='resultspage-container'>
           <ResultsList data={this.state.data} stateSelected={this.state.state} />
-          <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} />
+          <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} stateSelected={this.state.state} />
         </div>
       </div>
     )

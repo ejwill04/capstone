@@ -26,6 +26,7 @@ const checkForUser = (props)=> {
         <aside className='company-user-login'>
           <p className='user-name'>{userName.name}</p>
           <Button className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
+          <Button className='home-btn' title='Home' handleClick={()=> document.location.href='/'} />
         </aside>
       </section>
     )
