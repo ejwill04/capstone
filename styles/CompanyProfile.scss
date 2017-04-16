@@ -4,10 +4,6 @@
   height: 70%;
 }
 
-.alumn-card{
-  height:8vh;
-}
-
 .profile-techstack {
   margin-bottom: 20px;
 }
@@ -27,11 +23,11 @@
   margin-bottom: 20px;
   font-size: 48px;
 }
+
 .current-alumni{
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-flow: wrap;
+  justify-content: space-around;
 }
 
 .alumni-name {
@@ -40,4 +36,8 @@
 
 .company-list-style {
   text-decoration: none;
+}
+
+.company-footer {
+  display:block;
 }

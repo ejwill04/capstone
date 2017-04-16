@@ -88,6 +88,7 @@ export default class CompanyProfile extends Component {
             className="alumn-card-name"
             title={alum.name}
             avatar={alum.github_avatar}
+            subtitle={alum.email}
           />
         </Card>
       )
@@ -96,13 +97,23 @@ export default class CompanyProfile extends Component {
         <MuiThemeProvider>
         <div className="companyprofile-container">
           <div className="information-container">
-            <h1 className="profile-name">{company.name}</h1>
-            <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
-            <h2 className="profile-alumni">Alumni</h2>
-            <div className="current-alumni">{displayAlums}</div>
+            <h1 className="profile-name">
+              {company.name}
+            </h1>
+            <h2 className="profile-techstack">
+              Tech Stack: {company.tech_stack}
+            </h2>
+            <h2 className="profile-alumni">
+              Alumni
+            </h2>
+            <div className="current-alumni">
+              {displayAlums}
+            </div>
+            <div className="company-footer">
             <AddEmployeePopup companyId={this.state.company_id} postAUser={this.postAUser}/>
           </div>
           <CompanyFooter data={company} />
+          </div>
         </div>
       </MuiThemeProvider>
     )
