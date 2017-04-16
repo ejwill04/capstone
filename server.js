@@ -13,7 +13,8 @@ app.use(express.static('build'))
 
 app.use(function(req, res, next) {
  res.header("Access-Control-Allow-Origin", "*")
- res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+ res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT ,DELETE')
+ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
  next()
 })
 
@@ -349,7 +350,7 @@ app.post('/api/v1/interview_questions', (request, response) => {
 // post an reviews
 app.post('/api/v1/reviews', (request, response) => {
   const { message, user_id, company_id } = request.body
-  const review = { message, user_id, company_id }
+  const review = { message, user_id, company_id, created_at: new Date }
 
   database('reviews').insert(review)
   .then(() => {
@@ -410,11 +411,11 @@ app.put('/api/v1/users/:id', (request, response) => {
   .then(() => {
     database('users').where('id', id).select()
       .then(updatedUser =>
-        response.status(200).json(updatedUser)
+        response.status(200).json(updatedUser[0].id)
       )
   })
   .catch(error => {
-    response.status(422).send('Could not update user')
+    response.status(422).send(error)
   })
 })
 
