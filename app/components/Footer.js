@@ -13,28 +13,28 @@ const styles = {
 
 const Footer = () => {
     return (
-    <div id="footer">
+    <div id='footer'>
       <Tabs>
-        <Tab label="Search">
-          <div className="tab">
+        <Tab label='Search'>
+          <div className='tab'>
             <h2 style={styles.headline}>Search for Companies</h2>
-            <p className="tab-text">
+            <p className='tab-text'>
               Search for companies that have hired Turing grads.
             </p>
           </div>
         </Tab>
-        <Tab label="Review">
-          <div className="tab">
+        <Tab label='Review'>
+          <div className='tab'>
             <h2 style={styles.headline}>Company Reviews</h2>
-            <p className="tab-text">
+            <p className='tab-text'>
               Find company reviews from employees.
             </p>
           </div>
         </Tab>
-        <Tab label="Interview" >
-          <div className="tab">
+        <Tab label='Interview' >
+          <div className='tab'>
             <h2 style={styles.headline}>Hiring Process Info</h2>
-            <p className="tab-text">
+            <p className='tab-text'>
               Get information on the hiring process.
             </p>
           </div>

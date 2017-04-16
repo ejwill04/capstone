@@ -97,9 +97,9 @@ export default class App extends Component {
             <h1 className='neumann-title'>Neumann</h1>
           </aside>
           <HeroVideo />
-          <div className="dropdown-menu-container">
-            <SelectField className="dropdown"
-                         floatingLabelText="State"
+          <div className='dropdown-menu-container'>
+            <SelectField className='dropdown'
+                         floatingLabelText='State'
                          value={this.state.selectedState}
                          onChange={ this.handleStateChange }
                          style={dropDownStyles.customWidth}

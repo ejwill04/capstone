@@ -88,34 +88,34 @@ console.log('user', user);
     if(localStorage.id_token) {
       return (
         <div>
-          <RaisedButton label="Add Yourself"
+          <RaisedButton label='Add Yourself'
                         className='add-user-btn'
                         backgroundColor='#00C2D2'
-                        labelColor="#FFF"
+                        labelColor='#FFF'
                         onTouchTap={() => this.handleOpen()} />
-          <Dialog title="Add Yourself to this Company"
+          <Dialog title='Add Yourself to this Company'
                   actions={actions}
                   modal={false}
                   open={this.state.open}
                   onRequestClose={() => this.handleClose()}
                   autoScrollBodyContent={true}>
-              <TextField floatingLabelText="Your Name"
-                         hintText="Donald Duck"
+              <TextField floatingLabelText='Your Name'
+                         hintText='Donald Duck'
                          defaultValue={this.state.name}
                          onChange={(e) => this.setState({name: e.target.value})}></TextField>
-              <TextField floatingLabelText="Slack Handle"
-                         hintText="@quackquack"
+              <TextField floatingLabelText='Slack Handle'
+                         hintText='@quackquack'
                          onChange={(e) => this.setState({slack: e.target.value})}></TextField>
-              <TextField floatingLabelText="Email Address"
-                         hintText="quacking@gquack.com"
+              <TextField floatingLabelText='Email Address'
+                         hintText='quacking@gquack.com'
                          defaultValue={this.state.email}
                          onChange={(e) => this.setState({email: e.target.value})}></TextField>
-              <TextField floatingLabelText="Cohort Number"
-                         hintText="1610"
+              <TextField floatingLabelText='Cohort Number'
+                         hintText='1610'
                          defaultValue={this.state.cohort}
                          onChange={(e) => this.setState({email: e.target.value})}></TextField>
-              <Toggle    label="I work remotely"
-                         labelPosition="right"
+              <Toggle    label='I work remotely'
+                         labelPosition='right'
                          style={styles.toggle}
                          onToggle={(e) => this.setState({ remote: !this.state.remote})}/>
           </Dialog>
@@ -127,12 +127,12 @@ console.log('user', user);
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
+        label='Cancel'
         primary={true}
         onTouchTap={() => this.handleClose()}
       />,
       <FlatButton
-        label="Submit"
+        label='Submit'
         primary={true}
         keyboardFocused={true}
         onTouchTap={(e) => {

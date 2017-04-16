@@ -81,10 +81,10 @@ export default class CompanyProfile extends Component {
     } else {
       return (
         <section>
-          <div className="information-container">
-            <h1 className="profile-name">{company.name}</h1>
-            <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
-            <h2 className="profile-alumni">Alumni</h2>
+          <div className='information-container'>
+            <h1 className='profile-name'>{company.name}</h1>
+            <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
+            <h2 className='profile-alumni'>Alumni</h2>
             <div>{this.showUsers()}</div>
             <AddEmployeePopup companyId={this.state.company_id}/>
           </div>
@@ -98,7 +98,7 @@ export default class CompanyProfile extends Component {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
     return (
         <MuiThemeProvider>
-        <div className="companyprofile-container">
+        <div className='companyprofile-container'>
           {this.hideButtons(company)}
         </div>
       </MuiThemeProvider>
