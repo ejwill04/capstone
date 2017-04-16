@@ -10,7 +10,8 @@ export default class CompanyProfile extends Component {
     this.state = {
       companyData: {},
       alums: {},
-      company_id: ''
+      company_id: '',
+      state: ''
     }
     this.getCompany = this.getCompany.bind(this)
     this.getUsers = this.getUsers.bind(this)
@@ -19,6 +20,7 @@ export default class CompanyProfile extends Component {
   componentWillReceiveProps(newProps) {
     if (this.state.company_id !== newProps) {
       this.setState({ company_id: newProps.company_id })
+      this.setState({ state: newProps.stateSelected })
       this.getCompany(newProps)
       this.getUsers(newProps)
     }
@@ -66,7 +68,8 @@ export default class CompanyProfile extends Component {
   }
 
   hideButtons(company) {
-    if(window.location.pathname === '/CO') {
+    console.log(this.state.state);
+    if(window.location.pathname === `/${this.state.state}`) {
       return (
         <section className='instructions-container'>
           <img className='turing-logo' src='http://media4.cdn.builtincolorado.com/sites/www.builtincolorado.com/files/company_logos/turing-logo-black.png'></img>
@@ -81,10 +84,10 @@ export default class CompanyProfile extends Component {
     } else {
       return (
         <section>
-          <div className="information-container">
-            <h1 className="profile-name">{company.name}</h1>
-            <h2 className="profile-techstack">Tech Stack: {company.tech_stack}</h2>
-            <h2 className="profile-alumni">Alumni</h2>
+          <div className='information-container'>
+            <h1 className='profile-name'>{company.name}</h1>
+            <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
+            <h2 className='profile-alumni'>Alumni</h2>
             <div>{this.showUsers()}</div>
             <AddEmployeePopup companyId={this.state.company_id}/>
           </div>
@@ -98,7 +101,7 @@ export default class CompanyProfile extends Component {
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
     return (
         <MuiThemeProvider>
-        <div className="companyprofile-container">
+        <div className='companyprofile-container'>
           {this.hideButtons(company)}
         </div>
       </MuiThemeProvider>

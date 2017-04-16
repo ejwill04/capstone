@@ -13,30 +13,21 @@ const styles = {
 
 const Footer = () => {
     return (
-    <div id="footer">
+    <div id='footer'>
       <Tabs>
-        <Tab label="Search">
-          <div className="tab">
-            <h2 style={styles.headline}>Search for Companies</h2>
-            <p className="tab-text">
-              Search for companies that have hired Turing grads.
-            </p>
+        <Tab label='Search'>
+          <div className='tab'>
+            <h2 className="copy-text" style={styles.headline}>Search for companies that have hired Turing graduates.</h2>
           </div>
         </Tab>
-        <Tab label="Review">
-          <div className="tab">
-            <h2 style={styles.headline}>Company Reviews</h2>
-            <p className="tab-text">
-              Find company reviews from employees.
-            </p>
+        <Tab label='Review'>
+          <div className='tab'>
+            <h2 className="copy-text" style={styles.headline}>Find company reviews from Turing alumni, or leave your own review.</h2>
           </div>
         </Tab>
-        <Tab label="Interview" >
-          <div className="tab">
-            <h2 style={styles.headline}>Hiring Process Info</h2>
-            <p className="tab-text">
-              Get information on the hiring process.
-            </p>
+        <Tab label='Interview' >
+          <div className='tab'>
+            <h2 className="copy-text" style={styles.headline}>Get information on the hiring process at companies that have employed Turing grads.</h2>
           </div>
         </Tab>
       </Tabs>
