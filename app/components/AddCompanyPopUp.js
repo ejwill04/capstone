@@ -59,7 +59,6 @@ export default class AddCompanyPopUp extends Component {
       .then((response) => response.json())
       .then((company_id) => {
         this.postALocation(company_id)
-        // this.getName()
         this.updateUser(company_id)
       })
   }
@@ -115,8 +114,8 @@ export default class AddCompanyPopUp extends Component {
     })
       .then((response) => response.json())
       .then((user_id) => {
-        this.postAReview(user_id)
-        this.postAnInterviewQuestion(user_id)
+        this.state.message !== '' ? this.postAReview(user_id) : null
+        this.state.interviewQuestion !== '' ? this.postAnInterviewQuestion(user_id) : null
       })
   }
 
@@ -127,7 +126,6 @@ export default class AddCompanyPopUp extends Component {
       user_id,
       company_id
     }
-    console.log('review', review)
     fetch('http://localhost:3000/api/v1/reviews',
       {
         headers: {
