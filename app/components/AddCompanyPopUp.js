@@ -69,11 +69,11 @@ export default class AddCompanyPopUp extends Component {
         this.postALocation(company_id)
         this.getName()
         this.postAUser(company_id)
+        window.location.pathname = `/${this.state.state}`
       })
   }
 
   postALocation(company_id) {
-    console.log('psot locations', company_id)
     this.setState({ company_id: company_id})
     let { city, state } = this.state
     let location = {
@@ -137,7 +137,6 @@ export default class AddCompanyPopUp extends Component {
       user_id,
       company_id
     }
-    console.log('review', review)
     fetch('http://localhost:3000/api/v1/reviews',
       {
         headers: {
@@ -150,7 +149,7 @@ export default class AddCompanyPopUp extends Component {
         ),
       })
       .then((response) => response.json())
-      .then((payload) => console.log('post a review', payload))
+      // .then((payload) => console.log('post a review', payload))
   }
 
   postAnInterviewQuestion (user_id) {
@@ -160,7 +159,6 @@ export default class AddCompanyPopUp extends Component {
       user_id,
       company_id
     }
-    console.log('interview_question', interview_question)
     fetch('http://localhost:3000/api/v1/interview_questions',
       {
         headers: {
@@ -173,7 +171,7 @@ export default class AddCompanyPopUp extends Component {
         ),
       })
       .then((response) => response.json())
-      .then((payload) => console.log('post a interview_question', payload))
+      // .then((payload) => console.log('post a interview_question', payload))
   }
 
   handleOpen() {
