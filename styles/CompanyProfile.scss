@@ -4,6 +4,10 @@
   height: 70%;
 }
 
+.alumn-card{
+  height:8vh;
+}
+
 .profile-techstack {
   margin-bottom: 20px;
 }
@@ -26,6 +30,7 @@
 .current-alumni{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
