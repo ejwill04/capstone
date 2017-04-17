@@ -215,7 +215,7 @@ export default class AddCompanyPopUp extends Component {
             <TextField floatingLabelText='State'
                        hintText='Colorado'
                        onChange={(e) => this.setState({state: e.target.value})}></TextField>
-            <PopUpStateDropDown />
+            <PopUpStateDropDown state={state}/>
             <TextField floatingLabelText='Industry'
                        hintText='Roofing'
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
