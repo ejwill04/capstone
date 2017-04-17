@@ -29,7 +29,7 @@ export default class CompanyProfile extends Component {
   getCompany(newProps) {
       let company_id = newProps.company_id
       if (Number(company_id)) {
-        fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
+        fetch(`/api/v1/companies/${company_id}`, {
           method: 'GET',
         })
         .then(response => response.json())
@@ -42,7 +42,7 @@ export default class CompanyProfile extends Component {
     getUsers(newProps) {
       let company_id = newProps.company_id
       if (Number(company_id)) {
-        fetch(`http://localhost:3000/api/v1/users/company/${company_id}`, {
+        fetch(`/api/v1/users/company/${company_id}`, {
           method: 'GET',
         })
         .then(response => response.json())
