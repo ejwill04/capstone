@@ -34,7 +34,7 @@ export default class AuthService {
 
     console.log(user)
 
-    fetch('http://localhost:3000/api/v1/users',
+    fetch('/api/v1/users',
     {
       headers: {
         'Accept': 'application/json',
