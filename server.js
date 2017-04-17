@@ -34,12 +34,6 @@ app.use(function(req, res, next) {
 
 app.set('port', process.env.PORT || 3000)
 
-app.get('*', (request, response) => {
-  fs.readFile(`${__dirname}/index.html`, (err, file) => {
-    response.send(file)
-  })
-})
-
 // get all users
 app.get('/api/v1/users', (request, response) => {
   database('users').select()
@@ -510,6 +504,12 @@ app.delete('/api/v1/salaries/:id', (request, response) => {
         console.error('error: ', error)
       });
     }
+  })
+})
+
+app.get('*', (request, response) => {
+  fs.readFile(`${__dirname}/index.html`, (err, file) => {
+    response.send(file)
   })
 })
 
