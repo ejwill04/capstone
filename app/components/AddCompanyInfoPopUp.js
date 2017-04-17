@@ -75,7 +75,7 @@ export default class AddCompanyInfoPopUp extends Component {
           <RaisedButton label={`Add ${this.props.text}`}
                         className='add-comment-btn'
                         backgroundColor='#00C2D2'
-                        labelColor="#FFF"
+                        labelColor='#FFF'
                         onTouchTap={() => this.handleOpen()} />
           <Dialog title={`Add ${this.props.text} to this Company`}
                   actions={actions}
@@ -84,7 +84,7 @@ export default class AddCompanyInfoPopUp extends Component {
                   onRequestClose={() => this.handleClose()}
                   autoScrollBodyContent={true}>
               <TextField floatingLabelText={`Your ${this.props.text}`}
-                         hintText="Say something"
+                         hintText='Say something'
                          onChange={(e) => this.setState({ message: e.target.value })}>
               </TextField>
 
@@ -97,12 +97,12 @@ export default class AddCompanyInfoPopUp extends Component {
   render() {
     const actions = [
       <FlatButton
-        label="Cancel"
+        label='Cancel'
         primary={true}
         onTouchTap={() => this.handleClose()}
       />,
       <FlatButton
-        label="Submit"
+        label='Submit'
         primary={true}
         keyboardFocused={true}
         onTouchTap={(e) => {
