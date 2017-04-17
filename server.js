@@ -337,7 +337,7 @@ app.post('/api/v1/interview_questions', (request, response) => {
 
   database('interview_questions').insert(interview_question)
   .then(() => {
-    database('interview_questions').select()
+    database('interview_questions').where('company_id', company_id).select()
     .then(interview_question => {
       response.status(200).json(interview_question)
     })
@@ -354,7 +354,7 @@ app.post('/api/v1/reviews', (request, response) => {
 
   database('reviews').insert(review)
   .then(() => {
-    database('reviews').select()
+    database('reviews').where('company_id', company_id).select()
     .then(review => {
       response.status(200).json(review)
     })
@@ -455,8 +455,7 @@ app.delete('/api/v1/interview_questions/:id', (request, response) => {
     } else {
       database('interview_questions').where('id', id).delete()
       .then(() => {
-        database('interview_questions').select()
-        .then(interview_questions => response.status(200).json(interview_questions))
+        response.status(200).json('deleted')
       })
       .catch((error) => {
         console.error('error: ', error)
@@ -476,12 +475,11 @@ app.delete('/api/v1/reviews/:id', (request, response) => {
     } else {
       database('reviews').where('id', id).delete()
       .then(() => {
-        database('reviews').select()
-        .then(reviews => response.status(200).json(reviews))
+        response.status(200).json('deleted')
       })
       .catch((error) => {
         console.error('error: ', error)
-      });
+      })
     }
   })
 })
