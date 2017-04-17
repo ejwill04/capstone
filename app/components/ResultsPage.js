@@ -17,7 +17,7 @@ export default class ResultsPage extends Component {
   }
 
   fetchRequest(state) {
-    fetch(`/api/v1/locations/${state}`, {
+    fetch(`http://localhost:3000/api/v1/locations/${state}`, {
       method: 'GET',
     })
     .then(response => response.json())
