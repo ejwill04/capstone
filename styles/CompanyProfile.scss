@@ -19,20 +19,19 @@
 
 .information-container {
   height: 30vh;
-  margin: 20px;
 }
 
 .profile-name {
-  margin-top: 50px;
   margin-bottom: 20px;
   font-size: 48px;
+  // position: fixed;
 }
 
 .alumni-container {
   display: flex;
   flex-flow: wrap;
   justify-content: space-around;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 .alumni-card {
