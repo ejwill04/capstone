@@ -59,12 +59,11 @@ export default class AddCompanyPopUp extends Component {
       .then((response) => response.json())
       .then((company_id) => {
         this.postALocation(company_id)
-        this.updateUser(company_id)
+        this.state.worksThereNow ? this.updateUser(company_id) : this.updateUser()
       })
   }
 
   postALocation(company_id) {
-    console.log('psot locations', company_id)
     this.setState({ company_id: company_id})
     let { city, state } = this.state
     let location = {
@@ -101,6 +100,7 @@ export default class AddCompanyPopUp extends Component {
       company_id,
       remote: remote_ok
     }
+
     fetch(`http://localhost:3000/api/v1/users/${id}`,
     {
       headers: {
