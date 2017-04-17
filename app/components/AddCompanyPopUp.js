@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PopUpStateDropDown from './PopUpStateDropDown'
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -6,6 +7,7 @@ import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
+import SelectField from 'material-ui/SelectField';
 
 const styles = {
   radioButton: {
@@ -31,6 +33,7 @@ export default class AddCompanyPopUp extends Component {
       tech_stack: '',
       slack: '',
       state: '',
+      selectedState: '',
       value: 1,
       worksThereNow: false,
     }
@@ -212,6 +215,7 @@ export default class AddCompanyPopUp extends Component {
             <TextField floatingLabelText='State'
                        hintText='Colorado'
                        onChange={(e) => this.setState({state: e.target.value})}></TextField>
+            <PopUpStateDropDown />
             <TextField floatingLabelText='Industry'
                        hintText='Roofing'
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
