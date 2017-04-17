@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const fs = require('fs')
+const path = require('path')
 
 const environment = process.env.NODE_ENV || 'development'
 const configuration = require('./knexfile')[environment]
@@ -507,10 +508,10 @@ app.delete('/api/v1/salaries/:id', (request, response) => {
   })
 })
 
-app.get('*', (request, response) => {
-  fs.readFile(`${__dirname}/index.html`, (err, file) => {
-    response.send(file)
-  })
+app.get('/*', (request, response) => {
+  // fs.readFile(`${__dirname}/index.html`, (err, file) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'))
+  // })
 })
 
 if (!module.parent) {
