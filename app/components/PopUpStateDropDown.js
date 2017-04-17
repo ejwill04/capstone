@@ -21,7 +21,7 @@ export default class PopUpStateDropDown extends Component {
       <div>
         <SelectField
                  floatingLabelText="State"
-                 value={this.state.value}
+                 value={this.state.selectedState}
                  onChange={this.handleChange}
                  maxHeight={200}
                >
