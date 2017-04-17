@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import DeleteButton from './DeleteButton'
+
 import moment from 'moment'
 
 export default class RenderCompanyComment extends Component {
@@ -16,9 +18,7 @@ export default class RenderCompanyComment extends Component {
   renderDeleteBtn(user_id, id) {
     if (this.props.user_id === user_id) {
       return (
-        <button onClick={() => this.props.deleteAComment(id, this.props.company_id)}>
-          Delete
-        </button>
+        <DeleteButton handleClick={() => this.props.deleteAComment(id, this.props.company_id)}></DeleteButton>
       )
     }
   }
