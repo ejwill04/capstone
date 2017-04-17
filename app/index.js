@@ -7,8 +7,8 @@ import CompanyProfile from './components/CompanyProfile'
 
 ReactDOM.render(
   <Router history={browserHistory}>
-    <Route path="/" component={App} />
-    <Route path=":state" component={ResultsPage}/>
-    <Route path="/:state/:company_id" component={ResultsPage} />
+    <Route path='/' component={App} />
+    <Route path='/:state' component={ResultsPage}/>
+    <Route path='/:state/:company_id' component={ResultsPage} />
   </Router>
   , document.getElementById('application'))

@@ -14,9 +14,40 @@ export default class AuthService {
         console.log('Error loading the profile', error);
       } else {
         this.setProfile(profile)
+        this.postAUser()
       }
     })
   }
+
+  postAUser() {
+    let id = JSON.parse(localStorage.profile).identities[0].user_id
+    let name = JSON.parse(localStorage.profile).name
+    let github_url = JSON.parse(localStorage.profile).html_url
+    let github_avatar = JSON.parse(localStorage.profile).picture
+
+    let user = {
+      id,
+      name,
+      github_url,
+      github_avatar
+    }
+
+    console.log(user)
+
+    fetch('http://localhost:3000/api/v1/users',
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(
+        user
+      ),
+    })
+    .then((response) => response.json())
+  }
+
   login() {
     this.lock.show()
   }

@@ -41,3 +41,22 @@
 .company-footer {
   display:block;
 }
+.instructions-container {
+  text-align: center;
+
+  position: relative;
+}
+
+.turing-logo {
+  width: 500px;
+  opacity: 0.1;
+}
+
+.instructions {
+  position: absolute;
+  line-height: 200%;
+  font-size: 24px;
+  color:#2E3131;
+  top: 25%;
+  left: 6%;
+}

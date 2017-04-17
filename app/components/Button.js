@@ -2,10 +2,10 @@ import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
-  margin: 22,
+  margin: 20,
 }
 
-const GithubButton = (props) => (
+const Button = (props) => (
   <RaisedButton
     className={props.className}
     label={props.title}
@@ -15,4 +15,4 @@ const GithubButton = (props) => (
     icon={props.icon} />
 )
 
-module.exports = GithubButton
+module.exports = Button

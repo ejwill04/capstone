@@ -9,6 +9,7 @@ export default class ResultsPage extends Component {
     super(props)
     this.state = {
       data: {},
+      state: '',
       selectedCompany: ''
     }
     this.newCompanyAdded = this.newCompanyAdded.bind(this)
@@ -29,6 +30,7 @@ export default class ResultsPage extends Component {
   componentDidMount() {
     let state = this.props.params.state
     this.fetchRequest(state)
+    this.setState({ state: this.props.params.state })
   }
 
   newCompanyAdded(state) {
@@ -42,10 +44,10 @@ export default class ResultsPage extends Component {
   render() {
     return (
       <div>
-        <Header newCompanyAdded={this.newCompanyAdded}/>
+        <Header newCompanyAdded={this.newCompanyAdded} />
         <div className='resultspage-container'>
-          <ResultsList data={this.state.data} />
-          <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} />
+          <ResultsList data={this.state.data} stateSelected={this.state.state} />
+          <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} stateSelected={this.state.state} />
         </div>
       </div>
     )

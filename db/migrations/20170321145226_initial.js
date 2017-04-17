@@ -12,7 +12,7 @@ exports.up = function(knex, Promise) {
         }),
 
         knex.schema.createTable('users', function(table) {
-            table.increments('id').primary();
+            table.integer('id').primary();
             table.string('name');
             table.string('github_url');
             table.string('github_avatar');
