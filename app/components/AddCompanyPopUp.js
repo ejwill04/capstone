@@ -5,7 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
-import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
@@ -222,7 +221,9 @@ export default class AddCompanyPopUp extends Component {
             <TextField floatingLabelText='Industry'
                        hintText='Roofing'
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
-            <DropDownMenu value={this.state.value}
+            <SelectField
+              floatingLabelText='# of Employees'
+              value={this.state.value}
                           onChange={this.handleChange}>
                        <MenuItem value={1}
                                  primaryText='10'
@@ -235,7 +236,7 @@ export default class AddCompanyPopUp extends Component {
                                  onClick={(e) => this.setState({num_of_emp: 100, value: 3})}/>
                        <MenuItem value={4}
                                  primaryText='200'
-                                 onClick={(e) => this.setState({num_of_emp: 200, value: 4})}/></DropDownMenu>
+                                 onClick={(e) => this.setState({num_of_emp: 200, value: 4})}/></SelectField>
             <Toggle    label='I work remotely'
                        labelPosition='right'
                        style={styles.toggle}
