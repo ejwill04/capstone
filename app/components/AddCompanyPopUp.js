@@ -26,7 +26,7 @@ export default class AddCompanyPopUp extends Component {
       interviewQuestion: '',
       message: '',
       name: '',
-      num_of_emp: 10,
+      num_of_emp: '1-10',
       open: false,
       remote_ok: false,
       tech_stack: '',
@@ -226,17 +226,17 @@ export default class AddCompanyPopUp extends Component {
               value={this.state.value}
                           onChange={this.handleChange}>
                        <MenuItem value={1}
-                                 primaryText='10'
-                                 onClick={(e) => this.setState({num_of_emp: 10, value: 1})}/>
+                                 primaryText='1-10'
+                                 onClick={(e) => this.setState({num_of_emp: '1-10', value: 1})}/>
                        <MenuItem value={2}
-                                 primaryText='40'
-                                 onClick={(e) => this.setState({num_of_emp: 40, value: 2})}/>
+                                 primaryText='11-40'
+                                 onClick={(e) => this.setState({num_of_emp: '11-40', value: 2})}/>
                        <MenuItem value={3}
-                                 primaryText='100'
-                                 onClick={(e) => this.setState({num_of_emp: 100, value: 3})}/>
+                                 primaryText='41-100'
+                                 onClick={(e) => this.setState({num_of_emp: '41-100', value: 3})}/>
                        <MenuItem value={4}
-                                 primaryText='200'
-                                 onClick={(e) => this.setState({num_of_emp: 200, value: 4})}/></SelectField>
+                                 primaryText='100+'
+                                 onClick={(e) => this.setState({num_of_emp: '100+', value: 4})}/></SelectField>
             <Toggle    label='I work remotely'
                        labelPosition='right'
                        style={styles.toggle}
