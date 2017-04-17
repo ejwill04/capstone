@@ -14,7 +14,9 @@ export default class CompanyFooter extends Component {
     }
     this.getReviews = this.getReviews.bind(this)
     this.getHiring = this.getHiring.bind(this)
+    this.postAComment = this.postAComment.bind(this)
     this.dataSelector = this.dataSelector.bind(this)
+    this.updateStateAfterPost = this.updateStateAfterPost.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -52,6 +54,37 @@ export default class CompanyFooter extends Component {
     })
   }
 
+  postAComment(company_id, param_name, message, user_id) {
+    console.log('param_name', param_name)
+    let comment = {
+      message,
+      user_id,
+      company_id
+    }
+
+    fetch(`http://localhost:3000/api/v1/${param_name}`,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(
+        comment
+      ),
+    })
+      .then((response) => response.json())
+      .then((payload) => this.updateStateAfterPost(param_name, payload))
+  }
+
+  updateStateAfterPost(param_name, payload) {
+    if (param_name === 'reviews') {
+      this.setState({ companyReviews: payload })
+    } else if (param_name === 'interview_questions') {
+      this.setState({ companyInterviews: payload })
+    }
+  }
+
   dataSelector() {
     return this.state.renderedSection === 'Reviews' ? this.state.companyReviews : this.state.companyInterviews
   }
@@ -62,11 +95,13 @@ export default class CompanyFooter extends Component {
         <Tabs>
           <Tab id='reviews-tab' label='Reviews' value='Reviews' onClick={()=> this.setState({ renderedSection: 'Reviews' })}>
             <AddCompanyInfoPopUp company_id={this.props.data.id}
+                                 postAComment={this.postAComment}
                                  text='a Review'
                                  param_name='reviews' />
           </Tab>
           <Tab id='hiring-tab' label='Hiring Process' value='Hiring Process' onClick={()=> this.setState({ renderedSection: 'Interviews' })}>
             <AddCompanyInfoPopUp company_id={this.props.data.id}
+                                 postAComment={this.postAComment}
                                  text='an Interview Question'
                                  param_name='interview_questions' />
           </Tab>
