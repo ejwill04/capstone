@@ -20,8 +20,7 @@ export default class AddCompanyInfoPopUp extends Component {
     super()
     this.state = {
       open: false,
-      message: '',
-      user_id: 1
+      message: ''
     }
   }
 
@@ -35,8 +34,8 @@ export default class AddCompanyInfoPopUp extends Component {
 
   handleSubmit() {
     let { company_id, param_name } = this.props
-    let { message, user_id } = this.state
-    this.props.postAComment(company_id, param_name, message, user_id)
+    let { message } = this.state
+    this.props.postAComment(company_id, param_name, message)
   }
 
   checkForUser(actions) {

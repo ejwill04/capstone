@@ -455,8 +455,7 @@ app.delete('/api/v1/interview_questions/:id', (request, response) => {
     } else {
       database('interview_questions').where('id', id).delete()
       .then(() => {
-        database('interview_questions').select()
-        .then(interview_questions => response.status(200).json(interview_questions))
+        response.status(200).json('deleted')
       })
       .catch((error) => {
         console.error('error: ', error)
@@ -476,12 +475,11 @@ app.delete('/api/v1/reviews/:id', (request, response) => {
     } else {
       database('reviews').where('id', id).delete()
       .then(() => {
-        database('reviews').select()
-        .then(reviews => response.status(200).json(reviews))
+        response.status(200).json('deleted')
       })
       .catch((error) => {
         console.error('error: ', error)
-      });
+      })
     }
   })
 })
