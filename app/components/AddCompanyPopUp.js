@@ -59,8 +59,7 @@ export default class AddCompanyPopUp extends Component {
       .then((response) => response.json())
       .then((company_id) => {
         this.postALocation(company_id)
-        this.updateUser(company_id)
-        this.postAUser(company_id)
+        this.state.worksThereNow ? this.updateUser(company_id) : this.updateUser()
         window.location.pathname = `/${this.state.state}`
       })
   }
@@ -102,6 +101,7 @@ export default class AddCompanyPopUp extends Component {
       company_id,
       remote: remote_ok
     }
+
     fetch(`http://localhost:3000/api/v1/users/${id}`,
     {
       headers: {
@@ -115,8 +115,8 @@ export default class AddCompanyPopUp extends Component {
     })
       .then((response) => response.json())
       .then((user_id) => {
-        this.postAReview(user_id)
-        this.postAnInterviewQuestion(user_id)
+        this.state.message !== '' ? this.postAReview(user_id) : null
+        this.state.interviewQuestion !== '' ? this.postAnInterviewQuestion(user_id) : null
       })
   }
 
@@ -139,7 +139,6 @@ export default class AddCompanyPopUp extends Component {
         ),
       })
       .then((response) => response.json())
-      // .then((payload) => console.log('post a review', payload))
   }
 
   postAnInterviewQuestion (user_id) {
@@ -161,7 +160,6 @@ export default class AddCompanyPopUp extends Component {
         ),
       })
       .then((response) => response.json())
-      // .then((payload) => console.log('post a interview_question', payload))
   }
 
   handleOpen() {

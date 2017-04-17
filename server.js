@@ -402,10 +402,10 @@ app.put('/api/v1/companies/:id', (request, response) => {
 
 // update user
 app.put('/api/v1/users/:id', (request, response) => {
+  const updated_at = new Date
   const { id } = request.params
   const { cohort, slack, email, company_id, remote } = request.body
-  const user = { cohort, slack, email, remote }
-  const updated_at = new Date
+  const user = { cohort, slack, email, remote, company_id, updated_at }
 
   database('users').where('id', id).update(user)
   .then(() => {
