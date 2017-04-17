@@ -55,6 +55,8 @@ export default class AddCompanyInfoPopUp extends Component {
                   autoScrollBodyContent={true}>
               <TextField floatingLabelText={`Your ${this.props.text}`}
                          hintText='Say something'
+                         multiLine={true}
+                         fullWidth={true}
                          onChange={(e) => this.setState({ message: e.target.value })}>
               </TextField>
 
