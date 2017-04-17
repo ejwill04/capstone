@@ -12,18 +12,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('build'))
 
 app.use(function(req, res, next) {
- res.header('Access-Control-Allow-Origin', '*')
- res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+ res.header("Access-Control-Allow-Origin", "*")
+ res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT ,DELETE')
+ res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
  next()
 })
 
 app.set('port', process.env.PORT || 3000)
-
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-  next()
-})
 
 app.get('/', (request, response) => {
   fs.readFile(`${__dirname}/index.html`, (err, file) => {
@@ -269,24 +264,26 @@ app.get('/api/v1/salaries/company/:company_id', (request, response) => {
 // what information do we need to know about a user if any?
 app.post('/api/v1/users', (request, response) => {
 
-  const { name, github_url, cohort, slack, email, remote, company_id, github_avatar } = request.body;
-  const user = { name, github_url, cohort, slack, email, remote, company_id, github_avatar }
+  const { id, name, github_url, github_avatar } = request.body;
+  const user = { id, name, github_url, github_avatar }
 
-  if (!name) {
-    response.status(422).send('Did not receive correct body params')
-  } else {
-    database('users').insert(user)
-    .then(() => {
-      database('users').where('name', name).select()
-      .then((user) => {
-        response.status(200).json(user[user.length-1].id)
-      })
+    database('users').where('id', id).select()
+    .then(res => {
+      if(res.length === 0) {
+        database('users').insert(user)
+        .then(res => {
+          response.status(200).send('user created')
+        })
+        .catch(error => {
+          response.status(422).send('could not add user')
+        })
+      } else {
+        response.status(200).send('user already exists')
+      }
     })
     .catch(error => {
-      console.log('Could not add user', error)
-      response.status(422).send('Could not add user')
+      response.status(422).send('Could not find user')
     })
-  }
 })
 
 // add a company
@@ -334,7 +331,7 @@ app.post('/api/v1/interview_questions', (request, response) => {
 
   database('interview_questions').insert(interview_question)
   .then(() => {
-    database('interview_questions').select()
+    database('interview_questions').where('company_id', company_id).select()
     .then(interview_question => {
       response.status(200).json(interview_question)
     })
@@ -347,11 +344,11 @@ app.post('/api/v1/interview_questions', (request, response) => {
 // post an reviews
 app.post('/api/v1/reviews', (request, response) => {
   const { message, user_id, company_id } = request.body
-  const review = { message, user_id, company_id }
+  const review = { message, user_id, company_id, created_at: new Date }
 
   database('reviews').insert(review)
   .then(() => {
-    database('reviews').select()
+    database('reviews').where('company_id', company_id).select()
     .then(review => {
       response.status(200).json(review)
     })
@@ -397,6 +394,25 @@ app.put('/api/v1/companies/:id', (request, response) => {
   })
 })
 
+// update user
+app.put('/api/v1/users/:id', (request, response) => {
+  const updated_at = new Date
+  const { id } = request.params
+  const { cohort, slack, email, company_id, remote } = request.body
+  const user = { cohort, slack, email, remote, company_id, updated_at }
+
+  database('users').where('id', id).update(user)
+  .then(() => {
+    database('users').where('id', id).select()
+      .then(updatedUser =>
+        response.status(200).json(updatedUser[0].id)
+      )
+  })
+  .catch(error => {
+    response.status(422).send(error)
+  })
+})
+
 // delete company
 app.delete('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
@@ -433,8 +449,7 @@ app.delete('/api/v1/interview_questions/:id', (request, response) => {
     } else {
       database('interview_questions').where('id', id).delete()
       .then(() => {
-        database('interview_questions').select()
-        .then(interview_questions => response.status(200).json(interview_questions))
+        response.status(200).json('deleted')
       })
       .catch((error) => {
         console.error('error: ', error)
@@ -454,12 +469,11 @@ app.delete('/api/v1/reviews/:id', (request, response) => {
     } else {
       database('reviews').where('id', id).delete()
       .then(() => {
-        database('reviews').select()
-        .then(reviews => response.status(200).json(reviews))
+        response.status(200).json('deleted')
       })
       .catch((error) => {
         console.error('error: ', error)
-      });
+      })
     }
   })
 })

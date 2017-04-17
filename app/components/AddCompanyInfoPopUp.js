@@ -20,52 +20,22 @@ export default class AddCompanyInfoPopUp extends Component {
     super()
     this.state = {
       open: false,
-      message: '',
-      user_id: 1
+      message: ''
     }
-  }
-
-  postAComment() {
-    let { company_id, param_name } = this.props
-    let {message, user_id } = this.state
-    let comment = {
-      message,
-      user_id,
-      company_id
-    }
-
-    fetch(`http://localhost:3000/api/v1/${param_name}`,
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(
-        comment
-      ),
-    })
-      .then((response) => response.json())
-      .then((payload) => console.log(payload))
   }
 
   handleOpen() {
-    // this.getLocalStorageData()
     this.setState({ open: true })
   }
-
-  // getLocalStorageData() {
-  //   let userProfile = auth.getProfile()
-  //   let { email, name, picture, url } = userProfile
-  //   this.setState({ email, name, github_url: url, github_avatar: picture })
-  // }
 
   handleClose() {
     this.setState({ open: false })
   }
 
   handleSubmit() {
-    this.postAComment()
+    let { company_id, param_name } = this.props
+    let { message } = this.state
+    this.props.postAComment(company_id, param_name, message)
   }
 
   checkForUser(actions) {
