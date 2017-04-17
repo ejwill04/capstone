@@ -180,7 +180,6 @@ export default class AddCompanyPopUp extends Component {
   }
 
   updateStateState(value) {
-    console.log('hit first file', value)
     this.setState({state: value})
   }
 
