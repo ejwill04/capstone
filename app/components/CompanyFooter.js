@@ -35,7 +35,7 @@ export default class CompanyFooter extends Component {
 
   getReviews(company_id) {
     this.state.companyReviews = []
-    fetch(`http://localhost:3000/api/v1/reviews/company/${company_id}`, {
+    fetch(`/api/v1/reviews/company/${company_id}`, {
       method: 'GET',
     })
     .then(response => response.json())
@@ -49,7 +49,7 @@ export default class CompanyFooter extends Component {
 
   getHiring(company_id) {
     this.state.companyInterviews = []
-    fetch(`http://localhost:3000/api/v1/interview_questions/company/${company_id}`, {
+    fetch(`/api/v1/interview_questions/company/${company_id}`, {
       method: 'GET',
     })
     .then(response => response.json())
@@ -68,7 +68,7 @@ export default class CompanyFooter extends Component {
       company_id
     }
 
-    fetch(`http://localhost:3000/api/v1/${param_name}`,
+    fetch(`/api/v1/${param_name}`,
     {
       headers: {
         'Accept': 'application/json',
@@ -94,7 +94,7 @@ export default class CompanyFooter extends Component {
   deleteAComment(id, company_id) {
     let { renderedSection } = this.state
     let param_name = renderedSection === 'Reviews' ? 'reviews' : 'interview_questions'
-    fetch(`http://localhost:3000/api/v1/${param_name}/${id}`,
+    fetch(`/api/v1/${param_name}/${id}`,
       {
         headers: {
           'Accept': 'application/json',
