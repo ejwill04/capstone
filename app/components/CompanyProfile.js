@@ -1,20 +1,24 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import Avatar from 'material-ui/Avatar'
 import Button from './Button'
 import CompanyFooter from './CompanyFooter'
 import AddEmployeePopup from './AddEmployeePopup'
 
+// we want to render the alumn with their name, avatar, and github icon
 export default class CompanyProfile extends Component {
   constructor() {
     super()
     this.state = {
       companyData: {},
-      alums: {},
+      alums: [],
       company_id: '',
       state: ''
     }
     this.getCompany = this.getCompany.bind(this)
     this.getUsers = this.getUsers.bind(this)
+    this.updateUser = this.updateUser.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -39,36 +43,81 @@ export default class CompanyProfile extends Component {
         .catch(err => err)
       }
     }
-    getUsers(newProps) {
-      let company_id = newProps.company_id
-      if (Number(company_id)) {
-        fetch(`http://localhost:3000/api/v1/users/company/${company_id}`, {
-          method: 'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-          this.setState({ alums: data })
-        })
-        .catch(()=> this.setState({ alums: {} }))
-      }
-    }
 
-  showUsers() {
-    let alumArray = []
-    if(this.state.alums.length > 0) {
-      for(let i = 0; i < this.state.alums.length; i ++) {
-        alumArray.push(this.state.alums[i].name)
-      }
-      return alumArray.map((alum)=> {
-        return <p key={alum} className='alumni-name'>{alum}</p>
+  getUsers(newProps) {
+    let company_id = newProps.company_id
+    if (Number(company_id)) {
+      fetch(`http://localhost:3000/api/v1/users/company/${company_id}`, {
+        method: 'GET',
       })
-    } else {
-      return <p>No alumni here</p>
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ alums: data })
+      })
+      .catch(()=> this.setState({ alums: {} }))
     }
   }
 
+  updateUser(newUser) {
+    let { name, cohort, slack, email, remote } = newUser
+    let { company_id } = this.state
+    let id = JSON.parse(localStorage.profile).identities[0].user_id
+
+    let user = {
+      name,
+      cohort,
+      slack,
+      email,
+      company_id,
+      remote
+    }
+
+    fetch(`http://localhost:3000/api/v1/users/${id}`,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(
+        user
+      ),
+    })
+      .then((response) => response.json())
+      .then((payload) => {
+        if (Number(payload)){
+          fetch(`http://localhost:3000/api/v1/users/company/${company_id}`,
+          {
+            method: 'GET',
+          })
+          .then((response) => response.json())
+          .then((payload) => this.setState({ alums: payload }))
+        }
+      })
+  }
+
+  displayAlums(){
+    if(this.state.alums.length > 0){
+    return this.state.alums.map((alum, i) => {
+          return (
+            <Card
+              expanded={false}
+              key={i}
+              className="alumn-card"
+            >
+              <CardHeader
+                className="alumn-card-name"
+                title={alum.name}
+                avatar={alum.github_avatar}
+                subtitle={alum.email}
+              />
+            </Card>
+          )
+        })
+      }
+  }
+
   hideButtons(company) {
-    console.log(this.state.state);
     if(window.location.pathname === `/${this.state.state}`) {
       return (
         <section className='instructions-container'>
@@ -88,8 +137,8 @@ export default class CompanyProfile extends Component {
             <h1 className='profile-name'>{company.name}</h1>
             <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
             <h2 className='profile-alumni'>Alumni</h2>
-            <div>{this.showUsers()}</div>
-            <AddEmployeePopup companyId={this.state.company_id}/>
+            <div>{this.displayAlums()}</div>
+            <AddEmployeePopup companyId={this.state.company_id} updateUser={this.updateUser}/>
           </div>
           <CompanyFooter data={company} />
         </section>

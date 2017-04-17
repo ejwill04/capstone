@@ -24,6 +24,12 @@
   font-size: 48px;
 }
 
+.current-alumni{
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-around;
+}
+
 .alumni-name {
   margin-bottom: 20px;
 }
@@ -32,6 +38,9 @@
   text-decoration: none;
 }
 
+.company-footer {
+  display:block;
+}
 .instructions-container {
   text-align: center;
 

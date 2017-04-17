@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import { showUsers } from './CompanyProfile'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -14,19 +15,16 @@ const styles = {
     marginTop: 16,
   },
 };
-
 export default class AddEmployeePopup extends Component {
   constructor() {
     super()
     this.state = {
-      open: false,
       name: '',
+      open: false,
       remote: false,
       slack: '',
       email: '',
       cohort: '',
-      github_url: '',
-      github_avatar: '',
       company_id: ''
     }
   }
@@ -35,34 +33,6 @@ export default class AddEmployeePopup extends Component {
     if(this.state.company_id !== newProps) {
       this.setState({ company_id: newProps.companyId })
     }
-  }
-
-  postAUser() {
-    let {name, slack, email, company_id, remote, cohort, github_url, github_avatar} = this.state
-    let user = {
-      name,
-      remote,
-      slack,
-      email,
-      company_id,
-      cohort,
-      github_url,
-      github_avatar,
-    }
-console.log('user', user);
-    fetch('http://localhost:3000/api/v1/users',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(
-        user
-      ),
-    })
-      .then((response) => response.json())
-      .then((payload) => console.log(payload))
   }
 
   handleOpen() {
@@ -76,12 +46,14 @@ console.log('user', user);
     this.setState({ email, name, github_url: url, github_avatar: picture })
   }
 
-  handleClose() {
+  handleClose(props) {
     this.setState({ open: false })
   }
 
   handleSubmit() {
-    this.postAUser()
+    let {name, cohort, slack, email, remote} = this.state
+    let user = {name, cohort, slack, email, remote}
+    this.props.updateUser(user)
   }
 
   checkForUser(actions) {
