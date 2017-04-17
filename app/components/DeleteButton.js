@@ -6,8 +6,8 @@ const style = {
 }
 
 const DeleteButton = (props) => (
-    <FloatingActionButton className='delete-btn'
-                          mini={true} style={style}
+    <FloatingActionButton mini={true}
+                          style={style}
                           children='x'
                           backgroundColor='#7E8787'
                           onClick={()=> props.handleClick()}>
