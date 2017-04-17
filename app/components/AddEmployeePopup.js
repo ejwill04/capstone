@@ -50,7 +50,7 @@ export default class AddEmployeePopup extends Component {
       github_avatar,
     }
 console.log('user', user);
-    fetch('/api/v1/users',
+    fetch('http://localhost:3000/api/v1/users',
     {
       headers: {
         'Accept': 'application/json',
