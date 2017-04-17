@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
             table.increments('id').primary();
             table.string('name');
             table.string('industry');
-            table.integer('num_of_emp');
+            table.string('num_of_emp');
             table.string('tech_stack');
             // tech_stack will be an array of technologies
             table.boolean('remote_ok');
@@ -39,7 +39,7 @@ exports.up = function(knex, Promise) {
 
         knex.schema.createTable('interview_questions', function(table){
             table.increments('id').primary();
-            table.string('message');
+            table.text('message');
             table.integer('user_id')
                  .references('id')
                  .inTable('users');
@@ -52,7 +52,7 @@ exports.up = function(knex, Promise) {
 
         knex.schema.createTable('reviews', function(table){
             table.increments('id').primary();
-            table.string('message');
+            table.text('message');
             table.integer('user_id')
                  .references('id')
                  .inTable('users');
