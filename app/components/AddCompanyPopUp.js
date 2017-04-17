@@ -37,6 +37,8 @@ export default class AddCompanyPopUp extends Component {
       value: 1,
       worksThereNow: false,
     }
+
+    this.updateStateState = this.updateStateState.bind(this)
   }
 
   postACompany() {
@@ -177,6 +179,11 @@ export default class AddCompanyPopUp extends Component {
     this.postACompany()
   }
 
+  updateStateState(value) {
+    console.log('hit first file', value)
+    this.setState({state: value})
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -212,10 +219,7 @@ export default class AddCompanyPopUp extends Component {
             <TextField floatingLabelText='City'
                        hintText='Denver'
                        onChange={(e) => this.setState({city: e.target.value})}></TextField>
-            <TextField floatingLabelText='State'
-                       hintText='Colorado'
-                       onChange={(e) => this.setState({state: e.target.value})}></TextField>
-            <PopUpStateDropDown state={state}/>
+            <PopUpStateDropDown updateStateState={this.updateStateState} />
             <TextField floatingLabelText='Industry'
                        hintText='Roofing'
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>

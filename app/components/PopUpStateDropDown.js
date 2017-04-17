@@ -3,8 +3,8 @@ import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
 
 export default class PopUpStateDropDown extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       selectedState: ''
     }
@@ -12,8 +12,8 @@ export default class PopUpStateDropDown extends Component {
   }
 
   handleChange(e, i, value) {
-    console.log('bug', value)
     this.setState({ selectedState: value })
+    this.props.updateStateState(value)
   }
 
   render() {
@@ -22,8 +22,8 @@ export default class PopUpStateDropDown extends Component {
         <SelectField floatingLabelText='State'
                      value={this.state.selectedState}
                      onChange={this.handleChange}
-                     maxHeight={160} >
-
+                     maxHeight={160}
+                     >
                  <MenuItem value={'AL'} primaryText='Alabama' />
                  <MenuItem value={'AK'} primaryText='Alaska' />
                  <MenuItem value={'AZ'} primaryText='Arizona' />
@@ -74,7 +74,6 @@ export default class PopUpStateDropDown extends Component {
                  <MenuItem value={'WV'} primaryText='West Virginia' />
                  <MenuItem value={'WI'} primaryText='Wisconsin' />
                  <MenuItem value={'WY'} primaryText='Wyoming' />
-
         </SelectField>
       </div>
     )
