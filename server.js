@@ -398,8 +398,8 @@ app.put('/api/v1/companies/:id', (request, response) => {
 app.put('/api/v1/users/:id', (request, response) => {
   const updated_at = new Date
   const { id } = request.params
-  const { cohort, slack, email, company_id, remote } = request.body
-  const user = { cohort, slack, email, remote, company_id, updated_at }
+  const { cohort, slack, email, name, company_id, remote } = request.body
+  const user = { name, cohort, slack, email, remote, company_id, updated_at }
 
   database('users').where('id', id).update(user)
   .then(() => {
