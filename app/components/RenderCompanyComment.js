@@ -5,8 +5,6 @@ export default class RenderCompanyComment extends Component {
   constructor(props) {
     super(props)
     this.state  = {
-      company_id: '',
-      user_id: ''
     }
     this.renderDeleteBtn = this.renderDeleteBtn.bind(this)
   }
