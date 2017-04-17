@@ -99,7 +99,7 @@ export default class App extends Component {
           <HeroVideo />
           <div className='dropdown-menu-container'>
             <SelectField className='dropdown'
-                         floatingLabelText='State'
+                         floatingLabelText='Select A State'
                          value={this.state.selectedState}
                          onChange={ this.handleStateChange }
                          style={dropDownStyles.customWidth}

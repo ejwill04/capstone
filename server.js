@@ -228,7 +228,7 @@ app.get('/api/v1/interview_questions/company/:company_id', (request, response) =
     response.status(200).json(interview_questions)
   })
   .catch(error => {
-    console.error('Company not found')
+    console.error(404, 'Company not found')
   })
 })
 
