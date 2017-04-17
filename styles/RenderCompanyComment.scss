@@ -1,4 +1,5 @@
 .company-comment-wrapper {
+  position: relative;
   margin: 20px auto;
   box-shadow:0 2px 2px rgba(0,0,0,0.23);
   min-height: 80px;
@@ -13,4 +14,11 @@
 .company-comment-created_at {
   font-style: italic;
   font-size: 10px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color:  #7E8787;
 }
