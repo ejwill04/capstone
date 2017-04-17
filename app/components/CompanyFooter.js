@@ -117,14 +117,20 @@ export default class CompanyFooter extends Component {
   render() {
     return (
       <div id='company-footer'>
-        <Tabs>
-          <Tab id='reviews-tab' label='Reviews' value='Reviews' onClick={()=> this.setState({ renderedSection: 'Reviews' })}>
+        <Tabs tabItemContainerStyle={{width: '250px'}}>
+          <Tab id='reviews-tab'
+              label='Reviews'
+              value='Reviews'
+              onClick={()=> this.setState({ renderedSection: 'Reviews' })}>
             <AddCompanyInfoPopUp company_id={this.props.data.id}
                                  postAComment={this.postAComment}
                                  text='a Review'
                                  param_name='reviews' />
           </Tab>
-          <Tab id='hiring-tab' label='Hiring Process' value='Hiring Process' onClick={()=> this.setState({ renderedSection: 'Interviews' })}>
+          <Tab id='hiring-tab'
+              label='Hiring Process'
+              value='Hiring Process'
+              onClick={()=> this.setState({ renderedSection: 'Interviews' })}>
             <AddCompanyInfoPopUp company_id={this.props.data.id}
                                  postAComment={this.postAComment}
                                  text='an Interview Question'
