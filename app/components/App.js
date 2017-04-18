@@ -113,8 +113,9 @@ export default class App extends Component {
               {this.menuItems()}
             </SelectField>
             <Link to={`/${this.state.selectedState}`}>
-              <Button className="go-btn"
-                      title="go" />
+              <Button className='go-btn'
+                      title='go'
+                      />
             </Link>
             <Footer />
           </div>

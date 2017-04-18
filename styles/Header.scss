@@ -1,20 +1,13 @@
-.home-btn-container {
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: space-between;
-  background-color: #2e3131;
-}
-
 .header-container {
   margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
-  height: 150px;
+  height: 80px;
   background-color: #2e3131;
 }
 
 .company-btn-container {
-  margin-right: -30px;
+  margin: 20px;
 }
 
 .home-btn-container {
@@ -26,5 +19,5 @@
 }
 
 .user-home {
-  margin-left: -30px;
+  margin: 20px;
 }
