@@ -6,7 +6,6 @@ import Button from './Button'
 import CompanyFooter from './CompanyFooter'
 import AddEmployeePopup from './AddEmployeePopup'
 
-// we want to render the alumn with their name, avatar, and github icon
 export default class CompanyProfile extends Component {
   constructor() {
     super()
@@ -18,7 +17,6 @@ export default class CompanyProfile extends Component {
     }
     this.getCompany = this.getCompany.bind(this)
     this.getUsers = this.getUsers.bind(this)
-    // this.updateUser = this.updateUser.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -58,44 +56,6 @@ export default class CompanyProfile extends Component {
     }
   }
 
-  // updateUser(newUser) {
-  //   let { name, cohort, slack, email, remote } = newUser
-  //   let { company_id } = this.state
-  //   let id = JSON.parse(localStorage.profile).identities[0].user_id
-  //
-  //   let user = {
-  //     name,
-  //     cohort,
-  //     slack,
-  //     email,
-  //     company_id,
-  //     remote
-  //   }
-  //
-  //   fetch(`http://localhost:3000/api/v1/users/${id}`,
-  //   {
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     method: 'PUT',
-  //     body: JSON.stringify(
-  //       user
-  //     ),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((payload) => {
-  //       if (Number(payload)){
-  //         fetch(`http://localhost:3000/api/v1/users/company/${company_id}`,
-  //         {
-  //           method: 'GET',
-  //         })
-  //         .then((response) => response.json())
-  //         .then((payload) => this.setState({ alums: payload }))
-  //       }
-  //     })
-  // }
-
   displayAlums(){
     if(this.state.alums.length > 0){
     return this.state.alums.map((alum, i) => {
@@ -112,7 +72,6 @@ export default class CompanyProfile extends Component {
                 avatar={alum.github_avatar}
               />
               <CardText>
-                {/* <p> {alum.cohort}</p> */}
                 <a href={`mailto:${alum.email}`} target='_blank'><i className="material-icons">mail_outline</i></a>
                 <p>Slack: {alum.slack}</p>
               </CardText>

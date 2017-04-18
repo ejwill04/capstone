@@ -13,7 +13,7 @@ const styles = {
   radioButton: {
     marginTop: 16,
   },
-};
+}
 
 export default class AddCompanyInfoPopUp extends Component {
   constructor() {
@@ -41,7 +41,7 @@ export default class AddCompanyInfoPopUp extends Component {
   checkForUser(actions) {
     if(localStorage.id_token) {
       return (
-        <div>
+        <div className='add-company-info'>
           <RaisedButton label={`Add ${this.props.text}`}
                         className='add-comment-btn'
                         backgroundColor='#00C2D2'
@@ -59,7 +59,6 @@ export default class AddCompanyInfoPopUp extends Component {
                          fullWidth={true}
                          onChange={(e) => this.setState({ message: e.target.value })}>
               </TextField>
-
           </Dialog>
         </div>
         )
@@ -81,12 +80,12 @@ export default class AddCompanyInfoPopUp extends Component {
           this.handleSubmit()
           this.handleClose()}}
       />,
-    ];
+    ]
 
     return (
       <div>
         {this.checkForUser(actions)}
       </div>
-    );
+    )
   }
 }
