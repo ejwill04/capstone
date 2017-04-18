@@ -1,12 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import PopUpStateDropDown from './PopUpStateDropDown'
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
+import Button from './Button'
 import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
-import MenuItem from 'material-ui/MenuItem';
-import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem'
+import SelectField from 'material-ui/SelectField'
+
+import AuthService from '../helpers/AuthService'
+const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
+let userName = auth.getProfile()
 
 const styles = {
   radioButton: {
@@ -217,6 +222,7 @@ export default class AddCompanyPopUp extends Component {
 
     return (
       <div className='company-btn-container'>
+        <p className='user-name'>{userName.name}</p>
         <RaisedButton label='Add A Company'
                       className='add-company-btn'
                       backgroundColor='#00C2D2'
@@ -280,6 +286,7 @@ export default class AddCompanyPopUp extends Component {
                        hintText='macDaddy@daddymac.com'
                        onChange={(e) => this.setState({email: e.target.value})}></TextField>
         </Dialog>
+        <Button className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
       </div>
     )
   }

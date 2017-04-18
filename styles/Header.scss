@@ -1,34 +1,31 @@
+.home-btn-container {
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  height: 150px;
+  background-color: #2e3131;
+}
+
 .header-container {
   margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
-  height: 13vh;
+  height: 150px;
   background-color: #2e3131;
-}
-
-.home-btn-container {
-  margin-bottom: 100px;
-  height: 13vh;
-  background-color: #2e3131;
-}
-
-.company-user-login {
-  margin: 20px;
-}
-
-.log-out-btn {
-  margin-left: 20px;
-}
-
-.add-company-btn {
-  margin: 40px;
 }
 
 .company-btn-container {
-  margin-left: 20px;
+  margin: 20px;
 }
 
-.home-btn {
-  float: right;
-  margin: 40px;
+.home-btn-container {
+  background-color: #2e3131;
+}
+
+.user-name {
+  margin-right: 30px;
+}
+
+.user-home {
+  margin: 20px;
 }
