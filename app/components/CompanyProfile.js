@@ -108,10 +108,11 @@ export default class CompanyProfile extends Component {
               <CardHeader
                 className="alumni-card-name"
                 title={alum.name}
+                subtitle={`Cohort: ${alum.cohort}`}
                 avatar={alum.github_avatar}
               />
               <CardText>
-                <p>Cohort: {alum.cohort}</p>
+                {/* <p> {alum.cohort}</p> */}
                 <a href={`mailto:${alum.email}`} target='_blank'><i className="material-icons">mail_outline</i></a>
                 <p>Slack: {alum.slack}</p>
               </CardText>
