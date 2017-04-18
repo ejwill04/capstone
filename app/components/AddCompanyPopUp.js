@@ -233,14 +233,14 @@ export default class AddCompanyPopUp extends Component {
                 onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
             <TextField floatingLabelText='Company Name'
-                       hintText='Ex:ABC Co.'
+                       hintText='Ex: ABC Co.'
                        onChange={(e) => this.setState({name: e.target.value})}></TextField>
             <TextField floatingLabelText='City'
-                       hintText='Denver'
+                       hintText='Ex: Denver'
                        onChange={(e) => this.setState({city: e.target.value})}></TextField>
             <PopUpStateDropDown updateStateState={this.updateStateState} />
             <TextField floatingLabelText='Industry'
-                       hintText='Roofing'
+                       hintText='Ex: Health'
                        onChange={(e) => this.setState({industry: e.target.value})}></TextField>
             <SelectField
               floatingLabelText='# of Employees'
@@ -263,26 +263,30 @@ export default class AddCompanyPopUp extends Component {
                        style={styles.toggle}
                        onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok})}/>
             <TextField floatingLabelText='Tech Stack'
-                       hintText='Java, React'
+                       hintText='Ex: Java, React'
                        onChange={(e) => this.setState({tech_stack: e.target.value})}></TextField>
             <TextField floatingLabelText='Review'
-                       hintText='We have TONS of fun.'
+                       hintText='Ex: ABC Co. has been an awesome experience...'
+                       multiLine={true}
+                       fullWidth={true}
                        onChange={(e) => this.setState({message: e.target.value})}></TextField>
-            <TextField floatingLabelText='Interview Questions'
-                       hintText='What is your greatest weakness?'
+            <TextField floatingLabelText='Hiring Process'
+                       hintText='Time from application to hire, interview questions, number of interview rounds'
+                       multiLine={true}
+                       fullWidth={true}
                        onChange={(e) => this.setState({interviewQuestion: e.target.value})}></TextField>
             <Toggle    label='I currently work here'
                        labelPosition='right'
                        style={styles.toggle}
                        onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow})}/>
             <TextField floatingLabelText='Slack handle'
-                       hintText='@macDaddy'
+                       hintText='Ex: @firstlast'
                        onChange={(e) => this.setState({slack:  e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
             <TextField floatingLabelText='cohort'
-                       hintText='1610'
+                       hintText='Ex: 1610'
                        onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
             <TextField floatingLabelText='Email Address'
-                       hintText='macDaddy@daddymac.com'
+                       hintText='Ex: firstlast@gmail.com'
                        onChange={(e) => this.setState({email: e.target.value})}></TextField>
         </Dialog>
         <Button className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
