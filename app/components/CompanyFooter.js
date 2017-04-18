@@ -11,7 +11,9 @@ export default class CompanyFooter extends Component {
       renderedSection: 'Reviews',
       companyReviews: [],
       companyInterviews: [],
-      user_id: ''
+      user_id: '',
+      param_name: 'reviews',
+      text: 'Review'
     }
     this.getReviews = this.getReviews.bind(this)
     this.getHiring = this.getHiring.bind(this)
@@ -19,6 +21,7 @@ export default class CompanyFooter extends Component {
     this.dataSelector = this.dataSelector.bind(this)
     this.updateStateAfterPost = this.updateStateAfterPost.bind(this)
     this.deleteAComment = this.deleteAComment.bind(this)
+    this.updateRenderedSection = this.updateRenderedSection.bind(this)
   }
 
   componentWillMount() {
@@ -112,6 +115,19 @@ export default class CompanyFooter extends Component {
         })
   }
 
+  updateRenderedSection(section) {
+    let param_name
+    let text
+    if (section === 'Reviews') {
+      text = 'Review'
+      param_name='reviews'
+    } else if (section === 'Hiring Information') {
+      text = 'Hiring Process'
+      param_name='interview_questions'
+    }
+    this.setState({ renderedSection: section, param_name, text })
+  }
+
   dataSelector() {
     return this.state.renderedSection === 'Reviews' ? this.state.companyReviews : this.state.companyInterviews
   }
@@ -124,24 +140,20 @@ export default class CompanyFooter extends Component {
             <Tab id='reviews-tab'
               label='Reviews'
               value='Reviews'
-              onClick={()=> this.setState({ renderedSection: 'Reviews' })}>
-              <AddCompanyInfoPopUp company_id={this.props.data.id}
-                postAComment={this.postAComment}
-                text='a Review'
-                param_name='reviews' />
+              onClick={()=> this.updateRenderedSection('Reviews')}>
               </Tab>
               <Tab id='hiring-tab'
                 label='Hiring Process'
                 value='Hiring Process'
-                onClick={()=> this.setState({ renderedSection: 'Interviews' })}>
-                <AddCompanyInfoPopUp company_id={this.props.data.id}
-                  postAComment={this.postAComment}
-                  text='an Interview Question'
-                  param_name='interview_questions' />
+                onClick={()=> this.updateRenderedSection('Hiring Information')}>
                 </Tab>
               </Tabs>
             </div>
             <div className='user-comments'>
+              <AddCompanyInfoPopUp company_id={this.props.data.id}
+                postAComment={this.postAComment}
+                text={this.state.text}
+                param_name={this.state.param_name} />
               <RenderCompanyComment className='scroll-comments' data={this.dataSelector()} user_id={this.state.user_id} company_id={this.props.data.id} deleteAComment={this.deleteAComment} />
             </div>
       </section>
