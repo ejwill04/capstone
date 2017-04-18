@@ -74,7 +74,7 @@ export default class CompanyProfile extends Component {
                 style={{'padding-bottom': '10px'}}
               />
               <CardText style={{'padding-top': '10px', 'padding-bottom': '10px'}}>
-                <a href={`mailto:${alum.email}`}><i className="material-icons">mail_outline</i></a>
+                {!alum.email ? <div></div> : <a href={`mailto:${alum.email}`}><i className="material-icons">mail_outline</i></a> }
                 <p>Slack: {alum.slack}</p>
               </CardText>
             </Card>
