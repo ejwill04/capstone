@@ -20,12 +20,12 @@ const Footer = () => {
       <Tabs>
         <Tab label='What is Neumann?'>
           <div className='tab'>
-            <p className="copy-text-headline" style={styles.headline}>Neumann allows Turing students and alumni to search for companies that have hired graduates.
-            Find company reviews from alumni, or leave your own.
-            Get information on the hiring process at companies that have employed grads.</p>
+            <p className="copy-text-headline" style={styles.headline}>Neumann allows Turing students and alumni to share and gather information about employers.<br/>
+            Got a job? Add your company, tell everyone why it's so great, and share info on how to get a job there.<br/>
+            Job seeker? Peruse companies where Turing alumni work and figure out how to work there.</p>
 
               <h3 className="copy-subtext">
-                Select a state from the dropdown menu to begin your search! Log in to contribute to Neumann.
+                Select a state from the dropdown menu to begin your search! Log in to begin contributing!
               </h3>
           </div>
         </Tab>
