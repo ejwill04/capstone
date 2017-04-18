@@ -118,6 +118,10 @@ export default class CompanyProfile extends Component {
             </Card>
           )
         })
+      } else {
+        return (
+          <p>No Alumni at this Company</p>
+        )
       }
   }
 
