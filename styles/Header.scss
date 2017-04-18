@@ -2,7 +2,6 @@
   margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
-  height: 150px;
   background-color: #2e3131;
 }
 
@@ -15,7 +14,7 @@
 }
 
 .company-btn-container {
-  margin: 20px;
+  margin-right: -30px;
 }
 
 .home-btn-container {
@@ -27,5 +26,5 @@
 }
 
 .user-home {
-  margin: 20px;
+  margin-left: -30px;
 }
