@@ -278,7 +278,7 @@ export default class AddCompanyPopUp extends Component {
                        onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow})}/>
             <TextField floatingLabelText='Slack handle'
                        hintText='@macDaddy'
-                       onChange={(e) => this.setState({slack: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({slack:  e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
             <TextField floatingLabelText='cohort'
                        hintText='1610'
                        onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
