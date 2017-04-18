@@ -22,8 +22,10 @@ export default class CompanyFooter extends Component {
   }
 
   componentWillMount() {
-    let user_id = JSON.parse(localStorage.profile).identities[0].user_id
-    this.setState({ user_id })
+    if (localStorage.profile) {
+      let user_id = JSON.parse(localStorage.profile).identities[0].user_id
+      this.setState({ user_id })
+    }
   }
 
   componentWillReceiveProps(newProps) {
