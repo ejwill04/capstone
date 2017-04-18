@@ -113,7 +113,7 @@ export default class CompanyProfile extends Component {
               <CardText>
                 <p>{alum.email}</p>
                 <p>Cohort: {alum.cohort}</p>
-                <p>Slack</p>
+                <p>Slack: {alum.slack}</p>
               </CardText>
             </Card>
           )
