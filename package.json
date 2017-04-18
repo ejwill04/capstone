@@ -47,6 +47,7 @@
     "express": "^4.15.2",
     "jwt-decode": "^2.2.0",
     "knex": "^0.12.8",
+    "material-design-icons": "^3.0.1",
     "material-ui": "^0.17.2",
     "moment": "^2.18.1",
     "nodemon": "^1.11.0",
