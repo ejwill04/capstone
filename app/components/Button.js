@@ -2,7 +2,7 @@ import React from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
-  margin: 20,
+  margin: 55,
 }
 
 const Button = (props) => (

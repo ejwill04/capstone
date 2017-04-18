@@ -4,10 +4,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import Button from './Button'
 import RaisedButton from 'material-ui/RaisedButton'
 const githubIcon = require('../photos/github.svg')
-import AuthService from '../helpers/AuthService'
-const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
-
-let userName = auth.getProfile()
 
 const checkForUser = (props)=> {
   if(localStorage.length === 0) {
@@ -22,11 +18,9 @@ const checkForUser = (props)=> {
   } else {
     return (
       <section className='header-container'>
-        <AddCompanyPopUp newCompanyAdded={props.newCompanyAdded}/>
+        <Button className='home-btn' title='Home' handleClick={()=> document.location.href='/'} />
         <aside className='company-user-login'>
-          <p className='user-name'>{userName.name}</p>
-          <Button className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
-          <Button className='home-btn' title='Home' handleClick={()=> document.location.href='/'} />
+          <AddCompanyPopUp newCompanyAdded={props.newCompanyAdded}/>
         </aside>
       </section>
     )
