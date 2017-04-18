@@ -108,11 +108,12 @@ export default class CompanyProfile extends Component {
               <CardHeader
                 className="alumni-card-name"
                 title={alum.name}
+                subtitle={`Cohort: ${alum.cohort}`}
                 avatar={alum.github_avatar}
               />
               <CardText>
+                {/* <p> {alum.cohort}</p> */}
                 <a href={`mailto:${alum.email}`} target='_blank'><i className="material-icons">mail_outline</i></a>
-                <p>Cohort: {alum.cohort}</p>
                 <p>Slack: {alum.slack}</p>
               </CardText>
             </Card>
@@ -142,11 +143,14 @@ export default class CompanyProfile extends Component {
       return (
         <section>
           <div className='information-container'>
+
+            <AddEmployeePopup companyId={this.state.company_id} updateUser={this.updateUser}/>
             <h1 className='profile-name'>{company.name}</h1>
-            <AddEmployeePopup companyId={this.state.company_id} updateUser={this.props.updateUser}/>
             <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
-            <h2 className='profile-alumni'>Alumni</h2>
-            <div className='alumni-container'>{this.displayAlums()}</div>
+            <div className='alumni-information'>
+              <h2 className='profile-alumni'>Alumni</h2>
+              <div className='alumni-container'>{this.displayAlums()}</div>
+            </div>
           </div>
           <CompanyFooter data={company} />
         </section>
