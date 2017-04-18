@@ -29,6 +29,7 @@ export default class AddCompanyPopUp extends Component {
       num_of_emp: '1-10',
       open: false,
       remote_ok: false,
+      requiredMessage: '',
       tech_stack: '',
       slack: '',
       state: '',
@@ -38,6 +39,7 @@ export default class AddCompanyPopUp extends Component {
     }
 
     this.updateStateState = this.updateStateState.bind(this)
+    this.checkFeilds = this.checkFeilds.bind(this)
   }
 
   postACompany() {
@@ -172,10 +174,23 @@ export default class AddCompanyPopUp extends Component {
 
   handleClose() {
     this.setState({ open: false });
+    this.setState({ requiredMessage: ''})
+  }
+
+  checkFeilds() {
+    let { name, city, state } = this.state
+
+    if(name === '' || city === '' || state === '') {
+      console.log('please fill out the required feilds')
+      this.setState({ requiredMessage: 'please fill out name, city, and state' })
+    } else {
+      this.postACompany()
+      this.handleClose()
+    }
   }
 
   handleSubmit() {
-    this.postACompany()
+    this.checkFeilds()
   }
 
   updateStateState(value) {
@@ -195,8 +210,9 @@ export default class AddCompanyPopUp extends Component {
         keyboardFocused={true}
         onTouchTap={(e) => {
           this.handleSubmit()
-          this.handleClose()}}
+          }}
       />,
+      <div>{this.state.requiredMessage}</div>
     ]
 
     return (
