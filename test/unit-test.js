@@ -1,29 +1,15 @@
-// import React from 'react'
-//
-// import { shallow, mount, render } from 'enzyme'
-// import { assert, expect } from 'chai'
-// import { spy } from 'sinon'
+import React from 'react'
+// import '../styles/index.scss'
 
-// const assert = require('chai').assert
-// import Button from '../app/components/Button'
-// import DeleteButton from '../app/components/DeleteButton'
-// import Footer from '../app/components/Footer'
-// import Header from '../app/components/Header'
+import { shallow, mount, render } from 'enzyme'
+import { assert, expect } from 'chai'
+import { spy } from 'sinon'
 
-// describe('Button', ()=> {
-//   it('should be a function', ()=> {
-//     assert.isFunction(Button)
-//   })
-// })
-//
-// describe('DeleteButton', ()=> {
-//   it('should be a function', ()=> {
-//     assert.isFunction(DeleteButton)
-//   })
-// })
+import App from '../app/components/App'
 
-// describe('Footer', ()=> {
-//   it('should be a function', ()=> {
-//     assert.isFunction(Footer)
-//   })
-// })
+describe('App', () => {
+  it('should render as a <div>', () => {
+    const wrapper = shallow(<App />)
+    assert.equal(wrapper.type(), 'div')
+  })
+})
