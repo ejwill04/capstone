@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import CityList from './CityList'
 import statesReference from './statesReference'
 
-
-
 export default class ResultsList extends Component {
   constructor(props) {
     super(props)

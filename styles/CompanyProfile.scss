@@ -30,13 +30,15 @@
 .alumni-container {
   display: flex;
   flex-flow: wrap;
-  justify-content: space-around;
+  // justify-content: space-around;
+  align-content: flex-start;
   overflow-y: scroll;
 }
 
 .alumni-card {
   width: 250px;
   line-height: 1.3;
+  margin: 5px;
 }
 
 .company-list-style {
