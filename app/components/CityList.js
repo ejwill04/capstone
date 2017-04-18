@@ -22,6 +22,7 @@ export default class CityList extends Component {
 
     let mappedCompanies = selectedCompanies.map(company => {
       return <IndividualCompany key={company.id}
+                                className='company'
                                 company_id={company.id}
                                 city={this.props.city}
                                 state={this.props.locationData[0].state}
