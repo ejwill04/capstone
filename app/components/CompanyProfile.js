@@ -103,7 +103,7 @@ export default class CompanyProfile extends Component {
         <section>
           <div className='information-container'>
 
-            <AddEmployeePopup companyId={this.state.company_id} updateUser={this.updateUser}/>
+            <AddEmployeePopup companyId={this.state.company_id} updateUser={this.props.updateUser}/>
             <h1 className='profile-name'>{company.name}</h1>
             <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
             <div className='alumni-information'>
