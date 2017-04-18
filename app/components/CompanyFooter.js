@@ -118,29 +118,33 @@ export default class CompanyFooter extends Component {
 
   render() {
     return (
-      <div id='company-footer'>
-        <Tabs tabItemContainerStyle={{backgroundColor: '#00C2D2'}}>
-          <Tab id='reviews-tab'
+      <section id='company-footer'>
+        <div className='company-footer'>
+          <Tabs tabItemContainerStyle={{backgroundColor: '#00C2D2'}}>
+            <Tab id='reviews-tab'
               label='Reviews'
               value='Reviews'
               onClick={()=> this.setState({ renderedSection: 'Reviews' })}>
-            <AddCompanyInfoPopUp company_id={this.props.data.id}
-                                 postAComment={this.postAComment}
-                                 text='a Review'
-                                 param_name='reviews' />
-          </Tab>
-          <Tab id='hiring-tab'
-              label='Hiring Process'
-              value='Hiring Process'
-              onClick={()=> this.setState({ renderedSection: 'Interviews' })}>
-            <AddCompanyInfoPopUp company_id={this.props.data.id}
-                                 postAComment={this.postAComment}
-                                 text='an Interview Question'
-                                 param_name='interview_questions' />
-          </Tab>
-        </Tabs>
-        <RenderCompanyComment data={this.dataSelector()} user_id={this.state.user_id} company_id={this.props.data.id} deleteAComment={this.deleteAComment} />
-      </div>
+              <AddCompanyInfoPopUp company_id={this.props.data.id}
+                postAComment={this.postAComment}
+                text='a Review'
+                param_name='reviews' />
+              </Tab>
+              <Tab id='hiring-tab'
+                label='Hiring Process'
+                value='Hiring Process'
+                onClick={()=> this.setState({ renderedSection: 'Interviews' })}>
+                <AddCompanyInfoPopUp company_id={this.props.data.id}
+                  postAComment={this.postAComment}
+                  text='an Interview Question'
+                  param_name='interview_questions' />
+                </Tab>
+              </Tabs>
+            </div>
+            <div className='user-comments'>
+              <RenderCompanyComment className='scroll-comments' data={this.dataSelector()} user_id={this.state.user_id} company_id={this.props.data.id} deleteAComment={this.deleteAComment} />
+            </div>
+      </section>
     )
   }
 }
