@@ -64,15 +64,17 @@ export default class CompanyProfile extends Component {
               expanded={false}
               key={i}
               className="alumni-card"
+              containerStyle={{'padding-bottom': '0px'}}
             >
               <CardHeader
                 className="alumni-card-name"
                 title={alum.name}
                 subtitle={`Cohort: ${alum.cohort}`}
                 avatar={alum.github_avatar}
+                style={{'padding-bottom': '10px'}}
               />
-              <CardText>
-                <a href={`mailto:${alum.email}`} target='_blank'><i className="material-icons">mail_outline</i></a>
+              <CardText style={{'padding-top': '10px', 'padding-bottom': '10px'}}>
+                <a href={`mailto:${alum.email}`}><i className="material-icons">mail_outline</i></a>
                 <p>Slack: {alum.slack}</p>
               </CardText>
             </Card>

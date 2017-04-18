@@ -42,49 +42,49 @@ const Footer = () => {
           <div className='tab'>
             <div className="about-us-container">
               <div className="gabi">
-                <a href="https://www.turing.io/alumni/gabi-procell">
+                <a href="https://www.turing.io/alumni/gabi-procell" target='_blank'>
                 <img
                 className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/gabrielle_procell_1024.jpg?itok=d4yChcTt"
                 />
               </a>
                 <p><a
-                  href="https://www.turing.io/alumni/gabi-procell" className="team-member-name">Gabi Procell</a></p>
+                  href="https://www.turing.io/alumni/gabi-procell" className="team-member-name" target='_blank'>Gabi Procell</a></p>
               </div>
               <div className="elijah">
-                <a href="https://www.turing.io/alumni/elijah-williams">
+                <a href="https://www.turing.io/alumni/elijah-williams" target='_blank'>
                 <img
                 className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/Headshot_2.jpg?itok=aIK-3Hgy"
                 />
                 </a>
                 <p><a
-                  href="https://www.turing.io/alumni/elijah-williams" className="team-member-name">Elijah Williams
+                  href="https://www.turing.io/alumni/elijah-williams" className="team-member-name" target='_blank'>Elijah Williams
                 </a></p>
               </div>
               <div className="devin">
-                <a href="https://www.turing.io/alumni/devin-beliveau">
+                <a href="https://www.turing.io/alumni/devin-beliveau" target='_blank'>
                 <img
                 className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/IMG_2112%20%281%29.jpg?itok=VOY6RwGz"
                 />
                 </a>
                 <p><a
-                  href="https://www.turing.io/alumni/devin-beliveau" className="team-member-name">Devin Beliveau</a></p>
+                  href="https://www.turing.io/alumni/devin-beliveau" className="team-member-name" target='_blank'>Devin Beliveau</a></p>
               </div>
               <div className="bekah">
-                <a href="https://www.turing.io/alumni/bekah-lundy"><img
+                <a href="https://www.turing.io/alumni/bekah-lundy" target='_blank'><img
                 className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/Rebekah%20Lundy.jpg?itok=pxqR9NyJ"
                 />
                 </a>
                 <p><a
-                  href="https://www.turing.io/alumni/bekah-lundy" className="team-member-name">Bekah Lundy</a></p>
+                  href="https://www.turing.io/alumni/bekah-lundy" className="team-member-name" target='_blank'>Bekah Lundy</a></p>
               </div>
               <div className="anna">
                 <a
-                href="https://www.turing.io/alumni/annastasia-psitos"><img
+                href="https://www.turing.io/alumni/annastasia-psitos" target='_blank'><img
                 className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/headshot%20%281%29.jpg?itok=OMn_qZas"
                 />
                 </a>
                 <p><a
-                href="https://www.turing.io/alumni/annastasia-psitos" className="team-member-name">Annastasia Psitos</a></p>
+                href="https://www.turing.io/alumni/annastasia-psitos" className="team-member-name" target='_blank'>Annastasia Psitos</a></p>
               </div>
             </div>
           </div>
