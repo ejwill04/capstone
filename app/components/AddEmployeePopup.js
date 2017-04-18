@@ -85,7 +85,7 @@ export default class AddEmployeePopup extends Component {
               <TextField floatingLabelText='Cohort Number'
                          hintText='1610'
                          defaultValue={this.state.cohort}
-                         onChange={(e) => this.setState({email: e.target.value})}></TextField>
+                         onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
               <Toggle    label='I work remotely'
                          labelPosition='right'
                          style={styles.toggle}

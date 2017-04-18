@@ -24,15 +24,13 @@
 .profile-name {
   margin-bottom: 20px;
   font-size: 48px;
-  // position: fixed;
 }
 
 .alumni-container {
   display: flex;
   flex-flow: wrap;
-  // justify-content: space-around;
   align-content: flex-start;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .alumni-card {
