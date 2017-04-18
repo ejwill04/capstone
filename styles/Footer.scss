@@ -1,19 +1,45 @@
+.about-us-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin:auto;
+  margin-top: 4%;
+}
+
+.team{
+  height:90px;
+  width:90px;
+  border-radius: 50px;
+  font-size: 36px;
+  color:#fff;
+  margin-bottom: 10%;
+}
+
+.team-member-name {
+  font:18px;
+  color:#B3B7B7;
+  margin-top:10%;
+}
 .copy-text-headline{
-  margin-top:1%;
-}
-
-.copy-subtext{
-  color: #B3B7B7;
-}
-
-.Neumann{
   color: #B3B7B7;
   font-size:18px;
   text-align: center;
   width:70%;
   margin:auto;
-  margin-top: 4.5%;
+  margin-top: 1%;
   line-height: 1.5;
+}
+
+.copy-subtext{
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover{
+  color: #00C2D2;
 }
 
 ul{
