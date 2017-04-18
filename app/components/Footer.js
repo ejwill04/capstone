@@ -15,19 +15,31 @@ const Footer = () => {
     return (
     <div id='footer'>
       <Tabs>
-        <Tab label='Search'>
+        <Tab label='What is Neumann?'>
           <div className='tab'>
-            <h2 className="copy-text" style={styles.headline}>Search for companies that have hired Turing graduates.</h2>
+            <h2 className="copy-text-headline" style={styles.headline}>Neumann allows Turing students and alumni to: </h2>
+            <ul>
+              <li className="copy-subtext">
+                Search for companies that have hired Turing graduates.
+              </li>
+              <li
+                className="copy-subtext">
+                Find company reviews from Turing alumni, or leave your own review.
+              </li>
+              <li className="copy-subtext">
+                Get information on the hiring process at companies that have employed Turing grads.
+              </li>
+            </ul>
           </div>
         </Tab>
-        <Tab label='Review'>
+        <Tab label='Who is Neumann?'>
           <div className='tab'>
-            <h2 className="copy-text" style={styles.headline}>Find company reviews from Turing alumni, or leave your own review.</h2>
+            <h2 className="copy-text" style={styles.headline}></h2>
           </div>
         </Tab>
-        <Tab label='Interview' >
+        <Tab label='Who are we?' >
           <div className='tab'>
-            <h2 className="copy-text" style={styles.headline}>Get information on the hiring process at companies that have employed Turing grads.</h2>
+            <h2 className="copy-text" style={styles.headline}></h2>
           </div>
         </Tab>
       </Tabs>
