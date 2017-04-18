@@ -9,16 +9,21 @@ export default class RenderCompanyComment extends Component {
     this.state  = {
     }
     this.renderDeleteBtn = this.renderDeleteBtn.bind(this)
+    this.confirmDelete = this.confirmDelete.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
     return newProps !== this.props
   }
 
+  confirmDelete() {
+
+  }
+
   renderDeleteBtn(user_id, id) {
     if (this.props.user_id === user_id) {
       return (
-      <div className='delete-btn'> 
+      <div className='delete-btn'>
         <DeleteButton handleClick={() => this.props.deleteAComment(id, this.props.company_id)}></DeleteButton>
       </div>
       )

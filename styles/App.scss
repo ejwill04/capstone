@@ -17,7 +17,7 @@ body {
 .dropdown-menu-container {
   display: flex;
   justify-content: center;
-  margin-top: 15%;
+  margin-top: 300px;
 }
 
 .title-container {
@@ -27,7 +27,8 @@ body {
 }
 
 .neumann-title {
-  font-family: 'Special Elite', cursive;
+  font-family: 'Cutive Mono', monospace;
+  margin-bottom: 70px;
   position: absolute;
   z-index: 3;
   font-size: 100px;

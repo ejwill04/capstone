@@ -5,13 +5,15 @@ const style = {
   marginRight: 20,
 }
 
+
+
 const DeleteButton = (props) => (
     <FloatingActionButton mini={true}
                           style={style}
                           children='x'
                           backgroundColor='#dbdbdb'
                           onClick={()=> props.handleClick()}>
-      </FloatingActionButton>
+    </FloatingActionButton>
 )
 
 export default DeleteButton
