@@ -18,7 +18,7 @@ export default class CompanyProfile extends Component {
     }
     this.getCompany = this.getCompany.bind(this)
     this.getUsers = this.getUsers.bind(this)
-    this.updateUser = this.updateUser.bind(this)
+    // this.updateUser = this.updateUser.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -58,43 +58,43 @@ export default class CompanyProfile extends Component {
     }
   }
 
-  updateUser(newUser) {
-    let { name, cohort, slack, email, remote } = newUser
-    let { company_id } = this.state
-    let id = JSON.parse(localStorage.profile).identities[0].user_id
-
-    let user = {
-      name,
-      cohort,
-      slack,
-      email,
-      company_id,
-      remote
-    }
-
-    fetch(`http://localhost:3000/api/v1/users/${id}`,
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'PUT',
-      body: JSON.stringify(
-        user
-      ),
-    })
-      .then((response) => response.json())
-      .then((payload) => {
-        if (Number(payload)){
-          fetch(`http://localhost:3000/api/v1/users/company/${company_id}`,
-          {
-            method: 'GET',
-          })
-          .then((response) => response.json())
-          .then((payload) => this.setState({ alums: payload }))
-        }
-      })
-  }
+  // updateUser(newUser) {
+  //   let { name, cohort, slack, email, remote } = newUser
+  //   let { company_id } = this.state
+  //   let id = JSON.parse(localStorage.profile).identities[0].user_id
+  //
+  //   let user = {
+  //     name,
+  //     cohort,
+  //     slack,
+  //     email,
+  //     company_id,
+  //     remote
+  //   }
+  //
+  //   fetch(`http://localhost:3000/api/v1/users/${id}`,
+  //   {
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json'
+  //     },
+  //     method: 'PUT',
+  //     body: JSON.stringify(
+  //       user
+  //     ),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((payload) => {
+  //       if (Number(payload)){
+  //         fetch(`http://localhost:3000/api/v1/users/company/${company_id}`,
+  //         {
+  //           method: 'GET',
+  //         })
+  //         .then((response) => response.json())
+  //         .then((payload) => this.setState({ alums: payload }))
+  //       }
+  //     })
+  // }
 
   displayAlums(){
     if(this.state.alums.length > 0){
@@ -108,11 +108,12 @@ export default class CompanyProfile extends Component {
               <CardHeader
                 className="alumni-card-name"
                 title={alum.name}
+                subtitle={`Cohort: ${alum.cohort}`}
                 avatar={alum.github_avatar}
               />
               <CardText>
-                <p>{alum.email}</p>
-                <p>Cohort: {alum.cohort}</p>
+                {/* <p> {alum.cohort}</p> */}
+                <a href={`mailto:${alum.email}`} target='_blank'><i className="material-icons">mail_outline</i></a>
                 <p>Slack: {alum.slack}</p>
               </CardText>
             </Card>
@@ -142,11 +143,14 @@ export default class CompanyProfile extends Component {
       return (
         <section>
           <div className='information-container'>
-            <h1 className='profile-name'>{company.name}</h1>
+
             <AddEmployeePopup companyId={this.state.company_id} updateUser={this.updateUser}/>
+            <h1 className='profile-name'>{company.name}</h1>
             <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
-            <h2 className='profile-alumni'>Alumni</h2>
-            <div className='alumni-container'>{this.displayAlums()}</div>
+            <div className='alumni-information'>
+              <h2 className='profile-alumni'>Alumni</h2>
+              <div className='alumni-container'>{this.displayAlums()}</div>
+            </div>
           </div>
           <CompanyFooter data={company} />
         </section>

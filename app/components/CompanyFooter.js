@@ -119,7 +119,7 @@ export default class CompanyFooter extends Component {
   render() {
     return (
       <div id='company-footer'>
-        <Tabs tabItemContainerStyle={{width: '250px', backgroundColor: '#00C2D2'}}>
+        <Tabs tabItemContainerStyle={{backgroundColor: '#00C2D2'}}>
           <Tab id='reviews-tab'
               label='Reviews'
               value='Reviews'
