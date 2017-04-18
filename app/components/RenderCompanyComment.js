@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DeleteButton from './DeleteButton'
-import ConfirmLink from 'react-confirm-dialog'
+// import ConfirmLink from 'react-confirm-dialog'
 
 import moment from 'moment'
 
