@@ -4,8 +4,6 @@ body {
 
 .user-login-container {
   float: right;
-  margin-top: -20px;
-  margin-right: -50px
 }
 
 .user-name {
@@ -17,6 +15,7 @@ body {
 }
 
 .dropdown-menu-container {
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   margin-top: 300px;
@@ -68,15 +67,4 @@ body {
 #turing-video {
   position: absolute;
   top: 0;
-}
-
-@media screen and (max-width: 1300px) {
-
-  #turing-video {
-    height: 700px;
-  }
-
-  #footer {
-    margin-top: -5%;
-  }
 }
