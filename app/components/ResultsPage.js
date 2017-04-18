@@ -14,6 +14,7 @@ export default class ResultsPage extends Component {
     }
     this.newCompanyAdded = this.newCompanyAdded.bind(this)
     this.fetchRequest = this.fetchRequest.bind(this)
+    this.updateUser = this.updateUser.bind(this)
   }
 
   fetchRequest(state) {
@@ -41,13 +42,51 @@ export default class ResultsPage extends Component {
     this.setState({ data: data })
   }
 
+  updateUser(newUser, company_id) {
+    let { name, cohort, slack, email, remote } = newUser
+    let id = JSON.parse(localStorage.profile).identities[0].user_id
+
+    let user = {
+      name,
+      cohort,
+      slack,
+      email,
+      company_id,
+      remote
+    }
+
+    fetch(`http://localhost:3000/api/v1/users/${id}`,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(
+        user
+      ),
+    })
+      .then((response) => response.json())
+      .then((payload) => {
+        if (Number(payload)){
+          fetch(`http://localhost:3000/api/v1/users/company/${company_id}`,
+          {
+            method: 'GET',
+          })
+          .then((response) => response.json())
+          .then((payload) => this.setState({ alums: payload }))
+          .then(()=> this.fetchRequest(this.state.state))
+        }
+      })
+  }
+
   render() {
     return (
       <div>
         <Header newCompanyAdded={this.newCompanyAdded} />
         <div className='resultspage-container'>
           <ResultsList data={this.state.data} stateSelected={this.state.state} />
-          <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} stateSelected={this.state.state} />
+          <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} stateSelected={this.state.state} updateUser={this.updateUser} />
         </div>
       </div>
     )

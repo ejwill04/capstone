@@ -51,9 +51,9 @@ export default class AddEmployeePopup extends Component {
   }
 
   handleSubmit() {
-    let {name, cohort, slack, email, remote} = this.state
+    let {name, cohort, slack, email, remote, company_id} = this.state
     let user = {name, cohort, slack, email, remote}
-    this.props.updateUser(user)
+    this.props.updateUser(user, company_id )
   }
 
   checkForUser(actions) {
