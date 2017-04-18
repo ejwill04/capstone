@@ -186,7 +186,6 @@ export default class AddCompanyPopUp extends Component {
     let { name, city, state } = this.state
 
     if(name === '' || city === '' || state === '') {
-      console.log('please fill out the required feilds')
       this.setState({ requiredMessage: 'Please fill out Company Name, City, and State' })
     } else {
       this.postACompany()
@@ -286,7 +285,7 @@ export default class AddCompanyPopUp extends Component {
                        hintText='macDaddy@daddymac.com'
                        onChange={(e) => this.setState({email: e.target.value})}></TextField>
         </Dialog>
-        <Button className="log-out-btn" title="Logout" handleClick={() => auth.logout()}/>
+        <Button className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
       </div>
     )
   }
