@@ -111,8 +111,8 @@ export default class CompanyProfile extends Component {
                 avatar={alum.github_avatar}
               />
               <CardText>
-                <a href={`mailto:${alum.email}`} target='_blank'><i className="material-icons">mail_outline</i></a>
                 <p>Cohort: {alum.cohort}</p>
+                <a href={`mailto:${alum.email}`} target='_blank'><i className="material-icons">mail_outline</i></a>
                 <p>Slack: {alum.slack}</p>
               </CardText>
             </Card>
