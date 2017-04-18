@@ -36,12 +36,11 @@ export default class DeleteButton extends Component {
              onClick={() => this.handleOpen()}>
             clear
           </i>
-          <Dialog title={`Are you sure you want to delete?`}
+          <Dialog title='Are you sure you want to delete?'
                   actions={actions}
                   modal={false}
                   open={this.state.open}
-                  onRequestClose={() => this.handleClose()}
-                  autoScrollBodyContent={true}>
+                  onRequestClose={() => this.handleClose()}>
           </Dialog>
         </div>
         )
