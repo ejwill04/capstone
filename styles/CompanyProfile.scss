@@ -1,6 +1,6 @@
 .companyprofile-container {
-  margin-left: 100px;
-  width: 66%;
+  margin-left: 50px;
+  width: 100%;
   height: 70%;
 }
 
@@ -19,11 +19,18 @@
 
 .information-container {
   height: 30vh;
+  width: 66%;
+  margin-left: 100px;
 }
 
 .profile-name {
   margin-bottom: 20px;
   font-size: 48px;
+}
+
+.alumni-information {
+  border-top: 1px solid #B3B7B7;
+  padding: 15px;
 }
 
 .alumni-container {
@@ -54,10 +61,11 @@
 //this is the container for reviews/interviews tabs and the sections
 #company-footer {
   display:block;
-  margin-top:100px;
+  margin-top:120px;
+  width: 100%;
   height: 400px;
   overflow-y: hidden;
-  background-color: #B3B7B7;
+  background-color: #2E3131;
 }
 
 .company-comment-wrapper {
