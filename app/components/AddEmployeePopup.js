@@ -77,7 +77,7 @@ export default class AddEmployeePopup extends Component {
                          onChange={(e) => this.setState({name: e.target.value})}></TextField>
               <TextField floatingLabelText='Slack Handle'
                          hintText='@quackquack'
-                         onChange={(e) => this.setState({slack: e.target.value})}></TextField>
+                         onChange={(e) => this.setState({slack:  e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
               <TextField floatingLabelText='Email Address'
                          hintText='quacking@gquack.com'
                          defaultValue={this.state.email}
