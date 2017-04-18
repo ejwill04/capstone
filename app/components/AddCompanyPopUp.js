@@ -187,7 +187,7 @@ export default class AddCompanyPopUp extends Component {
 
     if(name === '' || city === '' || state === '') {
       console.log('please fill out the required feilds')
-      this.setState({ requiredMessage: 'please fill out name, city, and state' })
+      this.setState({ requiredMessage: 'Please fill out Company Name, City, and State' })
     } else {
       this.postACompany()
       this.handleClose()
@@ -217,7 +217,7 @@ export default class AddCompanyPopUp extends Component {
           this.handleSubmit()
           }}
       />,
-      <div>{this.state.requiredMessage}</div>
+      <div className='required-error-message'>{this.state.requiredMessage}</div>
     ]
 
     return (
