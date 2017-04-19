@@ -5,11 +5,11 @@ import { shallow, mount, render } from 'enzyme'
 import { assert, expect } from 'chai'
 import { spy } from 'sinon'
 
-import App from '../app/components/App'
+import ResultsList from '../app/components/ResultsList'
 
-describe('App', () => {
+describe('ResultsList', () => {
   it('should render as a <div>', () => {
-    const wrapper = shallow(<App />)
+    const wrapper = shallow(<ResultsList data={ { locations: [] } } />)
     assert.equal(wrapper.type(), 'div')
   })
 })
