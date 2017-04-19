@@ -6,7 +6,6 @@ exports.up = function(knex, Promise) {
             table.string('industry');
             table.string('num_of_emp');
             table.string('tech_stack');
-            // tech_stack will be an array of technologies
             table.boolean('remote_ok');
             table.timestamps();
         }),

@@ -32,7 +32,7 @@ export default class AuthService {
       github_avatar
     }
 
-    fetch('/api/v1/users',
+    fetch('http://localhost:3000/api/v1/users',
     {
       headers: {
         'Accept': 'application/json',
@@ -60,7 +60,6 @@ export default class AuthService {
   }
   setProfile(profile) {
     localStorage.setItem('profile', JSON.stringify(profile))
-    // this.emit('profile_updated', profile)
   }
   getProfile() {
     const profile = localStorage.getItem('profile')

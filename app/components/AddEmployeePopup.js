@@ -14,7 +14,8 @@ const styles = {
   radioButton: {
     marginTop: 16,
   },
-};
+}
+
 export default class AddEmployeePopup extends Component {
   constructor() {
     super()
@@ -74,22 +75,22 @@ export default class AddEmployeePopup extends Component {
               <TextField floatingLabelText='Your Name'
                          hintText='Donald Duck'
                          defaultValue={this.state.name}
-                         onChange={(e) => this.setState({name: e.target.value})}></TextField>
+                         onChange={(e) => this.setState({ name: e.target.value })}></TextField>
               <TextField floatingLabelText='Slack Handle'
                          hintText='@quackquack'
-                         onChange={(e) => this.setState({slack:  e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
+                         onChange={(e) => this.setState({ slack: e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
               <TextField floatingLabelText='Email Address'
                          hintText='quacking@gquack.com'
                          defaultValue={this.state.email}
-                         onChange={(e) => this.setState({email: e.target.value})}></TextField>
+                         onChange={(e) => this.setState({ email: e.target.value })}></TextField>
               <TextField floatingLabelText='Cohort Number'
                          hintText='1610'
                          defaultValue={this.state.cohort}
-                         onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
+                         onChange={(e) => this.setState({ cohort: e.target.value })}></TextField>
               <Toggle    label='I work remotely'
                          labelPosition='right'
                          style={styles.toggle}
-                         onToggle={(e) => this.setState({ remote: !this.state.remote})}/>
+                         onToggle={(e) => this.setState({ remote: !this.state.remote })}/>
           </Dialog>
         </div>
         )

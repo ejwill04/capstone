@@ -42,7 +42,6 @@ export default class AddCompanyPopUp extends Component {
       value: 1,
       worksThereNow: false,
     }
-
     this.updateStateState = this.updateStateState.bind(this)
     this.checkFeilds = this.checkFeilds.bind(this)
     this.postACompany = this.postACompany.bind(this)
@@ -64,7 +63,7 @@ export default class AddCompanyPopUp extends Component {
       remote_ok,
       num_of_emp
     }
-    fetch('/api/v1/companies',
+    fetch('http://localhost:3000/api/v1/companies',
     {
       headers: {
         'Accept': 'application/json',
@@ -84,14 +83,14 @@ export default class AddCompanyPopUp extends Component {
   }
 
   postALocation(company_id) {
-    this.setState({ company_id: company_id})
+    this.setState({ company_id: company_id })
     let { city, state } = this.state
     let location = {
       city,
       state,
       company_id
     }
-    fetch('/api/v1/locations',
+    fetch('http://localhost:3000/api/v1/locations',
     {
       headers: {
         'Accept': 'application/json',
@@ -120,7 +119,7 @@ export default class AddCompanyPopUp extends Component {
       remote: remote_ok
     }
 
-    fetch(`/api/v1/users/${id}`,
+    fetch(`http://localhost:3000/api/v1/users/${id}`,
     {
       headers: {
         'Accept': 'application/json',
@@ -145,7 +144,7 @@ export default class AddCompanyPopUp extends Component {
       user_id,
       company_id
     }
-    fetch('/api/v1/reviews',
+    fetch('http://localhost:3000/api/v1/reviews',
       {
         headers: {
           'Accept': 'application/json',
@@ -166,7 +165,7 @@ export default class AddCompanyPopUp extends Component {
       user_id,
       company_id
     }
-    fetch('/api/v1/interview_questions',
+    fetch('http://localhost:3000/api/v1/interview_questions',
       {
         headers: {
           'Accept': 'application/json',
@@ -186,13 +185,13 @@ export default class AddCompanyPopUp extends Component {
 
   handleClose() {
     this.setState({ open: false });
-    this.setState({ requiredMessage: ''})
+    this.setState({ requiredMessage: '' })
   }
 
   checkFeilds() {
     let { name, city, state } = this.state
 
-    if(name === '' || city === '' || state === '') {
+    if (name === '' || city === '' || state === '') {
       this.setState({ requiredMessage: 'Please fill out Company Name, City, and State' })
     } else {
       this.postACompany()
@@ -205,7 +204,7 @@ export default class AddCompanyPopUp extends Component {
   }
 
   updateStateState(value) {
-    this.setState({state: value})
+    this.setState({ state: value })
   }
 
   render() {
@@ -241,51 +240,51 @@ export default class AddCompanyPopUp extends Component {
                 autoScrollBodyContent={true}>
             <TextField floatingLabelText='Company Name'
                        hintText='Ex: ABC Co.'
-                       onChange={(e) => this.setState({name: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({ name: e.target.value })}></TextField>
             <TextField floatingLabelText='City'
                        hintText='Ex: Denver'
-                       onChange={(e) => this.setState({city: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({ city: e.target.value })}></TextField>
             <PopUpStateDropDown updateStateState={this.updateStateState} />
             <TextField floatingLabelText='Industry'
                        hintText='Ex: Health'
-                       onChange={(e) => this.setState({industry: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({ industry: e.target.value })}></TextField>
             <SelectField
               floatingLabelText='# of Employees'
               value={this.state.value}
                           onChange={this.handleChange}>
                        <MenuItem value={1}
                                  primaryText='1-10'
-                                 onClick={(e) => this.setState({num_of_emp: '1-10', value: 1})}/>
+                                 onClick={(e) => this.setState({ num_of_emp: '1-10', value: 1 })}/>
                        <MenuItem value={2}
                                  primaryText='11-40'
-                                 onClick={(e) => this.setState({num_of_emp: '11-40', value: 2})}/>
+                                 onClick={(e) => this.setState({ num_of_emp: '11-40', value: 2 })}/>
                        <MenuItem value={3}
                                  primaryText='41-100'
-                                 onClick={(e) => this.setState({num_of_emp: '41-100', value: 3})}/>
+                                 onClick={(e) => this.setState({ num_of_emp: '41-100', value: 3 })}/>
                        <MenuItem value={4}
                                  primaryText='100+'
-                                 onClick={(e) => this.setState({num_of_emp: '100+', value: 4})}/></SelectField>
+                                 onClick={(e) => this.setState({ num_of_emp: '100+', value: 4 })}/></SelectField>
             <Toggle    label='I work remotely'
                        labelPosition='right'
                        style={styles.toggle}
-                       onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok})}/>
+                       onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok })}/>
             <TextField floatingLabelText='Tech Stack'
                        hintText='Ex: Java, React'
-                       onChange={(e) => this.setState({tech_stack: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({ tech_stack: e.target.value })}></TextField>
             <TextField floatingLabelText='Review'
                        hintText='Ex: ABC Co. has been an awesome experience...'
                        multiLine={true}
                        fullWidth={true}
-                       onChange={(e) => this.setState({message: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({ message: e.target.value })}></TextField>
             <TextField floatingLabelText='Hiring Process'
                        hintText='Time from application to hire, interview questions, number of interview rounds'
                        multiLine={true}
                        fullWidth={true}
-                       onChange={(e) => this.setState({interviewQuestion: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({ interviewQuestion: e.target.value })}></TextField>
             <Toggle    label='I currently work here'
                        labelPosition='right'
                        style={styles.toggle}
-                       onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow})}/>
+                       onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow })}/>
             <TextField floatingLabelText='Slack handle'
                        hintText='Ex: @firstlast'
                        onChange={(e) => this.setState({slack:  e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
@@ -294,7 +293,7 @@ export default class AddCompanyPopUp extends Component {
                        onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
             <TextField floatingLabelText='Email Address'
                        hintText='Ex: firstlast@gmail.com'
-                       onChange={(e) => this.setState({email: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({ email: e.target.value })}></TextField>
         </Dialog>
         <Button className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
       </div>

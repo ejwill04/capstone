@@ -487,7 +487,7 @@ describe('PUT /api/v1/companies/:id', () => {
     let company = {
       name: 'Glengarry Glen Ross',
       industry: 'Nowhere',
-      num_of_emp: 5,
+      num_of_emp: '5',
       tech_stack: '[do shit]'
     }
     chai.request(app)
