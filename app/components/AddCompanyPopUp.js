@@ -45,6 +45,14 @@ export default class AddCompanyPopUp extends Component {
 
     this.updateStateState = this.updateStateState.bind(this)
     this.checkFeilds = this.checkFeilds.bind(this)
+    this.postACompany = this.postACompany.bind(this)
+    this.postALocation = this.postALocation.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+    this.postAReview = this.postAReview.bind(this)
+    this.postAnInterviewQuestion = this.postAnInterviewQuestion.bind(this)
+    this.handleOpen = this.handleOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   postACompany() {
@@ -99,7 +107,6 @@ export default class AddCompanyPopUp extends Component {
         this.props.newCompanyAdded(this.state.state)
       })
   }
-
 
   updateUser(company_id) {
     let { cohort, slack, email, remote_ok } = this.state
@@ -230,7 +237,7 @@ export default class AddCompanyPopUp extends Component {
                 actions={actions}
                 modal={false}
                 open={this.state.open}
-                onRequestClose={() => this.handleClose()}
+                // onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
             <TextField floatingLabelText='Company Name'
                        hintText='Ex: ABC Co.'
