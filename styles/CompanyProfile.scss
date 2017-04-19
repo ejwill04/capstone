@@ -34,8 +34,9 @@
 .alumni-container {
   display: flex;
   flex-flow: wrap;
+  max-height: 20vh;
   align-content: flex-start;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 .alumni-card {
