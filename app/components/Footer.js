@@ -33,7 +33,7 @@ const Footer = () => {
           <div className='tab'>
             <p className='copy-text-headline'
             style={styles.headline}>John von Neumann was a Hungarian-American mathematician who worked with Alan Turing to build the first stored-program computer.
-            Neumann used Turing's idea of a single machine that can be used to compute any computable sequence.<br/>
+            Neumann used Turing's idea of a single machine that can be used to compute any computable sequence.
             He is considered to be one of the true fathers of computing.</p>
           </div>
         </Tab>
