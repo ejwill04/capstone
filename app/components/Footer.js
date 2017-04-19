@@ -20,12 +20,12 @@ const Footer = () => {
       <Tabs>
         <Tab label='What is Neumann?'>
           <div className='tab'>
-            <p className="copy-text-headline" style={styles.headline}>Neumann allows Turing students and alumni to search for companies that have hired graduates.
-            Find company reviews from alumni, or leave your own.
-            Get information on the hiring process at companies that have employed grads.</p>
+            <p className="copy-text-headline" style={styles.headline}>Neumann allows Turing students and alumni to share and gather information about employers.<br/>
+            Got a job? Add your company, tell everyone why it's so great, and share info on how to get a job there.<br/>
+            Job seeker? Peruse companies where Turing alumni work and figure out how to work there.</p>
 
               <h3 className="copy-subtext">
-                Select a state from the dropdown menu to begin your search! Log in to contribute to Neumann.
+                Select a state from the dropdown menu to begin your search! Log in to begin contributing!
               </h3>
           </div>
         </Tab>
@@ -39,51 +39,51 @@ const Footer = () => {
         </Tab>
         <Tab label='Who are we?' >
           <div className='tab'>
-            <div className="about-us-container">
-              <div className="gabi">
-                <a href="https://www.turing.io/alumni/gabi-procell" target='_blank'>
+            <div className='about-us-container'>
+              <div className='gabi'>
+                <a href='https://www.turing.io/alumni/gabi-procell' target='_blank'>
                 <img
-                className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/gabrielle_procell_1024.jpg?itok=d4yChcTt"
+                className='team' src='https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/gabrielle_procell_1024.jpg?itok=d4yChcTt'
                 />
               </a>
                 <p><a
-                  href="https://www.turing.io/alumni/gabi-procell" className="team-member-name" target='_blank'>Gabi Procell</a></p>
+                  href='https://www.turing.io/alumni/gabi-procell' className='team-member-name' target='_blank'>Gabi Procell</a></p>
               </div>
-              <div className="elijah">
-                <a href="https://www.turing.io/alumni/elijah-williams" target='_blank'>
+              <div className='elijah'>
+                <a href='https://www.turing.io/alumni/elijah-williams' target='_blank'>
                 <img
-                className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/Headshot_2.jpg?itok=aIK-3Hgy"
+                className='team' src='https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/Headshot_2.jpg?itok=aIK-3Hgy'
                 />
                 </a>
                 <p><a
-                  href="https://www.turing.io/alumni/elijah-williams" className="team-member-name" target='_blank'>Elijah Williams
+                  href='https://www.turing.io/alumni/elijah-williams' className='team-member-name' target='_blank'>Elijah Williams
                 </a></p>
               </div>
-              <div className="devin">
-                <a href="https://www.turing.io/alumni/devin-beliveau" target='_blank'>
+              <div className='devin'>
+                <a href='https://www.turing.io/alumni/devin-beliveau' target='_blank'>
                 <img
-                className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/IMG_2112%20%281%29.jpg?itok=VOY6RwGz"
+                className='team' src='https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/IMG_2112%20%281%29.jpg?itok=VOY6RwGz'
                 />
                 </a>
                 <p><a
-                  href="https://www.turing.io/alumni/devin-beliveau" className="team-member-name" target='_blank'>Devin Beliveau</a></p>
+                  href='https://www.turing.io/alumni/devin-beliveau' className='team-member-name' target='_blank'>Devin Beliveau</a></p>
               </div>
-              <div className="bekah">
-                <a href="https://www.turing.io/alumni/bekah-lundy" target='_blank'><img
-                className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/Rebekah%20Lundy.jpg?itok=pxqR9NyJ"
+              <div className='bekah'>
+                <a href='https://www.turing.io/alumni/bekah-lundy' target='_blank'><img
+                className='team' src='https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/Rebekah%20Lundy.jpg?itok=pxqR9NyJ'
                 />
                 </a>
                 <p><a
-                  href="https://www.turing.io/alumni/bekah-lundy" className="team-member-name" target='_blank'>Bekah Lundy</a></p>
+                  href='https://www.turing.io/alumni/bekah-lundy' className='team-member-name' target='_blank'>Bekah Lundy</a></p>
               </div>
-              <div className="anna">
+              <div className='anna'>
                 <a
-                href="https://www.turing.io/alumni/annastasia-psitos" target='_blank'><img
-                className="team" src="https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/headshot%20%281%29.jpg?itok=OMn_qZas"
+                href='https://www.turing.io/alumni/annastasia-psitos' target='_blank'><img
+                className='team' src='https://www.turing.io/sites/default/files/styles/graduate_full_profile/public/headshot%20%281%29.jpg?itok=OMn_qZas'
                 />
                 </a>
                 <p><a
-                href="https://www.turing.io/alumni/annastasia-psitos" className="team-member-name" target='_blank'>Annastasia Psitos</a></p>
+                href='https://www.turing.io/alumni/annastasia-psitos' className='team-member-name' target='_blank'>Annastasia Psitos</a></p>
               </div>
             </div>
           </div>
