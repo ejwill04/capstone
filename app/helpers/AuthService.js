@@ -60,7 +60,6 @@ export default class AuthService {
   }
   setProfile(profile) {
     localStorage.setItem('profile', JSON.stringify(profile))
-    // this.emit('profile_updated', profile)
   }
   getProfile() {
     const profile = localStorage.getItem('profile')
