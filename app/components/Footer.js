@@ -7,7 +7,7 @@ import ListItem from 'material-ui/List/ListItem'
 const styles = {
   headline: {
     color: '#B3B7B7',
-    fontSize: 24,
+    fontSize: 22,
     paddingTop: 16,
     marginBottom: 12,
     fontWeight: 400,
@@ -32,8 +32,7 @@ const Footer = () => {
         <Tab label='Who is Neumann?'>
           <div className='tab'>
             <p className='copy-text-headline'
-            style={styles.headline}>
-            John von Neumann was a Hungarian-American mathematician who worked with Alan Turing to build the first stored-program computer.
+            style={styles.headline}>John von Neumann was a Hungarian-American mathematician who worked with Alan Turing to build the first stored-program computer.
             Neumann used Turing's idea of a single machine that can be used to compute any computable sequence.
             He is considered to be one of the true fathers of computing.</p>
           </div>
