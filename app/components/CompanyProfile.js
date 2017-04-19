@@ -20,7 +20,7 @@ export default class CompanyProfile extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.state.company_id !== newProps.company_id) {
+    if (this.state.company_id !== newProps) {
       this.setState({ company_id: newProps.company_id })
       this.setState({ state: newProps.stateSelected })
       this.getCompany(newProps)
