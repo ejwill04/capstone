@@ -45,6 +45,7 @@ export default class ResultsPage extends Component {
   updateUser(newUser, company_id) {
     let { name, cohort, slack, email, remote } = newUser
     let id = JSON.parse(localStorage.profile).identities[0].user_id
+    console.log('id', id);
 
     let user = {
       name,
