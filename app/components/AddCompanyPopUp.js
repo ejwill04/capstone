@@ -56,7 +56,7 @@ export default class AddCompanyPopUp extends Component {
   }
 
   postACompany() {
-    let {name, industry, tech_stack, remote_ok, num_of_emp} = this.state
+    let {name, industry, tech_stack, remote_ok, num_of_emp, company_id} = this.state
     let company = {
       name,
       industry,
