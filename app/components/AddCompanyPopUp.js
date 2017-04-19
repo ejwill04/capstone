@@ -55,7 +55,8 @@ export default class AddCompanyPopUp extends Component {
   }
 
   postACompany() {
-    let {name, industry, tech_stack, remote_ok, num_of_emp, company_id} = this.state
+    let user_id = JSON.parse(localStorage.profile).identities[0].user_id
+    let {name, industry, tech_stack, remote_ok, num_of_emp } = this.state
     let company = {
       name,
       industry,
@@ -78,6 +79,8 @@ export default class AddCompanyPopUp extends Component {
       .then((company_id) => {
         this.postALocation(company_id)
         this.state.worksThereNow ? this.updateUser(company_id) : this.updateUser()
+        this.state.message !== '' ? this.postAReview(user_id) : null
+        this.state.interviewQuestion !== '' ? this.postAnInterviewQuestion(user_id) : null
         window.location.pathname = `/${this.state.state}`
       })
   }
@@ -131,10 +134,6 @@ export default class AddCompanyPopUp extends Component {
       ),
     })
       .then((response) => response.json())
-      .then((user_id) => {
-        this.state.message !== '' ? this.postAReview(user_id) : null
-        this.state.interviewQuestion !== '' ? this.postAnInterviewQuestion(user_id) : null
-      })
   }
 
   postAReview(user_id) {
@@ -158,7 +157,7 @@ export default class AddCompanyPopUp extends Component {
       .then((response) => response.json())
   }
 
-  postAnInterviewQuestion (user_id) {
+  postAnInterviewQuestion(user_id) {
     let { company_id, interviewQuestion } = this.state
     let interview_question = {
       message: interviewQuestion,
