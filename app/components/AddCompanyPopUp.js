@@ -64,7 +64,7 @@ export default class AddCompanyPopUp extends Component {
       remote_ok,
       num_of_emp
     }
-    fetch('/api/v1/companies',
+    fetch('httplocalhost:3000/api/v1/companies',
     {
       headers: {
         'Accept': 'application/json',
@@ -132,10 +132,10 @@ export default class AddCompanyPopUp extends Component {
       ),
     })
       .then((response) => response.json())
-      .then((user_id) => {
-        this.state.message !== '' ? this.postAReview(user_id) : null
-        this.state.interviewQuestion !== '' ? this.postAnInterviewQuestion(user_id) : null
-      })
+      // .then((user_id) => {
+      //   this.state.message !== '' ? this.postAReview(user_id) : null
+      //   this.state.interviewQuestion !== '' ? this.postAnInterviewQuestion(user_id) : null
+      // })
   }
 
   postAReview(user_id) {
@@ -272,7 +272,7 @@ export default class AddCompanyPopUp extends Component {
             <TextField floatingLabelText='Tech Stack'
                        hintText='Ex: Java, React'
                        onChange={(e) => this.setState({tech_stack: e.target.value})}></TextField>
-            <TextField floatingLabelText='Review'
+            {/* <TextField floatingLabelText='Review'
                        hintText='Ex: ABC Co. has been an awesome experience...'
                        multiLine={true}
                        fullWidth={true}
@@ -281,7 +281,7 @@ export default class AddCompanyPopUp extends Component {
                        hintText='Time from application to hire, interview questions, number of interview rounds'
                        multiLine={true}
                        fullWidth={true}
-                       onChange={(e) => this.setState({interviewQuestion: e.target.value})}></TextField>
+                       onChange={(e) => this.setState({interviewQuestion: e.target.value})}></TextField> */}
             <Toggle    label='I currently work here'
                        labelPosition='right'
                        style={styles.toggle}
