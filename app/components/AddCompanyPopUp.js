@@ -64,7 +64,7 @@ export default class AddCompanyPopUp extends Component {
       remote_ok,
       num_of_emp
     }
-    fetch('/api/v1/companies',
+    fetch('http://localhost:3000/api/v1/companies',
     {
       headers: {
         'Accept': 'application/json',
@@ -93,7 +93,7 @@ export default class AddCompanyPopUp extends Component {
       state,
       company_id
     }
-    fetch('/api/v1/locations',
+    fetch('http://localhost:3000/api/v1/locations',
     {
       headers: {
         'Accept': 'application/json',
@@ -122,7 +122,7 @@ export default class AddCompanyPopUp extends Component {
       remote: remote_ok
     }
 
-    fetch(`/api/v1/users/${id}`,
+    fetch(`http://localhost:3000/api/v1/users/${id}`,
     {
       headers: {
         'Accept': 'application/json',
@@ -143,7 +143,7 @@ export default class AddCompanyPopUp extends Component {
       user_id,
       company_id
     }
-    fetch('/api/v1/reviews',
+    fetch('http://localhost:3000/api/v1/reviews',
       {
         headers: {
           'Accept': 'application/json',
@@ -164,7 +164,7 @@ export default class AddCompanyPopUp extends Component {
       user_id,
       company_id
     }
-    fetch('/api/v1/interview_questions',
+    fetch('http://localhost:3000/api/v1/interview_questions',
       {
         headers: {
           'Accept': 'application/json',
