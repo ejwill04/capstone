@@ -64,7 +64,7 @@ export default class AddCompanyPopUp extends Component {
       remote_ok,
       num_of_emp
     }
-    fetch('httplocalhost:3000/api/v1/companies',
+    fetch('/api/v1/companies',
     {
       headers: {
         'Accept': 'application/json',
