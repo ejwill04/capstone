@@ -16,15 +16,12 @@ export default class CompanyProfile extends Component {
       state: ''
     }
     this.getCompany = this.getCompany.bind(this)
-    this.getUsers = this.getUsers.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
-    if (this.state.company_id !== newProps) {
-      this.setState({ company_id: newProps.company_id })
-      this.setState({ state: newProps.stateSelected })
+    if (newProps !== this.props) {
+      this.setState({ company_id: newProps.company_id, state: newProps.stateSelected })
       this.getCompany(newProps)
-      this.getUsers(newProps)
     }
   }
 
@@ -36,25 +33,11 @@ export default class CompanyProfile extends Component {
         })
         .then(response => response.json())
         .then(data => {
-          this.setState({ companyData: data })
+          this.setState({ companyData: data.companies, alums: data.users })
         })
         .catch(err => err)
       }
     }
-
-  getUsers(newProps) {
-    let company_id = newProps.company_id
-    if (Number(company_id)) {
-      fetch(`http://localhost:3000/api/v1/users/company/${company_id}`, {
-        method: 'GET',
-      })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ alums: data })
-      })
-      .catch(()=> this.setState({ alums: {} }))
-    }
-  }
 
   displayAlums(){
     if(this.state.alums.length > 0){
@@ -120,6 +103,7 @@ export default class CompanyProfile extends Component {
   }
 
   render() {
+    console.log('render', this.state.companyData[0])
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
     return (
         <MuiThemeProvider>
