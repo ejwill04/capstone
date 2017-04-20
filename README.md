@@ -8,6 +8,14 @@
 
 The application utilizes React, Node, Express, Knex, Sass, and auth0.  Areas we'd like to improve are adding responsiveness to the website and implementing Redux.
 
-[Link to Neumann](https://neumann.herokuapp.com/)
+Contributors
+
+[Elijah Williams](https://www.turing.io/alumni/elijah-williams)
+[Gabi Procell](https://www.turing.io/alumni/gabi-procell)
+[Devin Beliveau](https://www.turing.io/alumni/devin-beliveau)
+[Bekah Lundy](https://www.turing.io/alumni/bekah-lundy)
+[Annastasia Psitos](https://www.turing.io/alumni/annastasia-psitos)
+
+[Link to Neumann site](https://neumann.herokuapp.com/)
 
 
