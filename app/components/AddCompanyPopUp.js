@@ -268,6 +268,7 @@ export default class AddCompanyPopUp extends Component {
              <AutoComplete
                  floatingLabelText="City"
                  hintText='Ex. Denver'
+                 maxSearchResults={4}
                  onNewRequest={(city) => this.setState({ city })}
                  filter={AutoComplete.fuzzyFilter}
                  dataSource={this.state.allCities}

@@ -22,7 +22,7 @@ export default class PopUpStateDropDown extends Component {
         <SelectField floatingLabelText='State'
                      value={this.state.selectedState}
                      onChange={this.handleChange}
-                     maxHeight={160}
+                     maxHeight={180}
                      >
            <MenuItem value={'AL'} primaryText='Alabama' />
            <MenuItem value={'AK'} primaryText='Alaska' />
