@@ -70,7 +70,16 @@ export default class CompanyProfile extends Component {
       }
   }
 
+  show() {
+    for(let i = 0; i < this.state.alums.length; i ++) {
+      if(this.state.alums[i].company_id == this.state.company_id) {
+        return ( <i className='material-icons'>&#xE150;</i> )
+      }
+    }
+  }
+
   hideButtons(company) {
+    console.log(this.state.state);
     if(window.location.pathname === `/${this.state.state}`) {
       return (
         <section className='instructions-container'>
@@ -90,6 +99,7 @@ export default class CompanyProfile extends Component {
 
             <AddEmployeePopup companyId={this.state.company_id} updateUser={this.props.updateUser}/>
             <h1 className='profile-name'>{company.name}</h1>
+            {this.show()}
             <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
             <div className='alumni-information'>
               <h2 className='profile-alumni'>Alumni</h2>
