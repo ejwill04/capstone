@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
+import AutoComplete from 'material-ui/AutoComplete'
 
 import AuthService from '../helpers/AuthService'
 import config from '../../config.env'
@@ -24,6 +25,7 @@ export default class AddCompanyPopUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      allCities: [],
       city: '',
       cohort: '',
       company_id: '',
@@ -53,6 +55,11 @@ export default class AddCompanyPopUp extends Component {
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.getAllCities = this.getAllCities.bind(this)
+  }
+
+  componentDidMount() {
+    this.getAllCities()
   }
 
   postACompany() {
@@ -207,6 +214,20 @@ export default class AddCompanyPopUp extends Component {
     this.setState({ state: value })
   }
 
+  getAllCities() {
+    fetch('http://localhost:3000/api/v1/locations', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      let cityArray = data.map(el => {
+        return el.city
+      })
+      let uniqueCitiesArray = [...new Set(cityArray)]
+      this.setState({ allCities: uniqueCitiesArray})
+    })
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -244,6 +265,15 @@ export default class AddCompanyPopUp extends Component {
             <TextField floatingLabelText='City'
                        hintText='Ex: Denver'
                        onChange={(e) => this.setState({ city: e.target.value })}></TextField>
+             <AutoComplete
+                 floatingLabelText="City"
+                 hintText='Ex. Denver'
+                 onNewRequest={(city) => this.setState({ city })}
+                 filter={AutoComplete.fuzzyFilter}
+                 dataSource={this.state.allCities}
+                 onUpdateInput={(e) => this.setState({ city: e }) }
+                 openOnFocus
+               />
             <PopUpStateDropDown updateStateState={this.updateStateState} />
             <TextField floatingLabelText='Industry'
                        hintText='Ex: Health'
