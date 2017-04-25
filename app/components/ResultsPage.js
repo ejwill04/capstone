@@ -12,7 +12,6 @@ export default class ResultsPage extends Component {
       state: '',
       selectedCompany: ''
     }
-    this.newCompanyAdded = this.newCompanyAdded.bind(this)
     this.fetchRequest = this.fetchRequest.bind(this)
     this.updateUser = this.updateUser.bind(this)
   }
@@ -32,10 +31,6 @@ export default class ResultsPage extends Component {
     let state = this.props.params.state
     this.fetchRequest(state)
     this.setState({ state: this.props.params.state })
-  }
-
-  newCompanyAdded(state) {
-    this.fetchRequest(state)
   }
 
   getData(data) {
@@ -83,7 +78,7 @@ export default class ResultsPage extends Component {
   render() {
     return (
       <div>
-        <Header newCompanyAdded={this.newCompanyAdded} />
+        <Header fetchRequest={this.fetchRequest} />
         <div className='resultspage-container'>
           <ResultsList data={this.state.data} stateSelected={this.state.state} />
           <CompanyProfile data={this.state.data} company_id={window.location.pathname.slice(4)} stateSelected={this.state.state} updateUser={this.updateUser} />
