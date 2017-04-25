@@ -548,7 +548,7 @@ describe('PUT /api/v1/companies/:id', () => {
     })
   })
 
-  xit('it should not update anything if no body', (done) => {
+  it.only('it should not update anything if no body', (done) => {
     let originalName;
     let originalIndustry;
     let originalNum_of_emp;
@@ -566,23 +566,23 @@ describe('PUT /api/v1/companies/:id', () => {
       expect(res).to.be.json;
       expect(res.body).to.be.a('array');
       expect(res.body).to.have.length(1);
+      chai.request(app)
+      .put('/api/v1/companies/1')
+      .send()
+      .end((err, res) => {
+        if(err) { return done(err) }
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('array');
+        expect(res.body).to.have.length(1);
+        expect(res.body[0].name).to.be.equal(originalName);
+        expect(res.body[0].num_of_emp).to.be.equal(originalNum_of_emp);
+        expect(res.body[0].industry).to.be.equal(originalIndustry);
+        expect(res.body[0].tech_stack).to.be.equal(originalTech_stack);
+        done();
+      })
     })
 
-    chai.request(app)
-    .put('/api/v1/companies/1')
-    .send()
-    .end((err, res) => {
-      if(err) { return done(err) }
-      expect(res).to.have.status(200);
-      expect(res).to.be.json;
-      expect(res.body).to.be.a('array');
-      expect(res.body).to.have.length(1);
-      expect(res.body[0].name).to.be.equal(originalName);
-      expect(res.body[0].num_of_emp).to.be.equal(originalNum_of_emp);
-      expect(res.body[0].industry).to.be.equal(originalIndustry);
-      expect(res.body[0].tech_stack).to.be.equal(originalTech_stack);
-      done();
-    })
   })
 })
 
