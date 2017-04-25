@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import Avatar from 'material-ui/Avatar'
 import Button from './Button'
+import EditButton from './EditButton'
 import CompanyFooter from './CompanyFooter'
 import AddEmployeePopup from './AddEmployeePopup'
 
@@ -16,6 +17,7 @@ export default class CompanyProfile extends Component {
       state: ''
     }
     this.getCompany = this.getCompany.bind(this)
+    this.renderEditButton = this.renderEditButton.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -70,16 +72,27 @@ export default class CompanyProfile extends Component {
       }
   }
 
-  show() {
+  renderEditButton() {
     for(let i = 0; i < this.state.alums.length; i ++) {
+      this.getCity()
       if(this.state.alums[i].company_id == this.state.company_id) {
-        return ( <i className='material-icons'>&#xE150;</i> )
+        return (
+          <div className='edit-btn'>
+            <EditButton editaComment={this.props.editaComment}/>
+          </div>)
+      }
+    }
+  }
+
+  getCity() {
+    for(let i = 0; i < this.props.data.locations.length; i ++) {
+      if(this.props.data.locations[i].company_id == this.state.company_id) {
+        console.log(this.props.data.locations[i].city);
       }
     }
   }
 
   hideButtons(company) {
-    console.log(this.state.state);
     if(window.location.pathname === `/${this.state.state}`) {
       return (
         <section className='instructions-container'>
@@ -99,7 +112,7 @@ export default class CompanyProfile extends Component {
 
             <AddEmployeePopup companyId={this.state.company_id} updateUser={this.props.updateUser}/>
             <h1 className='profile-name'>{company.name}</h1>
-            {this.show()}
+            {this.renderEditButton()}
             <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
             <div className='alumni-information'>
               <h2 className='profile-alumni'>Alumni</h2>
@@ -113,7 +126,6 @@ export default class CompanyProfile extends Component {
   }
 
   render() {
-    console.log('render', this.state.companyData[0])
     let company = this.state.companyData[0] ? this.state.companyData[0] : {}
     return (
         <MuiThemeProvider>

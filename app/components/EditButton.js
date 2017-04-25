@@ -24,7 +24,7 @@ export default class EditButton extends Component {
   handleClose() {
     this.setState({ open: false })
   }
-
+  
   handleSubmit() {
     this.props.editaComment(this.props.id, this.props.company_id)
   }
@@ -34,7 +34,7 @@ export default class EditButton extends Component {
         <div>
           <i className='material-icons edit-btn'
              onClick={() => this.handleOpen()}>
-            create
+            &#xE150;
           </i>
           <Dialog title='Edit this company'
                   actions={actions}
@@ -49,7 +49,7 @@ export default class EditButton extends Component {
   render() {
     const actions = [
       <FlatButton
-        label='Edit'
+        label='Cancel'
         primary={true}
         onTouchTap={() => this.handleClose()}
       />,
