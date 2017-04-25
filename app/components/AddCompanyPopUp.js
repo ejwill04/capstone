@@ -262,9 +262,6 @@ export default class AddCompanyPopUp extends Component {
             <TextField floatingLabelText='Company Name'
                        hintText='Ex: ABC Co.'
                        onChange={(e) => this.setState({ name: e.target.value })}></TextField>
-            <TextField floatingLabelText='City'
-                       hintText='Ex: Denver'
-                       onChange={(e) => this.setState({ city: e.target.value })}></TextField>
              <AutoComplete
                  floatingLabelText="City"
                  hintText='Ex. Denver'
