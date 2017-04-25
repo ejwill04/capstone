@@ -8,6 +8,7 @@ import ProfileDetails from './ProfileDetails'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
 import Button from './Button'
+import AddCompanyPopUp from './AddCompanyPopUp'
 import statesReference from './statesReference'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -68,8 +69,7 @@ export default class App extends Component {
   logoutBtn() {
     return (
       <div className='user-login-container'>
-        <p className='user-name'>{this.state.user_profile.name}</p>
-        <Button className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
+        <AddCompanyPopUp />
       </div>
     )
   }
