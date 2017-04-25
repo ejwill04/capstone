@@ -223,7 +223,7 @@ app.get('/api/v1/users/company/:company_id', (request, response) => {
 // get all interview questions associated with a company
 app.get('/api/v1/interview_questions/company/:company_id', (request, response) => {
   const { company_id } = request.params
-  database('interview_questions').where('company_id', company_id).select()
+  database('interview_questions').where('company_id', company_id).select().orderBy('created_at', 'desc')
   .then(interview_questions => {
     response.status(200).json(interview_questions)
   })
@@ -235,7 +235,7 @@ app.get('/api/v1/interview_questions/company/:company_id', (request, response) =
 // get all reviews associated with a company
 app.get('/api/v1/reviews/company/:company_id', (request, response) => {
   const { company_id } = request.params
-  database('reviews').where('company_id', company_id).select()
+  database('reviews').where('company_id', company_id).select().orderBy('created_at', 'desc')
   .then(reviews => {
     response.status(200).json(reviews)
   })
@@ -331,7 +331,7 @@ app.post('/api/v1/interview_questions', (request, response) => {
 
   database('interview_questions').insert(interview_question)
   .then(() => {
-    database('interview_questions').where('company_id', company_id).select()
+    database('interview_questions').where('company_id', company_id).select().orderBy('created_at', 'desc')
     .then(interview_question => {
       response.status(200).json(interview_question)
     })
@@ -348,7 +348,7 @@ app.post('/api/v1/reviews', (request, response) => {
 
   database('reviews').insert(review)
   .then(() => {
-    database('reviews').where('company_id', company_id).select()
+    database('reviews').where('company_id', company_id).select().orderBy('created_at', 'desc')
     .then(review => {
       response.status(200).json(review)
     })
