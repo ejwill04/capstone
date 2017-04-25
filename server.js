@@ -381,7 +381,7 @@ app.put('/api/v1/companies/:id', (request, response) => {
   const { name, industry, num_of_emp, tech_stack } = request.body
   const company = { name, industry, num_of_emp, tech_stack }
   const updated_at = new Date
-
+  console.log(company);
   database('companies').where('id', id).update(company)
   .then(() => {
     database('companies').where('id', id).select()
@@ -390,6 +390,7 @@ app.put('/api/v1/companies/:id', (request, response) => {
       )
   })
   .catch(error => {
+    console.log(error)
     response.status(422).send('Could not update company')
   })
 })
