@@ -10,7 +10,8 @@ import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 
 import AuthService from '../helpers/AuthService'
-const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
+import config from '../../config.env'
+const auth = new AuthService(config.CLIENT_ID, 'gabitron.auth0.com')
 let userName = auth.getProfile()
 
 const styles = {

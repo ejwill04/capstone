@@ -131,14 +131,19 @@ app.get('/api/v1/users/:id', (request, response) => {
   })
 })
 
-// get a single company
+// get a single company and associated users
 app.get('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
 
   database('companies').where('id', id).select()
   .then(companies => {
     if (companies.length > 0) {
-      response.status(200).json(companies)
+      database('users').where('company_id', id).select()
+      .then((users) => response.status(200).json({
+        companies,
+        users
+      }))
+
     } else {
       response.status(404).send('Company not found')
     }
