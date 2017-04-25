@@ -1,48 +1,76 @@
-.about-us-container{
+.about-us-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-around;
-  margin:auto;
-  margin-top: 4%;
+  margin: 15px auto;
 }
 
-.team{
-  height:90px;
-  width:90px;
+.member-name {
+  margin: 10px;
+}
+
+.team-github-pic {
+  height: 90px;
+  width: 90px;
   border-radius: 50px;
   font-size: 36px;
-  color:#fff;
+  color: #fff;
   margin-bottom: 10%;
+
+  @media (max-width: 500px) {
+    height: 50px;
+    width: 50px;
+  }
 }
 
-.team-member-name:hover{
+.team-member-name:hover {
   color: #00C2D2;
 }
 
 .team-member-name {
-  font:18px;
-  color:#B3B7B7;
-  margin-top:10%;
-}
-.copy-text-headline{
+  font-size: 18px;
   color: #B3B7B7;
-  text-align: center;
-  width:85%;
-  margin:auto;
-  padding: 0px;
-  margin-top: 1%;
-  line-height: 1.5;
+  margin-top: 10%;
+
+  @media (max-width: 500px) {
+    font-size: 14px;
+  }
 }
 
-.copy-subtext{
+.copy-text-headline {
   color: #B3B7B7;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  margin: auto;
+  margin-top: 1%;
+  padding: 0px;
+  padding-top: 16px;
+  text-align: center;
+  width: 85%;
+
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
+}
+
+.copy-subtext {
+  color: #B3B7B7;
+
+  @media (max-width: 600px) {
+    font-size: 14px;
+    width: 80%;
+    margin: 5px auto;
+  }
 }
 
 a {
   text-decoration: none;
 }
 
-ul{
+ul {
   list-style: circle;
   text-align: left;
   display: flex;
@@ -52,13 +80,13 @@ ul{
 }
 
 #footer {
-  width: 100vw;
-  height: 40vh;
   background-color: #2E3131;
-  z-index: 2;
-  position: absolute;
-  left: 0;
   bottom: 0;
+  left: 0;
+  min-height: 300px;
+  position: absolute;
+  width: 100vw;
+  z-index: 2;
 }
 
 .footer-text {
@@ -66,13 +94,10 @@ ul{
   margin: 25px;
   line-height: 130%;
   font-size: 20px;
-  color: #B3B7B7;
+  // color: #B3B7B7;
 }
 
-.tab-text{
-  color:#B3B7B7;
-}
-
-.tab{
+.tab {
   text-align: center;
+  padding: 10px;
 }

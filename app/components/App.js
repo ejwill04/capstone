@@ -67,14 +67,6 @@ export default class App extends Component {
     ))
   }
 
-  logoutBtn() {
-    return (
-      <div className='user-login-container'>
-        <AddCompanyPopUp />
-      </div>
-    )
-  }
-
   loginBtn() {
     return (
       <RaisedButton className='github-btn'
@@ -92,7 +84,7 @@ export default class App extends Component {
       <MuiThemeProvider>
         <section>
           <div className='login-container'>
-            { localStorage.id_token ? this.logoutBtn() : this.loginBtn() }
+            { localStorage.id_token ? <AddCompanyPopUp /> : this.loginBtn() }
           </div>
           <aside className='title-container'>
             <h1 className='neumann-title'>Neumann</h1>
