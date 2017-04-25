@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
+import AutoComplete from 'material-ui/AutoComplete'
 
 import AuthService from '../helpers/AuthService'
 import config from '../../config.env'
@@ -24,6 +25,8 @@ export default class AddCompanyPopUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      allCities: [],
+      allIndustries: [],
       city: '',
       cohort: '',
       company_id: '',
@@ -53,6 +56,12 @@ export default class AddCompanyPopUp extends Component {
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.getAllCities = this.getAllCities.bind(this)
+  }
+
+  componentDidMount() {
+    this.getAllCities()
+    this.getAllIndustries()
   }
 
   postACompany() {
@@ -207,6 +216,38 @@ export default class AddCompanyPopUp extends Component {
     this.setState({ state: value })
   }
 
+  getAllCities() {
+    fetch('http://localhost:3000/api/v1/locations', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      let cityArray = data.map(el => {
+        return el.city
+      })
+      let uniqueCitiesArray = [...new Set(cityArray)]
+      this.setState({ allCities: uniqueCitiesArray})
+    })
+  }
+  getAllIndustries() {
+    fetch('http://localhost:3000/api/v1/companies', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      let companyArray = data.map(el => {
+        return el.name
+      })
+      let uniqueCompanyArray = [...new Set(companyArray)]
+      this.setState({ allCompanies: uniqueCompanyArray})
+      let industryArray = data.map(el => {
+        return el.industry
+      })
+      let uniqueIndustriesArray = [...new Set(industryArray)]
+      this.setState({ allIndustries: uniqueIndustriesArray})
+    })
+  }
+
   render() {
     const actions = [
       <FlatButton
@@ -238,16 +279,37 @@ export default class AddCompanyPopUp extends Component {
                 open={this.state.open}
                 onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
-            <TextField floatingLabelText='Company Name'
-                       hintText='Ex: ABC Co.'
-                       onChange={(e) => this.setState({ name: e.target.value })}></TextField>
-            <TextField floatingLabelText='City'
-                       hintText='Ex: Denver'
-                       onChange={(e) => this.setState({ city: e.target.value })}></TextField>
+             <AutoComplete
+                 floatingLabelText="Company Name"
+                 hintText='Ex. ABC Co.'
+                 maxSearchResults={4}
+                 onNewRequest={(name) => this.setState({ name })}
+                 filter={AutoComplete.fuzzyFilter}
+                 dataSource={this.state.allCompanies}
+                 onUpdateInput={(e) => this.setState({ name: e }) }
+                 openOnFocus
+               />
+             <AutoComplete
+                 floatingLabelText="City"
+                 hintText='Ex. Denver'
+                 maxSearchResults={4}
+                 onNewRequest={(city) => this.setState({ city })}
+                 filter={AutoComplete.fuzzyFilter}
+                 dataSource={this.state.allCities}
+                 onUpdateInput={(e) => this.setState({ city: e }) }
+                 openOnFocus
+               />
             <PopUpStateDropDown updateStateState={this.updateStateState} />
-            <TextField floatingLabelText='Industry'
-                       hintText='Ex: Health'
-                       onChange={(e) => this.setState({ industry: e.target.value })}></TextField>
+             <AutoComplete
+                 floatingLabelText="Industry"
+                 hintText='Ex. Health'
+                 maxSearchResults={4}
+                 onNewRequest={(industry) => this.setState({ industry })}
+                 filter={AutoComplete.fuzzyFilter}
+                 dataSource={this.state.allIndustries}
+                 onUpdateInput={(e) => this.setState({ industry: e }) }
+                 openOnFocus
+               />
             <SelectField
               floatingLabelText='# of Employees'
               value={this.state.value}
