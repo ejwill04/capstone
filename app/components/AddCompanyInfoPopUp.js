@@ -7,7 +7,10 @@ import Toggle from 'material-ui/Toggle'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
 import AuthService from '../helpers/AuthService'
-const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
+
+import config from '../../config.env'
+
+const auth = new AuthService(config.CLIENT_ID, 'gabitron.auth0.com')
 
 const styles = {
   radioButton: {
