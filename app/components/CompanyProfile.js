@@ -14,7 +14,8 @@ export default class CompanyProfile extends Component {
       companyData: {},
       alums: [],
       company_id: '',
-      state: ''
+      state: '',
+      cityName: ''
     }
     this.getCompany = this.getCompany.bind(this)
     this.renderEditButton = this.renderEditButton.bind(this)
@@ -24,8 +25,10 @@ export default class CompanyProfile extends Component {
     if (newProps !== this.props) {
       this.setState({ company_id: newProps.company_id, state: newProps.stateSelected })
       this.getCompany(newProps)
+      this.getCity(newProps)
     }
   }
+
 
   getCompany(newProps) {
       let company_id = newProps.company_id
@@ -74,20 +77,21 @@ export default class CompanyProfile extends Component {
 
   renderEditButton() {
     for(let i = 0; i < this.state.alums.length; i ++) {
-      this.getCity()
       if(this.state.alums[i].company_id == this.state.company_id) {
         return (
           <div className='edit-btn'>
-            <EditButton editaComment={this.props.editaComment}/>
+            <EditButton editaComment={this.props.editaComment}
+                        companyData={this.state.companyData}
+                        cityName={this.state.cityName}/>
           </div>)
       }
     }
   }
 
-  getCity() {
-    for(let i = 0; i < this.props.data.locations.length; i ++) {
-      if(this.props.data.locations[i].company_id == this.state.company_id) {
-        console.log(this.props.data.locations[i].city);
+  getCity(newProps) {
+    for(let i = 0; i < newProps.data.locations.length; i ++) {
+      if(newProps.data.locations[i].company_id == this.state.company_id) {
+        this.setState({ cityName: newProps.data.locations[i].city })
       }
     }
   }
