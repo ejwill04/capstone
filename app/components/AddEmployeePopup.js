@@ -7,8 +7,9 @@ import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
 import DropDownMenu from 'material-ui/DropDownMenu'
 import MenuItem from 'material-ui/MenuItem'
+import config from '../../config.env'
 import AuthService from '../helpers/AuthService'
-const auth = new AuthService('z3lAkZTSzkQjkiLGedtGuOcLRCe5czSd', 'gabitron.auth0.com')
+const auth = new AuthService(config.CLIENT_ID, 'gabitron.auth0.com')
 
 const styles = {
   radioButton: {
