@@ -1,29 +1,20 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
-import Toggle from 'material-ui/Toggle'
-import DropDownMenu from 'material-ui/DropDownMenu'
-import MenuItem from 'material-ui/MenuItem'
 import AuthService from '../helpers/AuthService'
 
 import config from '../../config.env'
 
 const auth = new AuthService(config.CLIENT_ID, 'gabitron.auth0.com')
 
-const styles = {
-  radioButton: {
-    marginTop: 16,
-  },
-}
-
 export default class AddCompanyInfoPopUp extends Component {
   constructor() {
     super()
     this.state = {
       open: false,
-      message: ''
+      message: '',
     }
   }
 
@@ -42,7 +33,7 @@ export default class AddCompanyInfoPopUp extends Component {
   }
 
   checkForUser(actions) {
-    if(localStorage.id_token) {
+    if (localStorage.id_token) {
       return (
         <div className='add-company-info'>
           <RaisedButton label={`Add ${this.props.text}`}
@@ -55,13 +46,12 @@ export default class AddCompanyInfoPopUp extends Component {
                   modal={false}
                   open={this.state.open}
                   onRequestClose={() => this.handleClose()}
-                  autoScrollBodyContent={true}>
+                  autoScrollBodyContent>
               <TextField floatingLabelText={`Your ${this.props.text}`}
                          hintText='Say something'
-                         multiLine={true}
-                         fullWidth={true}
-                         onChange={(e) => this.setState({ message: e.target.value })}>
-              </TextField>
+                         multiLine
+                         fullWidth
+                         onChange={(e) => this.setState({ message: e.target.value })} />
           </Dialog>
         </div>
         )
@@ -72,16 +62,17 @@ export default class AddCompanyInfoPopUp extends Component {
     const actions = [
       <FlatButton
         label='Cancel'
-        primary={true}
+        primary
         onTouchTap={() => this.handleClose()}
       />,
       <FlatButton
         label='Submit'
-        primary={true}
-        keyboardFocused={true}
+        primary
+        keyboardFocused
         onTouchTap={(e) => {
           this.handleSubmit()
-          this.handleClose()}}
+          this.handleClose()
+        }}
       />,
     ]
 

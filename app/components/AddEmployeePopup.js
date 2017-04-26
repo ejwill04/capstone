@@ -1,12 +1,9 @@
-import React, {Component} from 'react'
-import { showUsers } from './CompanyProfile'
+import React, { Component } from 'react'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
-import DropDownMenu from 'material-ui/DropDownMenu'
-import MenuItem from 'material-ui/MenuItem'
 import config from '../../config.env'
 import AuthService from '../helpers/AuthService'
 const auth = new AuthService(config.CLIENT_ID, 'gabitron.auth0.com')
@@ -27,12 +24,12 @@ export default class AddEmployeePopup extends Component {
       slack: '',
       email: '',
       cohort: '',
-      company_id: ''
+      company_id: '',
     }
   }
 
-  componentWillReceiveProps(newProps){
-    if(this.state.company_id !== newProps) {
+  componentWillReceiveProps(newProps) {
+    if (this.state.company_id !== newProps) {
       this.setState({ company_id: newProps.companyId })
     }
   }
@@ -53,13 +50,13 @@ export default class AddEmployeePopup extends Component {
   }
 
   handleSubmit() {
-    let {name, cohort, slack, email, remote, company_id} = this.state
-    let user = {name, cohort, slack, email, remote}
-    this.props.updateUser(user, company_id )
+    let { name, cohort, slack, email, remote, company_id } = this.state
+    let user = { name, cohort, slack, email, remote }
+    this.props.updateUser(user, company_id)
   }
 
   checkForUser(actions) {
-    if(localStorage.id_token) {
+    if (localStorage.id_token) {
       return (
         <div>
           <RaisedButton label='Add Yourself'
@@ -72,26 +69,26 @@ export default class AddEmployeePopup extends Component {
                   modal={false}
                   open={this.state.open}
                   onRequestClose={() => this.handleClose()}
-                  autoScrollBodyContent={true}>
+                  autoScrollBodyContent>
               <TextField floatingLabelText='Your Name'
                          hintText='Donald Duck'
                          defaultValue={this.state.name}
-                         onChange={(e) => this.setState({ name: e.target.value })}></TextField>
+                         onChange={(e) => this.setState({ name: e.target.value })} />
               <TextField floatingLabelText='Slack Handle'
                          hintText='@quackquack'
-                         onChange={(e) => this.setState({ slack: e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
+                         onChange={(e) => this.setState({ slack: e.target.value.substring(0, 1) === '@' ? e.target.value : `@${e.target.value}` })} />
               <TextField floatingLabelText='Email Address'
                          hintText='quacking@gquack.com'
                          defaultValue={this.state.email}
-                         onChange={(e) => this.setState({ email: e.target.value })}></TextField>
+                         onChange={(e) => this.setState({ email: e.target.value })} />
               <TextField floatingLabelText='Cohort Number'
                          hintText='1610'
                          defaultValue={this.state.cohort}
-                         onChange={(e) => this.setState({ cohort: e.target.value })}></TextField>
+                         onChange={(e) => this.setState({ cohort: e.target.value })} />
               <Toggle    label='I work remotely'
                          labelPosition='right'
                          style={styles.toggle}
-                         onToggle={(e) => this.setState({ remote: !this.state.remote })}/>
+                         onToggle={(e) => this.setState({ remote: !this.state.remote })} />
           </Dialog>
         </div>
         )
@@ -102,16 +99,17 @@ export default class AddEmployeePopup extends Component {
     const actions = [
       <FlatButton
         label='Cancel'
-        primary={true}
+        primary
         onTouchTap={() => this.handleClose()}
       />,
       <FlatButton
         label='Submit'
-        primary={true}
-        keyboardFocused={true}
+        primary
+        keyboardFocused
         onTouchTap={(e) => {
           this.handleSubmit()
-          this.handleClose()}}
+          this.handleClose()
+        }}
       />,
     ];
 
