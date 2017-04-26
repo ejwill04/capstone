@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PopUpStateDropDown from './PopUpStateDropDown'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
@@ -8,6 +8,7 @@ import TextField from 'material-ui/TextField'
 import Toggle from 'material-ui/Toggle'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
+import AutoComplete from 'material-ui/AutoComplete'
 
 import AuthService from '../helpers/AuthService'
 import config from '../../config.env'
@@ -24,6 +25,8 @@ export default class AddCompanyPopUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      allCities: [],
+      allIndustries: [],
       city: '',
       cohort: '',
       company_id: '',
@@ -53,29 +56,33 @@ export default class AddCompanyPopUp extends Component {
     this.handleOpen = this.handleOpen.bind(this)
     this.handleClose = this.handleClose.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.getAllCities = this.getAllCities.bind(this)
+  }
+
+  componentDidMount() {
+    this.getAllCities()
+    this.getAllIndustries()
   }
 
   postACompany() {
     let user_id = JSON.parse(localStorage.profile).identities[0].user_id
-    let {name, industry, tech_stack, remote_ok, num_of_emp } = this.state
+    let { name, industry, tech_stack, remote_ok, num_of_emp } = this.state
     let company = {
       name,
       industry,
       tech_stack,
       remote_ok,
-      num_of_emp
+      num_of_emp,
     }
     fetch('http://localhost:3000/api/v1/companies',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(
-        company
-      ),
-    })
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(company),
+      })
       .then((response) => response.json())
       .then((company_id) => {
         this.postALocation(company_id)
@@ -92,19 +99,19 @@ export default class AddCompanyPopUp extends Component {
     let location = {
       city,
       state,
-      company_id
+      company_id,
     }
     fetch('http://localhost:3000/api/v1/locations',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(
-        location
-      ),
-    })
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(
+          location
+        ),
+      })
       .then((response) => response.json())
       .then((payload) => {
         this.props.newCompanyAdded(this.state.state)
@@ -120,20 +127,20 @@ export default class AddCompanyPopUp extends Component {
       slack,
       email,
       company_id,
-      remote: remote_ok
+      remote: remote_ok,
     }
 
     fetch(`http://localhost:3000/api/v1/users/${id}`,
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'PUT',
-      body: JSON.stringify(
-        user
-      ),
-    })
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'PUT',
+        body: JSON.stringify(
+          user
+        ),
+      })
       .then((response) => response.json())
   }
 
@@ -142,13 +149,13 @@ export default class AddCompanyPopUp extends Component {
     let review = {
       message,
       user_id,
-      company_id
+      company_id,
     }
     fetch('http://localhost:3000/api/v1/reviews',
       {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         method: 'POST',
         body: JSON.stringify(
@@ -163,13 +170,13 @@ export default class AddCompanyPopUp extends Component {
     let interview_question = {
       message: interviewQuestion,
       user_id,
-      company_id
+      company_id,
     }
     fetch('http://localhost:3000/api/v1/interview_questions',
       {
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         method: 'POST',
         body: JSON.stringify(
@@ -207,20 +214,52 @@ export default class AddCompanyPopUp extends Component {
     this.setState({ state: value })
   }
 
+  getAllCities() {
+    fetch('http://localhost:3000/api/v1/locations', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      let cityArray = data.map(el => {
+        return el.city
+      })
+      let uniqueCitiesArray = [...new Set(cityArray)]
+      this.setState({ allCities: uniqueCitiesArray })
+    })
+  }
+  getAllIndustries() {
+    fetch('http://localhost:3000/api/v1/companies', {
+      method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+      let companyArray = data.map(el => {
+        return el.name
+      })
+      let uniqueCompanyArray = [...new Set(companyArray)]
+      this.setState({ allCompanies: uniqueCompanyArray })
+      let industryArray = data.map(el => {
+        return el.industry
+      })
+      let uniqueIndustriesArray = [...new Set(industryArray)]
+      this.setState({ allIndustries: uniqueIndustriesArray })
+    })
+  }
+
   render() {
     const actions = [
       <FlatButton
         label='Cancel'
-        primary={true}
+        primary
         onTouchTap={() => this.handleClose()}
       />,
       <FlatButton
         label='Submit'
-        primary={true}
-        keyboardFocused={true}
+        primary
+        keyboardFocused
         onTouchTap={(e) => {
           this.handleSubmit()
-          }}
+        }}
       />,
       <div className='required-error-message'>{this.state.requiredMessage}</div>
     ]
@@ -238,64 +277,86 @@ export default class AddCompanyPopUp extends Component {
                 open={this.state.open}
                 onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
-            <TextField floatingLabelText='Company Name'
-                       hintText='Ex: ABC Co.'
-                       onChange={(e) => this.setState({ name: e.target.value })}></TextField>
-            <TextField floatingLabelText='City'
-                       hintText='Ex: Denver'
-                       onChange={(e) => this.setState({ city: e.target.value })}></TextField>
+             <AutoComplete
+                 floatingLabelText='Company Name'
+                 hintText='Ex. ABC Co.'
+                 maxSearchResults={4}
+                 onNewRequest={(name) => this.setState({ name })}
+                 filter={AutoComplete.fuzzyFilter}
+                 dataSource={this.state.allCompanies}
+                 onUpdateInput={(e) => this.setState({ name: e })}
+                 openOnFocus
+               />
+             <AutoComplete
+                 floatingLabelText='City'
+                 hintText='Ex. Denver'
+                 maxSearchResults={4}
+                 onNewRequest={(city) => this.setState({ city })}
+                 filter={AutoComplete.fuzzyFilter}
+                 dataSource={this.state.allCities}
+                 onUpdateInput={(e) => this.setState({ city: e })}
+                 openOnFocus
+               />
             <PopUpStateDropDown updateStateState={this.updateStateState} />
-            <TextField floatingLabelText='Industry'
-                       hintText='Ex: Health'
-                       onChange={(e) => this.setState({ industry: e.target.value })}></TextField>
-            <SelectField
-              floatingLabelText='# of Employees'
-              value={this.state.value}
-                          onChange={this.handleChange}>
-                       <MenuItem value={1}
-                                 primaryText='1-10'
-                                 onClick={(e) => this.setState({ num_of_emp: '1-10', value: 1 })}/>
-                       <MenuItem value={2}
-                                 primaryText='11-40'
-                                 onClick={(e) => this.setState({ num_of_emp: '11-40', value: 2 })}/>
-                       <MenuItem value={3}
-                                 primaryText='41-100'
-                                 onClick={(e) => this.setState({ num_of_emp: '41-100', value: 3 })}/>
-                       <MenuItem value={4}
-                                 primaryText='100+'
-                                 onClick={(e) => this.setState({ num_of_emp: '100+', value: 4 })}/></SelectField>
-            <Toggle    label='I work remotely'
-                       labelPosition='right'
-                       style={styles.toggle}
-                       onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok })}/>
-            <TextField floatingLabelText='Tech Stack'
-                       hintText='Ex: Java, React'
-                       onChange={(e) => this.setState({ tech_stack: e.target.value })}></TextField>
-            <TextField floatingLabelText='Review'
-                       hintText='Ex: ABC Co. has been an awesome experience...'
-                       multiLine={true}
-                       fullWidth={true}
-                       onChange={(e) => this.setState({ message: e.target.value })}></TextField>
-            <TextField floatingLabelText='Hiring Process'
-                       hintText='Time from application to hire, interview questions, number of interview rounds'
-                       multiLine={true}
-                       fullWidth={true}
-                       onChange={(e) => this.setState({ interviewQuestion: e.target.value })}></TextField>
-            <Toggle    label='I currently work here'
-                       labelPosition='right'
-                       style={styles.toggle}
-                       onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow })}/>
-            <TextField floatingLabelText='Slack handle'
-                       hintText='Ex: @firstlast'
-                       onChange={(e) => this.setState({slack:  e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}`})}></TextField>
-            <TextField floatingLabelText='cohort'
-                       hintText='Ex: 1610'
-                       onChange={(e) => this.setState({cohort: e.target.value})}></TextField>
-            <TextField floatingLabelText='Email Address'
-                       hintText='Ex: firstlast@gmail.com'
-                       onChange={(e) => this.setState({ email: e.target.value })}></TextField>
+             <AutoComplete
+                 floatingLabelText='Industry'
+                 hintText='Ex. Health'
+                 maxSearchResults={4}
+                 onNewRequest={(industry) => this.setState({ industry })}
+                 filter={AutoComplete.fuzzyFilter}
+                 dataSource={this.state.allIndustries}
+                 onUpdateInput={(e) => this.setState({ industry: e })}
+                 openOnFocus
+               />
+          <SelectField
+            floatingLabelText='# of Employees'
+            value={this.state.value}
+                        onChange={this.handleChange}>
+                     <MenuItem value={1}
+                               primaryText='1-10'
+                               onClick={(e) => this.setState({ num_of_emp: '1-10', value: 1 })} />
+                     <MenuItem value={2}
+                               primaryText='11-40'
+                               onClick={(e) => this.setState({ num_of_emp: '11-40', value: 2 })} />
+                     <MenuItem value={3}
+                               primaryText='41-100'
+                               onClick={(e) => this.setState({ num_of_emp: '41-100', value: 3 })} />
+                     <MenuItem value={4}
+                               primaryText='100+'
+                               onClick={(e) => this.setState({ num_of_emp: '100+', value: 4 })} />
+          </SelectField>
+          <Toggle    label='I work remotely'
+                     labelPosition='right'
+                     style={styles.toggle}
+                     onToggle={(e) => this.setState({ remote_ok: !this.state.remote_ok })} />
+          <TextField floatingLabelText='Tech Stack'
+                     hintText='Ex: Java, React'
+                     onChange={(e) => this.setState({ tech_stack: e.target.value })} />
+          <TextField floatingLabelText='Review'
+                     hintText='Ex: ABC Co. has been an awesome experience...'
+                     multiLine={true}
+                     fullWidth={true}
+                     onChange={(e) => this.setState({ message: e.target.value })} />
+          <TextField floatingLabelText='Hiring Process'
+                     hintText='Time from application to hire, interview questions, number of interview rounds'
+                     multiLine={true}
+                     fullWidth={true}
+                     onChange={(e) => this.setState({ interviewQuestion: e.target.value })} />
+          <Toggle    label='I currently work here'
+                     labelPosition='right'
+                     style={styles.toggle}
+                     onToggle={(e) => this.setState({ worksThereNow: !this.state.worksThereNow })} />
+          <TextField floatingLabelText='Slack handle'
+                     hintText='Ex: @firstlast'
+                     onChange={(e) => this.setState({ slack:  e.target.value.substring(0,1) === '@' ? e.target.value : `@${e.target.value}` })} />
+          <TextField floatingLabelText='cohort'
+                     hintText='Ex: 1610'
+                     onChange={(e) => this.setState({ cohort: e.target.value })} />
+          <TextField floatingLabelText='Email Address'
+                     hintText='Ex: firstlast@gmail.com'
+                     onChange={(e) => this.setState({ email: e.target.value })} />
         </Dialog>
-        <Button className='log-out-btn' title='Logout' handleClick={() => auth.logout()}/>
+        <Button className='log-out-btn' title='Logout' handleClick={() => auth.logout()} />
       </div>
     )
   }
