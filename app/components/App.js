@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 import '../../styles/index.scss'
 const githubIcon = require('../photos/github.svg')
 
-import ProfileDetails from './ProfileDetails'
 import HeroVideo from './HeroVideo'
 import Footer from './Footer'
 import Button from './Button'
@@ -31,7 +30,7 @@ export default class App extends Component {
       availableStates: [],
       selectedState: 'CO',
       id_token: localStorage.id_token,
-      user_profile: auth.getProfile()
+      user_profile: auth.getProfile(),
     }
     this.handleStateChange = this.handleStateChange.bind(this)
     this.menuItems = this.menuItems.bind(this)
@@ -52,7 +51,7 @@ export default class App extends Component {
     .catch(err => err)
   }
 
-  handleStateChange(e,i,value) {
+  handleStateChange(e, i, value) {
     this.setState({ selectedState: value })
   }
 
@@ -60,7 +59,7 @@ export default class App extends Component {
     let { availableStates, selectedState } = this.state
     return availableStates.map(state => (
       <MenuItem key={state}
-                insetChildren={true}
+                insetChildren
                 checked={selectedState.includes(state)}
                 value={state}
                 primaryText={statesReference[state]} />
@@ -73,7 +72,7 @@ export default class App extends Component {
         backgroundColor='#00C2D2'
         label='Log in with'
         labelPosition='before'
-        icon={<img className='github-img' src={ githubIcon }/>}
+        icon={<img className='github-img' src={githubIcon} />}
         onClick={auth.login.bind(this)} />
       )
   }
@@ -98,10 +97,10 @@ export default class App extends Component {
                          style={dropDownStyles.customWidth}
                          labelStyle={{fontSize: '30px'}}
                          menuItemStyle={{fontSize: '24px', lineHeight: '35px'}}
-                         floatingLabelFixed={true}
+                         floatingLabelFixed
                          floatingLabelStyle={{color: '#ff4b8d', marginTop: '-25px', fontSize: '24px'}}
                          underlineStyle={{display: 'none'}}
-                         iconStyle={{fill: '#2E3131'}}
+                         iconStyle={{ fill: '#2E3131' }}
                          maxHeight={220} >
               {this.menuItems()}
             </SelectField>
@@ -116,10 +115,6 @@ export default class App extends Component {
       </MuiThemeProvider>
     )
   }
-}
-
-const style = {
-  margin: 18,
 }
 
 const dropDownStyles = {

@@ -1,13 +1,22 @@
 .header-container {
-  margin-bottom: 30px;
   display: flex;
   justify-content: space-between;
   height: 80px;
+  margin-bottom: 30px;
   background-color: #2e3131;
+
+  @media (max-width: 800px) {
+    background-color: #fff;
+  }
 }
 
 .company-btn-container {
   margin: 20px;
+
+  @media (max-width: 800px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 }
 
 .home-btn-container {

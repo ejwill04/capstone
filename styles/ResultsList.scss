@@ -1,10 +1,19 @@
 .results-container {
   width: 30%;
-  border-right: 1px solid #2E3131;
   padding-right: 15px;
+  border-right: 1px solid #2E3131;
+
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 }
 
 .state-selected {
-  font-size: 36px;
   margin-bottom: 50px;
+  font-size: 36px;
+
+  @media (max-width: 800px) {
+    margin-bottom: 20px;
+    text-align: center;
+  }
 }
