@@ -13,14 +13,15 @@ const styles = {
 }
 
 export default class EditButton extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       open: false,
       company_name: '',
       city: '',
       tech_stack:'',
-      numofemployees: ''
+      numofemployees: '',
+      value: this.props.companyData[0].num_of_emp,
     }
     this.editDialog = this.editDialog.bind(this)
   }
@@ -34,12 +35,11 @@ export default class EditButton extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state.company_name)
+    console.log(this.state.numofemployees)
   }
 
   retrieveCompanyInfo() {
     console.log(this.props.companyData)
-
   }
 
   editDialog(actions) {
@@ -68,21 +68,20 @@ export default class EditButton extends Component {
                           onChange={(e) =>  this.setState({ tech_stack: e.target.value }) }></TextField>
               <SelectField
                 floatingLabelText='# of Employees'
-                multiple={true}
-                value={this.props.companyData[0].num_of_emp}
-                            >
+                value={this.state.value}
+                 >
                          <MenuItem value={1}
                                    primaryText='1-10'
-                                   onClick={(e) => this.setState({ num_of_emp: '1-10', value: 1 })}/>
+                                   onClick={(e) => this.setState({ numofemployees: '1-10', value: 1 })}/>
                          <MenuItem value={2}
                                    primaryText='11-40'
-                                   onClick={(e) => this.setState({ num_of_emp: '11-40', value: 2 })}/>
+                                   onClick={(e) => this.setState({ numofemployees: '11-40', value: 2 })}/>
                          <MenuItem value={3}
                                    primaryText='41-100'
-                                   onClick={(e) => this.setState({ num_of_emp: '41-100', value: 3 })}/>
+                                   onClick={(e) => this.setState({ numofemployees: '41-100', value: 3 })}/>
                          <MenuItem value={4}
                                    primaryText='100+'
-                                   onClick={(e) => this.setState({ num_of_emp: '100+', value: 4 })}/></SelectField>
+                                   onClick={(e) => this.setState({ numofemployees: '100+', value: 4 })}/></SelectField>
           </Dialog>
         </div>
         )
