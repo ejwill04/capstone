@@ -34,7 +34,7 @@ export default class EditButton extends Component {
   }
 
   handleSubmit() {
-    this.props.editaComment(this.props.id, this.props.company_id)
+    console.log(this.state.company_name)
   }
 
   retrieveCompanyInfo() {
@@ -55,13 +55,17 @@ export default class EditButton extends Component {
                   open={this.state.open}
                   onRequestClose={() => this.handleClose()}>
               <TextField floatingLabelText='Company Name'
-                          defaultValue={this.props.companyData[0].name}></TextField>
+                          defaultValue={this.props.companyData[0].name}
+                          onChange={(e) =>  this.setState({ company_name: e.target.value }) }></TextField>
               <TextField floatingLabelText='City'
-                          defaultValue={this.props.cityName}></TextField>
+                          defaultValue={this.props.cityName}
+                          onChange={(e) =>  this.setState({ city: e.target.value }) }></TextField>
               <TextField floatingLabelText='Industry'
-                          defaultValue={this.props.companyData[0].industry}></TextField>
+                          defaultValue={this.props.companyData[0].industry}
+                          onChange={(e) =>  this.setState({ industry: e.target.value }) }></TextField>
               <TextField floatingLabelText='Tech Stack'
-                          defaultValue={this.props.companyData[0].tech_stack}></TextField>
+                          defaultValue={this.props.companyData[0].tech_stack}
+                          onChange={(e) =>  this.setState({ tech_stack: e.target.value }) }></TextField>
               <SelectField
                 floatingLabelText='# of Employees'
                 multiple={true}
@@ -92,7 +96,7 @@ export default class EditButton extends Component {
         onTouchTap={() => this.handleClose()}
       />,
       <FlatButton
-        label='Yes'
+        label='Save'
         primary={true}
         keyboardFocused={true}
         onTouchTap={(e) => {
