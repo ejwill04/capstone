@@ -20,7 +20,8 @@ export default class EditButton extends Component {
       company_name: '',
       city: '',
       tech_stack:'',
-      numofemployees: ''
+      employeeValue: '',
+      numofemployees: this.props.companyData[0].num_of_emp
     }
   }
 
@@ -61,21 +62,22 @@ export default class EditButton extends Component {
                           defaultValue={this.props.companyData[0].tech_stack}
                           onChange={(e) =>  this.setState({ tech_stack: e.target.value }) }></TextField>
               <SelectField
+                multiple={true}
                 floatingLabelText='# of Employees'
-                value={this.props.companyData[0].num_of_emp}
+                value={this.state.numofemployees}
                  >
                  <MenuItem value={1}
                            primaryText='1-10'
-                           onClick={(e) => this.setState({ numofemployees: '1-10', value: 1 })}/>
+                           onClick={(e) => this.setState({ numofemployees: '1-10', employeeValue: 1 })}/>
                  <MenuItem value={2}
                            primaryText='11-40'
-                           onClick={(e) => this.setState({ numofemployees: '11-40', value: 2 })}/>
+                           onClick={(e) => this.setState({numofemployees: '11-40', employeeValue: 2 })}/>
                  <MenuItem value={3}
                            primaryText='41-100'
-                           onClick={(e) => this.setState({ numofemployees: '41-100', value: 3 })}/>
+                           onClick={(e) => this.setState({numofemployees: '41-100', employeeValue: 3 })}/>
                  <MenuItem value={4}
                            primaryText='100+'
-                           onClick={(e) => this.setState({ numofemployees: '100+', value: 4 })}/>
+                           onClick={(e) => this.setState({ numofemployees: '100+', employeeValue: 4 })}/>
               </SelectField>
           </Dialog>
         </div>
@@ -101,6 +103,7 @@ export default class EditButton extends Component {
 
     return (
       <div>
+        {console.log(this.state.numofemployees)}
         {this.editDialog(actions)}
       </div>
     );
