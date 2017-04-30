@@ -65,10 +65,6 @@ export default class AddCompanyPopUp extends Component {
     this.getAllIndustries()
   }
 
-  clearCompanyError() {
-    this.setState({ companyExistsError: ''})
-  }
-
   checkCompany(e) {
     this.state.allCompanies.map((el) => {
       if (el === e.target.value) {
@@ -299,7 +295,6 @@ export default class AddCompanyPopUp extends Component {
                    onChange={(e) => {
                     this.setState({ name: e.target.value })
                     this.checkCompany(e)
-                    // this.clearCompanyError()
                     }}></TextField>
                     {this.state.companyExistsError}
              <AutoComplete
