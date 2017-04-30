@@ -81,6 +81,14 @@ body {
   width: 30px;
 }
 
+.mobile-img {
+  display:none;
+
+  @media (max-width: 1000px) {
+    display:block;
+  }
+}
+
 #turing-video {
   position: absolute;
   top: 0;

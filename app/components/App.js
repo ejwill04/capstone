@@ -88,6 +88,7 @@ export default class App extends Component {
           <aside className='title-container'>
             <h1 className='neumann-title'>Neumann</h1>
           </aside>
+          <img class="mobile-img" src={require('../photos/lovisa.png')} />
           <HeroVideo />
           <div className='dropdown-menu-container'>
             <SelectField className='dropdown'
