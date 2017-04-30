@@ -75,7 +75,6 @@ export default class CompanyProfile extends Component {
   }
 
   renderEditButton() {
-
     for(let i = 0; i < this.props.data.users.length; i ++) {
       if(this.props.data.users[i].company_id == this.props.company_id) {
         return (
