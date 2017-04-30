@@ -375,13 +375,12 @@ app.post('/api/v1/salaries', (request, response) => {
   })
 })
 
-// update company name
+// update company
 app.put('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
   const { name, industry, num_of_emp, tech_stack } = request.body
   const company = { name, industry, num_of_emp, tech_stack }
   const updated_at = new Date
-  console.log(company);
   database('companies').where('id', id).update(company)
   .then(() => {
     database('companies').where('id', id).select()
@@ -399,7 +398,6 @@ app.put('/api/v1/companies/:id', (request, response) => {
 app.put('/api/v1/users/:id', (request, response) => {
   const updated_at = new Date
   const { id } = request.params
-  console.log('user id', id)
   const { cohort, slack, email, name, company_id, remote } = request.body
   const user = { name, cohort, slack, email, remote, company_id, updated_at }
 
@@ -418,7 +416,6 @@ app.put('/api/v1/users/:id', (request, response) => {
 // delete company
 app.delete('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
-
   database('companies').where('id', id).select()
   .then((company) => {
     if (company.length === 0) {

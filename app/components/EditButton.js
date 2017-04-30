@@ -17,9 +17,10 @@ export default class EditButton extends Component {
     super(props)
     this.state = {
       open: false,
-      company_name: '',
+      name: '',
       city: '',
       tech_stack:'',
+      industry: '',
       value: 1,
       num_of_emp: ''
     }
@@ -34,7 +35,25 @@ export default class EditButton extends Component {
   }
 
   handleSubmit() {
-    console.log(this.state.num_of_emp)
+    let { name, tech_stack, industry, num_of_emp } = this.state
+    let company = {
+      name,
+      tech_stack,
+      industry,
+      num_of_emp
+    }
+
+    fetch(`http://localhost:3000/api/v1/companies/${this.props.companyData[0].id}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify(
+        company
+      )
+    })
+    .then((response) => response.json())
   }
 
   editDialog(actions) {
@@ -51,7 +70,7 @@ export default class EditButton extends Component {
                   onRequestClose={() => this.handleClose()}>
               <TextField floatingLabelText='Company Name'
                           defaultValue={this.props.companyData[0].name}
-                          onChange={(e) =>  this.setState({ company_name: e.target.value }) }></TextField>
+                          onChange={(e) =>  this.setState({ name: e.target.value }) }></TextField>
               <TextField floatingLabelText='City'
                           defaultValue={this.props.cityName}
                           onChange={(e) =>  this.setState({ city: e.target.value }) }></TextField>
@@ -102,6 +121,7 @@ export default class EditButton extends Component {
 
     return (
       <div>
+        {console.log(this.props.companyData[0].id)}
         {this.editDialog(actions)}
       </div>
     );
