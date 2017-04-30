@@ -30,6 +30,7 @@ export default class AddCompanyPopUp extends Component {
       city: '',
       cohort: '',
       company_id: '',
+      companyExistsError: '',
       email: '',
       industry: '',
       interviewQuestion: '',
@@ -62,6 +63,22 @@ export default class AddCompanyPopUp extends Component {
   componentDidMount() {
     this.getAllCities()
     this.getAllIndustries()
+  }
+
+  clearCompanyError() {
+    this.setState({ companyExistsError: ''})
+  }
+
+  checkCompany(e) {
+    this.state.allCompanies.map((el) => {
+      if (el === e.target.value) {
+        console.log('match');
+        this.setState({ companyExistsError: 'this company already exists on Nuemann, find company profile and add yourself there!'})
+      } else if (e.target.value === '')  {
+        console.log('nope');
+        this.setState({ companyExistsError: ''})
+      }
+    })
   }
 
   postACompany() {
@@ -277,16 +294,14 @@ export default class AddCompanyPopUp extends Component {
                 open={this.state.open}
                 onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
-             <AutoComplete
-                 floatingLabelText='Company Name'
-                 hintText='Ex. ABC Co.'
-                 maxSearchResults={4}
-                 onNewRequest={(name) => this.setState({ name })}
-                 filter={AutoComplete.fuzzyFilter}
-                 dataSource={this.state.allCompanies}
-                 onUpdateInput={(e) => this.setState({ name: e })}
-                 openOnFocus
-               />
+        <TextField floatingLabelText='Company Name'
+                   hintText='Ex: ABC Co.'
+                   onChange={(e) => {
+                    this.setState({ name: e.target.value })
+                    this.checkCompany(e)
+                    // this.clearCompanyError()
+                    }}></TextField>
+                    {this.state.companyExistsError}
              <AutoComplete
                  floatingLabelText='City'
                  hintText='Ex. Denver'
