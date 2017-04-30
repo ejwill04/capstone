@@ -378,8 +378,9 @@ app.post('/api/v1/salaries', (request, response) => {
 // update company
 app.put('/api/v1/companies/:id', (request, response) => {
   const { id } = request.params
-  const { name, industry, num_of_emp, tech_stack } = request.body
+  const { name, industry, num_of_emp, tech_stack, city } = request.body
   const company = { name, industry, num_of_emp, tech_stack }
+  const cityName = { city }
   const updated_at = new Date
   database('companies').where('id', id).update(company)
   .then(() => {
@@ -388,11 +389,27 @@ app.put('/api/v1/companies/:id', (request, response) => {
         response.status(200).json(updatedCompany)
       )
   })
+  .then(()=> {
+    database('locations').where('company_id', id).update(cityName)
+    .then(()=> {
+      database('locations').where('company_id', id).select()
+      .then(updatedCity => {
+        response.status(200).json(updatedCity)
+      })
+    })
+  })
   .catch(error => {
     console.log(error)
     response.status(422).send('Could not update company')
   })
 })
+
+//update city
+// app.put('api/v1/city/:id', (request, response)=> {
+//   const { id } = request.params
+//   const { city } = request.body
+//   database('locations').where('company_id', id).update(city)
+// })
 
 // update user
 app.put('/api/v1/users/:id', (request, response) => {

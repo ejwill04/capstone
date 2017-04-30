@@ -19,11 +19,21 @@ export default class EditButton extends Component {
       open: false,
       name: '',
       city: '',
-      tech_stack:'',
+      tech_stack: '',
       industry: '',
       value: 1,
       num_of_emp: ''
     }
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      name: newProps.companyData[0].name,
+      city: newProps.cityName,
+      tech_stack: newProps.companyData[0].tech_stack,
+      industry: newProps.companyData[0].industry,
+      num_of_emp: newProps.companyData[0].num_of_emp
+    })
   }
 
   handleOpen() {
@@ -35,14 +45,14 @@ export default class EditButton extends Component {
   }
 
   handleSubmit() {
-    let { name, tech_stack, industry, num_of_emp } = this.state
+    let { name, tech_stack, industry, num_of_emp, city } = this.state
     let company = {
       name,
-      tech_stack,
       industry,
-      num_of_emp
+      num_of_emp,
+      tech_stack,
+      city
     }
-
     fetch(`http://localhost:3000/api/v1/companies/${this.props.companyData[0].id}`, {
       headers: {
         'Accept': 'application/json',
@@ -54,6 +64,7 @@ export default class EditButton extends Component {
       )
     })
     .then((response) => response.json())
+    .then(location.reload())
   }
 
   editDialog(actions) {
@@ -69,16 +80,16 @@ export default class EditButton extends Component {
                   open={this.state.open}
                   onRequestClose={() => this.handleClose()}>
               <TextField floatingLabelText='Company Name'
-                          defaultValue={this.props.companyData[0].name}
+                          defaultValue={this.state.name}
                           onChange={(e) =>  this.setState({ name: e.target.value }) }></TextField>
               <TextField floatingLabelText='City'
-                          defaultValue={this.props.cityName}
+                          defaultValue={this.state.city}
                           onChange={(e) =>  this.setState({ city: e.target.value }) }></TextField>
               <TextField floatingLabelText='Industry'
-                          defaultValue={this.props.companyData[0].industry}
+                          defaultValue={this.state.industry}
                           onChange={(e) =>  this.setState({ industry: e.target.value }) }></TextField>
               <TextField floatingLabelText='Tech Stack'
-                          defaultValue={this.props.companyData[0].tech_stack}
+                          defaultValue={this.state.tech_stack}
                           onChange={(e) =>  this.setState({ tech_stack: e.target.value }) }></TextField>
               <SelectField
                 floatingLabelText='# of Employees'
@@ -121,7 +132,6 @@ export default class EditButton extends Component {
 
     return (
       <div>
-        {console.log(this.props.companyData[0].id)}
         {this.editDialog(actions)}
       </div>
     );
