@@ -29,7 +29,6 @@ export default class CompanyProfile extends Component {
     }
   }
 
-
   getCompany(newProps) {
       let company_id = newProps.company_id
       if (Number(company_id)) {
@@ -76,14 +75,17 @@ export default class CompanyProfile extends Component {
   }
 
   renderEditButton() {
-    for(let i = 0; i < this.state.alums.length; i ++) {
-      if(this.state.alums[i].company_id == this.state.company_id) {
+
+    for(let i = 0; i < this.props.data.users.length; i ++) {
+      if(this.props.data.users[i].company_id == this.props.company_id) {
         return (
           <div className='edit-btn'>
-            <EditButton editaComment={this.props.editaComment}
-                        companyData={this.state.companyData}
+            <EditButton companyData={this.state.companyData}
                         cityName={this.state.cityName}/>
-          </div>)
+          </div>
+        )
+      } else {
+        return null
       }
     }
   }
@@ -113,10 +115,9 @@ export default class CompanyProfile extends Component {
       return (
         <section>
           <div className='information-container'>
-
             <AddEmployeePopup companyId={this.state.company_id} updateUser={this.props.updateUser}/>
             <h1 className='profile-name'>{company.name}</h1>
-            {this.renderEditButton()}
+            {this.props.data.users ? this.renderEditButton() : null }
             <h2 className='profile-techstack'>Tech Stack: {company.tech_stack}</h2>
             <div className='alumni-information'>
               <h2 className='profile-alumni'>Alumni</h2>

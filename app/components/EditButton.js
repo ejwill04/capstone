@@ -20,10 +20,8 @@ export default class EditButton extends Component {
       company_name: '',
       city: '',
       tech_stack:'',
-      numofemployees: '',
-      value: this.props.companyData[0].num_of_emp,
+      numofemployees: ''
     }
-    this.editDialog = this.editDialog.bind(this)
   }
 
   handleOpen() {
@@ -36,10 +34,6 @@ export default class EditButton extends Component {
 
   handleSubmit() {
     console.log(this.state.numofemployees)
-  }
-
-  retrieveCompanyInfo() {
-    console.log(this.props.companyData)
   }
 
   editDialog(actions) {
@@ -68,20 +62,21 @@ export default class EditButton extends Component {
                           onChange={(e) =>  this.setState({ tech_stack: e.target.value }) }></TextField>
               <SelectField
                 floatingLabelText='# of Employees'
-                value={this.state.value}
+                value={this.props.companyData[0].num_of_emp}
                  >
-                         <MenuItem value={1}
-                                   primaryText='1-10'
-                                   onClick={(e) => this.setState({ numofemployees: '1-10', value: 1 })}/>
-                         <MenuItem value={2}
-                                   primaryText='11-40'
-                                   onClick={(e) => this.setState({ numofemployees: '11-40', value: 2 })}/>
-                         <MenuItem value={3}
-                                   primaryText='41-100'
-                                   onClick={(e) => this.setState({ numofemployees: '41-100', value: 3 })}/>
-                         <MenuItem value={4}
-                                   primaryText='100+'
-                                   onClick={(e) => this.setState({ numofemployees: '100+', value: 4 })}/></SelectField>
+                 <MenuItem value={1}
+                           primaryText='1-10'
+                           onClick={(e) => this.setState({ numofemployees: '1-10', value: 1 })}/>
+                 <MenuItem value={2}
+                           primaryText='11-40'
+                           onClick={(e) => this.setState({ numofemployees: '11-40', value: 2 })}/>
+                 <MenuItem value={3}
+                           primaryText='41-100'
+                           onClick={(e) => this.setState({ numofemployees: '41-100', value: 3 })}/>
+                 <MenuItem value={4}
+                           primaryText='100+'
+                           onClick={(e) => this.setState({ numofemployees: '100+', value: 4 })}/>
+              </SelectField>
           </Dialog>
         </div>
         )
@@ -107,7 +102,6 @@ export default class EditButton extends Component {
     return (
       <div>
         {this.editDialog(actions)}
-        {this.retrieveCompanyInfo()}
       </div>
     );
   }
