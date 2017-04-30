@@ -290,6 +290,17 @@ export default class AddCompanyPopUp extends Component {
                 open={this.state.open}
                 onRequestClose={() => this.handleClose()}
                 autoScrollBodyContent={true}>
+        <PopUpStateDropDown updateStateState={this.updateStateState} />
+        <AutoComplete
+            floatingLabelText='City'
+            hintText='Ex. Denver'
+            maxSearchResults={4}
+            onNewRequest={(city) => this.setState({ city })}
+            filter={AutoComplete.fuzzyFilter}
+            dataSource={this.state.allCities}
+            onUpdateInput={(e) => this.setState({ city: e })}
+            openOnFocus
+          />
         <TextField floatingLabelText='Company Name'
                    hintText='Ex: ABC Co.'
                    onChange={(e) => {
@@ -297,17 +308,6 @@ export default class AddCompanyPopUp extends Component {
                     this.checkCompany(e)
                     }}></TextField>
                     {this.state.companyExistsError}
-             <AutoComplete
-                 floatingLabelText='City'
-                 hintText='Ex. Denver'
-                 maxSearchResults={4}
-                 onNewRequest={(city) => this.setState({ city })}
-                 filter={AutoComplete.fuzzyFilter}
-                 dataSource={this.state.allCities}
-                 onUpdateInput={(e) => this.setState({ city: e })}
-                 openOnFocus
-               />
-            <PopUpStateDropDown updateStateState={this.updateStateState} />
              <AutoComplete
                  floatingLabelText='Industry'
                  hintText='Ex. Health'
