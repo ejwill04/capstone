@@ -21,7 +21,10 @@ body {
   align-items: flex-end;
   margin-top: 270px;
 
-  @media (max-width: 600px) {
+  // @media (max-width: 1000px) {
+  //
+  // }
+  @media (max-width: 1000px) {
     width: 80%;
     margin-top: 200px;
   }
@@ -41,7 +44,7 @@ body {
   font-size: 100px;
   top: 100px;
 
-  @media (max-width: 600px) {
+  @media (max-width: 1000px) {
     font-size: 60px;
     margin-bottom: 40px;
   }
@@ -81,11 +84,11 @@ body {
   width: 30px;
 }
 
-.mobile-img {
+.mobile-img img{
   display:none;
 
   @media (max-width: 1000px) {
-    display:block;
+    background-color: magenta;
   }
 }
 
