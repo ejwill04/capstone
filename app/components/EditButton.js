@@ -36,6 +36,7 @@ export default class EditButton extends Component {
     })
   }
 
+
   handleOpen() {
     this.setState({ open: true })
   }
