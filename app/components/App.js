@@ -37,7 +37,7 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    fetch(`/api/v1/locations`, {
+    fetch(`http://localhost:3000/api/v1/locations`, {
       method: 'GET',
     })
     .then(response => response.json())

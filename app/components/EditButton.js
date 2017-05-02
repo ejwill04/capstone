@@ -73,7 +73,7 @@ export default class EditButton extends Component {
       tech_stack,
       city
     }
-    fetch(`/api/v1/companies/${this.props.companyData[0].id}`, {
+    fetch(`http://localhost:3000/api/v1/companies/${this.props.companyData[0].id}`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
