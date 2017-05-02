@@ -77,6 +77,7 @@ export default class App extends Component {
       )
   }
 
+  // <img class="mobile-img" src={require('../photos/lovisa.png')} />
   render() {
     const { profile } = this.state
     return (
@@ -88,7 +89,7 @@ export default class App extends Component {
           <aside className='title-container'>
             <h1 className='neumann-title'>Neumann</h1>
           </aside>
-          <img class="mobile-img" src={require('../photos/lovisa.png')} />
+          <div className="hero-img"></div>
           <HeroVideo />
           <div className='dropdown-menu-container'>
             <SelectField className='dropdown'
