@@ -22,16 +22,13 @@ export default class CompanyProfile extends Component {
     this.renderEditButton = this.renderEditButton.bind(this)
     this.getUser = this.getUser.bind(this)
   }
-
-  componentWillMount() {
-    this.getUser()
-  }
-
+  
   componentWillReceiveProps(newProps) {
     if (newProps !== this.props) {
       this.setState({ company_id: newProps.company_id, state: newProps.stateSelected })
       this.getCompany(newProps)
       this.getCity(newProps)
+      this.getUser()
     }
   }
 
