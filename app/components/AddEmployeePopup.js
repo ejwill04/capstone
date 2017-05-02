@@ -35,8 +35,10 @@ export default class AddEmployeePopup extends Component {
   }
 
   handleOpen() {
+    console.log(this.props.updateUser)
     this.getLocalStorageData()
     this.setState({ open: true })
+    console.log(this.state.slack)
   }
 
   getLocalStorageData() {
@@ -83,7 +85,6 @@ export default class AddEmployeePopup extends Component {
                          onChange={(e) => this.setState({ email: e.target.value })} />
               <TextField floatingLabelText='Cohort Number'
                          hintText='1610'
-                         defaultValue={this.state.cohort}
                          onChange={(e) => this.setState({ cohort: e.target.value })} />
               <Toggle    label='I work remotely'
                          labelPosition='right'
