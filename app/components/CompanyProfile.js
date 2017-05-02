@@ -75,18 +75,18 @@ export default class CompanyProfile extends Component {
   }
 
   renderEditButton() {
-    for(let i = 0; i < this.props.data.users.length; i++) {
-      console.log('users company_id: ', this.props.data.users[i].company_id)
-      console.log('company_id: ', this.props.company_id)
-      console.log('props: ', this.props)
-      if(this.props.data.users[i].company_id == this.props.company_id) {
+    for (let i = 0; i < this.props.data.users.length; i++) {
+      if (this.props.data.users[i].company_id == this.props.company_id) {
+        console.log('users company_id: ', this.props.data.users[i].company_id)
+        console.log('company_id: ', this.props.company_id)
+        console.log('props: ', this.props)
         return (
           <div className='edit-btn'>
             <EditButton companyData={this.state.companyData}
                         cityName={this.state.cityName}/>
           </div>
         )
-      } 
+      }
     }
   }
 
