@@ -22,7 +22,7 @@ export default class CompanyProfile extends Component {
     this.renderEditButton = this.renderEditButton.bind(this)
     this.getUser = this.getUser.bind(this)
   }
-  
+
   componentWillReceiveProps(newProps) {
     if (newProps !== this.props) {
       this.setState({ company_id: newProps.company_id, state: newProps.stateSelected })
@@ -35,7 +35,7 @@ export default class CompanyProfile extends Component {
   getCompany(newProps) {
     let company_id = newProps.company_id
     if (Number(company_id)) {
-      fetch(`/api/v1/companies/${company_id}`, {
+      fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
         method: 'GET',
       })
       .then(response => response.json())
@@ -49,7 +49,7 @@ export default class CompanyProfile extends Component {
   getUser() {
     let user_id = JSON.parse(localStorage.profile).identities[0].user_id
     if (user_id) {
-      fetch(`/api/v1/users/${user_id}`, {
+      fetch(`http://localhost:3000/api/v1/users/${user_id}`, {
         method: 'GET',
       })
       .then(response => response.json())
