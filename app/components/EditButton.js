@@ -34,6 +34,7 @@ export default class EditButton extends Component {
       industry: newProps.companyData[0].industry,
       num_of_emp: newProps.companyData[0].num_of_emp
     })
+    this.checkValue(this.state.num_of_emp)
   }
 
 
@@ -43,6 +44,24 @@ export default class EditButton extends Component {
 
   handleClose() {
     this.setState({ open: false })
+  }
+
+  checkValue(value) {
+    switch(value) {
+      case '1-10':
+        return this.setState({ value: 1 })
+        break
+      case '11-40':
+        return this.setState({ value: 2 })
+        break
+      case '41-100':
+        return this.setState({ value: 3 })
+        break
+      case '100+':
+        return this.setState({ value: 4 })
+        break
+      default: 1
+    }
   }
 
   handleSubmit() {
