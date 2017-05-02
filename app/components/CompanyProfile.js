@@ -92,10 +92,10 @@ export default class CompanyProfile extends Component {
   }
 
   renderEditButton() {
+    console.log('users obj: ', this.state.user)
+    console.log('company_id: ', this.props.company_id)
+    console.log('props: ', this.props)
     if (this.state.user.company_id == this.props.company_id) {
-      console.log('users company_id: ', this.state.user.company_id)
-      console.log('company_id: ', this.props.company_id)
-      console.log('props: ', this.props)
       return (
         <div className='edit-btn'>
           <EditButton companyData={this.state.companyData}
