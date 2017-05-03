@@ -15,10 +15,12 @@ export default class CompanyProfile extends Component {
       alums: [],
       company_id: '',
       state: '',
-      cityName: ''
+      cityName: '',
+      user: ''
     }
     this.getCompany = this.getCompany.bind(this)
     this.renderEditButton = this.renderEditButton.bind(this)
+    this.getUser = this.getUser.bind(this)
   }
 
   componentWillReceiveProps(newProps) {
@@ -26,22 +28,37 @@ export default class CompanyProfile extends Component {
       this.setState({ company_id: newProps.company_id, state: newProps.stateSelected })
       this.getCompany(newProps)
       this.getCity(newProps)
+      this.getUser()
     }
   }
 
   getCompany(newProps) {
-      let company_id = newProps.company_id
-      if (Number(company_id)) {
-        fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
-          method: 'GET',
-        })
-        .then(response => response.json())
-        .then(data => {
-          this.setState({ companyData: data.companies, alums: data.users })
-        })
-        .catch(err => err)
-      }
+    let company_id = newProps.company_id
+    if (Number(company_id)) {
+      fetch(`http://localhost:3000/api/v1/companies/${company_id}`, {
+        method: 'GET',
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ companyData: data.companies, alums: data.users })
+      })
+      .catch(err => err)
     }
+  }
+
+  getUser() {
+    let user_id = JSON.parse(localStorage.profile).identities[0].user_id
+    if (user_id) {
+      fetch(`http://localhost:3000/api/v1/users/${user_id}`, {
+        method: 'GET',
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ user: data })
+      })
+      .catch(err => err)
+    }
+  }
 
   displayAlums(){
     if(this.state.alums.length > 0){
@@ -75,17 +92,13 @@ export default class CompanyProfile extends Component {
   }
 
   renderEditButton() {
-    for(let i = 0; i < this.props.data.users.length; i ++) {
-      if(this.props.data.users[i].company_id == this.props.company_id) {
-        return (
-          <div className='edit-btn'>
-            <EditButton companyData={this.state.companyData}
-                        cityName={this.state.cityName}/>
-          </div>
-        )
-      } else {
-        return null
-      }
+    if (this.state.user[0].company_id == this.props.company_id) {
+      return (
+        <div className='edit-btn'>
+          <EditButton companyData={this.state.companyData}
+                      cityName={this.state.cityName}/>
+        </div>
+      )
     }
   }
 

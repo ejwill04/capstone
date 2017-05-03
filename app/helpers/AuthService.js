@@ -1,5 +1,4 @@
 import Auth0Lock from 'auth0-lock'
-import { Link } from 'react-router'
 
 export default class AuthService {
   constructor(clientId, domain) {
@@ -7,7 +6,7 @@ export default class AuthService {
     this.lock.on('authenticated', this._doAuthentication.bind(this))
     this.login = this.login.bind(this)
   }
-  _doAuthentication(authResult){
+  _doAuthentication(authResult) {
     this.setToken(authResult.idToken)
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       if (error) {
@@ -29,38 +28,43 @@ export default class AuthService {
       id,
       name,
       github_url,
-      github_avatar
+      github_avatar,
     }
 
     fetch('http://localhost:3000/api/v1/users',
-    {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST',
-      body: JSON.stringify(
-        user
-      ),
-    })
+      {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(
+          user
+        ),
+      })
     .then((response) => response.json())
   }
 
   login() {
     this.lock.show()
   }
-  loggedIn(){
+
+  loggedIn() {
     return !!this.getToken()
   }
-  setToken(idToken){
+
+  setToken(idToken) {
     localStorage.setItem('id_token', idToken)
   }
-  getToken(){
+
+  getToken() {
     return localStorage.getItem('id_token')
   }
+
   setProfile(profile) {
     localStorage.setItem('profile', JSON.stringify(profile))
   }
+
   getProfile() {
     const profile = localStorage.getItem('profile')
     return profile ? JSON.parse(localStorage.profile) : {}
@@ -69,6 +73,6 @@ export default class AuthService {
   logout() {
     localStorage.removeItem('profile')
     localStorage.removeItem('id_token')
-    document.location.href='/'
+    document.location.href = '/'
   }
 }

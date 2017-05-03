@@ -18,8 +18,8 @@ const Footer = () => {
       <Tabs>
         <Tab className='footer-tab-header' label='What is Neumann?' style={{ fontSize: tabHeaderStyle() }}>
           <div className='tab'>
-            <p className="copy-text-headline">Neumann allows Turing students and alumni to share and gather information about employers.<br/>
-            Got a job? Add your company, tell everyone why it's so great, and share info on how to get a job there.<br/>
+            <p className="copy-text-headline">Neumann allows Turing students and alumni to share and gather information about employers.
+            Got a job? Add your company, tell everyone why it's so great, and share info on how to get a job there.
             Job seeker? Peruse companies where Turing alumni work and figure out how to work there.</p>
 
               <h3 className="copy-subtext">
@@ -30,7 +30,7 @@ const Footer = () => {
         <Tab className='footer-tab-header' label='Who is Neumann?' style={{ fontSize: tabHeaderStyle() }}>
           <div className='tab'>
             <p className='copy-text-headline'>John von Neumann was a Hungarian-American mathematician who worked with Alan Turing to build the first stored-program computer.
-            Neumann used Turing's idea of a single machine that can be used<br /> to compute any computable sequence.
+            Neumann used Turing's idea of a single machine that can be used to compute any computable sequence.
             He is considered to be one of the true fathers of computing.</p>
           </div>
         </Tab>

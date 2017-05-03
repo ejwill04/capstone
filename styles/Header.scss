@@ -5,17 +5,8 @@
   margin-bottom: 30px;
   background-color: #2e3131;
 
-  @media (max-width: 800px) {
-    background-color: #fff;
-  }
-}
-
-.company-btn-container {
-  margin: 20px;
-
-  @media (max-width: 800px) {
-    display: flex;
-    flex-direction: column-reverse;
+  @media (max-width: 370px) {
+    height: 140px;
   }
 }
 
@@ -23,10 +14,45 @@
   background-color: #2e3131;
 }
 
+.company-btn-container {
+  @media (max-width: 390px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: -8px;
+  }
+
+  @media (max-width: 370px) {
+    position: relative;
+    margin-top: 22px;
+    margin-left: 35px;
+  }
+}
+
 .user-name {
-  margin-right: 30px;
+  margin: 8px 30px 0 0;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 20px;
+  color: #B3B7B7;
+
+  @media (max-width: 590px) {
+    display: none;
+  }
 }
 
 .user-home {
-  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  margin-bottom: 30px;
+  background-color: #2e3131;
+
+  @media (max-width: 390px) {
+    margin-left: -10px;
+  }
+
+  @media (max-width: 370px) {
+    margin-left: 0px;
+  }
 }
