@@ -2,28 +2,14 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-.user-name {
-  margin-top: 8px;
-  display: inline-block;
-  font-weight: bold;
-  font-size: 20px;
-  color: #B3B7B7;
-
-  @media (max-width: 500px) {
-    display: none;
-  }
-}
-
 .dropdown-menu-container {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  margin-top: 200px;
+  align-items: baseline;
   margin-top: 270px;
 
-  // @media (max-width: 1000px) {
-  //
-  // }
   @media (max-width: 1000px) {
     width: 80%;
     margin-top: 200px;
@@ -86,13 +72,11 @@ body {
 
 .hero-img{
   @media (max-width: 1000px){
-    // background-color: magenta;
     height:60vh;
     width:100vw;
     background-image: url("../app/photos/computer.png");
     background-size: 100vw 60vh;
     position:absolute;
-    // background-image: radial-gradient(50% 182%, #FFFFFF 45%, rgba(119,117,117,0.98) 100%);
   }
 }
 

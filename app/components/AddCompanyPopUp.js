@@ -280,7 +280,7 @@ export default class AddCompanyPopUp extends Component {
     return (
       <div className='company-btn-container'>
         <p className='user-name'>{userName.name}</p>
-        <RaisedButton label='Add A Company'
+        <RaisedButton label='Add Company'
                       className='add-company-btn'
                       backgroundColor='#00C2D2'
                       onTouchTap={() => this.handleOpen()} />
