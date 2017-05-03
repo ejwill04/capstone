@@ -22,6 +22,29 @@ const auth = new AuthService(config.CLIENT_ID, 'gabitron.auth0.com')
 
 injectTapEventPlugin()
 
+const itemFontSize = () => {
+  if (window.innerWidth <= 320) {
+    return '12px'
+  } else {
+    return '24px'
+  }
+}
+const selectionFontSize = () => {
+  if (window.innerWidth <= 320) {
+    return '14px'
+  } else {
+    return '30px'
+  }
+}
+const floatingLabelFontSize = () => {
+  if (window.innerWidth <= 320) {
+    return '18px'
+  } else {
+    return '24px'
+  }
+}
+
+
 export default class App extends Component {
 
   constructor(props, context) {
@@ -77,7 +100,6 @@ export default class App extends Component {
       )
   }
 
-  // <img class="mobile-img" src={require('../photos/lovisa.png')} />
   render() {
     const { profile } = this.state
     return (
@@ -97,10 +119,10 @@ export default class App extends Component {
                          value={this.state.selectedState}
                          onChange={ this.handleStateChange }
                          style={dropDownStyles.customWidth}
-                         labelStyle={{fontSize: '30px'}}
-                         menuItemStyle={{fontSize: '24px', lineHeight: '35px'}}
+                         labelStyle={{fontSize: selectionFontSize()}}
+                         menuItemStyle={{fontSize: itemFontSize(), lineHeight: '35px'}}
                          floatingLabelFixed
-                         floatingLabelStyle={{color: '#ff4b8d', marginTop: '-25px', fontSize: '24px'}}
+                         floatingLabelStyle={{color: '#ff4b8d', marginTop: '-25px', fontSize: floatingLabelFontSize()}}
                          underlineStyle={{display: 'none'}}
                          iconStyle={{ fill: '#2E3131' }}
                          maxHeight={220} >
