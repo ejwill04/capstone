@@ -18,17 +18,42 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: baseline;
   margin-top: 270px;
 
-  // @media (max-width: 1000px) {
-  //
-  // }
   @media (max-width: 1000px) {
     width: 80%;
     margin-top: 200px;
   }
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width:60%;
+  } //iphone5
 }
+
+#undefined-undefined-SelectAState-54747 {
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    font-size:20px;
+  } //iphone5
+
+}
+// .dropdown-menu-container label {
+//   @media only screen
+//   and (min-device-width: 375px)
+//   and (max-device-width: 667px)
+//   and (-webkit-min-device-pixel-ratio: 2) {
+//     line-height: 10px;
+//     font-size:10px;
+//     height:50%;
+//   }//iphone6
+//
+// }
 
 .title-container {
   position: relative;
@@ -47,6 +72,14 @@ body {
   @media (max-width: 1000px) {
     font-size: 60px;
     margin-bottom: 40px;
+  }
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    font-size: 40px;
+    margin-top: 10%;
   }
 }
 
@@ -73,6 +106,14 @@ body {
     width: 100%;
     text-align: center;
   }
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    margin-left: 20%;
+    width: 60%;
+  }
 }
 
 .log-in {
@@ -92,7 +133,6 @@ body {
     background-image: url("../app/photos/computer.png");
     background-size: 100vw 60vh;
     position:absolute;
-    // background-image: radial-gradient(50% 182%, #FFFFFF 45%, rgba(119,117,117,0.98) 100%);
   }
 }
 

@@ -87,6 +87,13 @@ ul {
   position: absolute;
   width: 100vw;
   z-index: 2;
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    height: 50%;
+  }
 }
 
 .footer-text {
