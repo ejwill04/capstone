@@ -6,7 +6,6 @@ body {
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  margin-top: 200px;
   align-items: baseline;
   margin-top: 270px;
 
@@ -14,6 +13,46 @@ body {
     width: 80%;
     margin-top: 200px;
   }
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width:40%;
+  } //iphone5
+}
+
+.company-btn-container{
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    height: 20px;
+  } //iphone5
+  @media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    margin-left: 20%;
+  } //iphone 6
+}
+
+.add-company-btn{
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    margin-top: 5px;
+  } //iphone5
+}
+
+.log-out-btn{
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+  } //iphone5
 }
 
 .title-container {
@@ -34,6 +73,14 @@ body {
     font-size: 60px;
     margin-bottom: 40px;
   }
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    font-size: 40px;
+    margin-top: 12%;
+  }
 }
 
 .state-tag {
@@ -46,6 +93,15 @@ body {
 
 .github-btn {
   margin: 20px;
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    margin-left: 35px;
+    width: 80%;
+  }
+
 }
 
 .login-container {
@@ -59,15 +115,29 @@ body {
     width: 100%;
     text-align: center;
   }
-}
 
-.log-in {
-  display: inline-block;
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    width: 100vw;
+    display:flex;
+    flex-direction: row;
+  }
 }
 
 .github-img {
   height: 30px;
   width: 30px;
+
+  @media only screen
+  and (min-device-width: 320px)
+  and (max-device-width: 568px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    height: 20px;
+    width: 20px;
+  }
+
 }
 
 .hero-img{
@@ -78,6 +148,15 @@ body {
     background-size: 100vw 60vh;
     position:absolute;
   }
+  @media only screen
+  and (min-device-width: 375px)
+  and (max-device-width: 667px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+    height: 70vh;
+    background-size: 100vw 70vh;
+
+  }
+
 }
 
 #turing-video {
