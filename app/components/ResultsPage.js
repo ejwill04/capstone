@@ -17,7 +17,7 @@ export default class ResultsPage extends Component {
   }
 
   fetchRequest(state) {
-    fetch(`http://localhost:3000/api/v1/locations/${state}`, {
+    fetch(`/api/v1/locations/${state}`, {
       method: 'GET',
     })
     .then(response => response.json())
@@ -50,7 +50,7 @@ export default class ResultsPage extends Component {
       remote
     }
 
-    fetch(`http://localhost:3000/api/v1/users/${id}`,
+    fetch(`/api/v1/users/${id}`,
     {
       headers: {
         'Accept': 'application/json',
@@ -64,7 +64,7 @@ export default class ResultsPage extends Component {
       .then((response) => response.json())
       .then((payload) => {
         if (Number(payload)){
-          fetch(`http://localhost:3000/api/v1/users/company/${company_id}`,
+          fetch(`/api/v1/users/company/${company_id}`,
           {
             method: 'GET',
           })
