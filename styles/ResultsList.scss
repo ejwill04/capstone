@@ -1,12 +1,13 @@
 .results-container {
   width: 30%;
-  // height: auto;
+  height: 75vh;
   overflow: scroll;
   padding-right: 15px;
   border-right: 1px solid #2E3131;
 
   @media (max-width: 800px) {
     width: 100%;
+    height: auto;
   }
 }
 
