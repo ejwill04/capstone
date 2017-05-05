@@ -1,8 +1,10 @@
+const webpack = require('webpack')
+
 module.exports = {
   entry: './app',
   output: {
     path: './build',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     loaders: [
@@ -15,18 +17,25 @@ module.exports = {
       { test: /\.scss$/, loader: 'style!css!sass' },
       { test: /\.mp4$/, loader: 'url' },
       { test: /\.(png|svg)$/, loader: 'url' },
-    ]
+    ],
+    plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          'NODE_ENV': JSON.stringify('production'),
+        },
+      }),
+    ],
   },
   devServer: {
     contentBase: './build',
-    inline: true
+    inline: true,
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.jsx', '.css', '.scss']
+    extensions: ['', '.js', '.json', '.jsx', '.css', '.scss'],
   },
   externals: {
-  'cheerio': 'window',
-  'react/lib/ExecutionEnvironment': true,
-  'react/lib/ReactContext': true,
-  }
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+  },
 }
